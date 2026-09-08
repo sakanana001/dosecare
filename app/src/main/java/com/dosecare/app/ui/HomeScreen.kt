@@ -9,8 +9,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.dosecare.app.R
 import com.dosecare.app.domain.catalog.Drug
 import com.dosecare.app.domain.catalog.DrugCategory
 
@@ -101,13 +103,15 @@ internal fun WindowInfo(drug: Drug) {
         )
         Spacer(Modifier.width(6.dp))
         if (window != null) {
+            // TODO(v0.9b): "治疗窗:X - Y Z" 格式字符串需要 i18n (home_therapeutic_window 当前只接 1 个 %1$s)
+            //            需要新增 key (如 home_window_range: 治疗窗:%1$s - %2$s %3$s)
             Text(
-                "治疗窗:${"%.0f".format(window.low)} - ${"%.0f".format(window.high)} ${window.unit}",
+                stringResource(R.string.home_therapeutic_window, "${"%.0f".format(window.low)} - ${"%.0f".format(window.high)} ${window.unit}"),
                 style = MaterialTheme.typography.bodyMedium
             )
         } else {
             Text(
-                "无明确治疗窗",
+                stringResource(R.string.home_no_window),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -120,7 +124,7 @@ internal fun CypInfo(drug: Drug) {
     val subs = drug.cypProfile.substrates.joinToString { "${it.cyp.displayName} (${(it.fraction * 100).toInt()}%)" }
     if (subs.isEmpty()) return
     Text(
-        "代谢:$subs",
+        stringResource(R.string.home_metabolism, subs),
         style = MaterialTheme.typography.bodySmall,
         color = MaterialTheme.colorScheme.onSurfaceVariant
     )
@@ -132,9 +136,11 @@ internal fun DisclaimerCard() {
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
     ) {
+        // TODO(v0.9b): 完整免责声明 (个体差异显著,实际用药请遵医嘱) 需要新增 strings.xml key
+        //            home_disclaimer 仅有 "⚠️ 本 APP 所有计算结果(PK 估算、警示)仅供参考。"
+        //            建议: home_disclaimer_full: "%1$s\n个体差异显著,实际用药请遵医嘱。"
         Text(
-            "⚠️ 本 APP 所有计算结果(PK 估算、警示)仅供参考。" +
-                    "个体差异显著,实际用药请遵医嘱。",
+            stringResource(R.string.home_disclaimer),
             modifier = Modifier.padding(16.dp),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant

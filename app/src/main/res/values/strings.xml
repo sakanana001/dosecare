@@ -1,6 +1,266 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- ====== App 基础 ====== -->
     <string name="app_name">DoseCare</string>
     <string name="app_name_en">DoseCare</string>
     <string name="ic_launcher_name">DoseCare icon</string>
+    <string name="app_description">个体化用药助手</string>
+
+    <!-- ====== 通用按钮 / 标签 ====== -->
+    <string name="common_ok">确定</string>
+    <string name="common_cancel">取消</string>
+    <string name="common_save">保存</string>
+    <string name="common_delete">删除</string>
+    <string name="common_confirm">确认</string>
+    <string name="common_known">知道了</string>
+    <string name="common_back">返回</string>
+    <string name="common_search">搜索</string>
+    <string name="common_settings">设置</string>
+    <string name="common_about">关于</string>
+    <string name="common_contact">联系作者</string>
+    <string name="common_close">关闭</string>
+    <string name="common_clear">清空</string>
+    <string name="common_remove">移除</string>
+    <string name="common_edit">编辑</string>
+    <string name="common_create">创建</string>
+    <string name="common_new">新建</string>
+
+    <!-- ====== 底栏 3 tab ====== -->
+    <string name="nav_tab_calendar">我的用药</string>
+    <string name="nav_tab_diary">日记</string>
+    <string name="nav_tab_more">更多</string>
+
+    <!-- ====== 更多页 (More tab) ====== -->
+    <string name="more_section_tools">🧰 工具</string>
+    <string name="more_section_settings_about">⚙️ 设置 / 关于</string>
+    <string name="more_item_catalog">药物目录</string>
+    <string name="more_item_catalog_sub">%1$d 药 · 按类别 / 适应症浏览</string>
+    <string name="more_item_compare">双药对比</string>
+    <string name="more_item_compare_sub">PK / 治疗窗 / CYP / 副作用 详细对比</string>
+    <string name="more_item_interaction">相互作用</string>
+    <string name="more_item_interaction_sub">当前用户所有药之间的相互作用检测</string>
+    <string name="more_item_tdm">血药浓度推测</string>
+    <string name="more_item_tdm_sub">1/2/3 房室模型 · 治疗窗色带</string>
+    <string name="more_item_settings">设置</string>
+    <string name="more_item_settings_sub">个性化 / 提醒 / 提醒方式</string>
+    <string name="more_item_about">关于</string>
+    <string name="more_item_about_sub">数据源 / 许可证 / 局限性</string>
+    <string name="more_item_contact">联系作者</string>
+    <string name="more_item_contact_sub">Bug 反馈 / 功能建议</string>
+
+    <!-- ====== 设置页 ====== -->
+    <string name="settings_title">设置 · 关于</string>
+    <string name="settings_language">🌐 语言</string>
+    <string name="settings_data_source">📚 数据源</string>
+    <string name="settings_data_source_lines">• DrugCatalog: AGNP 2017 + FDA DailyMed + Flockhart CYP Table\n• PK 参数: 1 房室口服模型 (One-compartment oral)\n• 治疗窗: AGNP 2017 TDM 共识指南\n• 相互作用: RuleEngine 6 类自研规则</string>
+    <string name="settings_limitations">⚠️ 局限性</string>
+    <string name="settings_limitations_lines">• 1 房室模型对部分药不够准确(苯妥英非线性代谢、锂肾清除)\n• 群体平均参数,个体差异 2-3 倍(CYP 基因型 / 吸烟 / 年龄 / 肾 / 肝)\n• v0.3.2 不接医学数据库 API;PK 参数以 AGNP/FDA 静态数据为基准\n• 不替代医师判断;实际用药请遵医嘱或咨询临床药师</string>
+    <string name="settings_roadmap">🗺 路线图</string>
+    <string name="settings_roadmap_v04">v0.4 计划: Hilt DI + Room 持久化 + 服药提醒</string>
+    <string name="settings_roadmap_v05">v0.5 计划: 多房室 PK + 患者画像(吸烟/肾/肝)校准</string>
+    <string name="settings_roadmap_v10">v1.0 计划: 联网医学数据库校准 + 群体 PK Bayes 估计</string>
+    <string name="settings_roadmap_v15">v1.5 计划: KMP 多平台</string>
+    <string name="settings_disclaimer">⚠️ 本 APP 所有计算结果(PK 估算、警示)仅供参考。个体差异显著,实际用药请遵医嘱。</string>
+
+    <!-- ====== 语言选择 ====== -->
+    <string name="language_system">跟随系统</string>
+    <string name="language_zh_cn">简体中文</string>
+    <string name="language_en">English</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- ====== 血药浓度推测 TDM ====== -->
+    <string name="tdm_title">血药浓度推测 (TDM)</string>
+    <string name="tdm_data_source_info">数据源与校准说明</string>
+    <string name="tdm_no_drugs">暂无可 TDM 监测的药物(需要 therapeuticWindow 字段)</string>
+    <string name="tdm_data_source_title">📚 数据源 &amp; 校准说明</string>
+    <string name="tdm_data_source_lines">• PK 参数: AGNP 2017 (Therapeutic Drug Monitoring in Psychiatry) + FDA DailyMed 药品标签\n• CYP 谱: Flockhart Table (Indiana University)\n• 治疗窗: AGNP 2017 共识指南\n• 体重调整: Vd = vdLPerKg × weight(假设线性)</string>
+    <string name="tdm_limitations">⚠️ 局限性</string>
+    <string name="tdm_limitations_lines">• 1 房室口服模型 — 对非线性药(苯妥英)不准确,对肾清除药(锂)仅近似\n• 群体平均参数 — 个体差异 2-3 倍(CYP 基因型 / 吸烟 / 年龄 / 肾 / 肝)\n• 多药曲线仅显示浓度叠加,不模拟 CYP 竞争/酶抑制动力学\n• v0.4 不替代医师判断;实际用药请遵医嘱或咨询临床药师</string>
+    <string name="tdm_predict_n_drugs">推测 %1$d 药血药浓度</string>
+    <string name="tdm_add_drug_to_chart">添加药到图表</string>
+    <string name="tdm_add_drug_n">%1$d 个药可选 (有/无 TDM 均可)</string>
+    <string name="tdm_add">添加</string>
+    <string name="tdm_dose_mg">剂量 (mg)</string>
+    <string name="tdm_weight_kg">体重 (kg)</string>
+    <string name="tdm_freq">频次:</string>
+    <string name="tdm_chart_title">多药稳态浓度-时间曲线 (可点击/拖动/缩放)</string>
+
+    <!-- ====== 双药对比 ====== -->
+    <string name="compare_title">双药对比</string>
+    <string name="compare_card_title">双药规格对比</string>
+    <string name="compare_info">对比说明</string>
+    <string name="compare_info_title">ℹ️ 双药对比说明</string>
+    <string name="compare_info_lines">• 选两个药,按 7 个 section 对比 (基本信息 / 药代动力学 / 治疗窗 / CYP 角色 / 不良反应 / 剂量调整 / 监测)\n• 同值自动合并,不同值分两列展示\n• 治疗窗 / CYP 谱参考 AGNP 2017 + Flockhart Table\n• 不良反应等级: VERY_LOW / LOW / MEDIUM / HIGH / VERY_HIGH\n• 本工具仅展示规格差异,临床决策请结合实际病人情况</string>
+    <string name="compare_drug_a">药 A</string>
+    <string name="compare_drug_b">药 B</string>
+    <string name="compare_lay_title">📖 通俗模式</string>
+    <string name="compare_lay_disclaimer">⚠️ 各项参数请以实际药品说明书/化验值为准。\n用药调整、相互作用警示请遵医嘱或咨询临床药师。</string>
+    <string name="compare_diff_title">📖 关键差异 (通俗版)</string>
+    <string name="compare_diff_empty">两药在主要指标上没有明显差异。具体使用仍请遵医嘱。</string>
+    <string name="compare_critical_inbound">互相影响 (对方在 criticalInteractions 中引用了我)</string>
+    <string name="compare_hint_legend">💡 A → B 表示 A 药会让 B 药浓度变化; 数字越大变化越剧烈 (1.5 倍=轻, 5 倍以上=严重)</string>
+    <string name="compare_mechanism_auc">%1$s · AUC 变化 %2$s - %3$s 倍</string>
+
+    <!-- ====== 相互作用 ====== -->
+    <string name="interaction_title">相互作用 · %1$d 药</string>
+    <string name="interaction_card_title">多药相互作用</string>
+    <string name="interaction_info">评估说明</string>
+    <string name="interaction_info_title">ℹ️ 多药相互作用说明</string>
+    <string name="interaction_info_lines">• 添加 2+ 个药,RuleEngine 跑所有组合 (N×(N-1)/2 对)\n• 6 类规则: CYP 抑制/诱导、QTc 累积、抗胆碱能、5-HT 综合征、治疗窗偏离、肾/肝剂量调整\n• 严重度: LOW / MEDIUM / HIGH / CONTRAINDICATED\n• 个体差异极大,用药请遵医嘱或咨询临床药师</string>
+    <string name="interaction_selected_n">已选 (%1$d):</string>
+    <string name="interaction_add_drug_n">添加药 · 搜索 (%1$d 可选)</string>
+    <string name="interaction_search_hint">🔍 搜索: 氟 / fluvoxamine / 氯氮平 / F</string>
+    <string name="interaction_evaluate_n">评估 %1$d 药的所有组合</string>
+    <string name="interaction_reevaluate_n">重新评估 %1$d 药的所有组合</string>
+    <string name="interaction_no_alerts_title">✓ RuleEngine 未检出 6 类已知警示。</string>
+    <string name="interaction_no_alerts_desc">但这不代表安全——本次评估仅覆盖:CYP 抑制/诱导、QTc 累积、抗胆碱能负荷、5-HT 综合征、治疗窗偏离、肾/肝剂量调整。实际临床还要考虑:年龄、肝肾、基因型(CYP2D6/2C19 慢代谢)、蛋白结合置换、肠肝循环、食物/草本补充剂等。个体差异极大,仍请遵医嘱。</string>
+    <string name="interaction_alerts_count">RuleEngine 检出 %1$d 条警示</string>
+    <string name="interaction_high_overdose_n">⚠️ %1$d 药为高风险过量 (重症 / 危及生命)</string>
+    <string name="interaction_overdose_help">过量处理需多药协调(活性炭 / 血液透析 / 解毒剂等), 立即拨打 120 或当地中毒急救中心</string>
+    <string name="interaction_advice">建议:%1$s</string>
+    <string name="interaction_references">参考:%1$s</string>
+    <string name="interaction_n_drugs_available">%1$d 个药可选</string>
+    <string name="interaction_more_drugs">…还有 %1$d 个药(v0.4 加搜索)</string>
+
+    <!-- ====== 药物目录 ====== -->
+    <string name="catalog_title">药物目录 · %1$d 药</string>
+    <string name="catalog_expand_all">全部展开</string>
+    <string name="catalog_collapse_all">全部折叠</string>
+    <string name="catalog_by_category">💊 按药物类别 (药理学分类)</string>
+    <string name="catalog_by_category_sub">%1$d 类 · %2$d 药</string>
+    <string name="catalog_by_indication">🩺 按主治症状 (疾病/适应症)</string>
+    <string name="catalog_by_indication_sub">%1$d 类 · %2$d 药 (一药可属多类)</string>
+    <string name="catalog_search_n">搜索 %1$d 个药</string>
+    <string name="catalog_drug_count">%1$d 药</string>
+
+    <!-- ====== 日历 (CalendarTab) ====== -->
+    <string name="calendar_title">我的用药 · %1$d 组</string>
+    <string name="calendar_new_group">新建分组</string>
+    <string name="calendar_new_group_hint">如「早上药」「睡前药」</string>
+    <string name="calendar_temp_drug">临时用药</string>
+    <string name="calendar_temp_drug_hint">单次记录, 不属于任何分组 (头痛药/助眠药/抗生素短程)</string>
+    <string name="calendar_n_drugs">%1$d 药</string>
+    <string name="calendar_calibration_title">📚 数据校准说明</string>
+    <string name="calendar_calibration_lines">• 用药计划按各药 frequencyPerDay 自动生成时段 (08/12/18/22 点)\n• 打卡默认系统时间,可自定义 (补卡历史)\n• 实际浓度受 CYP 基因型/肝肾/食物/合并用药影响,2-3 倍偏差属正常\n• 群体 PK Bayes 个体化估计见 v1.0 路线图</string>
+    <string name="calendar_undo_today">撤销今日 %1$s</string>
+    <string name="calendar_selected_drug">已选: %1$s (%2$s)</string>
+    <string name="calendar_dose_mg">剂量 (mg)</string>
+    <string name="calendar_freq_per_day">每日次数: %1$d</string>
+    <string name="calendar_n_per_day">%1$d 次/日</string>
+    <string name="calendar_reselect_drug">重新选药</string>
+    <string name="calendar_slot_time">⏰ 第 %1$d 次用药时间</string>
+    <string name="calendar_checkin">打卡 · %1$s</string>
+    <string name="calendar_scheduled_time">计划时间: %1$s</string>
+    <string name="calendar_dose_label">剂量: %1$d mg</string>
+    <string name="calendar_taken_time">服药时间</string>
+    <string name="calendar_now">现在: %1$s</string>
+    <string name="calendar_delete_drug">删除这条用药</string>
+    <string name="calendar_delete_drug_confirm">确定要删除「%1$s」吗? 该药的所有历史打卡也会一并删除。</string>
+    <string name="calendar_delete_group">删除整组</string>
+    <string name="calendar_delete_group_confirm">确定要删除「%1$s」吗? 该组 %2$d 个药及其所有历史打卡都会被删除,无法恢复。</string>
+    <string name="calendar_color_label">选图标颜色:</string>
+    <string name="calendar_group_name">分组名称</string>
+    <string name="calendar_pinyin_hint">中文 / 英文 / 拼音首字母</string>
+    <string name="calendar_pinyin_example">例: 锂 / lithium / lpt</string>
+    <string name="calendar_add_drug_to">+ 加药到 %1$s</string>
+    <string name="calendar_theme">主题</string>
+    <string name="calendar_new_group_icon">新建分组/加药</string>
+    <string name="calendar_calibration">说明</string>
+    <string name="calendar_taken">已服药</string>
+    <string name="calendar_undo_checkin">撤销打卡</string>
+    <string name="calendar_edit_group">编辑分组</string>
+    <string name="calendar_add_drug">加药</string>
+    <string name="calendar_selected">已选</string>
+
+    <!-- ====== 主题菜单 ====== -->
+    <string name="theme_mode_title">主题模式</string>
+    <string name="theme_color_title">主题色</string>
+    <string name="theme_accent_selected">%1$s (已选)</string>
+    <string name="theme_custom_selected">自定义色 (已选)</string>
+    <string name="theme_clear_custom">清除自定义色</string>
+    <string name="theme_custom_color">自定义主题色</string>
+    <string name="theme_mode_system">跟随系统</string>
+    <string name="theme_mode_light">亮色</string>
+    <string name="theme_mode_dark">暗色</string>
+    <string name="theme_accent_sky_blue">浅蓝</string>
+    <string name="theme_accent_warm_orange">暖橙</string>
+    <string name="theme_accent_forest_green">墨绿</string>
+    <string name="theme_accent_rose_red">玫瑰红</string>
+    <string name="theme_accent_deep_purple">深紫</string>
+    <string name="theme_accent_custom">自定义</string>
+
+    <!-- ====== ColorPicker 调色盘 ====== -->
+    <string name="color_picker_title">自定义主题色</string>
+    <string name="color_picker_hue">色相</string>
+    <string name="color_picker_value">明度</string>
+
+    <!-- ====== 日记 ====== -->
+    <string name="diary_title">日记</string>
+    <string name="diary_new">新建日记</string>
+    <string name="diary_mood">心境</string>
+    <string name="diary_note">记录 (可选)</string>
+
+    <!-- ====== About 页 ====== -->
+    <string name="about_title">关于</string>
+    <string name="about_repo_title">🔗 仓库源代码</string>
+    <string name="about_repo_url">https://github.com/sakanana001/dosecare</string>
+    <string name="about_repo_desc">README / CHANGELOG / CONTRIBUTING / SECURITY 都在仓库根目录, 提交 Issue 之前请先阅读 CONTRIBUTING.md。</string>
+    <string name="about_contact_title">💌 联系作者</string>
+    <string name="about_contact_email">daisukikiki01@gmail.com</string>
+    <string name="about_contact_email_desc">点上面邮箱直接发邮件 (默认邮件客户端)</string>
+    <string name="about_data_source_title">📚 数据源</string>
+    <string name="about_data_source_lines">• PK 参数: 1/2/3 房室口服模型 (按 drug.pkModel 自动选)\n• 治疗窗: AGNP 2017 TDM 共识指南\n• 相互作用: RuleEngine 6 类自研规则</string>
+    <string name="about_limitations">⚠️ 局限性</string>
+    <string name="about_limitations_lines">• 1 房室模型对部分药不够准确(苯妥英非线性代谢、锂肾清除)\n• 实际浓度受 CYP 基因型/肝肾/食物/合并用药影响,2-3 倍偏差属正常\n• 不替代医师面诊; 急性不良反应请立即就医</string>
+    <string name="about_license_title">📜 开源许可证</string>
+    <string name="about_deps_title">📦 主要依赖</string>
+    <string name="about_deps_license_title">📊 数据源许可证</string>
+    <string name="about_app_id">com.dosecare.app · AGPL-3.0</string>
+
+    <!-- ====== Contact 页 ====== -->
+    <string name="contact_title">联系作者</string>
+    <string name="contact_bug_title">🐛 Bug 反馈 / 功能建议</string>
+    <string name="contact_email_title">💌 邮件</string>
+    <string name="contact_email_desc">点上面直接跳到默认邮件客户端</string>
+    <string name="contact_clinical_title">⚕️ 临床数据更正</string>
+    <string name="contact_clinical_desc">欢迎药师/医师朋友指出 PK 参数、治疗窗、CYP 数据的错误, 提 Issue 或邮件均可, 会尽快核对更正。</string>
+
+    <!-- ====== DrugDetail 药品详情 ====== -->
+    <string name="drug_not_found">未找到药物: %1$s</string>
+    <string name="drug_brand_names">商品名:%1$s</string>
+    <string name="drug_metabolism">主要代谢途径</string>
+    <string name="drug_therapeutic_window">治疗窗</string>
+    <string name="drug_window_ref">参考:%1$s</string>
+    <string name="drug_anticholinergic">抗胆碱能负荷</string>
+    <string name="drug_typical_symptoms">典型症状</string>
+    <string name="drug_toxic_dose">⚠️ 中毒 ~%1$d mg</string>
+    <string name="drug_lethal_dose">☠️ 致死 ~%1$d mg</string>
+    <string name="drug_rescue">抢救要点</string>
+    <string name="drug_antidote">💉 特异性解毒剂: %1$s</string>
+    <string name="drug_data_source">数据源: %1$s</string>
+    <string name="drug_critical_interactions">关键相互作用提示</string>
+    <string name="drug_auc_change">AUC 变化:%1$s - %2$s 倍</string>
+    <string name="drug_freq">频次:%1$s</string>
+
+    <!-- ====== 选药搜索 ====== -->
+    <string name="search_drug_count">%1$d 个药</string>
+    <string name="search_select_title">选药 · %1$s</string>
+    <string name="search_hint">中文名 / 英文名 / 品牌名 / 拼音首字母</string>
+    <string name="search_filtered">%1$d / %2$d 个药</string>
+    <string name="search_no_match">未找到匹配的药</string>
+
+    <!-- ====== Chart 浓度曲线 ====== -->
+    <string name="chart_window_label">窗 %1$d-%2$d</string>
+    <string name="chart_reset_view">🔄 重置视图 (%1$s)</string>
+
+    <!-- ====== HomeScreen 卡片 ====== -->
+    <string name="home_therapeutic_window">治疗窗:%1$s</string>
+    <string name="home_no_window">无明确治疗窗</string>
+    <string name="home_metabolism">代谢:%1$s</string>
+    <string name="home_disclaimer">⚠️ 本 APP 所有计算结果(PK 估算、警示)仅供参考。</string>
+
+    <!-- ====== CalendarCompose 月历 ====== -->
+    <string name="calendar_prev_month">上个月</string>
+    <string name="calendar_next_month">下个月</string>
+
 </resources>

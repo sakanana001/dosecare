@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ====== App 基础 ====== -->
+    <string name="app_name">DoseCare</string>
+    <string name="app_name_en">DoseCare</string>
+    <string name="ic_launcher_name">DoseCare icon</string>
+    <string name="app_description">Personalized medication assistant</string>
+
+    <!-- ====== Common buttons / labels ====== -->
+    <string name="common_ok">OK</string>
+    <string name="common_cancel">Cancel</string>
+    <string name="common_save">Save</string>
+    <string name="common_delete">Delete</string>
+    <string name="common_confirm">Confirm</string>
+    <string name="common_known">Got it</string>
+    <string name="common_back">Back</string>
+    <string name="common_search">Search</string>
+    <string name="common_settings">Settings</string>
+    <string name="common_about">About</string>
+    <string name="common_contact">Contact author</string>
+    <string name="common_close">Close</string>
+    <string name="common_clear">Clear</string>
+    <string name="common_remove">Remove</string>
+    <string name="common_edit">Edit</string>
+    <string name="common_create">Create</string>
+    <string name="common_new">New</string>
+
+    <!-- ====== Bottom nav 3 tabs ====== -->
+    <string name="nav_tab_calendar">My Meds</string>
+    <string name="nav_tab_diary">Diary</string>
+    <string name="nav_tab_more">More</string>
+
+    <!-- ====== More tab ====== -->
+    <string name="more_section_tools">🧰 Tools</string>
+    <string name="more_section_settings_about">⚙️ Settings / About</string>
+    <string name="more_item_catalog">Drug Catalog</string>
+    <string name="more_item_catalog_sub">%1$d drugs · Browse by class / indication</string>
+    <string name="more_item_compare">Drug Comparison</string>
+    <string name="more_item_compare_sub">PK / Therapeutic Window / CYP / Side Effects detailed compare</string>
+    <string name="more_item_interaction">Interactions</string>
+    <string name="more_item_interaction_sub">Detect interactions between your current meds</string>
+    <string name="more_item_tdm">Plasma Level (TDM)</string>
+    <string name="more_item_tdm_sub">1/2/3-compartment models · Therapeutic window band</string>
+    <string name="more_item_settings">Settings</string>
+    <string name="more_item_settings_sub">Personalization / Reminders / Notification</string>
+    <string name="more_item_about">About</string>
+    <string name="more_item_about_sub">Data sources / License / Limitations</string>
+    <string name="more_item_contact">Contact Author</string>
+    <string name="more_item_contact_sub">Bug reports / Feature requests</string>
+
+    <!-- ====== Settings ====== -->
+    <string name="settings_title">Settings · About</string>
+    <string name="settings_language">🌐 Language</string>
+    <string name="settings_data_source">📚 Data Sources</string>
+    <string name="settings_data_source_lines">• DrugCatalog: AGNP 2017 + FDA DailyMed + Flockhart CYP Table\n• PK parameters: 1-compartment oral model\n• Therapeutic window: AGNP 2017 TDM consensus\n• Interactions: RuleEngine 6-category custom rules</string>
+    <string name="settings_limitations">⚠️ Limitations</string>
+    <string name="settings_limitations_lines">• 1-compartment model is inaccurate for some drugs (e.g. phenytoin non-linear metabolism, lithium renal clearance)\n• Population-averaged parameters; individual variation 2-3× (CYP genotype / smoking / age / renal / hepatic)\n• v0.3.2 does not call external medical database APIs; PK data is based on AGNP/FDA static sources\n• Does not replace clinical judgment; consult your physician or clinical pharmacist</string>
+    <string name="settings_roadmap">🗺 Roadmap</string>
+    <string name="settings_roadmap_v04">v0.4 plan: Hilt DI + Room persistence + medication reminders</string>
+    <string name="settings_roadmap_v05">v0.5 plan: Multi-compartment PK + patient profile (smoking/renal/hepatic) calibration</string>
+    <string name="settings_roadmap_v10">v1.0 plan: Online medical DB calibration + Population PK Bayes estimation</string>
+    <string name="settings_roadmap_v15">v1.5 plan: KMP multi-platform</string>
+    <string name="settings_disclaimer">⚠️ All calculations (PK estimation, alerts) are for reference only. Individual variation is significant; consult your physician for actual medication decisions.</string>
+
+    <!-- ====== Language picker ====== -->
+    <string name="language_system">Follow System</string>
+    <string name="language_zh_cn">简体中文</string>
+    <string name="language_en">English</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- ====== TDM  ====== -->
+    <string name="tdm_title">Plasma Level Estimation (TDM)</string>
+    <string name="tdm_data_source_info">Data source &amp; calibration info</string>
+    <string name="tdm_no_drugs">No TDM-monitorable drugs (requires therapeuticWindow field)</string>
+    <string name="tdm_data_source_title">📚 Data Sources &amp; Calibration</string>
+    <string name="tdm_data_source_lines">• PK parameters: AGNP 2017 (Therapeutic Drug Monitoring in Psychiatry) + FDA DailyMed drug labels\n• CYP spectrum: Flockhart Table (Indiana University)\n• Therapeutic window: AGNP 2017 consensus\n• Weight adjustment: Vd = vdLPerKg × weight (assumes linear)</string>
+    <string name="tdm_limitations">⚠️ Limitations</string>
+    <string name="tdm_limitations_lines">• 1-compartment oral model — inaccurate for non-linear drugs (phenytoin), only approximate for renal-cleared drugs (lithium)\n• Population-averaged parameters — individual variation 2-3× (CYP genotype / smoking / age / renal / hepatic)\n• Multi-drug curves only show concentration overlap; do not model CYP competition / enzyme inhibition dynamics\n• v0.4 does not replace clinical judgment; consult your physician or clinical pharmacist</string>
+    <string name="tdm_predict_n_drugs">Estimate %1$d drug plasma levels</string>
+    <string name="tdm_add_drug_to_chart">Add drug to chart</string>
+    <string name="tdm_add_drug_n">%1$d drugs available (with/without TDM both ok)</string>
+    <string name="tdm_add">Add</string>
+    <string name="tdm_dose_mg">Dose (mg)</string>
+    <string name="tdm_weight_kg">Weight (kg)</string>
+    <string name="tdm_freq">Frequency:</string>
+    <string name="tdm_chart_title">Multi-drug steady-state concentration-time curve (tap/drag/pinch to interact)</string>
+
+    <!-- ====== Compare ====== -->
+    <string name="compare_title">Drug Comparison</string>
+    <string name="compare_card_title">Two-drug spec comparison</string>
+    <string name="compare_info">Compare info</string>
+    <string name="compare_info_title">ℹ️ Two-drug Comparison Info</string>
+    <string name="compare_info_lines">• Pick two drugs, compare across 7 sections (basics / PK / therapeutic window / CYP role / side effects / dose adjustment / monitoring)\n• Same values are merged automatically, different values shown in two columns\n• Therapeutic window / CYP spectrum references AGNP 2017 + Flockhart Table\n• Side effect severity: VERY_LOW / LOW / MEDIUM / HIGH / VERY_HIGH\n• This tool only shows spec differences; clinical decisions should consider the actual patient context</string>
+    <string name="compare_drug_a">Drug A</string>
+    <string name="compare_drug_b">Drug B</string>
+    <string name="compare_lay_title">📖 Layman Mode</string>
+    <string name="compare_lay_disclaimer">⚠️ All parameters should be verified against the actual drug label / lab values.\nConsult your physician or clinical pharmacist for medication adjustments and interaction alerts.</string>
+    <string name="compare_diff_title">📖 Key Differences (Layman)</string>
+    <string name="compare_diff_empty">The two drugs show no obvious differences in main indicators. Follow your physician for actual use.</string>
+    <string name="compare_critical_inbound">Mutual influence (the other references me in criticalInteractions)</string>
+    <string name="compare_hint_legend">💡 A → B means drug A will change drug B\'s concentration; larger numbers mean more dramatic change (1.5× = mild, 5×+ = severe)</string>
+    <string name="compare_mechanism_auc">%1$s · AUC change %2$s - %3$s ×</string>
+
+    <!-- ====== Interactions ====== -->
+    <string name="interaction_title">Interactions · %1$d drugs</string>
+    <string name="interaction_card_title">Multi-drug interactions</string>
+    <string name="interaction_info">Evaluation info</string>
+    <string name="interaction_info_title">ℹ️ Multi-drug Interaction Info</string>
+    <string name="interaction_info_lines">• Add 2+ drugs, RuleEngine runs all combinations (N×(N-1)/2 pairs)\n• 6 rule categories: CYP inhibition/induction, QTc accumulation, anticholinergic, 5-HT syndrome, therapeutic window deviation, renal/hepatic dose adjustment\n• Severity: LOW / MEDIUM / HIGH / CONTRAINDICATED\n• Individual variation is significant; consult your physician or clinical pharmacist</string>
+    <string name="interaction_selected_n">Selected (%1$d):</string>
+    <string name="interaction_add_drug_n">Add drug · search (%1$d available)</string>
+    <string name="interaction_search_hint">🔍 Search: flu / fluvoxamine / clozapine / F</string>
+    <string name="interaction_evaluate_n">Evaluate all %1$d drug combinations</string>
+    <string name="interaction_reevaluate_n">Re-evaluate all %1$d drug combinations</string>
+    <string name="interaction_no_alerts_title">✓ RuleEngine found none of the 6 known alert categories.</string>
+    <string name="interaction_no_alerts_desc">But this does not mean safe — this evaluation only covers: CYP inhibition/induction, QTc accumulation, anticholinergic load, 5-HT syndrome, therapeutic window deviation, renal/hepatic dose adjustment. Actual clinical practice also considers: age, liver/kidney, genotype (CYP2D6/2C19 poor metabolizers), protein binding displacement, enterohepatic circulation, food/herbal supplements. Individual variation is significant; still consult your physician.</string>
+    <string name="interaction_alerts_count">RuleEngine found %1$d alerts</string>
+    <string name="interaction_high_overdose_n">⚠️ %1$d drugs with high overdose risk (severe / life-threatening)</string>
+    <string name="interaction_overdose_help">Overdose treatment requires multi-drug coordination (activated charcoal / hemodialysis / antidote, etc.). Call 120 or local poison control immediately.</string>
+    <string name="interaction_advice">Suggestion: %1$s</string>
+    <string name="interaction_references">References: %1$s</string>
+    <string name="interaction_n_drugs_available">%1$d drugs available</string>
+    <string name="interaction_more_drugs">…and %1$d more drugs (search added in v0.4)</string>
+
+    <!-- ====== Catalog ====== -->
+    <string name="catalog_title">Drug Catalog · %1$d drugs</string>
+    <string name="catalog_expand_all">Expand all</string>
+    <string name="catalog_collapse_all">Collapse all</string>
+    <string name="catalog_by_category">💊 By Drug Class (Pharmacological)</string>
+    <string name="catalog_by_category_sub">%1$d classes · %2$d drugs</string>
+    <string name="catalog_by_indication">🩺 By Indication (Disease / Therapeutic Use)</string>
+    <string name="catalog_by_indication_sub">%1$d classes · %2$d drugs (a drug may belong to multiple)</string>
+    <string name="catalog_search_n">Search %1$d drugs</string>
+    <string name="catalog_drug_count">%1$d drugs</string>
+
+    <!-- ====== CalendarTab ====== -->
+    <string name="calendar_title">My Meds · %1$d groups</string>
+    <string name="calendar_new_group">New group</string>
+    <string name="calendar_new_group_hint">e.g. \"Morning meds\" / \"Bedtime meds\"</string>
+    <string name="calendar_temp_drug">Temporary medication</string>
+    <string name="calendar_temp_drug_hint">Single record, not in any group (e.g. headache / sleep aid / short-course antibiotic)</string>
+    <string name="calendar_n_drugs">%1$d drugs</string>
+    <string name="calendar_calibration_title">📚 Data Calibration Info</string>
+    <string name="calendar_calibration_lines">• Medication schedule auto-generated per drug frequencyPerDay (08/12/18/22h slots)\n• Default check-in uses system time; can be customized (backfill history)\n• Actual concentrations are affected by CYP genotype/liver/kidney/food/concomitant meds; 2-3× deviation is normal\n• Population PK Bayes individual estimation — see v1.0 roadmap</string>
+    <string name="calendar_undo_today">Undo today\'s %1$s</string>
+    <string name="calendar_selected_drug">Selected: %1$s (%2$s)</string>
+    <string name="calendar_dose_mg">Dose (mg)</string>
+    <string name="calendar_freq_per_day">Daily frequency: %1$d</string>
+    <string name="calendar_n_per_day">%1$d times/day</string>
+    <string name="calendar_reselect_drug">Reselect drug</string>
+    <string name="calendar_slot_time">⏰ Dose time slot %1$d</string>
+    <string name="calendar_checkin">Check-in · %1$s</string>
+    <string name="calendar_scheduled_time">Scheduled: %1$s</string>
+    <string name="calendar_dose_label">Dose: %1$d mg</string>
+    <string name="calendar_taken_time">Taken time</string>
+    <string name="calendar_now">Now: %1$s</string>
+    <string name="calendar_delete_drug">Delete this medication</string>
+    <string name="calendar_delete_drug_confirm">Delete \"%1$s\"? All historical check-ins for this drug will also be deleted.</string>
+    <string name="calendar_delete_group">Delete entire group</string>
+    <string name="calendar_delete_group_confirm">Delete \"%1$s\"? The %2$d drug(s) in this group and all their check-in history will be deleted, cannot be undone.</string>
+    <string name="calendar_color_label">Pick icon color:</string>
+    <string name="calendar_group_name">Group name</string>
+    <string name="calendar_pinyin_hint">Chinese / English / Pinyin initial</string>
+    <string name="calendar_pinyin_example">e.g. lithium / Li / 锂</string>
+    <string name="calendar_add_drug_to">+ Add drug to %1$s</string>
+    <string name="calendar_theme">Theme</string>
+    <string name="calendar_new_group_icon">New group / add drug</string>
+    <string name="calendar_calibration">Info</string>
+    <string name="calendar_taken">Taken</string>
+    <string name="calendar_undo_checkin">Undo check-in</string>
+    <string name="calendar_edit_group">Edit group</string>
+    <string name="calendar_add_drug">Add drug</string>
+    <string name="calendar_selected">Selected</string>
+
+    <!-- ====== Theme menu ====== -->
+    <string name="theme_mode_title">Theme Mode</string>
+    <string name="theme_color_title">Accent Color</string>
+    <string name="theme_accent_selected">%1$s (selected)</string>
+    <string name="theme_custom_selected">Custom (selected)</string>
+    <string name="theme_clear_custom">Clear custom color</string>
+    <string name="theme_custom_color">Custom accent</string>
+    <string name="theme_mode_system">Follow System</string>
+    <string name="theme_mode_light">Light</string>
+    <string name="theme_mode_dark">Dark</string>
+    <string name="theme_accent_sky_blue">Sky Blue</string>
+    <string name="theme_accent_warm_orange">Warm Orange</string>
+    <string name="theme_accent_forest_green">Forest Green</string>
+    <string name="theme_accent_rose_red">Rose Red</string>
+    <string name="theme_accent_deep_purple">Deep Purple</string>
+    <string name="theme_accent_custom">Custom</string>
+
+    <!-- ====== ColorPicker ====== -->
+    <string name="color_picker_title">Custom accent</string>
+    <string name="color_picker_hue">Hue</string>
+    <string name="color_picker_value">Value</string>
+
+    <!-- ====== Diary ====== -->
+    <string name="diary_title">Diary</string>
+    <string name="diary_new">New diary</string>
+    <string name="diary_mood">Mood</string>
+    <string name="diary_note">Note (optional)</string>
+
+    <!-- ====== About ====== -->
+    <string name="about_title">About</string>
+    <string name="about_repo_title">🔗 Source Code</string>
+    <string name="about_repo_url">https://github.com/sakanana001/dosecare</string>
+    <string name="about_repo_desc">README / CHANGELOG / CONTRIBUTING / SECURITY are all in the repo root. Please read CONTRIBUTING.md before opening an issue.</string>
+    <string name="about_contact_title">💌 Contact Author</string>
+    <string name="about_contact_email">daisukikiki01@gmail.com</string>
+    <string name="about_contact_email_desc">Tap the email above to open your default mail client</string>
+    <string name="about_data_source_title">📚 Data Sources</string>
+    <string name="about_data_source_lines">• PK parameters: 1/2/3-compartment oral model (auto-selected via drug.pkModel)\n• Therapeutic window: AGNP 2017 TDM consensus\n• Interactions: RuleEngine 6-category custom rules</string>
+    <string name="about_limitations">⚠️ Limitations</string>
+    <string name="about_limitations_lines">• 1-compartment model is inaccurate for some drugs (e.g. phenytoin non-linear metabolism, lithium renal clearance)\n• Actual concentrations vary with CYP genotype/liver/kidney/food/concomitant meds; 2-3× deviation is normal\n• Does not replace clinical consultation; seek immediate care for acute adverse reactions</string>
+    <string name="about_license_title">📜 Open Source License</string>
+    <string name="about_deps_title">📦 Major Dependencies</string>
+    <string name="about_deps_license_title">📊 Data Source Licenses</string>
+    <string name="about_app_id">com.dosecare.app · AGPL-3.0</string>
+
+    <!-- ====== Contact ====== -->
+    <string name="contact_title">Contact Author</string>
+    <string name="contact_bug_title">🐛 Bug Reports / Feature Requests</string>
+    <string name="contact_email_title">💌 Email</string>
+    <string name="contact_email_desc">Tap above to open your default mail client</string>
+    <string name="contact_clinical_title">⚕️ Clinical Data Correction</string>
+    <string name="contact_clinical_desc">Pharmacists/physicians are welcome to point out errors in PK parameters, therapeutic windows, or CYP data. Open an issue or send an email — I will verify and update promptly.</string>
+
+    <!-- ====== DrugDetail ====== -->
+    <string name="drug_not_found">Drug not found: %1$s</string>
+    <string name="drug_brand_names">Brand names: %1$s</string>
+    <string name="drug_metabolism">Major metabolic pathway</string>
+    <string name="drug_therapeutic_window">Therapeutic window</string>
+    <string name="drug_window_ref">Reference: %1$s</string>
+    <string name="drug_anticholinergic">Anticholinergic load</string>
+    <string name="drug_typical_symptoms">Typical symptoms</string>
+    <string name="drug_toxic_dose">⚠️ Toxic ~%1$d mg</string>
+    <string name="drug_lethal_dose">☠️ Lethal ~%1$d mg</string>
+    <string name="drug_rescue">Rescue</string>
+    <string name="drug_antidote">💉 Specific antidote: %1$s</string>
+    <string name="drug_data_source">Data source: %1$s</string>
+    <string name="drug_critical_interactions">Critical interaction alerts</string>
+    <string name="drug_auc_change">AUC change: %1$s - %2$s ×</string>
+    <string name="drug_freq">Frequency: %1$s</string>
+
+    <!-- ====== Search ====== -->
+    <string name="search_drug_count">%1$d drugs</string>
+    <string name="search_select_title">Select drug · %1$s</string>
+    <string name="search_hint">Chinese / English / Brand / Pinyin initial</string>
+    <string name="search_filtered">%1$d / %2$d drugs</string>
+    <string name="search_no_match">No matching drugs</string>
+
+    <!-- ====== Chart ====== -->
+    <string name="chart_window_label">Window %1$d-%2$d</string>
+    <string name="chart_reset_view">🔄 Reset view (%1$s)</string>
+
+    <!-- ====== HomeScreen ====== -->
+    <string name="home_therapeutic_window">Window: %1$s</string>
+    <string name="home_no_window">No defined therapeutic window</string>
+    <string name="home_metabolism">Metabolism: %1$s</string>
+    <string name="home_disclaimer">⚠️ All calculations (PK estimation, alerts) are for reference only.</string>
+
+    <!-- ====== CalendarCompose ====== -->
+    <string name="calendar_prev_month">Previous month</string>
+    <string name="calendar_next_month">Next month</string>
+
+</resources>

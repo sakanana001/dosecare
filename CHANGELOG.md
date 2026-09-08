@@ -5,10 +5,53 @@ DoseCare 的所有重要变更都记录在这里。格式基于 [Keep a Changelo
 ## [Unreleased]
 
 ### Planned
-- v0.9: WorkManager 提醒 + 通知权限 + 系统日历写入
-- v0.9: 日历事件点实时刷新 (接 `dose_taken` 表后,跨 tab 状态变化触发 dayEvents 重算)
-- v0.9: TDM 个体化校准 (基于历史血药浓度回算 ke / Vd)
+- v0.9b: WorkManager 提醒 + 通知权限 + 系统日历写入
+- v0.9b: 日历事件点实时刷新 (接 `dose_taken` 表后,跨 tab 状态变化触发 dayEvents 重算)
+- v0.9b: TDM 个体化校准 (基于历史血药浓度回算 ke / Vd)
 - v1.0: 性能优化 (启动 < 800ms)、可访问性 (a11y) 通过、隐私政策上线
+
+---
+
+## [0.9a] - 2026-09-08 · 多语言系统 (zh-CN / en / ja)
+
+### Added
+- **多语言系统 (i18n)** — 3 语言
+  - 简体中文 (zh-CN, 默认)
+  - English (en)
+  - 日本語 (ja)
+  - 抽 221 个 UI 字符串到 `res/values{,-en,-ja}/strings.xml`,全量 3 语言对照翻译
+- **语言设置入口** — 在「更多 → 设置」页面新增 `🌐 语言` 卡片
+  - 点击弹 RadioButton Dialog: 跟随系统 / 简体中文 / English / 日本語
+  - 选择后落盘 SharedPreferences,AppCompatDelegate.setApplicationLocales 应用
+  - 旧版本 (API 26-32) 由 AppCompat 1.7+ 兼容层处理,Android 13+ 走系统 Per-App Language
+- **`LocaleController` 状态机** (`ui/locale/LocaleController.kt`)
+  - `AppLanguage` enum (SYSTEM / ZH_CN / EN / JA)
+  - `LocaleController` singleton 模式同 ThemeController: load + setLanguage + StateFlow
+  - MainActivity.onCreate 在 super 之前 load,确保新 locale 立即生效
+- **LanguageSettingsCard Composable** (`ui/locale/LanguagePicker.kt`)
+  - 卡片显示当前语言,点开弹 4 选 1 Dialog
+  - 选完自动触发 Activity recreate (AppCompat 内部做)
+
+### Changed
+- **`DarkModePref.displayName`** 字段从 `String` 改为 `@StringRes displayNameRes: Int`,所有 DarkModePref 显示走 stringResource
+- **`AccentColor.name`** 字段从 `String` 改为 `@StringRes nameRes: Int`,主题菜单/已选徽章显示走 stringResource
+- **所有 13 个 UI 文件** 重构:硬编码中文字符串 → `stringResource(R.string.xxx)`,import `androidx.compose.ui.res.stringResource` + `com.dosecare.app.R`
+- **依赖**: 加 `androidx.appcompat:appcompat:1.7.0` (per-app language API 兼容层)
+- **AboutScreen / ContactScreen** 文案保留品牌调性,多语言显示
+
+### Verified
+- ✅ Build: 27s / 8 tasks / 0 error
+- ✅ 13 个 UI 文件全部 stringResource() 化,无遗漏
+- ✅ 3 语言 strings.xml 221 key 完全对齐
+- ✅ compileDebugKotlin 通过,只有 deprecation warnings
+- ⏳ Emulator 验证 3 语言切换 (待 v0.9a build APK 测试)
+
+### Migration
+- 旧用户 v0.8d 升级到 v0.9a: 数据无变化,只是 UI 文本多语言
+- 首次安装用户: 默认跟随系统语言 (中文/英文/日文 → 对应 locale;其他 → 简体中文)
+- 设置改语言后: 立即生效 (AppCompat 自动 recreate Activity)
+
+---
 
 ---
 

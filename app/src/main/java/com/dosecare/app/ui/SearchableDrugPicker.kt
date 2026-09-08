@@ -14,11 +14,13 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.dosecare.app.R
 import com.dosecare.app.domain.catalog.Drug
 import kotlin.math.min
 
@@ -62,7 +64,7 @@ fun SearchableDrugPicker(
                     modifier = Modifier.weight(1f)
                 )
                 Text(
-                    "${options.size} 个药",
+                    stringResource(R.string.search_drug_count, options.size),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -166,10 +168,10 @@ private fun SearchableDrugDialog(
             Column {
                 // Top bar
                 TopAppBar(
-                    title = { Text("选药 · $title") },
+                    title = { Text(stringResource(R.string.search_select_title, title)) },
                     navigationIcon = {
                         IconButton(onClick = onDismiss) {
-                            Icon(Icons.Default.Close, contentDescription = "关闭")
+                            Icon(Icons.Default.Close, contentDescription = stringResource(R.string.common_close))
                         }
                     }
                 )
@@ -181,19 +183,20 @@ private fun SearchableDrugDialog(
                     trailingIcon = {
                         if (query.isNotEmpty()) {
                             IconButton(onClick = { query = "" }) {
-                                Icon(Icons.Default.Close, contentDescription = "清空")
+                                Icon(Icons.Default.Close, contentDescription = stringResource(R.string.common_clear))
                             }
                         }
                     },
-                    placeholder = { Text("中文名 / 英文名 / 品牌名 / 拼音首字母") },
+                    placeholder = { Text(stringResource(R.string.search_hint)) },
                     singleLine = true,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(16.dp)
                 )
                 // Hint
+                // TODO(v0.9b): " · 搜索:\"$query\"" 部分需要 i18n
                 Text(
-                    "${filtered.size} / ${options.size} 个药" +
+                    stringResource(R.string.search_filtered, filtered.size, options.size) +
                         if (query.isNotEmpty()) " · 搜索:\"$query\"" else "",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
@@ -209,7 +212,7 @@ private fun SearchableDrugDialog(
                     if (filtered.isEmpty()) {
                         item {
                             Text(
-                                "未找到匹配的药",
+                                stringResource(R.string.search_no_match),
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(32.dp),
@@ -247,6 +250,7 @@ private fun DrugListItem(drug: Drug, onClick: () -> Unit) {
                     fontWeight = FontWeight.Medium
                 )
                 Spacer(Modifier.height(2.dp))
+                // TODO(v0.9b): " · 品牌: X" 需要 i18n
                 Text(
                     "${drug.genericName} · ${drug.category.displayName}" +
                         if (drug.brandNames.isNotEmpty()) " · 品牌: ${drug.brandNames.take(2).joinToString("/")}" else "",
@@ -255,6 +259,7 @@ private fun DrugListItem(drug: Drug, onClick: () -> Unit) {
                 )
             }
             if (drug.therapeuticWindow != null) {
+                // TODO(v0.9b): "TDM" 是国际通用医学缩写 (Therapeutic Drug Monitoring), 三语通用, 可保留
                 AssistChip(
                     onClick = onClick,
                     label = { Text("TDM", style = MaterialTheme.typography.labelSmall) }

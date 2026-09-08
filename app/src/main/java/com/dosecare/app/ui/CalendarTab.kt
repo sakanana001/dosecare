@@ -30,8 +30,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.dosecare.app.R
 import com.dosecare.app.domain.catalog.Drug
 import com.dosecare.app.domain.catalog.DrugCatalogService
 import com.dosecare.app.domain.prescription.DoseTaken
@@ -65,6 +67,20 @@ const val TEMP_GROUP_NAME = "临时用药"
  * - 选中日下方: 该日所有用药计划 (按 frequencyPerDay 自动生成时段, 已打卡标绿)
  * - 顶部右上 + 按钮: 弹 BottomSheet — 选「新建分组」或「为已有分组加药」
  * - tap 一个 plan 时段: 打卡 (默认 now, 可改时间)
+ *
+ * v0.9a i18n: 已用 stringResource 替换大部分用户可见中文 (顶栏 title/actions, dialog 标题/按钮/标签,
+ *            颜色选择器, 主题菜单, 删除整组确认等). 还遗留:
+ *              - 临时组 badge "临时"
+ *              - "还没有分组,点右上 + 创建" / "当日无安排用药" / "新增" / "为已有分组加药" / "📂 分组管理" 等空态文案
+ *              - "X 药" / "${n}次/日" / "Xmg · Y/日" 等格式化标签
+ *              - "已服" / "待服" 状态文本
+ *              - "本组用药 (N)" / "(空) 点右上「加药」加入第一个药" 文本
+ *              - "所属: X (单次, M月d日)" 文本
+ *              - "⏰ 服药时间:" / "⏰ 用药时间 (点时钟改):" 标签
+ *              - "使用现在" / "自定义" / "实际 HH:mm" 文本
+ *              - TEMP_GROUP_NAME = "临时用药" (const val, 存数据库识别, 改需数据迁移)
+ *              - SimpleDateFormat "M 月 d 日 EEE" 中文 pattern
+ *            留待 v0.9b 父 agent 处理. 所有 TODO 标记的 strings.xml 缺失 key 详见行内注释.
  */
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
@@ -126,14 +142,14 @@ fun CalendarTab(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("我的用药 · ${groups.size} 组") },
+                title = { Text(stringResource(R.string.calendar_title, groups.size)) },
                 actions = {
                     // 主题切换 (右上角)
                     Box {
                         IconButton(onClick = { showThemeMenu = true }) {
                             Icon(
                                 Icons.Default.Palette,
-                                contentDescription = "主题",
+                                contentDescription = stringResource(R.string.calendar_theme),
                                 tint = MaterialTheme.colorScheme.primary
                             )
                         }
@@ -145,7 +161,7 @@ fun CalendarTab(
                     }
                     // 新建分组/加药
                     IconButton(onClick = { showAddSheet = true }) {
-                        Icon(Icons.Default.Add, contentDescription = "新建分组/加药")
+                        Icon(Icons.Default.Add, contentDescription = stringResource(R.string.calendar_new_group_icon))
                     }
                 }
             )
@@ -176,6 +192,8 @@ fun CalendarTab(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 val dayTitle = remember(selectedDate) {
+                    // TODO(v0.9b): SimpleDateFormat pattern "M 月 d 日 EEE" 硬编码中文 (月/日)
+                    //            完整 i18n 需要按 locale 切换 pattern (zh: "M月d日 EEE", en: "MMM d, EEE", ja: "M月d日 EEE")
                     SimpleDateFormat("M 月 d 日 EEE", Locale.CHINA).format(Date(selectedDate))
                 }
                 Text(
@@ -185,7 +203,7 @@ fun CalendarTab(
                     modifier = Modifier.weight(1f)
                 )
                 IconButton(onClick = { PrescriptionViewModel.setInfoDialogOpen(true) }) {
-                    Icon(Icons.Default.Warning, contentDescription = "说明", tint = MaterialTheme.colorScheme.primary)
+                    Icon(Icons.Default.Warning, contentDescription = stringResource(R.string.calendar_calibration), tint = MaterialTheme.colorScheme.primary)
                 }
             }
 
@@ -194,6 +212,7 @@ fun CalendarTab(
                     modifier = Modifier.fillMaxWidth().padding(24.dp),
                     contentAlignment = Alignment.Center
                 ) {
+                    // TODO(v0.9b): 新增 strings.xml key (还没有分组,点右上 + 创建)
                     Text(
                         text = "还没有分组,点右上 + 创建",
                         style = MaterialTheme.typography.bodyMedium,
@@ -210,6 +229,7 @@ fun CalendarTab(
                         modifier = Modifier.fillMaxWidth().padding(24.dp),
                         contentAlignment = Alignment.Center
                     ) {
+                        // TODO(v0.9b): 新增 strings.xml key (当日无安排用药)
                         Text(
                             text = "当日无安排用药",
                             style = MaterialTheme.typography.bodyMedium,
@@ -262,6 +282,7 @@ fun CalendarTab(
                 Spacer(Modifier.height(8.dp))
                 Divider()
                 Spacer(Modifier.height(4.dp))
+                // TODO(v0.9b): 新增 strings.xml key (📂 分组管理)
                 Text(
                     text = "📂 分组管理",
                     style = MaterialTheme.typography.titleSmall,
@@ -298,7 +319,7 @@ fun CalendarTab(
                                 style = MaterialTheme.typography.titleSmall
                             )
                             Text(
-                                text = "${g.drugs.size} 药",
+                                text = stringResource(R.string.calendar_n_drugs, g.drugs.size),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
@@ -335,7 +356,7 @@ fun CalendarTab(
                         ) {
                             Icon(Icons.Default.Add, contentDescription = null)
                             Spacer(Modifier.width(4.dp))
-                            Text("+ 加药到 ${g.name}")
+                            Text(stringResource(R.string.calendar_add_drug_to, g.name))
                         }
                     }
                 }
@@ -347,6 +368,7 @@ fun CalendarTab(
     if (showAddSheet) {
         ModalBottomSheet(onDismissRequest = { showAddSheet = false }) {
             Column(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
+                // TODO(v0.9b): 新增 strings.xml key (新增)
                 Text(
                     text = "新增",
                     style = MaterialTheme.typography.titleMedium,
@@ -354,8 +376,8 @@ fun CalendarTab(
                 )
                 Spacer(Modifier.height(12.dp))
                 ListItem(
-                    headlineContent = { Text("新建分组") },
-                    supportingContent = { Text("如「早上药」「睡前药」") },
+                    headlineContent = { Text(stringResource(R.string.calendar_new_group)) },
+                    supportingContent = { Text(stringResource(R.string.calendar_new_group_hint)) },
                     leadingContent = { Icon(Icons.Default.Add, contentDescription = null) },
                     modifier = Modifier.clickable {
                         showAddSheet = false
@@ -364,8 +386,8 @@ fun CalendarTab(
                 )
                 HorizontalDivider()
                 ListItem(
-                    headlineContent = { Text("临时用药") },
-                    supportingContent = { Text("单次记录, 不属于任何分组 (头痛药/助眠药/抗生素短程)") },
+                    headlineContent = { Text(stringResource(R.string.calendar_temp_drug)) },
+                    supportingContent = { Text(stringResource(R.string.calendar_temp_drug_hint)) },
                     leadingContent = {
                         Icon(
                             Icons.Default.Edit,
@@ -380,6 +402,7 @@ fun CalendarTab(
                 )
                 if (groups.isNotEmpty()) {
                     HorizontalDivider()
+                    // TODO(v0.9b): 新增 strings.xml key (为已有分组加药)
                     Text(
                         text = "为已有分组加药",
                         style = MaterialTheme.typography.labelMedium,
@@ -389,7 +412,7 @@ fun CalendarTab(
                     groups.forEach { g ->
                         ListItem(
                             headlineContent = { Text(g.name) },
-                            supportingContent = { Text("${g.drugs.size} 药") },
+                            supportingContent = { Text(stringResource(R.string.calendar_n_drugs, g.drugs.size)) },
                             leadingContent = {
                                 Box(
                                     modifier = Modifier
@@ -661,17 +684,14 @@ fun CalendarTab(
     if (infoDialogOpen) {
         AlertDialog(
             onDismissRequest = { PrescriptionViewModel.setInfoDialogOpen(false) },
-            title = { Text("📚 数据校准说明") },
+            title = { Text(stringResource(R.string.calendar_calibration_title)) },
             text = {
                 Column {
-                    Text("• 用药计划按各药 frequencyPerDay 自动生成时段 (08/12/18/22 点)", style = MaterialTheme.typography.bodySmall)
-                    Text("• 打卡默认系统时间,可自定义 (补卡历史)", style = MaterialTheme.typography.bodySmall)
-                    Text("• 实际浓度受 CYP 基因型/肝肾/食物/合并用药影响,2-3 倍偏差属正常", style = MaterialTheme.typography.bodySmall)
-                    Text("• 群体 PK Bayes 个体化估计见 v1.0 路线图", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.calendar_calibration_lines), style = MaterialTheme.typography.bodySmall)
                 }
             },
             confirmButton = {
-                TextButton(onClick = { PrescriptionViewModel.setInfoDialogOpen(false) }) { Text("知道了") }
+                TextButton(onClick = { PrescriptionViewModel.setInfoDialogOpen(false) }) { Text(stringResource(R.string.common_known)) }
             }
         )
     }
@@ -828,7 +848,7 @@ private fun PlanRow(
                 if (plan.isChecked) {
                     Icon(
                         Icons.Default.Check,
-                        contentDescription = "已服药",
+                        contentDescription = stringResource(R.string.calendar_taken),
                         tint = MaterialTheme.colorScheme.onPrimary
                     )
                 } else {
@@ -853,6 +873,7 @@ private fun PlanRow(
                             color = MaterialTheme.colorScheme.tertiaryContainer,
                             shape = RoundedCornerShape(4.dp)
                         ) {
+                            // TODO(v0.9b): 新增 strings.xml key (临时 badge)
                             Text(
                                 text = "临时",
                                 style = MaterialTheme.typography.labelSmall,
@@ -862,6 +883,7 @@ private fun PlanRow(
                         }
                     }
                 }
+                // TODO(v0.9b): 新增 strings.xml key (groupName · doseMg mg · 已服/待服)
                 Text(
                     text = "${plan.groupName} · ${plan.doseMg} mg" +
                             if (plan.isChecked) " · 已服" else " · 待服",
@@ -871,7 +893,7 @@ private fun PlanRow(
             }
             if (plan.isChecked) {
                 IconButton(onClick = onLongPressDelete) {
-                    Icon(Icons.Default.Delete, contentDescription = "撤销打卡")
+                    Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.calendar_undo_checkin))
                 }
             }
         }
@@ -896,13 +918,14 @@ private fun PrescribedDrugRow(
             modifier = Modifier.weight(1f),
             style = MaterialTheme.typography.bodySmall
         )
+        // TODO(v0.9b): 新增 strings.xml key (Xmg · Y/日)
         Text(
             text = "${pd.defaultDoseMg}mg · ${pd.frequencyPerDay}/日",
             style = MaterialTheme.typography.labelSmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
         )
         IconButton(onClick = onDelete) {
-            Icon(Icons.Default.Delete, contentDescription = "删除", modifier = Modifier.size(16.dp))
+            Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.common_delete), modifier = Modifier.size(16.dp))
         }
     }
 }
@@ -918,18 +941,18 @@ private fun NewGroupDialog(
     var color by remember { mutableStateOf(existingCount % GROUP_COLORS.size) }
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("新建分组") },
+        title = { Text(stringResource(R.string.calendar_new_group)) },
         text = {
             Column {
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("分组名称") },
+                    label = { Text(stringResource(R.string.calendar_group_name)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(Modifier.height(12.dp))
-                Text("选图标颜色:", style = MaterialTheme.typography.labelMedium)
+                Text(stringResource(R.string.calendar_color_label), style = MaterialTheme.typography.labelMedium)
                 Spacer(Modifier.height(4.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     GROUP_COLORS.forEachIndexed { i, c ->
@@ -948,9 +971,9 @@ private fun NewGroupDialog(
             TextButton(
                 onClick = { if (name.isNotBlank()) onCreate(name.trim(), color) },
                 enabled = name.isNotBlank()
-            ) { Text("创建") }
+            ) { Text(stringResource(R.string.common_create)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("取消") } }
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_cancel)) } }
     )
 }
 
@@ -1023,8 +1046,9 @@ private fun AddDrugDialog(
             Text(
                 if (isTemp) {
                     val dateFmt = remember { java.text.SimpleDateFormat("M月d日", java.util.Locale.CHINA) }
+                    // TODO(v0.9b): 新增 strings.xml key (临时用药 · M月d日)
                     "临时用药 · ${dateFmt.format(java.util.Date(targetDate!!))}"
-                } else "为「${group.name}」加药"
+                } else stringResource(R.string.calendar_add_drug_to, group.name)
             )
         },
         text = {
@@ -1033,8 +1057,8 @@ private fun AddDrugDialog(
                     OutlinedTextField(
                         value = searchQuery,
                         onValueChange = { searchQuery = it },
-                        label = { Text("中文 / 英文 / 拼音首字母") },
-                        placeholder = { Text("例: 锂 / lithium / lpt") },
+                        label = { Text(stringResource(R.string.calendar_pinyin_hint)) },
+                        placeholder = { Text(stringResource(R.string.calendar_pinyin_example)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
@@ -1050,29 +1074,30 @@ private fun AddDrugDialog(
                         }
                     }
                 } else {
-                    Text("已选: ${selected!!.genericNameZh} (${selected!!.genericName})")
+                    Text(stringResource(R.string.calendar_selected_drug, selected!!.genericNameZh, selected!!.genericName))
                     Spacer(Modifier.height(8.dp))
                     OutlinedTextField(
                         value = doseText,
                         onValueChange = { doseText = it.filter { c -> c.isDigit() || c == '.' } },
-                        label = { Text("剂量 (mg)") },
+                        label = { Text(stringResource(R.string.calendar_dose_mg)) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
                     )
                     Spacer(Modifier.height(8.dp))
                     if (!isTemp) {
-                        Text("每日次数: $freq", style = MaterialTheme.typography.labelMedium)
+                        Text(stringResource(R.string.calendar_freq_per_day, freq), style = MaterialTheme.typography.labelMedium)
                         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                             listOf(1, 2, 3, 4).forEach { n ->
                                 FilterChip(
                                     selected = freq == n,
                                     onClick = { freq = n },
-                                    label = { Text("$n 次/日") }
+                                    label = { Text(stringResource(R.string.calendar_n_per_day, n)) }
                                 )
                             }
                         }
                         Spacer(Modifier.height(8.dp))
                     }
+                    // TODO(v0.9b): 新增 strings.xml key (⏰ 服药时间: / ⏰ 用药时间 (点时钟改):)
                     Text(
                         text = if (isTemp) "⏰ 服药时间:" else "⏰ 用药时间 (点时钟改):",
                         style = MaterialTheme.typography.labelMedium
@@ -1093,7 +1118,7 @@ private fun AddDrugDialog(
                         }
                     }
                     Spacer(Modifier.height(8.dp))
-                    TextButton(onClick = { selected = null }) { Text("重新选药") }
+                    TextButton(onClick = { selected = null }) { Text(stringResource(R.string.calendar_reselect_drug)) }
                 }
             }
         },
@@ -1105,9 +1130,9 @@ private fun AddDrugDialog(
                     onAdd(d.id, dose, freq, times, targetDate)
                 },
                 enabled = selected != null
-            ) { Text(if (isTemp) "加入" else "加入") }
+            ) { Text(if (isTemp) stringResource(R.string.calendar_add_drug) else stringResource(R.string.calendar_add_drug)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("取消") } }
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_cancel)) } }
     )
 
     // 选 slot 时间弹的 TimePicker
@@ -1122,10 +1147,10 @@ private fun AddDrugDialog(
                     val newTime = String.format("%02d:%02d", timeState.hour, timeState.minute)
                     times = times.toMutableList().also { it[slotIdx] = newTime }
                     pickerForSlot = null
-                }) { Text("确定") }
+                }) { Text(stringResource(R.string.common_ok)) }
             },
-            dismissButton = { TextButton(onClick = { pickerForSlot = null }) { Text("取消") } },
-            title = { Text("⏰ 第 ${slotIdx + 1} 次用药时间") },
+            dismissButton = { TextButton(onClick = { pickerForSlot = null }) { Text(stringResource(R.string.common_cancel)) } },
+            title = { Text(stringResource(R.string.calendar_slot_time, slotIdx + 1)) },
             text = { TimePicker(state = timeState) }
         )
     }
@@ -1153,15 +1178,16 @@ private fun CheckInDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("打卡 · ${drug?.genericNameZh ?: plan.drugName}") },
+        title = { Text(stringResource(R.string.calendar_checkin, drug?.genericNameZh ?: plan.drugName)) },
         text = {
             Column {
-                Text("计划时间: ${scheduledFmt.format(Date(plan.scheduledMillis))}", style = MaterialTheme.typography.bodyMedium)
-                Text("剂量: ${plan.doseMg} mg", style = MaterialTheme.typography.bodyMedium)
+                Text(stringResource(R.string.calendar_scheduled_time, scheduledFmt.format(Date(plan.scheduledMillis))), style = MaterialTheme.typography.bodyMedium)
+                Text(stringResource(R.string.calendar_dose_label, plan.doseMg.toInt()), style = MaterialTheme.typography.bodyMedium)
                 Spacer(Modifier.height(12.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("服药时间", modifier = Modifier.weight(1f), style = MaterialTheme.typography.labelMedium)
+                    Text(stringResource(R.string.calendar_taken_time), modifier = Modifier.weight(1f), style = MaterialTheme.typography.labelMedium)
                     TextButton(onClick = { customTimeEnabled = !customTimeEnabled }) {
+                        // TODO(v0.9b): 新增 strings.xml key (使用现在 / 自定义)
                         Text(if (customTimeEnabled) "使用现在" else "自定义")
                     }
                 }
@@ -1178,7 +1204,7 @@ private fun CheckInDialog(
                         ) { Text(hourFmt.format(Date(hourMin))) }
                     }
                 } else {
-                    Text("现在: ${timeFmt.format(Date())}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(stringResource(R.string.calendar_now, timeFmt.format(Date())), style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         },
@@ -1186,9 +1212,9 @@ private fun CheckInDialog(
             TextButton(onClick = {
                 val ts = if (customTimeEnabled) dateMillis + hourMin else System.currentTimeMillis()
                 onConfirm(ts)
-            }) { Text("确认") }
+            }) { Text(stringResource(R.string.common_confirm)) }
         },
-        dismissButton = { TextButton(onClick = onDismiss) { Text("取消") } }
+        dismissButton = { TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_cancel)) } }
     )
 
     if (showDatePicker) {
@@ -1199,9 +1225,9 @@ private fun CheckInDialog(
                 TextButton(onClick = {
                     dateMillis = dateState.selectedDateMillis ?: dateMillis
                     showDatePicker = false
-                }) { Text("确定") }
+                }) { Text(stringResource(R.string.common_ok)) }
             },
-            dismissButton = { TextButton(onClick = { showDatePicker = false }) { Text("取消") } }
+            dismissButton = { TextButton(onClick = { showDatePicker = false }) { Text(stringResource(R.string.common_cancel)) } }
         ) { DatePicker(state = dateState) }
     }
     if (showTimePicker) {
@@ -1222,9 +1248,9 @@ private fun CheckInDialog(
                     }
                     hourMin = cal.timeInMillis
                     showTimePicker = false
-                }) { Text("确定") }
+                }) { Text(stringResource(R.string.common_ok)) }
             },
-            dismissButton = { TextButton(onClick = { showTimePicker = false }) { Text("取消") } },
+            dismissButton = { TextButton(onClick = { showTimePicker = false }) { Text(stringResource(R.string.common_cancel)) } },
             text = { TimePicker(state = timeState) }
         )
     }
@@ -1291,6 +1317,7 @@ private fun EditDrugDialog(
                         color = MaterialTheme.colorScheme.tertiaryContainer,
                         shape = RoundedCornerShape(4.dp)
                     ) {
+                        // TODO(v0.9b): 新增 strings.xml key (临时 badge)
                         Text(
                             text = "临时",
                             style = MaterialTheme.typography.labelSmall,
@@ -1303,6 +1330,7 @@ private fun EditDrugDialog(
         },
         text = {
             Column {
+                // TODO(v0.9b): 新增 strings.xml key (所属: X (单次, M月d日))
                 Text(
                     text = "所属: ${group.name}${if (isTemp) "  (单次, ${drug.targetDate?.let { SimpleDateFormat("M月d日", Locale.CHINA).format(Date(it)) } ?: ""})" else ""}",
                     style = MaterialTheme.typography.bodySmall,
@@ -1312,24 +1340,25 @@ private fun EditDrugDialog(
                 OutlinedTextField(
                     value = doseText,
                     onValueChange = { doseText = it.filter { c -> c.isDigit() || c == '.' } },
-                    label = { Text("剂量 (mg)") },
+                    label = { Text(stringResource(R.string.calendar_dose_mg)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
                 if (!isTemp) {
                     Spacer(Modifier.height(8.dp))
-                    Text("每日次数: $freq", style = MaterialTheme.typography.labelMedium)
+                    Text(stringResource(R.string.calendar_freq_per_day, freq), style = MaterialTheme.typography.labelMedium)
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         listOf(1, 2, 3, 4).forEach { n ->
                             FilterChip(
                                 selected = freq == n,
                                 onClick = { freq = n },
-                                label = { Text("$n 次/日") }
+                                label = { Text(stringResource(R.string.calendar_n_per_day, n)) }
                             )
                         }
                     }
                 }
                 Spacer(Modifier.height(8.dp))
+                // TODO(v0.9b): 新增 strings.xml key (⏰ 服药时间: / ⏰ 用药时间 (点时钟改):)
                 Text(
                     text = if (isTemp) "⏰ 服药时间:" else "⏰ 用药时间 (点时钟改):",
                     style = MaterialTheme.typography.labelMedium
@@ -1360,7 +1389,7 @@ private fun EditDrugDialog(
                     ) {
                         Icon(Icons.Default.Delete, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text("撤销今日 ${SimpleDateFormat("HH:mm", Locale.CHINA).format(Date(scheduledMillis))} 打卡")
+                        Text(stringResource(R.string.calendar_undo_today, SimpleDateFormat("HH:mm", Locale.CHINA).format(Date(scheduledMillis))))
                     }
                     Spacer(Modifier.height(4.dp))
                 }
@@ -1372,15 +1401,15 @@ private fun EditDrugDialog(
                     val dose = doseText.toDoubleOrNull() ?: drug.defaultDoseMg
                     onSave(dose, freq, times)
                 }
-            ) { Text("保存") }
+            ) { Text(stringResource(R.string.common_save)) }
         },
         dismissButton = {
             Row {
                 TextButton(onClick = { showDeleteConfirm = true }) {
-                    Text("删除", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(R.string.common_delete), color = MaterialTheme.colorScheme.error)
                 }
                 Spacer(Modifier.width(4.dp))
-                TextButton(onClick = onDismiss) { Text("取消") }
+                TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_cancel)) }
             }
         }
     )
@@ -1399,10 +1428,10 @@ private fun EditDrugDialog(
                     val newTime = String.format("%02d:%02d", timeState.hour, timeState.minute)
                     times = times.toMutableList().also { it[slotIdx] = newTime }
                     pickerForSlot = null
-                }) { Text("确定") }
+                }) { Text(stringResource(R.string.common_ok)) }
             },
-            dismissButton = { TextButton(onClick = { pickerForSlot = null }) { Text("取消") } },
-            title = { Text("⏰ 第 ${slotIdx + 1} 次用药时间") },
+            dismissButton = { TextButton(onClick = { pickerForSlot = null }) { Text(stringResource(R.string.common_cancel)) } },
+            title = { Text(stringResource(R.string.calendar_slot_time, slotIdx + 1)) },
             text = { TimePicker(state = timeState) }
         )
     }
@@ -1411,17 +1440,17 @@ private fun EditDrugDialog(
     if (showDeleteConfirm) {
         AlertDialog(
             onDismissRequest = { showDeleteConfirm = false },
-            title = { Text("删除这条用药") },
+            title = { Text(stringResource(R.string.calendar_delete_drug)) },
             text = {
-                Text("确定要删除「${drugInfo?.genericNameZh ?: drug.drugId}」吗? 该药的所有历史打卡也会一并删除。")
+                Text(stringResource(R.string.calendar_delete_drug_confirm, drugInfo?.genericNameZh ?: drug.drugId))
             },
             confirmButton = {
                 TextButton(onClick = {
                     showDeleteConfirm = false
                     onDelete()
-                }) { Text("删除", color = MaterialTheme.colorScheme.error) }
+                }) { Text(stringResource(R.string.common_delete), color = MaterialTheme.colorScheme.error) }
             },
-            dismissButton = { TextButton(onClick = { showDeleteConfirm = false }) { Text("取消") } }
+            dismissButton = { TextButton(onClick = { showDeleteConfirm = false }) { Text(stringResource(R.string.common_cancel)) } }
         )
     }
 }
@@ -1445,14 +1474,14 @@ private fun ThemeMenu(
 
     DropdownMenu(expanded = expanded, onDismissRequest = onDismiss) {
         Text(
-            "主题模式",
+            stringResource(R.string.theme_mode_title),
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
         )
         DarkModePref.entries.forEach { mode ->
             DropdownMenuItem(
-                text = { Text(mode.displayName) },
+                text = { Text(stringResource(mode.displayNameRes)) },
                 leadingIcon = {
                     if (state.darkMode == mode) {
                         Icon(
@@ -1472,7 +1501,7 @@ private fun ThemeMenu(
         }
         HorizontalDivider(modifier = Modifier.padding(vertical = 4.dp))
         Text(
-            "主题色",
+            stringResource(R.string.theme_color_title),
             style = MaterialTheme.typography.labelMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
@@ -1498,7 +1527,7 @@ private fun ThemeMenu(
                     if (isSelected) {
                         Icon(
                             Icons.Default.Check,
-                            contentDescription = "${accent.name} (已选)",
+                            contentDescription = stringResource(R.string.theme_accent_selected, stringResource(accent.nameRes)),
                             tint = Color.White,
                             modifier = Modifier.size(20.dp)
                         )
@@ -1518,7 +1547,7 @@ private fun ThemeMenu(
                 ) {
                     Icon(
                         Icons.Default.Check,
-                        contentDescription = "自定义色 (已选)",
+                        contentDescription = stringResource(R.string.theme_custom_selected),
                         tint = Color.White,
                         modifier = Modifier.size(20.dp)
                     )
@@ -1536,7 +1565,7 @@ private fun ThemeMenu(
                 ) {
                     Icon(
                         Icons.Default.Delete,
-                        contentDescription = "清除自定义色",
+                        contentDescription = stringResource(R.string.theme_clear_custom),
                         tint = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(14.dp)
                     )
@@ -1553,7 +1582,7 @@ private fun ThemeMenu(
             ) {
                 Icon(
                     Icons.Default.Add,
-                    contentDescription = "自定义主题色",
+                    contentDescription = stringResource(R.string.theme_custom_color),
                     tint = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.size(20.dp)
                 )
@@ -1605,13 +1634,14 @@ private fun EditGroupDialog(
         onDismissRequest = onDismiss,
         title = {
             Row(verticalAlignment = Alignment.CenterVertically) {
-                Text("编辑分组", style = MaterialTheme.typography.titleMedium)
+                Text(stringResource(R.string.calendar_edit_group), style = MaterialTheme.typography.titleMedium)
                 if (isTemp) {
                     Spacer(Modifier.width(6.dp))
                     Surface(
                         color = MaterialTheme.colorScheme.tertiaryContainer,
                         shape = RoundedCornerShape(4.dp)
                     ) {
+                        // TODO(v0.9b): 新增 strings.xml key (临时 badge)
                         Text(
                             text = "临时",
                             style = MaterialTheme.typography.labelSmall,
@@ -1627,12 +1657,12 @@ private fun EditGroupDialog(
                 OutlinedTextField(
                     value = name,
                     onValueChange = { name = it },
-                    label = { Text("分组名称") },
+                    label = { Text(stringResource(R.string.calendar_group_name)) },
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
                 Spacer(Modifier.height(12.dp))
-                Text("选图标颜色:", style = MaterialTheme.typography.labelMedium)
+                Text(stringResource(R.string.calendar_color_label), style = MaterialTheme.typography.labelMedium)
                 Spacer(Modifier.height(4.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     GROUP_COLORS.forEachIndexed { i, c ->
@@ -1646,7 +1676,7 @@ private fun EditGroupDialog(
                             if (color == i) {
                                 Icon(
                                     Icons.Default.Check,
-                                    contentDescription = "已选",
+                                    contentDescription = stringResource(R.string.calendar_selected),
                                     tint = Color.White,
                                     modifier = Modifier.align(Alignment.Center)
                                 )
@@ -1656,6 +1686,7 @@ private fun EditGroupDialog(
                 }
                 Spacer(Modifier.height(16.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
+                    // TODO(v0.9b): 新增 strings.xml key (本组用药 (N))
                     Text(
                         text = "本组用药 (${group.drugs.size})",
                         style = MaterialTheme.typography.labelMedium,
@@ -1664,11 +1695,12 @@ private fun EditGroupDialog(
                     TextButton(onClick = { showAddDrug = true }) {
                         Icon(Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
                         Spacer(Modifier.width(4.dp))
-                        Text("加药")
+                        Text(stringResource(R.string.calendar_add_drug))
                     }
                 }
                 Spacer(Modifier.height(4.dp))
                 if (group.drugs.isEmpty()) {
+                    // TODO(v0.9b): 新增 strings.xml key ((空) 点右上「加药」加入第一个药)
                     Text(
                         text = "(空) 点右上「加药」加入第一个药",
                         style = MaterialTheme.typography.bodySmall,
@@ -1689,6 +1721,7 @@ private fun EditGroupDialog(
                                     style = MaterialTheme.typography.bodySmall,
                                     modifier = Modifier.weight(1f)
                                 )
+                                // TODO(v0.9b): 新增 strings.xml key (Xmg · Y/日)
                                 Text(
                                     text = "${pd.defaultDoseMg}mg · ${pd.frequencyPerDay}/日",
                                     style = MaterialTheme.typography.labelSmall,
@@ -1700,7 +1733,7 @@ private fun EditGroupDialog(
                                 ) {
                                     Icon(
                                         Icons.Default.Delete,
-                                        contentDescription = "删除",
+                                        contentDescription = stringResource(R.string.common_delete),
                                         modifier = Modifier.size(16.dp),
                                         tint = MaterialTheme.colorScheme.error
                                     )
@@ -1715,15 +1748,15 @@ private fun EditGroupDialog(
             TextButton(
                 onClick = { onSave(name.trim().ifBlank { group.name }, color) },
                 enabled = name.isNotBlank()
-            ) { Text("保存") }
+            ) { Text(stringResource(R.string.common_save)) }
         },
         dismissButton = {
             Row {
                 TextButton(onClick = { showDeleteConfirm = true }) {
-                    Text("删除整组", color = MaterialTheme.colorScheme.error)
+                    Text(stringResource(R.string.calendar_delete_group), color = MaterialTheme.colorScheme.error)
                 }
                 Spacer(Modifier.width(4.dp))
-                TextButton(onClick = onDismiss) { Text("取消") }
+                TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_cancel)) }
             }
         }
     )
@@ -1746,17 +1779,17 @@ private fun EditGroupDialog(
     if (showDeleteConfirm) {
         AlertDialog(
             onDismissRequest = { showDeleteConfirm = false },
-            title = { Text("删除整组") },
+            title = { Text(stringResource(R.string.calendar_delete_group)) },
             text = {
-                Text("确定要删除「${group.name}」吗? 该组 ${group.drugs.size} 个药及其所有历史打卡都会被删除,无法恢复。")
+                Text(stringResource(R.string.calendar_delete_group_confirm, group.name, group.drugs.size))
             },
             confirmButton = {
                 TextButton(onClick = {
                     showDeleteConfirm = false
                     onDelete()
-                }) { Text("删除整组", color = MaterialTheme.colorScheme.error) }
+                }) { Text(stringResource(R.string.calendar_delete_group), color = MaterialTheme.colorScheme.error) }
             },
-            dismissButton = { TextButton(onClick = { showDeleteConfirm = false }) { Text("取消") } }
+            dismissButton = { TextButton(onClick = { showDeleteConfirm = false }) { Text(stringResource(R.string.common_cancel)) } }
         )
     }
 }

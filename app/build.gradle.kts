@@ -15,8 +15,8 @@ android {
         applicationId = "com.dosecare.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 8
-        versionName = "0.8d"
+        versionCode = 9
+        versionName = "0.9a"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
@@ -66,6 +66,8 @@ dependencies {
     // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.compose.ui)
+    // v0.9a: 多语言 — AppCompat 1.7+ 提供 AppCompatDelegate.setApplicationLocales() (API 26+)
+    implementation(libs.androidx.appcompat)
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)

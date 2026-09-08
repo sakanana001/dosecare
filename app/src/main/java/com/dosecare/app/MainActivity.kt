@@ -8,6 +8,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.dosecare.app.domain.catalog.DrugCatalogService
 import com.dosecare.app.ui.AppRoot
+import com.dosecare.app.ui.locale.LocaleController
 import com.dosecare.app.ui.theme.ThemeController
 import com.dosecare.app.ui.theme.DoseCareTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,6 +28,10 @@ import javax.inject.Inject
  * v0.8c 升级:
  * - 启动时 ThemeController.load() 从 SharedPreferences 读主题设置
  * - 包到 DoseCareTheme 里用 state.darkMode + state.accentIndex 生成 ColorScheme
+ *
+ * v0.9a 升级:
+ * - 启动时 LocaleController.load() 应用用户选的语言 (SYSTEM / zh-CN / en / ja)
+ *   AppCompatDelegate.setApplicationLocales 内部会自动重启 Activity
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -34,6 +39,8 @@ class MainActivity : ComponentActivity() {
     @Inject lateinit var catalog: DrugCatalogService
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        // v0.9a: locale 必须在 super.onCreate 之前 apply
+        LocaleController.load(applicationContext)
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         // v0.8c: 启动时载入主题设置

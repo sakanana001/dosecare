@@ -20,8 +20,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.dosecare.app.R
 import com.dosecare.app.data.db.DiaryEntryEntity
 import com.dosecare.app.data.db.DiaryMood
 import com.dosecare.app.data.repository.DiaryRepository
@@ -89,10 +91,10 @@ fun DiaryTab() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("日记") },
+                title = { Text(stringResource(R.string.diary_title)) },
                 actions = {
                     IconButton(onClick = { editing = null; addOpen = true }) {
-                        Icon(Icons.Default.Add, contentDescription = "新建日记")
+                        Icon(Icons.Default.Add, contentDescription = stringResource(R.string.diary_new))
                     }
                 }
             )
@@ -118,6 +120,7 @@ fun DiaryTab() {
 
             // 选中日标题
             val dayTitle = remember(selectedDate) {
+                // TODO(v0.9b): SimpleDateFormat pattern "M 月 d 日 EEE" 硬编码中文
                 SimpleDateFormat("M 月 d 日 EEE", Locale.CHINA).format(Date(selectedDate))
             }
             Row(
@@ -130,6 +133,7 @@ fun DiaryTab() {
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.weight(1f)
                 )
+                // TODO(v0.9b): "X 条" 计数标签需要 i18n (新增 diary_n_entries key)
                 Text(
                     text = "${dayEntries.size} 条",
                     style = MaterialTheme.typography.labelSmall,
@@ -142,6 +146,7 @@ fun DiaryTab() {
                     modifier = Modifier.fillMaxWidth().padding(24.dp),
                     contentAlignment = Alignment.Center
                 ) {
+                    // TODO(v0.9b): "今天还没有日记,点右上 + 写一条" 需要 i18n
                     Text(
                         text = "今天还没有日记,点右上 + 写一条",
                         style = MaterialTheme.typography.bodyMedium,
@@ -223,10 +228,10 @@ private fun DiaryCard(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 IconButton(onClick = onEdit) {
-                    Icon(Icons.Default.Edit, contentDescription = "编辑", modifier = Modifier.size(18.dp))
+                    Icon(Icons.Default.Edit, contentDescription = stringResource(R.string.common_edit), modifier = Modifier.size(18.dp))
                 }
                 IconButton(onClick = onDelete) {
-                    Icon(Icons.Default.Delete, contentDescription = "删除", modifier = Modifier.size(18.dp))
+                    Icon(Icons.Default.Delete, contentDescription = stringResource(R.string.common_delete), modifier = Modifier.size(18.dp))
                 }
             }
             if (!entry.text.isNullOrBlank()) {
@@ -265,7 +270,7 @@ private fun DiaryEditorDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(if (initial == null) "新建日记" else "编辑日记") },
+        title = { Text(if (initial == null) stringResource(R.string.diary_new) else /* TODO(v0.9b): 新增 strings.xml key (编辑日记, diary_edit_title) */ "编辑日记") },
         text = {
             Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
                 // 心境下拉
@@ -275,10 +280,11 @@ private fun DiaryEditorDialog(
                     onExpandedChange = { moodOpen = it }
                 ) {
                     OutlinedTextField(
+                        // TODO(v0.9b): m.displayName 是 DiaryMood enum 字段, 跟 Severity 同理
                         value = "${mood.emoji} ${mood.displayName}",
                         onValueChange = {},
                         readOnly = true,
-                        label = { Text("心境") },
+                        label = { Text(stringResource(R.string.diary_mood)) },
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = moodOpen) },
                         modifier = Modifier.fillMaxWidth().menuAnchor()
                     )
@@ -294,12 +300,14 @@ private fun DiaryEditorDialog(
 
                 // 时间 (默认系统时间, 可改)
                 Row(verticalAlignment = Alignment.CenterVertically) {
+                    // TODO(v0.9b): "时间" label 需要 i18n (新增 diary_time_label)
                     Text(
                         text = "时间",
                         style = MaterialTheme.typography.labelMedium,
                         modifier = Modifier.weight(1f)
                     )
                     TextButton(onClick = { customTimeEnabled = !customTimeEnabled }) {
+                        // TODO(v0.9b): "使用现在" / "自定义" 需要 i18n
                         Text(if (customTimeEnabled) "使用现在" else "自定义")
                     }
                 }
@@ -316,6 +324,7 @@ private fun DiaryEditorDialog(
                         ) { Text(hourFmt.format(Date(hourMin))) }
                     }
                 } else {
+                    // TODO(v0.9b): "现在: X" 格式需要 i18n
                     Text(
                         text = "现在: ${timeFmt.format(Date())}",
                         style = MaterialTheme.typography.bodySmall,
@@ -327,7 +336,7 @@ private fun DiaryEditorDialog(
                 OutlinedTextField(
                     value = text,
                     onValueChange = { text = it },
-                    label = { Text("记录 (可选)") },
+                    label = { Text(stringResource(R.string.diary_note)) },
                     modifier = Modifier.fillMaxWidth(),
                     minLines = 3,
                     maxLines = 6
@@ -338,10 +347,10 @@ private fun DiaryEditorDialog(
             TextButton(onClick = {
                 val ts = if (customTimeEnabled) composeTimestamp() else System.currentTimeMillis()
                 onSave(ts, mood, text.takeIf { it.isNotBlank() })
-            }) { Text("保存") }
+            }) { Text(stringResource(R.string.common_save)) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消") }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_cancel)) }
         }
     )
 
@@ -353,9 +362,9 @@ private fun DiaryEditorDialog(
                 TextButton(onClick = {
                     dateMillis = dateState.selectedDateMillis ?: dateMillis
                     showDatePicker = false
-                }) { Text("确定") }
+                }) { Text(stringResource(R.string.common_ok)) }
             },
-            dismissButton = { TextButton(onClick = { showDatePicker = false }) { Text("取消") } }
+            dismissButton = { TextButton(onClick = { showDatePicker = false }) { Text(stringResource(R.string.common_cancel)) } }
         ) { DatePicker(state = dateState) }
     }
     if (showTimePicker) {
@@ -376,9 +385,9 @@ private fun DiaryEditorDialog(
                     }
                     hourMin = cal.timeInMillis
                     showTimePicker = false
-                }) { Text("确定") }
+                }) { Text(stringResource(R.string.common_ok)) }
             },
-            dismissButton = { TextButton(onClick = { showTimePicker = false }) { Text("取消") } },
+            dismissButton = { TextButton(onClick = { showTimePicker = false }) { Text(stringResource(R.string.common_cancel)) } },
             text = { TimePicker(state = timeState) }
         )
     }

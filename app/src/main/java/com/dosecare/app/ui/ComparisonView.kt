@@ -13,9 +13,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.dosecare.app.R
 import com.dosecare.app.domain.catalog.Drug
 import com.dosecare.app.domain.catalog.RiskLevel
 import com.dosecare.app.domain.pk.PkModel
@@ -34,6 +36,13 @@ import com.dosecare.app.domain.pk.PkModel
  * - SpecComparison 静态展示两药的所有字段
  * - RuleEngine 评估给出动态警示(代谢/相加/风险)
  * - 两者并存,SpecComparison 在前,RuleEngine 结果在后
+ *
+ * v0.9a i18n: 已处理顶栏 toggle + disclaimer + 关键差异标题.
+ *   TODO(v0.9b): buildComparisonSections + PlainKeyDiffCard 的内部中文字符串
+ *   (section 标题: 基本信息/药代动力学/治疗窗/CYP 角色/关键不良反应/剂量调整/监测/药物过量;
+ *    字段 label: 蛋白结合/代谢途径/QTc 延长/粒细胞缺乏/抗胆碱能/肾/肝/老年/频次/项目/严重度/中毒/致死/解毒剂;
+ *    PlainKeyDiffCard 文本生成: 治疗窗/无明确治疗窗/TDM 监测/短效/长效/超长效/QT 延长/粒缺/EPS/镇静/高风险 等)
+ *   都需要重构为 stringResource — 目前 strings.xml 未提供这些 key, 留待 v0.9b 父 agent 处理.
  */
 @Composable
 fun SpecComparison(drugA: Drug, drugB: Drug) {
@@ -56,13 +65,13 @@ fun SpecComparison(drugA: Drug, drugB: Drug) {
         ) {
             Icon(
                 if (plainMode) Icons.Default.Visibility else Icons.Default.VisibilityOff,
-                contentDescription = "通俗模式",
+                contentDescription = stringResource(R.string.compare_lay_title),
                 tint = if (plainMode) MaterialTheme.colorScheme.primary
                        else MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.size(18.dp)
             )
             Spacer(Modifier.width(4.dp))
-            Text("📖 通俗模式", style = MaterialTheme.typography.labelMedium)
+            Text(stringResource(R.string.compare_lay_title), style = MaterialTheme.typography.labelMedium)
             Spacer(Modifier.width(4.dp))
             Switch(checked = plainMode, onCheckedChange = { plainMode = it })
         }
@@ -80,7 +89,7 @@ fun SpecComparison(drugA: Drug, drugB: Drug) {
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                "⚠️ 各项参数请以实际药品说明书/化验值为准。\n用药调整、相互作用警示请遵医嘱或咨询临床药师。",
+                stringResource(R.string.compare_lay_disclaimer),
                 modifier = Modifier.padding(12.dp),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onTertiaryContainer
@@ -164,9 +173,9 @@ private fun PlainKeyDiffCard(drugA: Drug, drugB: Drug) {
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(Modifier.padding(12.dp)) {
-                Text("📖 关键差异 (通俗版)", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.compare_diff_title), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
                 Spacer(Modifier.height(6.dp))
-                Text("两药在主要指标上没有明显差异。具体使用仍请遵医嘱。", style = MaterialTheme.typography.bodySmall)
+                Text(stringResource(R.string.compare_diff_empty), style = MaterialTheme.typography.bodySmall)
             }
         }
     } else {
@@ -176,7 +185,7 @@ private fun PlainKeyDiffCard(drugA: Drug, drugB: Drug) {
             modifier = Modifier.fillMaxWidth()
         ) {
             Column(Modifier.padding(12.dp)) {
-                Text("📖 关键差异 (通俗版)", style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.compare_diff_title), style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
                 Spacer(Modifier.height(6.dp))
                 diffs.forEach {
                     Text(it, style = MaterialTheme.typography.bodySmall, modifier = Modifier.padding(vertical = 2.dp))
@@ -261,6 +270,10 @@ private fun SpecSection(
                 )
                 if (plainNote != null) {
                     Spacer(Modifier.height(2.dp))
+                    // TODO(v0.9b): sectionPlainNote() 返回的 section 中文标签需要 i18n
+                    //            这些是 buildComparisonSections() 中硬编码的中文 section 标题
+                    //            (基本信息/药代动力学/治疗窗/CYP 角色/关键不良反应/剂量调整/监测/药物过量)
+                    //            需要重构 buildComparisonSections 用 stringResource
                     Text(
                         "💡 $plainNote",
                         style = MaterialTheme.typography.labelSmall,
@@ -356,7 +369,7 @@ private fun CriticalInteractionsSection(drugA: Drug, drugB: Drug, plain: Boolean
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    "互相影响 (对方在 criticalInteractions 中引用了我)",
+                    stringResource(R.string.compare_critical_inbound),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.SemiBold,
                     textAlign = TextAlign.Center,
@@ -365,7 +378,7 @@ private fun CriticalInteractionsSection(drugA: Drug, drugB: Drug, plain: Boolean
                 if (plain) {
                     Spacer(Modifier.height(2.dp))
                     Text(
-                        "💡 A → B 表示 A 药会让 B 药浓度变化; 数字越大变化越剧烈 (1.5 倍=轻, 5 倍以上=严重)",
+                        stringResource(R.string.compare_hint_legend),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.tertiary,
                         textAlign = TextAlign.Center
@@ -447,7 +460,7 @@ private fun InteractionCard(
             }
             Spacer(Modifier.height(4.dp))
             Text(
-                "$mechanism · AUC 变化 ${auc.first} - ${auc.second} 倍",
+                stringResource(R.string.compare_mechanism_auc, mechanism, auc.first.toString(), auc.second.toString()),
                 style = MaterialTheme.typography.labelSmall,
                 color = sevColor
             )
@@ -460,6 +473,26 @@ private fun InteractionCard(
 // ============================================================
 // Data builder
 // ============================================================
+//
+// TODO(v0.9b): buildComparisonSections 内部硬编码中文 section 标题 + 字段 label.
+//              完整 i18n 需要重构:
+//                1) buildComparisonSections 接收 LocalContext/LocalConfiguration,
+//                   用 context.getString(R.string.xxx) 替代硬编码字符串
+//                2) 在 strings.xml 添加 ~30 个 key (compare_section_basics, compare_section_pk,
+//                   compare_section_window, compare_section_cyp, compare_section_adverse,
+//                   compare_section_adjust, compare_section_monitor, compare_section_overdose,
+//                   compare_label_protein_binding, compare_label_pathway, compare_label_qtc,
+//                   compare_label_metabolic_syndrome, compare_label_agranulocytosis,
+//                   compare_label_eps, compare_label_sedation, compare_label_sexual,
+//                   compare_label_hyperprolactinemia, compare_label_anticholinergic,
+//                   compare_label_renal, compare_label_hepatic, compare_label_elderly,
+//                   compare_label_smoking, compare_label_frequency, compare_label_items,
+//                   compare_label_overdose, compare_overdose_toxic, compare_overdose_lethal,
+//                   compare_overdose_severity, compare_overdose_antidote, etc.)
+//                3) sectionPlainNote() 同 Plain.kt 一起 i18n
+//                4) buildComparisonSections 是顶层 (非 composable), 需要传入 Context/Resources
+//                   或者改为 @Composable 函数
+//              留待 v0.9b 处理.
 
 private fun buildComparisonSections(
     drugA: Drug,
@@ -562,6 +595,9 @@ private fun fmtCypInd(d: Drug): String = d.cypProfile.inducers
     .joinToString("、") { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" }
     .ifEmpty { "—" }
 
+// TODO(v0.9b): strengthZh / riskZh / fmtPathway 是 domain helper, 硬编码中文.
+//            如果要 i18n 需要在 CypStrength / RiskLevel enum 上加 displayNameRes
+//            或新增 strings.xml key, 然后把这些函数改为 composable 调用 stringResource
 private fun fmtPathway(d: Drug): String {
     val cp = d.cypProfile
     val pt = cp.pathwayType?.displayName ?: "未标"

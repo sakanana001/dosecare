@@ -35,8 +35,10 @@ import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.dosecare.app.R
 import com.dosecare.app.domain.catalog.Drug
 import com.dosecare.app.domain.pk.PkCurve
 import kotlin.math.abs
@@ -110,6 +112,8 @@ fun InteractiveConcentrationChart(
                 title, style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f)
             )
+            // TODO(v0.9b): "🔍 Xx · 拖动 / 双指缩放" status bar 需要 i18n
+            //            "拖动 / 双指缩放" 是 UI 提示, 需要新增 strings.xml key
             Text(
                 "🔍 ${"%.1f".format(scaleX)}x · 拖动 / 双指缩放",
                 style = MaterialTheme.typography.labelSmall,
@@ -132,10 +136,11 @@ fun InteractiveConcentrationChart(
                 s.drug.therapeuticWindow?.let { win ->
                     Spacer(Modifier.width(8.dp))
                     Text(
-                        "窗 ${win.low.toInt()}-${win.high.toInt()}",
+                        stringResource(R.string.chart_window_label, win.low.toInt(), win.high.toInt()),
                         style = MaterialTheme.typography.labelSmall,
                         color = s.color
                     )
+                    // TODO(v0.9b): "不可比" / "偏低" / "偏高" / "窗内" 状态标签需要 i18n
                     val status = when {
                         s.drug.skipTherapeuticWindowBand -> "· 不可比"
                         cmaxD < win.low -> "⛔ 偏低"
@@ -457,7 +462,7 @@ fun InteractiveConcentrationChart(
                     }
             ) {
                 Text(
-                    "🔄 重置视图 (${"%.1f".format(scaleX)}x)",
+                    stringResource(R.string.chart_reset_view, "${"%.1f".format(scaleX)}x"),
                     modifier = Modifier.padding(8.dp).fillMaxWidth(),
                     style = MaterialTheme.typography.labelSmall,
                     color = colorScheme.primary,

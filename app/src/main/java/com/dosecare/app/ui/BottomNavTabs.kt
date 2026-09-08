@@ -36,9 +36,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.annotation.StringRes
+import com.dosecare.app.R
+import com.dosecare.app.BuildConfig
 import com.dosecare.app.domain.catalog.Drug
 import com.dosecare.app.domain.catalog.DrugCatalogService
 import com.dosecare.app.domain.catalog.IndicationGroup
@@ -57,10 +61,10 @@ import com.dosecare.app.domain.rules.UserDrugForRule
 // Tab 定义 + App 根 (v0.8a: 3 底栏 + 更多子页)
 // ============================================================
 
-enum class Tab(val title: String, val icon: ImageVector) {
-    Calendar("我的用药", Icons.Default.Schedule),
-    Diary("日记", Icons.Default.Edit),
-    More("更多", Icons.Default.List)
+enum class Tab(@StringRes val titleRes: Int, val icon: ImageVector) {
+    Calendar(R.string.nav_tab_calendar, Icons.Default.Schedule),
+    Diary(R.string.nav_tab_diary, Icons.Default.Edit),
+    More(R.string.nav_tab_more, Icons.Default.List)
 }
 
 /**
@@ -152,18 +156,19 @@ private fun MainScaffold(
         bottomBar = {
             NavigationBar {
                 Tab.entries.forEach { tab ->
+                    val title = stringResource(tab.titleRes)
                     NavigationBarItem(
                         selected = selectedTab == tab,
                         onClick = { onTabSelected(tab) },
                         icon = {
                             Icon(
                                 imageVector = tab.icon,
-                                contentDescription = tab.title
+                                contentDescription = title
                             )
                         },
                         label = {
                             Text(
-                                text = tab.title,
+                                text = title,
                                 style = MaterialTheme.typography.labelSmall,
                                 maxLines = 1
                             )
@@ -215,7 +220,7 @@ fun MoreTab(
     val totalDrugs = remember { catalog.all().size }
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("更多") })
+            TopAppBar(title = { Text(stringResource(R.string.nav_tab_more)) })
         }
     ) { padding ->
         Column(
@@ -227,29 +232,57 @@ fun MoreTab(
         ) {
             // 工具区
             Text(
-                "🧰 工具",
+                stringResource(R.string.more_section_tools),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = 4.dp, top = 4.dp)
             )
-            MoreItem("药物目录", "$totalDrugs 药 · 按类别 / 适应症浏览", Icons.Default.List, onClick = onShowCatalog)
-            MoreItem("双药对比", "PK / 治疗窗 / CYP / 副作用 详细对比", Icons.AutoMirrored.Filled.CompareArrows, onClick = onShowCompare)
-            MoreItem("相互作用", "当前用户所有药之间的相互作用检测", Icons.Default.Warning, onClick = onShowInteractions)
-            MoreItem("血药浓度推测", "1/2/3 房室模型 · 治疗窗色带", Icons.Default.Science, onClick = onShowTdm)
+            MoreItem(
+                stringResource(R.string.more_item_catalog),
+                stringResource(R.string.more_item_catalog_sub, totalDrugs),
+                Icons.Default.List, onClick = onShowCatalog
+            )
+            MoreItem(
+                stringResource(R.string.more_item_compare),
+                stringResource(R.string.more_item_compare_sub),
+                Icons.AutoMirrored.Filled.CompareArrows, onClick = onShowCompare
+            )
+            MoreItem(
+                stringResource(R.string.more_item_interaction),
+                stringResource(R.string.more_item_interaction_sub),
+                Icons.Default.Warning, onClick = onShowInteractions
+            )
+            MoreItem(
+                stringResource(R.string.more_item_tdm),
+                stringResource(R.string.more_item_tdm_sub),
+                Icons.Default.Science, onClick = onShowTdm
+            )
 
             Spacer(Modifier.height(8.dp))
             HorizontalDivider()
             Spacer(Modifier.height(4.dp))
 
             Text(
-                "⚙️ 设置 / 关于",
+                stringResource(R.string.more_section_settings_about),
                 style = MaterialTheme.typography.labelMedium,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 modifier = Modifier.padding(start = 4.dp, top = 4.dp)
             )
-            MoreItem("设置", "个性化 / 提醒 / 提醒方式", Icons.Default.Settings, onClick = onShowSettings)
-            MoreItem("关于", "数据源 / 许可证 / 局限性", Icons.Default.Info, onClick = onShowAbout)
-            MoreItem("联系作者", "Bug 反馈 / 功能建议", Icons.Default.Edit, onClick = onShowContact)
+            MoreItem(
+                stringResource(R.string.more_item_settings),
+                stringResource(R.string.more_item_settings_sub),
+                Icons.Default.Settings, onClick = onShowSettings
+            )
+            MoreItem(
+                stringResource(R.string.more_item_about),
+                stringResource(R.string.more_item_about_sub),
+                Icons.Default.Info, onClick = onShowAbout
+            )
+            MoreItem(
+                stringResource(R.string.more_item_contact),
+                stringResource(R.string.more_item_contact_sub),
+                Icons.Default.Edit, onClick = onShowContact
+            )
         }
     }
 }
@@ -312,10 +345,10 @@ fun TdmScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("血药浓度推测 (TDM)") },
+                title = { Text(stringResource(R.string.tdm_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                 }
             )
@@ -366,13 +399,13 @@ fun CatalogTab(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("药物目录 · ${totalCount} 药") },
+                title = { Text(stringResource(R.string.catalog_title, totalCount)) },
                 actions = {
                     IconButton(onClick = { showSearch = true }) {
-                        Icon(Icons.Default.Search, contentDescription = "搜索")
+                        Icon(Icons.Default.Search, contentDescription = stringResource(R.string.common_search))
                     }
                     IconButton(onClick = onSettingsClick) {
-                        Icon(Icons.Default.Settings, contentDescription = "设置")
+                        Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.common_settings))
                     }
                 }
             )
@@ -407,7 +440,7 @@ fun CatalogTab(
                             modifier = Modifier.size(16.dp)
                         )
                         Spacer(Modifier.width(4.dp))
-                        Text("全部展开", style = MaterialTheme.typography.labelMedium, maxLines = 1, softWrap = false)
+                        Text(stringResource(R.string.catalog_expand_all), style = MaterialTheme.typography.labelMedium, maxLines = 1, softWrap = false)
                     }
                     OutlinedButton(
                         onClick = {
@@ -425,7 +458,7 @@ fun CatalogTab(
                             modifier = Modifier.size(16.dp)
                         )
                         Spacer(Modifier.width(4.dp))
-                        Text("全部折叠", style = MaterialTheme.typography.labelMedium, maxLines = 1, softWrap = false)
+                        Text(stringResource(R.string.catalog_collapse_all), style = MaterialTheme.typography.labelMedium, maxLines = 1, softWrap = false)
                     }
                     FilledTonalButton(
                         onClick = { showSearch = true },
@@ -439,7 +472,7 @@ fun CatalogTab(
                             modifier = Modifier.size(16.dp)
                         )
                         Spacer(Modifier.width(4.dp))
-                        Text("搜索", style = MaterialTheme.typography.labelMedium, maxLines = 1, softWrap = false)
+                        Text(stringResource(R.string.common_search), style = MaterialTheme.typography.labelMedium, maxLines = 1, softWrap = false)
                     }
                 }
             }
@@ -447,8 +480,8 @@ fun CatalogTab(
             // 大类 1: 按药物类别 (药理学分类)
             item(key = "top_cat") {
                 TopLevelHeader(
-                    title = "💊 按药物类别 (药理学分类)",
-                    subtitle = "${byCategory.size} 类 · ${totalCount} 药",
+                    title = stringResource(R.string.catalog_by_category),
+                    subtitle = stringResource(R.string.catalog_by_category_sub, byCategory.size, totalCount),
                     isExpanded = "cat" in topLevelOpen,
                     onToggle = {
                         CatalogViewModel.toggleTop("cat")
@@ -478,8 +511,8 @@ fun CatalogTab(
             // 大类 2: 按主治症状 (IndicationGroup)
             item(key = "top_ind") {
                 TopLevelHeader(
-                    title = "🩺 按主治症状 (疾病/适应症)",
-                    subtitle = "${byIndication.size} 类 · ${totalCount} 药 (一药可属多类)",
+                    title = stringResource(R.string.catalog_by_indication),
+                    subtitle = stringResource(R.string.catalog_by_indication_sub, byIndication.size, totalCount),
                     isExpanded = "ind" in topLevelOpen,
                     onToggle = {
                         CatalogViewModel.toggleTop("ind")
@@ -513,7 +546,7 @@ fun CatalogTab(
 
     if (showSearch) {
         SearchableDrugPicker(
-            label = "搜索 ${allDrugs.size} 个药",
+            label = stringResource(R.string.catalog_search_n, allDrugs.size),
             selected = null,
             options = allDrugs.sortedBy { it.genericNameZh },
             onSelect = { drug ->
@@ -546,10 +579,11 @@ private fun TopLevelHeader(
         ) {
             Icon(
                 if (isExpanded) Icons.Default.KeyboardArrowDown else Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = if (isExpanded) "折叠" else "展开",
+                contentDescription = if (isExpanded) stringResource(R.string.catalog_collapse_all) else stringResource(R.string.catalog_expand_all),
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(20.dp)
             )
+
             Spacer(Modifier.width(8.dp))
             Column(modifier = Modifier.weight(1f)) {
                 Text(
@@ -588,7 +622,7 @@ private fun CategoryHeader(
         ) {
             Icon(
                 if (isExpanded) Icons.Default.KeyboardArrowDown else Icons.AutoMirrored.Filled.KeyboardArrowRight,
-                contentDescription = if (isExpanded) "折叠" else "展开",
+                contentDescription = if (isExpanded) stringResource(R.string.catalog_collapse_all) else stringResource(R.string.catalog_expand_all),
                 tint = MaterialTheme.colorScheme.primary
             )
             Spacer(Modifier.width(8.dp))
@@ -604,7 +638,7 @@ private fun CategoryHeader(
                     .padding(horizontal = 10.dp, vertical = 4.dp)
             ) {
                 Text(
-                    "$count 药",
+                    stringResource(R.string.catalog_drug_count, count),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onPrimary
                 )
@@ -634,10 +668,10 @@ fun CompareTab(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("双药对比") },
+                title = { Text(stringResource(R.string.compare_title)) },
                 actions = {
                     IconButton(onClick = onSettingsClick) {
-                        Icon(Icons.Default.Settings, contentDescription = "设置")
+                        Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.common_settings))
                     }
                 }
             )
@@ -662,7 +696,7 @@ fun CompareTab(
                     Icon(Icons.Default.Science, contentDescription = null, tint = MaterialTheme.colorScheme.tertiary)
                     Spacer(Modifier.width(12.dp))
                     Text(
-                        "双药规格对比",
+                        stringResource(R.string.compare_card_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier.weight(1f)
@@ -670,7 +704,7 @@ fun CompareTab(
                     IconButton(onClick = { CompareViewModel.setInfoDialogOpen(true) }) {
                         Icon(
                             Icons.Default.Info,
-                            contentDescription = "对比说明",
+                            contentDescription = stringResource(R.string.compare_info),
                             tint = MaterialTheme.colorScheme.tertiary
                         )
                     }
@@ -680,23 +714,20 @@ fun CompareTab(
             if (infoDialogOpen) {
                 AlertDialog(
                     onDismissRequest = { CompareViewModel.setInfoDialogOpen(false) },
-                    title = { Text("ℹ️ 双药对比说明") },
+                    title = { Text(stringResource(R.string.compare_info_title)) },
                     text = {
                         Column {
-                            Text("• 选两个药,按 7 个 section 对比 (基本信息 / 药代动力学 / 治疗窗 / CYP 角色 / 不良反应 / 剂量调整 / 监测)", style = MaterialTheme.typography.bodySmall)
-                            Text("• 同值自动合并,不同值分两列展示", style = MaterialTheme.typography.bodySmall)
-                            Text("• 治疗窗 / CYP 谱参考 AGNP 2017 + Flockhart Table", style = MaterialTheme.typography.bodySmall)
-                            Text("• 不良反应等级: VERY_LOW / LOW / MEDIUM / HIGH / VERY_HIGH", style = MaterialTheme.typography.bodySmall)
-                            Text("• 本工具仅展示规格差异,临床决策请结合实际病人情况", style = MaterialTheme.typography.bodySmall)
+                            // 5 行分句,合并为 1 个 strings.xml multiline
+                            Text(stringResource(R.string.compare_info_lines), style = MaterialTheme.typography.bodySmall)
                         }
                     },
                     confirmButton = {
-                        TextButton(onClick = { CompareViewModel.setInfoDialogOpen(false) }) { Text("知道了") }
+                        TextButton(onClick = { CompareViewModel.setInfoDialogOpen(false) }) { Text(stringResource(R.string.common_known)) }
                     }
                 )
             }
             SearchableDrugPicker(
-                label = "药 A",
+                label = stringResource(R.string.compare_drug_a),
                 selected = drugA,
                 options = drugs,
                 onSelect = {
@@ -705,7 +736,7 @@ fun CompareTab(
                 }
             )
             SearchableDrugPicker(
-                label = "药 B",
+                label = stringResource(R.string.compare_drug_b),
                 selected = drugB,
                 options = drugs.filter { it.id != drugAId },
                 onSelect = { CompareViewModel.setDrugBId(it.id) }
@@ -739,10 +770,10 @@ fun InteractionsTab(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("相互作用 · ${selectedIds.size} 药") },
+                title = { Text(stringResource(R.string.interaction_title, selectedIds.size)) },
                 actions = {
                     IconButton(onClick = onSettingsClick) {
-                        Icon(Icons.Default.Settings, contentDescription = "设置")
+                        Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.common_settings))
                     }
                 }
             )
@@ -768,7 +799,7 @@ fun InteractionsTab(
                     Icon(Icons.Default.Warning, contentDescription = null, tint = MaterialTheme.colorScheme.tertiary)
                     Spacer(Modifier.width(12.dp))
                     Text(
-                        "多药相互作用",
+                        stringResource(R.string.interaction_card_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold,
                         modifier = Modifier.weight(1f)
@@ -776,7 +807,7 @@ fun InteractionsTab(
                     IconButton(onClick = { CompareViewModel.setInfoDialogOpen(true) }) {
                         Icon(
                             Icons.Default.Info,
-                            contentDescription = "评估说明",
+                            contentDescription = stringResource(R.string.interaction_info),
                             tint = MaterialTheme.colorScheme.tertiary
                         )
                     }
@@ -786,18 +817,14 @@ fun InteractionsTab(
             if (infoDialogOpen) {
                 AlertDialog(
                     onDismissRequest = { CompareViewModel.setInfoDialogOpen(false) },
-                    title = { Text("ℹ️ 多药相互作用说明") },
+                    title = { Text(stringResource(R.string.interaction_info_title)) },
                     text = {
                         Column {
-                            Text("• 添加 2+ 个药,RuleEngine 跑所有组合 (N×(N-1)/2 对)", style = MaterialTheme.typography.bodySmall)
-                            Text("• 6 类规则: CYP 抑制/诱导、QTc 累积、抗胆碱能、5-HT 综合征、治疗窗偏离、肾/肝剂量调整", style = MaterialTheme.typography.bodySmall)
-                            Text("• 严重度: LOW / MEDIUM / HIGH / CONTRAINDICATED", style = MaterialTheme.typography.bodySmall)
-                            Text("• \"未检出\" ≠ \"安全\"——本评估仅覆盖 6 类规则,实际还要考虑年龄、肝肾、CYP 基因型、蛋白结合置换、肠肝循环、食物/草本补充剂等", style = MaterialTheme.typography.bodySmall)
-                            Text("• 个体差异极大,用药请遵医嘱或咨询临床药师", style = MaterialTheme.typography.bodySmall)
+                            Text(stringResource(R.string.interaction_info_lines), style = MaterialTheme.typography.bodySmall)
                         }
                     },
                     confirmButton = {
-                        TextButton(onClick = { CompareViewModel.setInfoDialogOpen(false) }) { Text("知道了") }
+                        TextButton(onClick = { CompareViewModel.setInfoDialogOpen(false) }) { Text(stringResource(R.string.common_known)) }
                     }
                 )
             }
@@ -807,7 +834,7 @@ fun InteractionsTab(
                 Card(modifier = Modifier.fillMaxWidth()) {
                     Column(Modifier.padding(12.dp)) {
                         Text(
-                            "已选 (${selectedIds.size}):",
+                            stringResource(R.string.interaction_selected_n, selectedIds.size),
                             style = MaterialTheme.typography.titleSmall,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -831,7 +858,7 @@ fun InteractionsTab(
                                         trailingIcon = {
                                             Icon(
                                                 Icons.Default.Close,
-                                                contentDescription = "移除",
+                                                contentDescription = stringResource(R.string.common_remove),
                                                 modifier = Modifier.size(16.dp)
                                             )
                                         }
@@ -845,7 +872,7 @@ fun InteractionsTab(
 
             // 搜索选药 (替代之前 take(50) 的 dropdown,修复"剩余 73 不可点"bug)
             SearchableDrugPicker(
-                label = "添加药 · 搜索 (${availableDrugs.size} 可选)",
+                label = stringResource(R.string.interaction_add_drug_n, availableDrugs.size),
                 selected = null,
                 options = availableDrugs,
                 onSelect = { drug ->
@@ -853,7 +880,7 @@ fun InteractionsTab(
                     InteractionsViewModel.setHasEvaluated(false)
                     InteractionsViewModel.setResults(emptyList())
                 },
-                placeholder = "🔍 搜索: 氟 / fluvoxamine / 氯氮平 / F"
+                placeholder = stringResource(R.string.interaction_search_hint)
             )
 
             // 评估按钮
@@ -872,8 +899,8 @@ fun InteractionsTab(
                 Icon(Icons.Default.CheckCircle, contentDescription = null)
                 Spacer(Modifier.width(8.dp))
                 Text(
-                    if (hasEvaluated) "重新评估 ${selectedIds.size} 药的所有组合"
-                    else "评估 ${selectedIds.size} 药的所有组合"
+                    if (hasEvaluated) stringResource(R.string.interaction_reevaluate_n, selectedIds.size)
+                    else stringResource(R.string.interaction_evaluate_n, selectedIds.size)
                 )
             }
 
@@ -886,15 +913,13 @@ fun InteractionsTab(
                     ) {
                         Column(Modifier.padding(16.dp)) {
                             Text(
-                                "✓ RuleEngine 未检出 6 类已知警示。",
+                                stringResource(R.string.interaction_no_alerts_title),
                                 style = MaterialTheme.typography.bodyMedium,
                                 fontWeight = FontWeight.SemiBold
                             )
                             Spacer(Modifier.height(6.dp))
                             Text(
-                                "但这不代表安全——本次评估仅覆盖:CYP 抑制/诱导、QTc 累积、抗胆碱能负荷、5-HT 综合征、治疗窗偏离、肾/肝剂量调整。" +
-                                    "实际临床还要考虑:年龄、肝肾、基因型(CYP2D6/2C19 慢代谢)、蛋白结合置换、肠肝循环、食物/草本补充剂等。" +
-                                    "个体差异极大,仍请遵医嘱。",
+                                stringResource(R.string.interaction_no_alerts_desc),
                                 style = MaterialTheme.typography.bodySmall
                             )
                         }
@@ -903,7 +928,7 @@ fun InteractionsTab(
                     Card(modifier = Modifier.fillMaxWidth()) {
                         Column(Modifier.padding(16.dp)) {
                             Text(
-                                "RuleEngine 检出 ${results.size} 条警示",
+                                stringResource(R.string.interaction_alerts_count, results.size),
                                 style = MaterialTheme.typography.titleMedium,
                                 fontWeight = FontWeight.SemiBold
                             )
@@ -933,7 +958,7 @@ fun InteractionsTab(
                                 )
                                 Spacer(Modifier.width(8.dp))
                                 Text(
-                                    "⚠️ ${highOverdose.size} 药为高风险过量 (重症 / 危及生命)",
+                                    stringResource(R.string.interaction_high_overdose_n, highOverdose.size),
                                     style = MaterialTheme.typography.titleSmall,
                                     fontWeight = FontWeight.SemiBold,
                                     color = Color(0xFFB71C1C)
@@ -963,7 +988,7 @@ fun InteractionsTab(
                             }
                             Spacer(Modifier.height(4.dp))
                             Text(
-                                "过量处理需多药协调(活性炭 / 血液透析 / 解毒剂等), 立即拨打 120 或当地中毒急救中心",
+                                stringResource(R.string.interaction_overdose_help),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = Color(0xFFB71C1C)
                             )
@@ -998,7 +1023,7 @@ internal fun DrugPicker(
                     modifier = Modifier.weight(1f)
                 )
                 Text(
-                    "${options.size} 个药可选",
+                    stringResource(R.string.interaction_n_drugs_available, options.size),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -1010,7 +1035,7 @@ internal fun DrugPicker(
                     onExpandedChange = { expanded = !expanded }
                 ) {
                     OutlinedTextField(
-                        value = selected?.let { "${it.genericNameZh} (${it.genericName})" } ?: "点击选择…",
+                        value = selected?.let { "${it.genericNameZh} (${it.genericName})" } ?: stringResource(R.string.common_search),
                         onValueChange = {},
                         readOnly = true,
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
@@ -1042,7 +1067,7 @@ internal fun DrugPicker(
                         }
                         if (options.size > 50) {
                             DropdownMenuItem(
-                                text = { Text("…还有 ${options.size - 50} 个药(v0.4 加搜索)") },
+                                text = { Text(stringResource(R.string.interaction_more_drugs, options.size - 50)) },
                                 onClick = { expanded = false },
                                 enabled = false
                             )
@@ -1091,7 +1116,7 @@ internal fun InteractionRow(interaction: Interaction) {
             Text(interaction.detail, style = MaterialTheme.typography.bodySmall)
             Spacer(Modifier.height(4.dp))
             Text(
-                "建议:${interaction.advice}",
+                stringResource(R.string.interaction_advice, interaction.advice),
                 style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.Medium
             )
@@ -1099,7 +1124,7 @@ internal fun InteractionRow(interaction: Interaction) {
             if (interaction.references.isNotEmpty()) {
                 Spacer(Modifier.height(4.dp))
                 Text(
-                    "参考:${interaction.references.take(2).joinToString(";")}",
+                    stringResource(R.string.interaction_references, interaction.references.take(2).joinToString(";")),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -1111,7 +1136,14 @@ internal fun InteractionRow(interaction: Interaction) {
 @Composable
 private fun MechanismLine(interaction: Interaction) {
     val text = when (interaction) {
-        is CypInteraction -> "${interaction.cyp.displayName} · 估算 AUC 变化 ${"%.1f".format(interaction.patientAdjustedFold)}x"
+        is CypInteraction -> stringResource(
+            R.string.compare_mechanism_auc,
+            interaction.cyp.displayName,
+            "%.1f".format(interaction.patientAdjustedFold),
+            "%.1f".format(interaction.patientAdjustedFold)
+        )
+        // TODO(v0.9b): 以下 3 行需要新增 strings.xml key (估算 QTc, ACB 评分, 5-HT 增强药 涉及 N 个)
+        //            父 agent 需要在 strings.xml/values/strings.xml + values-en/strings.xml + values-ja/strings.xml 同步
         is QtcInteraction -> "估算 QTc ${"%.0f".format(interaction.finalEstimatedQtcMs)} ms"
         is AnticholinergicLoadInteraction -> "ACB 评分 ${interaction.totalScore}"
         is SerotoninSyndromeRisk -> "涉及 ${interaction.serotonergicDrugs.size} 个 5-HT 增强药"
@@ -1145,10 +1177,10 @@ fun SettingsScreen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("设置 · 关于") },
+                title = { Text(stringResource(R.string.settings_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                 }
             )
@@ -1168,23 +1200,26 @@ fun SettingsScreen(onBack: () -> Unit) {
             ) {
                 Column(Modifier.padding(20.dp)) {
                     Text(
-                        "DoseCare",
+                        stringResource(R.string.app_name),
                         style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.SemiBold
                     )
-                    Text("v0.3.2 P0 极简版 · Debug", style = MaterialTheme.typography.bodyMedium)
-                    Text("com.dosecare.app · AGPL-3.0", style = MaterialTheme.typography.labelSmall)
+                    Text(
+                        "v0.9a" + if (BuildConfig.DEBUG) " · Debug" else "",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                    Text(stringResource(R.string.about_app_id), style = MaterialTheme.typography.labelSmall)
                 }
             }
 
+            // v0.9a: 语言设置入口
+            com.dosecare.app.ui.locale.LanguageSettingsCard()
+
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("📚 数据源", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.settings_data_source), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Spacer(Modifier.height(8.dp))
-                    Text("• DrugCatalog: AGNP 2017 + FDA DailyMed + Flockhart CYP Table", style = MaterialTheme.typography.bodySmall)
-                    Text("• PK 参数: 1 房室口服模型 (One-compartment oral)", style = MaterialTheme.typography.bodySmall)
-                    Text("• 治疗窗: AGNP 2017 TDM 共识指南", style = MaterialTheme.typography.bodySmall)
-                    Text("• 相互作用: RuleEngine 6 类自研规则", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.settings_data_source_lines), style = MaterialTheme.typography.bodySmall)
                 }
             }
 
@@ -1193,23 +1228,20 @@ fun SettingsScreen(onBack: () -> Unit) {
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.4f))
             ) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("⚠️ 局限性", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.settings_limitations), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Spacer(Modifier.height(8.dp))
-                    Text("• 1 房室模型对部分药不够准确(苯妥英非线性代谢、锂肾清除)", style = MaterialTheme.typography.bodySmall)
-                    Text("• 群体平均参数,个体差异 2-3 倍(CYP 基因型 / 吸烟 / 年龄 / 肾 / 肝)", style = MaterialTheme.typography.bodySmall)
-                    Text("• v0.3.2 不接医学数据库 API;PK 参数以 AGNP/FDA 静态数据为基准", style = MaterialTheme.typography.bodySmall)
-                    Text("• 不替代医师判断;实际用药请遵医嘱或咨询临床药师", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.settings_limitations_lines), style = MaterialTheme.typography.bodySmall)
                 }
             }
 
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("🗺 路线图", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.settings_roadmap), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Spacer(Modifier.height(8.dp))
-                    Text("v0.4 计划: Hilt DI + Room 持久化 + 服药提醒", style = MaterialTheme.typography.bodySmall)
-                    Text("v0.5 计划: 多房室 PK + 患者画像(吸烟/肾/肝)校准", style = MaterialTheme.typography.bodySmall)
-                    Text("v1.0 计划: 联网医学数据库校准 + 群体 PK Bayes 估计", style = MaterialTheme.typography.bodySmall)
-                    Text("v1.5 计划: KMP 多平台", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.settings_roadmap_v04), style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.settings_roadmap_v05), style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.settings_roadmap_v10), style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.settings_roadmap_v15), style = MaterialTheme.typography.bodySmall)
                 }
             }
 
@@ -1218,8 +1250,7 @@ fun SettingsScreen(onBack: () -> Unit) {
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)
             ) {
                 Text(
-                    "⚠️ 本 APP 所有计算结果(PK 估算、警示)仅供参考。" +
-                        "个体差异显著,实际用药请遵医嘱。",
+                    stringResource(R.string.settings_disclaimer),
                     modifier = Modifier.padding(16.dp),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant

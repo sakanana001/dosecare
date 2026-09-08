@@ -2,15 +2,17 @@ package com.dosecare.app.ui.theme
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import com.dosecare.app.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 
 /**
- * 主题偏好持久化 (v0.8c 新增, v0.8d 增强自定义色)
+ * 主题偏好持久化 (v0.8c 新增, v0.8d 增强自定义色, v0.9a 字段 i18n)
  *
  * 存:
  *  - 暗色模式 (SYSTEM/LIGHT/DARK)
@@ -21,15 +23,15 @@ import kotlinx.coroutines.flow.update
  *
  * 暴露 StateFlow 给 Compose 订阅, 任何写入会触发 recomposition
  */
-enum class DarkModePref(val displayName: String) {
-    SYSTEM("跟随系统"),
-    LIGHT("亮色"),
-    DARK("暗色");
+enum class DarkModePref(@StringRes val displayNameRes: Int) {
+    SYSTEM(R.string.theme_mode_system),
+    LIGHT(R.string.theme_mode_light),
+    DARK(R.string.theme_mode_dark);
 }
 
 /** 预设主题色 (5 选 1) — 跟 LightColors/DarkColors 配对 */
 data class AccentColor(
-    val name: String,
+    @StringRes val nameRes: Int,
     val lightPrimary: Color,
     val lightOnPrimary: Color = Color.White,
     val lightPrimaryContainer: Color,
@@ -42,7 +44,7 @@ data class AccentColor(
 
 object AccentColors {
     val SkyBlue = AccentColor(
-        name = "浅蓝",
+        nameRes = R.string.theme_accent_sky_blue,
         lightPrimary = Color(0xFF5B8DBE),
         lightPrimaryContainer = Color(0xFFE3EEF7),
         lightOnPrimaryContainer = Color(0xFF0A2A47),
@@ -51,7 +53,7 @@ object AccentColors {
         darkOnPrimaryContainer = Color(0xFFD6E5F2),
     )
     val WarmOrange = AccentColor(
-        name = "暖橙",
+        nameRes = R.string.theme_accent_warm_orange,
         lightPrimary = Color(0xFFE08A4F),
         lightPrimaryContainer = Color(0xFFFCE4D2),
         lightOnPrimaryContainer = Color(0xFF4A2510),
@@ -60,7 +62,7 @@ object AccentColors {
         darkOnPrimaryContainer = Color(0xFFFCE4D2),
     )
     val ForestGreen = AccentColor(
-        name = "墨绿",
+        nameRes = R.string.theme_accent_forest_green,
         lightPrimary = Color(0xFF5C8A6B),
         lightPrimaryContainer = Color(0xFFD7EFE0),
         lightOnPrimaryContainer = Color(0xFF1A3528),
@@ -69,7 +71,7 @@ object AccentColors {
         darkOnPrimaryContainer = Color(0xFFD7EFE0),
     )
     val RoseRed = AccentColor(
-        name = "玫瑰红",
+        nameRes = R.string.theme_accent_rose_red,
         lightPrimary = Color(0xFFC4646E),
         lightPrimaryContainer = Color(0xFFFADADD),
         lightOnPrimaryContainer = Color(0xFF4A1A20),
@@ -78,7 +80,7 @@ object AccentColors {
         darkOnPrimaryContainer = Color(0xFFFADADD),
     )
     val DeepPurple = AccentColor(
-        name = "深紫",
+        nameRes = R.string.theme_accent_deep_purple,
         lightPrimary = Color(0xFF7C5DAB),
         lightPrimaryContainer = Color(0xFFEAE0F8),
         lightOnPrimaryContainer = Color(0xFF26154A),
@@ -116,7 +118,7 @@ object AccentColors {
         val forcedS = s.coerceAtLeast(0.4f)
 
         return AccentColor(
-            name = "自定义",
+            nameRes = R.string.theme_accent_custom,
             lightPrimary = userColor,
             lightOnPrimary = Color.White,
             // 浅色模式背景: 同 hue, 极低饱和, 极高亮度

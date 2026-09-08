@@ -22,8 +22,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.dosecare.app.R
 import com.dosecare.app.domain.catalog.Drug
 import com.dosecare.app.domain.catalog.DrugCatalogService
 import com.dosecare.app.domain.catalog.OverdoseSeverity
@@ -56,13 +58,13 @@ fun DrugDetailScreen(
             TopAppBar(
                 title = {
                     Text(
-                        drug?.genericNameZh ?: "药物详情",
+                        drug?.genericNameZh ?: stringResource(R.string.drug_not_found, ""),
                         fontWeight = FontWeight.SemiBold
                     )
                 },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                 },
                 actions = {
@@ -70,7 +72,7 @@ fun DrugDetailScreen(
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(
                             if (plainMode) Icons.Default.Visibility else Icons.Default.VisibilityOff,
-                            contentDescription = "通俗模式",
+                            contentDescription = stringResource(R.string.compare_lay_title),
                             tint = if (plainMode) MaterialTheme.colorScheme.primary
                                    else MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -87,7 +89,7 @@ fun DrugDetailScreen(
     ) { padding ->
         if (drug == null) {
             Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
-                Text("未找到药物: $drugId")
+                Text(stringResource(R.string.drug_not_found, drugId))
             }
             return@Scaffold
         }
@@ -160,12 +162,14 @@ private fun HeaderCard(drug: Drug, plain: Boolean) {
             if (drug.brandNames.isNotEmpty()) {
                 Spacer(Modifier.height(12.dp))
                 Text(
-                    "商品名：${drug.brandNames.joinToString("、")}",
+                    stringResource(R.string.drug_brand_names, drug.brandNames.joinToString("、")),
                     style = MaterialTheme.typography.bodySmall
                 )
             }
             if (plain) {
                 Spacer(Modifier.height(8.dp))
+                // TODO(v0.9b): Plain 模式解释 (ATC 码 = 世界卫生组织...) 需要 i18n
+                //            Plain.kt 的所有函数返回中文, 需要重构返回 stringResource id
                 PlainNote("ATC 码 = 世界卫生组织给每种药分的唯一编号,医生用来识别同类药")
             }
         }
@@ -176,8 +180,10 @@ private fun HeaderCard(drug: Drug, plain: Boolean) {
 private fun CypRoleCard(drug: Drug, plain: Boolean) {
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp)) {
+            // TODO(v0.9b): "CYP 角色" section title 需要 i18n
             SectionTitle("CYP 角色")
             Spacer(Modifier.height(4.dp))
+            // TODO(v0.9b): "作为底物（被代谢）" / "作为抑制剂（影响其他药）" / "作为诱导剂（影响其他药）" 标签需要 i18n
             CypRow("作为底物（被代谢）", drug.cypProfile.substrates.map { "${it.cyp.displayName} ${(it.fraction * 100).toInt()}%" })
             if (plain && drug.cypProfile.substrates.isNotEmpty()) PlainNote(Plain.cypSubstrate())
             CypRow("作为抑制剂（影响其他药）", drug.cypProfile.inhibitors.map { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" })
@@ -194,12 +200,14 @@ private fun CypRoleCard(drug: Drug, plain: Boolean) {
             if (drug.cypProfile.primaryPathway != null) {
                 Spacer(Modifier.height(6.dp))
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("主要代谢途径", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
+                    Text(stringResource(R.string.drug_metabolism), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
                     if (drug.cypProfile.pathwayType != null) {
                         Surface(
                             shape = RoundedCornerShape(4.dp),
                             color = pathwayColor(drug.cypProfile.pathwayType).copy(alpha = 0.15f)
                         ) {
+                            // TODO(v0.9b): pathwayType.displayName (e.g. "CYP450 氧化", "UGT 葡萄糖苷酸化") 是 domain data
+                            //            可以保留, 但如需 i18n 需要在 PathwayType enum 上加 displayNameRes
                             Text(
                                 drug.cypProfile.pathwayType.displayName,
                                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
@@ -210,6 +218,7 @@ private fun CypRoleCard(drug: Drug, plain: Boolean) {
                         }
                     }
                 }
+                // TODO(v0.9b): primaryPathway 字段是数据 (database value), 不需要 i18n
                 Text(drug.cypProfile.primaryPathway, style = MaterialTheme.typography.bodyMedium)
                 if (plain) PlainNote(Plain.metabolism(drug.cypProfile.pathwayType))
             }
@@ -251,6 +260,8 @@ private fun strengthRank(s: String) = when (s) {
     else -> 0
 }
 
+// TODO(v0.9b): strengthZh 是 domain helper, 把 enum name 翻译成中文.
+//            如果要 i18n 需要在 CypStrength enum 上加 displayNameRes 或单独 strings.xml key
 private fun strengthZh(name: String): String = when (name) {
     "STRONG" -> "强"
     "MODERATE" -> "中"
@@ -269,18 +280,19 @@ private fun WindowCard(drug: Drug, plain: Boolean) {
             Icon(Icons.Default.Schedule, contentDescription = null, tint = MaterialTheme.colorScheme.secondary)
             Spacer(Modifier.width(12.dp))
             Column {
-                Text("治疗窗", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSecondaryContainer)
+                Text(stringResource(R.string.drug_therapeutic_window), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSecondaryContainer)
                 Text(
                     "${"%.0f".format(w.low)} - ${"%.0f".format(w.high)} ${w.unit}",
                     style = MaterialTheme.typography.titleLarge,
                     fontWeight = FontWeight.SemiBold
                 )
                 Text(
-                    "参考：${w.guidelineSource}",
+                    stringResource(R.string.drug_window_ref, w.guidelineSource ?: ""),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
                 )
                 if (plain) {
+                    // TODO(v0.9b): Plain.kt 解释 (治疗窗 = ...) 需要 i18n
                     PlainNote(Plain.therapeuticWindow(w.low, w.high, w.unit))
                     w.guidelineSource?.let { PlainNote(Plain.guideline(it)) }
                 }
@@ -296,10 +308,12 @@ private fun PkPreviewCard(drug: Drug, plain: Boolean) {
     val css = remember(drug.id) { computeCss(drug) }
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp)) {
+            // TODO(v0.9b): "PK 估算（演示：200 mg bid 第 5 天，70 kg）" 需要 i18n
             SectionTitle("PK 估算（演示：200 mg bid 第 5 天，70 kg）")
             Spacer(Modifier.height(8.dp))
             Text(css, style = MaterialTheme.typography.bodyMedium)
             Spacer(Modifier.height(4.dp))
+            // TODO(v0.9b): "t½ X h · 蛋白结合 X%" 格式化标签需要 i18n
             Text(
                 "t½ ${"%.1f".format(model.tHalfHours)} h · 蛋白结合 ${drug.proteinBindingPct}%",
                 style = MaterialTheme.typography.bodySmall,
@@ -381,8 +395,10 @@ private fun AdverseEffectsCard(drug: Drug, plain: Boolean) {
     val ae = drug.adverseEffects
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp)) {
+            // TODO(v0.9b): "关键不良反应" section title 需要 i18n
             SectionTitle("关键不良反应")
             Spacer(Modifier.height(8.dp))
+            // TODO(v0.9b): RiskRow labels (QTc 延长, 代谢综合征, 粒细胞缺乏, 锥体外系反应, 镇静, 性功能影响, 高泌乳素) 需要 i18n
             RiskRow("QTc 延长", ae.qtcProlongation); if (plain) PlainNote(Plain.qtcProlongation(ae.qtcProlongation))
             RiskRow("代谢综合征", ae.metabolicSyndrome); if (plain) PlainNote(Plain.metabolicSyndrome(ae.metabolicSyndrome))
             RiskRow("粒细胞缺乏", ae.agranulocytosis); if (plain) PlainNote(Plain.agranulocytosis(ae.agranulocytosis))
@@ -391,7 +407,8 @@ private fun AdverseEffectsCard(drug: Drug, plain: Boolean) {
             RiskRow("性功能影响", ae.sexual); if (plain) PlainNote(Plain.sexual(ae.sexual))
             RiskRow("高泌乳素", ae.hyperprolactinemia); if (plain) PlainNote(Plain.hyperprolactinemia(ae.hyperprolactinemia))
             Row(Modifier.padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
-                Text("抗胆碱能负荷", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+                Text(stringResource(R.string.drug_anticholinergic), style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+                // TODO(v0.9b): "X / 3" 抗胆碱能格式需要 i18n
                 Text("${ae.anticholinergicLoad} / 3", style = MaterialTheme.typography.bodyMedium, color = anticholinergicColor(ae.anticholinergicLoad))
             }
             if (plain) PlainNote(Plain.anticholinergicLoad(ae.anticholinergicLoad))
@@ -435,12 +452,14 @@ private fun OverdoseCard(drug: Drug, plain: Boolean) {
                     modifier = Modifier.size(20.dp)
                 )
                 Spacer(Modifier.width(8.dp))
+                // TODO(v0.9b): "药物过量 (70kg 成人)" section title 需要 i18n
                 SectionTitle("药物过量 (70kg 成人)")
                 Spacer(Modifier.weight(1f))
                 Surface(
                     shape = RoundedCornerShape(4.dp),
                     color = sevColor.copy(alpha = 0.18f)
                 ) {
+                    // TODO(v0.9b): o.severity.displayName (OverdoseSeverity) 是 domain data
                     Text(
                         o.severity.displayName,
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 3.dp),
@@ -451,7 +470,7 @@ private fun OverdoseCard(drug: Drug, plain: Boolean) {
                 }
             }
             Spacer(Modifier.height(10.dp))
-            Text("典型症状", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(R.string.drug_typical_symptoms), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(o.symptoms, style = MaterialTheme.typography.bodyMedium)
             Spacer(Modifier.height(8.dp))
             // 剂量估计
@@ -459,7 +478,7 @@ private fun OverdoseCard(drug: Drug, plain: Boolean) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     if (o.toxicDoseEstimateMg != null) {
                         Text(
-                            "⚠️ 中毒 ~${o.toxicDoseEstimateMg.toInt()} mg",
+                            stringResource(R.string.drug_toxic_dose, o.toxicDoseEstimateMg.toInt()),
                             style = MaterialTheme.typography.labelMedium,
                             color = Color(0xFFFB8C00)
                         )
@@ -467,7 +486,7 @@ private fun OverdoseCard(drug: Drug, plain: Boolean) {
                     if (o.fatalDoseEstimateMg != null) {
                         if (o.toxicDoseEstimateMg != null) Spacer(Modifier.width(12.dp))
                         Text(
-                            "☠️ 致死 ~${o.fatalDoseEstimateMg.toInt()} mg",
+                            stringResource(R.string.drug_lethal_dose, o.fatalDoseEstimateMg.toInt()),
                             style = MaterialTheme.typography.labelMedium,
                             color = Color(0xFFB71C1C),
                             fontWeight = FontWeight.SemiBold
@@ -476,7 +495,7 @@ private fun OverdoseCard(drug: Drug, plain: Boolean) {
                 }
                 Spacer(Modifier.height(8.dp))
             }
-            Text("抢救要点", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(R.string.drug_rescue), style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Text(o.management, style = MaterialTheme.typography.bodySmall)
             o.antidote?.let { ant ->
                 Spacer(Modifier.height(6.dp))
@@ -485,7 +504,7 @@ private fun OverdoseCard(drug: Drug, plain: Boolean) {
                     color = Color(0xFFB71C1C).copy(alpha = 0.12f)
                 ) {
                     Text(
-                        "💉 特异性解毒剂: $ant",
+                        stringResource(R.string.drug_antidote, ant),
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
                         style = MaterialTheme.typography.labelSmall,
                         color = Color(0xFFB71C1C),
@@ -494,7 +513,7 @@ private fun OverdoseCard(drug: Drug, plain: Boolean) {
                 }
             }
             Spacer(Modifier.height(6.dp))
-            Text("数据源: ${o.dataSource}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(stringResource(R.string.drug_data_source, o.dataSource), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
@@ -521,6 +540,8 @@ private fun anticholinergicColor(score: Int): Color = when {
     else -> Color(0xFF66BB6A)
 }
 
+// TODO(v0.9b): RiskLevel.displayName() 是 domain helper, 把 enum 翻译成中文.
+//            如果要 i18n 需要在 RiskLevel enum 上加 displayNameRes 或单独 strings.xml key
 private fun RiskLevel.displayName(): String = when (this) {
     RiskLevel.VERY_HIGH -> "极高"
     RiskLevel.HIGH -> "高"
@@ -534,8 +555,10 @@ private fun AdjustmentsCard(drug: Drug, plain: Boolean) {
     val a = drug.adjustments
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp)) {
+            // TODO(v0.9b): "剂量调整" section title 需要 i18n
             SectionTitle("剂量调整")
             Spacer(Modifier.height(8.dp))
+            // TODO(v0.9b): KvRow labels (肾功能, 肝功能, 老年, 吸烟, 戒烟) 需要 i18n
             KvRow("肾功能", a.renal.name.replace("_", " "))
             if (plain) PlainNote(Plain.renalAdj(a.renal))
             KvRow("肝功能", a.hepatic.name.replace("_", " "))
@@ -570,7 +593,7 @@ private fun CriticalInteractionsCard(drug: Drug, catalog: DrugCatalogService, pl
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Icon(Icons.Default.Warning, contentDescription = null, tint = MaterialTheme.colorScheme.error)
                 Spacer(Modifier.width(8.dp))
-                Text("关键相互作用提示", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                Text(stringResource(R.string.drug_critical_interactions), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
             }
             Spacer(Modifier.height(8.dp))
             drug.criticalInteractions.forEach { hint ->
@@ -588,9 +611,10 @@ private fun CriticalInteractionsCard(drug: Drug, catalog: DrugCatalogService, pl
                             color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f)
                         )
                         Text(
-                            "AUC 变化：${hint.aucFoldChange.first} - ${hint.aucFoldChange.second} 倍",
+                            stringResource(R.string.drug_auc_change, hint.aucFoldChange.first.toString(), hint.aucFoldChange.second.toString()),
                             style = MaterialTheme.typography.bodySmall
                         )
+                        // TODO(v0.9b): Plain.auc() 返回中文, 需要 i18n
                         if (plain) PlainNote(Plain.auc() + " — 倍数 = 联用时浓度变化倍数")
                         Spacer(Modifier.height(2.dp))
                         Text(hint.clinicalNote, style = MaterialTheme.typography.bodySmall)
@@ -606,10 +630,11 @@ private fun CriticalInteractionsCard(drug: Drug, catalog: DrugCatalogService, pl
 private fun MonitoringCard(drug: Drug, plain: Boolean) {
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp)) {
+            // TODO(v0.9b): "监测要求" section title 需要 i18n
             SectionTitle("监测要求")
             Spacer(Modifier.height(4.dp))
             drug.monitoring.frequency?.let {
-                Text("频次：$it", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+                Text(stringResource(R.string.drug_freq, it), style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
                 Spacer(Modifier.height(4.dp))
             }
             Text(

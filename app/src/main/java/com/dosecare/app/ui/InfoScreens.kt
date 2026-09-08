@@ -14,8 +14,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.dosecare.app.R
 
 /**
  * v0.8a Phase F7: 关于 / 开源许可证 / 联系作者 Screen
@@ -34,10 +36,10 @@ fun AboutScreen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("关于") },
+                title = { Text(stringResource(R.string.about_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                 }
             )
@@ -57,7 +59,7 @@ fun AboutScreen(onBack: () -> Unit) {
             ) {
                 Column(Modifier.padding(20.dp)) {
                     Text(
-                        "DoseCare",
+                        stringResource(R.string.app_name),
                         style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -66,7 +68,7 @@ fun AboutScreen(onBack: () -> Unit) {
                         "v0.8d" + if (BuildConfig.DEBUG) " · Debug" else "",
                         style = MaterialTheme.typography.bodyMedium
                     )
-                    Text("com.dosecare.app · AGPL-3.0", style = MaterialTheme.typography.labelSmall)
+                    Text(stringResource(R.string.about_app_id), style = MaterialTheme.typography.labelSmall)
                 }
             }
 
@@ -77,13 +79,13 @@ fun AboutScreen(onBack: () -> Unit) {
             ) {
                 Column(Modifier.padding(16.dp)) {
                     Text(
-                        "🔗 仓库源代码",
+                        stringResource(R.string.about_repo_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "https://github.com/sakanana001/dosecare",
+                        stringResource(R.string.about_repo_url),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
@@ -94,8 +96,7 @@ fun AboutScreen(onBack: () -> Unit) {
                     )
                     Spacer(Modifier.height(12.dp))
                     Text(
-                        "README / CHANGELOG / CONTRIBUTING / SECURITY 都在仓库根目录," +
-                            " 提交 Issue 之前请先阅读 CONTRIBUTING.md。",
+                        stringResource(R.string.about_repo_desc),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -108,13 +109,13 @@ fun AboutScreen(onBack: () -> Unit) {
             ) {
                 Column(Modifier.padding(16.dp)) {
                     Text(
-                        "💌 联系作者",
+                        stringResource(R.string.about_contact_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "daisukikiki01@gmail.com",
+                        stringResource(R.string.about_contact_email),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
@@ -125,7 +126,7 @@ fun AboutScreen(onBack: () -> Unit) {
                     )
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        "点上面邮箱直接发邮件 (默认邮件客户端)",
+                        stringResource(R.string.about_contact_email_desc),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -134,12 +135,9 @@ fun AboutScreen(onBack: () -> Unit) {
 
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("📚 数据源", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.about_data_source_title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Spacer(Modifier.height(8.dp))
-                    Text("• DrugCatalog: AGNP 2017 + FDA DailyMed + Flockhart CYP Table", style = MaterialTheme.typography.bodySmall)
-                    Text("• PK 参数: 1/2/3 房室口服模型 (按 drug.pkModel 自动选)", style = MaterialTheme.typography.bodySmall)
-                    Text("• 治疗窗: AGNP 2017 TDM 共识指南", style = MaterialTheme.typography.bodySmall)
-                    Text("• 相互作用: RuleEngine 6 类自研规则", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.about_data_source_lines), style = MaterialTheme.typography.bodySmall)
                 }
             }
 
@@ -148,11 +146,9 @@ fun AboutScreen(onBack: () -> Unit) {
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer.copy(alpha = 0.4f))
             ) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("⚠️ 局限性", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.about_limitations), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Spacer(Modifier.height(8.dp))
-                    Text("• 1 房室模型对部分药不够准确(苯妥英非线性代谢、锂肾清除)", style = MaterialTheme.typography.bodySmall)
-                    Text("• 实际浓度受 CYP 基因型/肝肾/食物/合并用药影响,2-3 倍偏差属正常", style = MaterialTheme.typography.bodySmall)
-                    Text("• 不替代医师面诊; 急性不良反应请立即就医", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.about_limitations_lines), style = MaterialTheme.typography.bodySmall)
                 }
             }
 
@@ -163,13 +159,14 @@ fun AboutScreen(onBack: () -> Unit) {
             ) {
                 Column(Modifier.padding(16.dp)) {
                     Text(
-                        "📜 开源许可证",
+                        stringResource(R.string.about_license_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
                     Spacer(Modifier.height(4.dp))
                     Text("GNU Affero General Public License v3.0 (AGPL-3.0)", style = MaterialTheme.typography.bodyMedium)
                     Spacer(Modifier.height(8.dp))
+                    // TODO(v0.9b): AGPL 全文需要 i18n (en/zh/ja 三份完整 GPL 文本)
                     Text(
                         "Copyright (C) 2024-2026 DoseCare contributors\n" +
                             "This program is free software: you can redistribute it and/or modify " +
@@ -187,7 +184,7 @@ fun AboutScreen(onBack: () -> Unit) {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
                     Text(
-                        "📦 主要依赖",
+                        stringResource(R.string.about_deps_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -204,7 +201,7 @@ fun AboutScreen(onBack: () -> Unit) {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
                     Text(
-                        "📊 数据源许可证",
+                        stringResource(R.string.about_deps_license_title),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -237,10 +234,10 @@ fun ContactScreen(onBack: () -> Unit) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("联系作者") },
+                title = { Text(stringResource(R.string.contact_title)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
-                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = stringResource(R.string.common_back))
                     }
                 }
             )
@@ -256,8 +253,9 @@ fun ContactScreen(onBack: () -> Unit) {
         ) {
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("🐛 Bug 反馈 / 功能建议", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.contact_bug_title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Spacer(Modifier.height(8.dp))
+                    // TODO(v0.9b): "GitHub Issues:" label 需要 i18n
                     Text("GitHub Issues:", style = MaterialTheme.typography.labelMedium)
                     Text(
                         "https://github.com/sakanana001/dosecare/issues",
@@ -273,10 +271,10 @@ fun ContactScreen(onBack: () -> Unit) {
             }
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("💌 邮件", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.contact_email_title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "daisukikiki01@gmail.com",
+                        stringResource(R.string.about_contact_email),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
@@ -287,7 +285,7 @@ fun ContactScreen(onBack: () -> Unit) {
                     )
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        "点上面直接跳到默认邮件客户端",
+                        stringResource(R.string.contact_email_desc),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -295,10 +293,9 @@ fun ContactScreen(onBack: () -> Unit) {
             }
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {
-                    Text("⚕️ 临床数据更正", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+                    Text(stringResource(R.string.contact_clinical_title), style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
                     Spacer(Modifier.height(8.dp))
-                    Text("欢迎药师/医师朋友指出 PK 参数、治疗窗、CYP 数据的错误," +
-                            "可附 PMID/官方指南, 我们会尽快复核。",
+                    Text(stringResource(R.string.contact_clinical_desc),
                         style = MaterialTheme.typography.bodySmall)
                 }
             }

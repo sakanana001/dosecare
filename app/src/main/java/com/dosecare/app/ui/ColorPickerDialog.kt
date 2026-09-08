@@ -40,9 +40,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.dosecare.app.R
 
 /**
  * 主题色选择器 (v0.8d 新增)
@@ -79,7 +81,7 @@ fun ColorPickerDialog(
 
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text("自定义主题色") },
+        title = { Text(stringResource(R.string.color_picker_title)) },
         text = {
             Column(
                 verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -100,6 +102,7 @@ fun ColorPickerDialog(
                             hexInput,
                             style = MaterialTheme.typography.titleMedium
                         )
+                        // TODO(v0.9b): "R G B" label 需要 i18n
                         Text(
                             "R ${color.red.times(255).toInt()}  " +
                                 "G ${color.green.times(255).toInt()}  " +
@@ -129,7 +132,7 @@ fun ColorPickerDialog(
 
                 // Hue 滑块
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("色相", style = MaterialTheme.typography.labelMedium, modifier = Modifier.width(40.dp))
+                    Text(stringResource(R.string.color_picker_hue), style = MaterialTheme.typography.labelMedium, modifier = Modifier.width(40.dp))
                     Slider(
                         value = hue,
                         onValueChange = { hue = it },
@@ -146,7 +149,7 @@ fun ColorPickerDialog(
 
                 // Value 滑块
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text("明度", style = MaterialTheme.typography.labelMedium, modifier = Modifier.width(40.dp))
+                    Text(stringResource(R.string.color_picker_value), style = MaterialTheme.typography.labelMedium, modifier = Modifier.width(40.dp))
                     Slider(
                         value = value,
                         onValueChange = { value = it },
@@ -188,10 +191,10 @@ fun ColorPickerDialog(
             }
         },
         confirmButton = {
-            TextButton(onClick = { onConfirm(color) }) { Text("确定") }
+            TextButton(onClick = { onConfirm(color) }) { Text(stringResource(R.string.common_ok)) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss) { Text("取消") }
+            TextButton(onClick = onDismiss) { Text(stringResource(R.string.common_cancel)) }
         }
     )
 }

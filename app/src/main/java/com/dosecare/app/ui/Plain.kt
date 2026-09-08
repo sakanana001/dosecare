@@ -14,6 +14,25 @@ import com.dosecare.app.domain.catalog.RiskLevel
  * 3. 关键风险(肝/肾/老年)给一句"为什么要小心"
  *
  * 何时显示: DrugDetailScreen 和 ComparisonView 的 toggle "📖 通俗模式" ON
+ *
+ * v0.9a i18n: TODO(v0.9b) — 本文件所有函数返回硬编码中文.
+ *            完整 i18n 需要重构:
+ *              1) 把每个函数返回 @StringRes Int + 需要 %d/%s 参数的用 Composable 包装
+ *              2) 在 strings.xml/values/strings.xml + values-en + values-ja 添加 ~40 个 key
+ *                 (plain_half_life_short, plain_half_life_medium, plain_half_life_long, plain_half_life_xlong,
+ *                  plain_protein_high, plain_protein_mid, plain_protein_low,
+ *                  plain_therapeutic_window, plain_cmax, plain_cmin, plain_cavg, plain_auc,
+ *                  plain_cyp_substrate, plain_metabolism_cyp, plain_metabolism_ugt, plain_metabolism_renal,
+ *                  plain_metabolism_hydrolysis, plain_metabolism_deiodination, plain_metabolism_mao,
+ *                  plain_metabolism_dpp4, plain_metabolism_beta_oxidation, plain_metabolism_other,
+ *                  plain_cyp_inhibitor_strong/moderate/weak,
+ *                  plain_cyp_inducer_strong/moderate/weak,
+ *                  plain_qtc_*, plain_metabolic_syndrome_*, plain_agranulocytosis_*,
+ *                  plain_extrapyramidal_*, plain_sedation_*, plain_sexual_*,
+ *                  plain_hyperprolactinemia_*, plain_anticholinergic_*,
+ *                  plain_renal_*, plain_hepatic_*, plain_elderly, plain_guideline)
+ *              3) 修改 DrugDetailScreen + ComparisonView 中所有 Plain.xxx() 调用
+ *            留待 v0.9b 处理.
  */
 object Plain {
 

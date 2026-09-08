@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ====== App 基本 ====== -->
+    <string name="app_name">DoseCare</string>
+    <string name="app_name_en">DoseCare</string>
+    <string name="ic_launcher_name">DoseCare icon</string>
+    <string name="app_description">個別化投薬アシスタント</string>
+
+    <!-- ====== 共通ボタン / ラベル ====== -->
+    <string name="common_ok">確定</string>
+    <string name="common_cancel">キャンセル</string>
+    <string name="common_save">保存</string>
+    <string name="common_delete">削除</string>
+    <string name="common_confirm">確認</string>
+    <string name="common_known">了解</string>
+    <string name="common_back">戻る</string>
+    <string name="common_search">検索</string>
+    <string name="common_settings">設定</string>
+    <string name="common_about">について</string>
+    <string name="common_contact">作者に連絡</string>
+    <string name="common_close">閉じる</string>
+    <string name="common_clear">クリア</string>
+    <string name="common_remove">削除</string>
+    <string name="common_edit">編集</string>
+    <string name="common_create">作成</string>
+    <string name="common_new">新規</string>
+
+    <!-- ====== 下部ナビ 3 タブ ====== -->
+    <string name="nav_tab_calendar">服薬</string>
+    <string name="nav_tab_diary">日記</string>
+    <string name="nav_tab_more">その他</string>
+
+    <!-- ====== その他タブ ====== -->
+    <string name="more_section_tools">🧰 ツール</string>
+    <string name="more_section_settings_about">⚙️ 設定 / について</string>
+    <string name="more_item_catalog">薬品カタログ</string>
+    <string name="more_item_catalog_sub">%1$d 薬 · 分類 / 適応症で閲覧</string>
+    <string name="more_item_compare">2 剤比較</string>
+    <string name="more_item_compare_sub">PK / 治療域 / CYP / 副作用 詳細比較</string>
+    <string name="more_item_interaction">相互作用</string>
+    <string name="more_item_interaction_sub">現在の全服薬間の相互作用を検出</string>
+    <string name="more_item_tdm">血中濃度推定 (TDM)</string>
+    <string name="more_item_tdm_sub">1/2/3-コンパートメントモデル · 治療域バンド</string>
+    <string name="more_item_settings">設定</string>
+    <string name="more_item_settings_sub">パーソナライズ / リマインダー / 通知</string>
+    <string name="more_item_about">について</string>
+    <string name="more_item_about_sub">データソース / ライセンス / 限界</string>
+    <string name="more_item_contact">作者に連絡</string>
+    <string name="more_item_contact_sub">バグ報告 / 機能要望</string>
+
+    <!-- ====== 設定 ====== -->
+    <string name="settings_title">設定 · について</string>
+    <string name="settings_language">🌐 言語</string>
+    <string name="settings_data_source">📚 データソース</string>
+    <string name="settings_data_source_lines">• DrugCatalog: AGNP 2017 + FDA DailyMed + Flockhart CYP Table\n• PK パラメータ: 1-コンパートメント経口モデル\n• 治療域: AGNP 2017 TDM コンセンサス\n• 相互作用: RuleEngine 6 カテゴリ独自ルール</string>
+    <string name="settings_limitations">⚠️ 限界</string>
+    <string name="settings_limitations_lines">• 1-コンパートメントモデルは一部の薬に不正確 (フェニトイン非線形代謝、リチウム腎クリアランスなど)\n• 集団平均パラメータ;個人差 2-3 倍 (CYP 遺伝子型 / 喫煙 / 年齢 / 腎 / 肝)\n• v0.3.2 は外部医療データベース API を呼びません;PK データは AGNP/FDA 静的ソースが基準\n• 医師の判断に代わるものではありません;実際の投薬は医師または臨床薬剤師にご相談ください</string>
+    <string name="settings_roadmap">🗺 ロードマップ</string>
+    <string name="settings_roadmap_v04">v0.4 計画: Hilt DI + Room 永続化 + 服薬リマインダー</string>
+    <string name="settings_roadmap_v05">v0.5 計画: マルチコンパートメント PK + 患者プロファイル (喫煙/腎/肝) キャリブレーション</string>
+    <string name="settings_roadmap_v10">v1.0 計画: オンラインメディカル DB キャリブレーション + 集団 PK Bayes 推定</string>
+    <string name="settings_roadmap_v15">v1.5 計画: KMP マルチプラットフォーム</string>
+    <string name="settings_disclaimer">⚠️ 本アプリのすべての計算結果 (PK 推定、警告) は参考用です。個人差が大きいため、実際の投薬は医師にご相談ください。</string>
+
+    <!-- ====== 言語選択 ====== -->
+    <string name="language_system">システムに従う</string>
+    <string name="language_zh_cn">简体中文</string>
+    <string name="language_en">English</string>
+    <string name="language_ja">日本語</string>
+
+    <!-- ====== TDM ====== -->
+    <string name="tdm_title">血中濃度推定 (TDM)</string>
+    <string name="tdm_data_source_info">データソースとキャリブレーション説明</string>
+    <string name="tdm_no_drugs">TDM モニタリング可能な薬がありません (therapeuticWindow フィールドが必要)</string>
+    <string name="tdm_data_source_title">📚 データソース &amp; キャリブレーション</string>
+    <string name="tdm_data_source_lines">• PK パラメータ: AGNP 2017 (Therapeutic Drug Monitoring in Psychiatry) + FDA DailyMed 添付文書\n• CYP スペクトル: Flockhart Table (Indiana University)\n• 治療域: AGNP 2017 コンセンサス\n• 体重調整: Vd = vdLPerKg × weight (線形と仮定)</string>
+    <string name="tdm_limitations">⚠️ 限界</string>
+    <string name="tdm_limitations_lines">• 1-コンパートメント経口モデル — 非線形薬 (フェニトイン) に不正確、腎クリアランス薬 (リチウム) は近似のみ\n• 集団平均パラメータ — 個人差 2-3 倍 (CYP 遺伝子型 / 喫煙 / 年齢 / 腎 / 肝)\n• 複数薬カーブは濃度の重ね合わせのみ;CYP 競合 / 酵素阻害動力学は模擬しません\n• v0.4 は医師の判断に代わるものではありません;実際の投薬は医師または臨床薬剤師にご相談ください</string>
+    <string name="tdm_predict_n_drugs">%1$d 薬の血中濃度を推定</string>
+    <string name="tdm_add_drug_to_chart">薬をグラフに追加</string>
+    <string name="tdm_add_drug_n">%1$d 薬選択可能 (TDM あり/なし両方可)</string>
+    <string name="tdm_add">追加</string>
+    <string name="tdm_dose_mg">投与量 (mg)</string>
+    <string name="tdm_weight_kg">体重 (kg)</string>
+    <string name="tdm_freq">頻度:</string>
+    <string name="tdm_chart_title">複数薬定常状態濃度-時間曲線 (タップ/ドラッグ/ピンチで操作)</string>
+
+    <!-- ====== 比較 ====== -->
+    <string name="compare_title">2 剤比較</string>
+    <string name="compare_card_title">2 剤スペック比較</string>
+    <string name="compare_info">比較説明</string>
+    <string name="compare_info_title">ℹ️ 2 剤比較の説明</string>
+    <string name="compare_info_lines">• 2 剤を選び、7 セクションで比較 (基本情報 / PK / 治療域 / CYP 役割 / 副作用 / 投与量調整 / モニタリング)\n• 同じ値は自動マージ、異なる値は 2 列で表示\n• 治療域 / CYP スペクトルは AGNP 2017 + Flockhart Table を参照\n• 副作用レベル: VERY_LOW / LOW / MEDIUM / HIGH / VERY_HIGH\n• 本ツールはスペック差異のみ表示;臨床判断は実際の患者状況を考慮してください</string>
+    <string name="compare_drug_a">薬 A</string>
+    <string name="compare_drug_b">薬 B</string>
+    <string name="compare_lay_title">📖 平易モード</string>
+    <string name="compare_lay_disclaimer">⚠️ すべてのパラメータは実際の添付文書 / 検査値で確認してください。\n投薬調整、相互作用警告は医師または臨床薬剤師にご相談ください。</string>
+    <string name="compare_diff_title">📖 重要な差異 (平易版)</string>
+    <string name="compare_diff_empty">2 剤は主要指標で明らかな差異がありません。実際の使用は医師に従ってください。</string>
+    <string name="compare_critical_inbound">相互影響 (相手が criticalInteractions で自分を参照)</string>
+    <string name="compare_hint_legend">💡 A → B は薬 A が薬 B の濃度を変化させることを示します;数字が大きいほど変化が激しい (1.5 倍=軽度、5 倍以上=重度)</string>
+    <string name="compare_mechanism_auc">%1$s · AUC 変化 %2$s - %3$s 倍</string>
+
+    <!-- ====== 相互作用 ====== -->
+    <string name="interaction_title">相互作用 · %1$d 剤</string>
+    <string name="interaction_card_title">複数薬相互作用</string>
+    <string name="interaction_info">評価説明</string>
+    <string name="interaction_info_title">ℹ️ 複数薬相互作用の説明</string>
+    <string name="interaction_info_lines">• 2 剤以上追加すると、RuleEngine がすべての組み合わせ (N×(N-1)/2 ペア) を実行\n• 6 カテゴリルール: CYP 阻害/誘導、QTc 蓄積、抗コリン作用、5-HT 症候群、治療域逸脱、腎/肝投与量調整\n• 重度: LOW / MEDIUM / HIGH / CONTRAINDICATED\n• 個人差が大きいため、医師または臨床薬剤師にご相談ください</string>
+    <string name="interaction_selected_n">選択中 (%1$d):</string>
+    <string name="interaction_add_drug_n">薬を追加 · 検索 (%1$d 選択可能)</string>
+    <string name="interaction_search_hint">🔍 検索: フル / fluvoxamine / クロザピン / F</string>
+    <string name="interaction_evaluate_n">%1$d 剤の全組み合わせを評価</string>
+    <string name="interaction_reevaluate_n">%1$d 剤の全組み合わせを再評価</string>
+    <string name="interaction_no_alerts_title">✓ RuleEngine は 6 カテゴリの既知警告を検出しませんでした。</string>
+    <string name="interaction_no_alerts_desc">しかしこれは安全を意味しません — 本評価は CYP 阻害/誘導、QTc 蓄積、抗コリン負荷、5-HT 症候群、治療域逸脱、腎/肝投与量調整のみをカバーします。実際の臨床では年齢、肝/腎、遺伝子型 (CYP2D6/2C19 代謝不良者)、蛋白結合置換、腸肝循環、食事/ハーブサプリメント等も考慮されます。個人差が大きいため、医師に従ってください。</string>
+    <string name="interaction_alerts_count">RuleEngine が %1$d 件の警告を検出</string>
+    <string name="interaction_high_overdose_n">⚠️ %1$d 剤が高リスク過剰投与 (重症 / 生命を脅かす)</string>
+    <string name="interaction_overdose_help">過剰投与処理には複数薬の調整が必要 (活性炭 / 血液透析 / 解毒剤等)。すぐに 120 または地域の中毒救急センターに電話してください。</string>
+    <string name="interaction_advice">推奨:%1$s</string>
+    <string name="interaction_references">参照:%1$s</string>
+    <string name="interaction_n_drugs_available">%1$d 剤選択可能</string>
+    <string name="interaction_more_drugs">…あと %1$d 剤 (検索は v0.4 で追加)</string>
+
+    <!-- ====== 薬品カタログ ====== -->
+    <string name="catalog_title">薬品カタログ · %1$d 剤</string>
+    <string name="catalog_expand_all">すべて展開</string>
+    <string name="catalog_collapse_all">すべて折りたたみ</string>
+    <string name="catalog_by_category">💊 薬品分類別 (薬理学分類)</string>
+    <string name="catalog_by_category_sub">%1$d 類 · %2$d 剤</string>
+    <string name="catalog_by_indication">🩺 適応症別 (疾患 / 治療用途)</string>
+    <string name="catalog_by_indication_sub">%1$d 類 · %2$d 剤 (1 剤が複数類に属する場合あり)</string>
+    <string name="catalog_search_n">%1$d 剤を検索</string>
+    <string name="catalog_drug_count">%1$d 剤</string>
+
+    <!-- ====== CalendarTab ====== -->
+    <string name="calendar_title">服薬 · %1$d グループ</string>
+    <string name="calendar_new_group">新規グループ</string>
+    <string name="calendar_new_group_hint">例:「朝の薬」「就寝前の薬」</string>
+    <string name="calendar_temp_drug">臨時投薬</string>
+    <string name="calendar_temp_drug_hint">単回記録、グループに属さない (頭痛薬/睡眠薬/短期抗生物質等)</string>
+    <string name="calendar_n_drugs">%1$d 剤</string>
+    <string name="calendar_calibration_title">📚 データキャリブレーション説明</string>
+    <string name="calendar_calibration_lines">• 服薬スケジュールは各薬の frequencyPerDay から自動生成 (08/12/18/22 時台)\n• デフォルトはシステム時刻でチェックイン;カスタマイズ可能 (遡及記録)\n• 実際の濃度は CYP 遺伝子型/肝/腎/食事/併用薬に影響され、2-3 倍の偏差は正常\n• 集団 PK Bayes 個別推定は v1.0 ロードマップ参照</string>
+    <string name="calendar_undo_today">今日の %1$s を取り消し</string>
+    <string name="calendar_selected_drug">選択中: %1$s (%2$s)</string>
+    <string name="calendar_dose_mg">投与量 (mg)</string>
+    <string name="calendar_freq_per_day">1 日頻度: %1$d</string>
+    <string name="calendar_n_per_day">%1$d 回/日</string>
+    <string name="calendar_reselect_drug">薬を選び直す</string>
+    <string name="calendar_slot_time">⏰ %1$d 回目の投薬時刻</string>
+    <string name="calendar_checkin">チェックイン · %1$s</string>
+    <string name="calendar_scheduled_time">予定時刻: %1$s</string>
+    <string name="calendar_dose_label">投与量: %1$d mg</string>
+    <string name="calendar_taken_time">服用時刻</string>
+    <string name="calendar_now">現在: %1$s</string>
+    <string name="calendar_delete_drug">この投薬を削除</string>
+    <string name="calendar_delete_drug_confirm">「%1$s」を削除しますか? この薬のすべてのチェックイン履歴も削除されます。</string>
+    <string name="calendar_delete_group">グループ全体を削除</string>
+    <string name="calendar_delete_group_confirm">「%1$s」を削除しますか? このグループの %2$d 剤とその全チェックイン履歴が削除され、元に戻せません。</string>
+    <string name="calendar_color_label">アイコン色を選択:</string>
+    <string name="calendar_group_name">グループ名</string>
+    <string name="calendar_pinyin_hint">中国語 / 英語 / 拼音頭文字</string>
+    <string name="calendar_pinyin_example">例: リチウム / Li / 锂</string>
+    <string name="calendar_add_drug_to">+ %1$s に薬を追加</string>
+    <string name="calendar_theme">テーマ</string>
+    <string name="calendar_new_group_icon">新規グループ/薬追加</string>
+    <string name="calendar_calibration">説明</string>
+    <string name="calendar_taken">服用済み</string>
+    <string name="calendar_undo_checkin">チェックイン取り消し</string>
+    <string name="calendar_edit_group">グループを編集</string>
+    <string name="calendar_add_drug">薬を追加</string>
+    <string name="calendar_selected">選択中</string>
+
+    <!-- ====== テーマメニュー ====== -->
+    <string name="theme_mode_title">テーマモード</string>
+    <string name="theme_color_title">アクセントカラー</string>
+    <string name="theme_accent_selected">%1$s (選択中)</string>
+    <string name="theme_custom_selected">カスタム (選択中)</string>
+    <string name="theme_clear_custom">カスタム色をクリア</string>
+    <string name="theme_custom_color">カスタムアクセント</string>
+    <string name="theme_mode_system">システムに従う</string>
+    <string name="theme_mode_light">ライト</string>
+    <string name="theme_mode_dark">ダーク</string>
+    <string name="theme_accent_sky_blue">スカイブルー</string>
+    <string name="theme_accent_warm_orange">ウォームオレンジ</string>
+    <string name="theme_accent_forest_green">フォレストグリーン</string>
+    <string name="theme_accent_rose_red">ローズレッド</string>
+    <string name="theme_accent_deep_purple">ディープパープル</string>
+    <string name="theme_accent_custom">カスタム</string>
+
+    <!-- ====== カラーピッカー ====== -->
+    <string name="color_picker_title">カスタムアクセント</string>
+    <string name="color_picker_hue">色相</string>
+    <string name="color_picker_value">明度</string>
+
+    <!-- ====== 日記 ====== -->
+    <string name="diary_title">日記</string>
+    <string name="diary_new">新規日記</string>
+    <string name="diary_mood">気分</string>
+    <string name="diary_note">メモ (任意)</string>
+
+    <!-- ====== について ====== -->
+    <string name="about_title">について</string>
+    <string name="about_repo_title">🔗 ソースコード</string>
+    <string name="about_repo_url">https://github.com/sakanana001/dosecare</string>
+    <string name="about_repo_desc">README / CHANGELOG / CONTRIBUTING / SECURITY はすべてリポジトリのルートにあります。Issue を開く前に CONTRIBUTING.md をお読みください。</string>
+    <string name="about_contact_title">💌 作者に連絡</string>
+    <string name="about_contact_email">daisukikiki01@gmail.com</string>
+    <string name="about_contact_email_desc">上のメールをタップしてデフォルトメールクライアントを開く</string>
+    <string name="about_data_source_title">📚 データソース</string>
+    <string name="about_data_source_lines">• PK パラメータ: 1/2/3-コンパートメント経口モデル (drug.pkModel で自動選択)\n• 治療域: AGNP 2017 TDM コンセンサス\n• 相互作用: RuleEngine 6 カテゴリ独自ルール</string>
+    <string name="about_limitations">⚠️ 限界</string>
+    <string name="about_limitations_lines">• 1-コンパートメントモデルは一部の薬に不正確 (フェニトイン非線形代謝、リチウム腎クリアランス)\n• 実際の濃度は CYP 遺伝子型/肝/腎/食事/併用薬に影響され、2-3 倍の偏差は正常\n• 医師の診療に代わるものではありません;急性副作用はすぐに受診してください</string>
+    <string name="about_license_title">📜 オープンソースライセンス</string>
+    <string name="about_deps_title">📦 主要依存関係</string>
+    <string name="about_deps_license_title">📊 データソースライセンス</string>
+    <string name="about_app_id">com.dosecare.app · AGPL-3.0</string>
+
+    <!-- ====== 連絡 ====== -->
+    <string name="contact_title">作者に連絡</string>
+    <string name="contact_bug_title">🐛 バグ報告 / 機能要望</string>
+    <string name="contact_email_title">💌 メール</string>
+    <string name="contact_email_desc">上をタップしてデフォルトメールクライアントを開く</string>
+    <string name="contact_clinical_title">⚕️ 臨床データ修正</string>
+    <string name="contact_clinical_desc">薬剤師/医師の方は PK パラメータ、治療域、CYP データの誤りを指摘してください。Issue またはメールで対応します。確認後速やかに更新します。</string>
+
+    <!-- ====== DrugDetail 薬品詳細 ====== -->
+    <string name="drug_not_found">薬品が見つかりません: %1$s</string>
+    <string name="drug_brand_names">商品名:%1$s</string>
+    <string name="drug_metabolism">主な代謝経路</string>
+    <string name="drug_therapeutic_window">治療域</string>
+    <string name="drug_window_ref">参照:%1$s</string>
+    <string name="drug_anticholinergic">抗コリン負荷</string>
+    <string name="drug_typical_symptoms">典型症状</string>
+    <string name="drug_toxic_dose">⚠️ 中毒 ~%1$d mg</string>
+    <string name="drug_lethal_dose">☠️ 致死 ~%1$d mg</string>
+    <string name="drug_rescue">救命処置</string>
+    <string name="drug_antidote">💉 特異的解毒剤: %1$s</string>
+    <string name="drug_data_source">データソース: %1$s</string>
+    <string name="drug_critical_interactions">重要な相互作用警告</string>
+    <string name="drug_auc_change">AUC 変化:%1$s - %2$s 倍</string>
+    <string name="drug_freq">頻度:%1$s</string>
+
+    <!-- ====== 検索 ====== -->
+    <string name="search_drug_count">%1$d 剤</string>
+    <string name="search_select_title">薬を選択 · %1$s</string>
+    <string name="search_hint">中国語 / 英語 / ブランド / 拼音頭文字</string>
+    <string name="search_filtered">%1$d / %2$d 剤</string>
+    <string name="search_no_match">一致する薬がありません</string>
+
+    <!-- ====== チャート ====== -->
+    <string name="chart_window_label">域 %1$d-%2$d</string>
+    <string name="chart_reset_view">🔄 ビューをリセット (%1$s)</string>
+
+    <!-- ====== HomeScreen ====== -->
+    <string name="home_therapeutic_window">治療域:%1$s</string>
+    <string name="home_no_window">明確な治療域なし</string>
+    <string name="home_metabolism">代謝:%1$s</string>
+    <string name="home_disclaimer">⚠️ 本アプリのすべての計算結果 (PK 推定、警告) は参考用です。</string>
+
+    <!-- ====== CalendarCompose ====== -->
+    <string name="calendar_prev_month">前の月</string>
+    <string name="calendar_next_month">次の月</string>
+
+</resources>

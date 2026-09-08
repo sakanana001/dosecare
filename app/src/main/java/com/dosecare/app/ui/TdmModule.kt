@@ -29,10 +29,12 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.nativeCanvas
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.dosecare.app.R
 import com.dosecare.app.domain.catalog.Drug
 import com.dosecare.app.domain.catalog.DrugCatalogService
 import com.dosecare.app.domain.pk.DoseEvent
@@ -55,6 +57,11 @@ import com.dosecare.app.domain.pk.PkModel
  * - 估计给药时间点用实心圆标记
  * - 每药可单独 toggle 显隐
  * - 横轴 0-48h 或 0-96h (2-4 个稳态周期)
+ *
+ * v0.9a i18n: TODO(v0.9b) — TDM 频次 chip "qXh" (q6h, q8h 等) 是国际通用医学缩写,
+ *            三语通用, 可保留. 但 "TDM (无窗)" chip 的 "(无窗)" 部分需要新增 tdm_no_window key.
+ *            "隐藏" / "显示" contentDescription 也需要 i18n.
+ *            留待 v0.9b 处理.
  */
 
 // 8 种可视区分的颜色 (按 RYB 顺序)
@@ -115,7 +122,7 @@ fun TdmModule(catalog: DrugCatalogService, modifier: Modifier = Modifier) {
             )
             Spacer(Modifier.width(12.dp))
             Text(
-                "血药浓度推测 (TDM)",
+                stringResource(R.string.tdm_title),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.SemiBold,
                 modifier = Modifier.weight(1f)
@@ -123,14 +130,14 @@ fun TdmModule(catalog: DrugCatalogService, modifier: Modifier = Modifier) {
             IconButton(onClick = { infoDialogOpen = true }) {
                 Icon(
                     Icons.Default.Info,
-                    contentDescription = "数据源与校准说明",
+                    contentDescription = stringResource(R.string.tdm_data_source_info),
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
         }
         if (tdmDrugs.isEmpty()) {
             Text(
-                "暂无可 TDM 监测的药物(需要 therapeuticWindow 字段)",
+                stringResource(R.string.tdm_no_drugs),
                 modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 16.dp),
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.bodySmall
@@ -141,29 +148,23 @@ fun TdmModule(catalog: DrugCatalogService, modifier: Modifier = Modifier) {
     if (infoDialogOpen) {
         AlertDialog(
             onDismissRequest = { infoDialogOpen = false },
-            title = { Text("📚 数据源 & 校准说明") },
+            title = { Text(stringResource(R.string.tdm_data_source_title)) },
             text = {
                 Column {
-                    Text("• PK 参数: AGNP 2017 (Therapeutic Drug Monitoring in Psychiatry) + FDA DailyMed 药品标签", style = MaterialTheme.typography.bodySmall)
-                    Text("• CYP 谱: Flockhart Table (Indiana University)", style = MaterialTheme.typography.bodySmall)
-                    Text("• 治疗窗: AGNP 2017 共识指南", style = MaterialTheme.typography.bodySmall)
-                    Text("• 体重调整: Vd = vdLPerKg × weight(假设线性)", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.tdm_data_source_lines), style = MaterialTheme.typography.bodySmall)
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "⚠️ 局限性",
+                        stringResource(R.string.tdm_limitations),
                         style = MaterialTheme.typography.labelMedium,
                         fontWeight = FontWeight.SemiBold,
                         color = MaterialTheme.colorScheme.error
                     )
                     Spacer(Modifier.height(4.dp))
-                    Text("• 1 房室口服模型 — 对非线性药(苯妥英)不准确,对肾清除药(锂)仅近似", style = MaterialTheme.typography.bodySmall)
-                    Text("• 群体平均参数 — 个体差异 2-3 倍(CYP 基因型 / 吸烟 / 年龄 / 肾 / 肝)", style = MaterialTheme.typography.bodySmall)
-                    Text("• 多药曲线仅显示浓度叠加,不模拟 CYP 竞争/酶抑制动力学", style = MaterialTheme.typography.bodySmall)
-                    Text("• v0.4 不替代医师判断;实际用药请遵医嘱或咨询临床药师", style = MaterialTheme.typography.bodySmall)
+                    Text(stringResource(R.string.tdm_limitations_lines), style = MaterialTheme.typography.bodySmall)
                 }
             },
             confirmButton = {
-                TextButton(onClick = { infoDialogOpen = false }) { Text("知道了") }
+                TextButton(onClick = { infoDialogOpen = false }) { Text(stringResource(R.string.common_known)) }
             }
         )
     }
@@ -211,7 +212,7 @@ fun TdmModule(catalog: DrugCatalogService, modifier: Modifier = Modifier) {
         ) {
             Icon(Icons.Default.PlayArrow, contentDescription = null)
             Spacer(Modifier.width(8.dp))
-            Text("推测 ${selections.size} 药血药浓度")
+            Text(stringResource(R.string.tdm_predict_n_drugs, selections.size))
         }
     }
 
@@ -244,18 +245,18 @@ fun TdmModule(catalog: DrugCatalogService, modifier: Modifier = Modifier) {
                 Spacer(Modifier.width(8.dp))
                 Column(modifier = Modifier.weight(1f)) {
                     Text(
-                        "添加药到图表",
+                        stringResource(R.string.tdm_add_drug_to_chart),
                         style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.SemiBold
                     )
                     Text(
-                        "${availableForAdd.size} 个药可选 (有/无 TDM 均可)",
+                        stringResource(R.string.tdm_add_drug_n, availableForAdd.size),
                         style = MaterialTheme.typography.labelSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
                 Button(onClick = { addExpanded = true }) {
-                    Text("添加")
+                    Text(stringResource(R.string.tdm_add))
                 }
             }
         }
@@ -263,7 +264,7 @@ fun TdmModule(catalog: DrugCatalogService, modifier: Modifier = Modifier) {
 
     if (addExpanded) {
         SearchableDrugPicker(
-            label = "添加药",
+            label = stringResource(R.string.tdm_add),
             selected = null,
             options = availableForAdd,
             onSelect = { drug ->
@@ -318,14 +319,18 @@ private fun TdmSelectionCard(
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.weight(1f)
                 )
+                // TODO(v0.9b): "TDM (无窗)" chip 文本需要 i18n — 需要新增 strings.xml key
+                //            "TDM" 是英文缩写保持不变, "(无窗)" 部分需要 tdm_no_window key
                 Text(
-                    "TDM" + if (selection.drug.therapeuticWindow != null) "" else " (无窗)",
+                    "TDM" + if (selection.drug.therapeuticWindow != null) "" else " " + stringResource(R.string.home_no_window),
                     style = MaterialTheme.typography.labelSmall,
                     color = if (selection.drug.therapeuticWindow != null) selection.color else MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 IconButton(onClick = {
                     onUpdate(selection.copy(visible = !selection.visible))
                 }) {
+                    // TODO(v0.9b): "隐藏" / "显示" contentDescription 需要 i18n
+                    //            建议: 新增 strings.xml key (tdm_hide / tdm_show)
                     Icon(
                         if (selection.visible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
                         contentDescription = if (selection.visible) "隐藏" else "显示",
@@ -333,7 +338,7 @@ private fun TdmSelectionCard(
                     )
                 }
                 IconButton(onClick = onRemove) {
-                    Icon(Icons.Default.RemoveCircleOutline, contentDescription = "移除", tint = MaterialTheme.colorScheme.error)
+                    Icon(Icons.Default.RemoveCircleOutline, contentDescription = stringResource(R.string.common_remove), tint = MaterialTheme.colorScheme.error)
                 }
             }
             Spacer(Modifier.height(8.dp))
@@ -345,7 +350,7 @@ private fun TdmSelectionCard(
                         val s = input.filter { c -> c.isDigit() || c == '.' }
                         if (s.count { it == '.' } <= 1) onUpdate(selection.copy(doseText = s))
                     },
-                    label = { Text("剂量 (mg)", style = MaterialTheme.typography.labelSmall) },
+                    label = { Text(stringResource(R.string.tdm_dose_mg), style = MaterialTheme.typography.labelSmall) },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                     modifier = Modifier.weight(1f)
@@ -356,7 +361,7 @@ private fun TdmSelectionCard(
                         val s = input.filter { c -> c.isDigit() || c == '.' }
                         if (s.count { it == '.' } <= 1) onUpdate(selection.copy(weightText = s))
                     },
-                    label = { Text("体重 (kg)", style = MaterialTheme.typography.labelSmall) },
+                    label = { Text(stringResource(R.string.tdm_weight_kg), style = MaterialTheme.typography.labelSmall) },
                     singleLine = true,
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Decimal),
                     modifier = Modifier.weight(1f)
@@ -366,7 +371,7 @@ private fun TdmSelectionCard(
             // 频次
             Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
                 Text(
-                    "频次:",
+                    stringResource(R.string.tdm_freq),
                     style = MaterialTheme.typography.labelSmall,
                     modifier = Modifier.align(Alignment.CenterVertically)
                 )
@@ -374,6 +379,7 @@ private fun TdmSelectionCard(
                     FilterChip(
                         selected = selection.frequencyPerDay == freq,
                         onClick = { onUpdate(selection.copy(frequencyPerDay = freq)) },
+                        // TODO(v0.9b): "qXh" 是国际通用医学频次缩写 (q6h = 每 6 小时), 三语通用, 可保留
                         label = { Text("q${24 / freq}h", style = MaterialTheme.typography.labelSmall) }
                     )
                 }
@@ -410,7 +416,7 @@ private fun MultiConcentrationChart(selections: List<TdmSelection>) {
     }
     InteractiveConcentrationChart(
         series = series,
-        title = "多药稳态浓度-时间曲线 (可点击/拖动/缩放)",
+        title = stringResource(R.string.tdm_chart_title),
         height = 320.dp
     )
 }
