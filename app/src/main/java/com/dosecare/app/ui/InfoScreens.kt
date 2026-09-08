@@ -1,6 +1,7 @@
 ﻿package com.dosecare.app.ui
 
 import androidx.activity.compose.BackHandler
+import com.dosecare.app.BuildConfig
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -61,7 +62,10 @@ fun AboutScreen(onBack: () -> Unit) {
                         fontWeight = FontWeight.SemiBold
                     )
                     Spacer(Modifier.height(4.dp))
-                    Text("v0.8d · Debug", style = MaterialTheme.typography.bodyMedium)
+                    Text(
+                        "v0.8d" + if (BuildConfig.DEBUG) " · Debug" else "",
+                        style = MaterialTheme.typography.bodyMedium
+                    )
                     Text("com.dosecare.app · AGPL-3.0", style = MaterialTheme.typography.labelSmall)
                 }
             }
