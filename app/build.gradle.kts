@@ -30,6 +30,9 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            // v0.8d 临时方案: 用 Android Studio 的 debug keystore 签名,
+            // 个人 OSS 阶段先 sideload 用,正式签名 key 后续单独配
+            signingConfig = signingConfigs.getByName("debug")
         }
         debug {
             isMinifyEnabled = false
