@@ -34,6 +34,7 @@ OUTPUT_ZIP = Path(r"C:\Users\yuwen\Desktop\DoseCare-v0.8b-github.zip")
 # Patterns to exclude (matched against relative path or any path component)
 EXCLUDE_DIR_PATTERNS = [
     ".gradle",
+    ".git",  # git history should not be in the source zip
     "build",
     ".kotlin",
     ".idea",
