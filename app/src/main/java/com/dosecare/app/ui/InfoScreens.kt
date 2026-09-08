@@ -1,4 +1,4 @@
-package com.dosecare.app.ui
+﻿package com.dosecare.app.ui
 
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.clickable
@@ -79,13 +79,13 @@ fun AboutScreen(onBack: () -> Unit) {
                     )
                     Spacer(Modifier.height(8.dp))
                     Text(
-                        "https://github.com/dosecare/app",
+                        "https://github.com/sakanana001/dosecare",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                runCatching { uriHandler.openUri("https://github.com/dosecare/app") }
+                                runCatching { uriHandler.openUri("https://github.com/sakanana001/dosecare") }
                             }
                     )
                     Spacer(Modifier.height(12.dp))
@@ -256,13 +256,13 @@ fun ContactScreen(onBack: () -> Unit) {
                     Spacer(Modifier.height(8.dp))
                     Text("GitHub Issues:", style = MaterialTheme.typography.labelMedium)
                     Text(
-                        "https://github.com/dosecare/app/issues",
+                        "https://github.com/sakanana001/dosecare/issues",
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier
                             .fillMaxWidth()
                             .clickable {
-                                runCatching { uriHandler.openUri("https://github.com/dosecare/app/issues") }
+                                runCatching { uriHandler.openUri("https://github.com/sakanana001/dosecare/issues") }
                             }
                     )
                 }

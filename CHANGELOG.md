@@ -33,13 +33,13 @@ DoseCare 的所有重要变更都记录在这里。格式基于 [Keep a Changelo
 
 ### Changed
 - **AboutScreen 增强** (`ui/InfoScreens.kt`)
-  - 新增 "🔗 仓库源代码" 卡片 — `https://github.com/dosecare/app` (clickable, LocalUriHandler)
+  - 新增 "🔗 仓库源代码" 卡片 — `https://github.com/sakanana001/dosecare` (clickable, LocalUriHandler)
   - 新增 "💌 联系作者" 卡片 — `daisukikiki01@gmail.com` (clickable, mailto: intent)
   - 顶部版本号: `v0.8a · Debug` → `v0.8d · Debug`
 - **ContactScreen 更新**
   - 邮件地址: `dosecare@example.com` → `daisukikiki01@gmail.com`
   - 邮件 / GitHub Issues URL 均改为 clickable 链接 (LocalUriHandler)
-  - Issues URL 保持: `https://github.com/dosecare/app/issues`
+  - Issues URL 保持: `https://github.com/sakanana001/dosecare/issues`
 
 ### Verified
 - ✅ Build: 21s / 42 tasks / 0 error

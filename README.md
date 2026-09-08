@@ -141,7 +141,7 @@
 | UI 主题 (5 预设 + 自定义调色) | ✅ v0.8c/d | 圆角加大 12/14/18/24/32,主题持久化 |
 | 长按药/分组 → 编辑 | ✅ v0.8b | EditDrugDialog + EditGroupDialog |
 | 临时用药 | ✅ v0.8b | 单次记录,自动建/复用「临时用药」组 |
-| 关于页增强 (mailto + 仓库 URL) | ✅ v0.8d | `daisukikiki01@gmail.com` + `github.com/dosecare/app` |
+| 关于页增强 (mailto + 仓库 URL) | ✅ v0.8d | `daisukikiki01@gmail.com` + `github.com/sakanana001/dosecare` |
 | 提醒 (WorkManager + 通知) | 🔜 v0.8c | schema 已预埋 (`dose_taken` 表) |
 | 加密云同步 | 🔮 v2.0 | 详见 `docs/08-SYNC_ACCOUNT_FUTURE.md` |
 
@@ -219,7 +219,7 @@
 
 ```bash
 # 克隆
-git clone https://github.com/dosecare/app.git
+git clone https://github.com/sakanana001/dosecare.git
 cd dosecare
 
 # 编辑 local.properties (SDK 路径)
