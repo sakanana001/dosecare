@@ -1,0 +1,503 @@
+{
+  "schemaVersion": "0.2.0",
+  "generatedAt": "2026-09-07T00:30:00Z",
+  "source": [
+    "OpenFDA DailyMed (SPL)",
+    "AGNP Consensus 2017 (Hiemke C. et al., Pharmacopsychiatry 2018)",
+    "Flockhart CYP Drug Interaction Table (Indiana University)",
+    "国内药品说明书",
+    "Hiemke C. et al. 2018 (AGNP)"
+  ],
+  "disclaimer": "本目录的所有数据基于公开文献与药品说明书，仅供参考。个体差异（年龄、肝肾、基因型、食物、草本补充剂）显著影响真实数值。任何用药调整请咨询精神科医师或临床药师。",
+  "drugs": [
+    {
+      "id": "clozapine",
+      "genericName": "Clozapine",
+      "genericNameZh": "氯氮平",
+      "brandNames": ["Clozaril", "Leponex", "FazaClo"],
+      "category": "ANTIPSYCHOTIC",
+      "subcategory": "ATYPICAL_DIBENZODIAZEPINE",
+      "atc": "N05AH02",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.6, "kaPerHour": 1.5, "tMaxHours": 2.0, "doseUnits": ["mg"], "commonDoseRangeMg": [12.5, 900.0]}],
+      "kePerHour": 0.0495, "tHalfHours": 14.0, "tHalfRangeHours": [8.0, 20.0],
+      "vdLPerKg": 5.4, "clLPerHour": 50.0, "proteinBindingPct": 95,
+      "therapeuticWindow": {"low": 350.0, "high": 600.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {
+        "substrates": [{"cyp": "CYP1A2", "fraction": 0.7}, {"cyp": "CYP3A4", "fraction": 0.2}, {"cyp": "CYP2C19", "fraction": 0.1}],
+        "inhibitors": [], "inducers": []
+      },
+      "activeMetabolites": [{"id": "norclozapine", "name": "Norclozapine (N-desmethylclozapine)", "activityRatio": 0.5, "note": "5-HT2A > D2 亲和力；原药+代谢物比值临床重要"}],
+      "adverseEffects": {"qtcProlongation": "MEDIUM", "metabolicSyndrome": "HIGH", "anticholinergicLoad": 3, "agranulocytosis": "HIGH", "extrapyramidal": "VERY_LOW", "sedation": "HIGH", "sexual": "MEDIUM", "hyperprolactinemia": "LOW"},
+      "adjustments": {
+        "renal": "NONE", "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始低剂量，缓慢滴定；易体位性低血压",
+        "smoking": {"effect": "CYP1A2 强诱导", "doseAdjustment": "吸烟者剂量约需增加 50%", "abstinenceNote": "戒烟后 1 周内剂量需减 30-50%"}
+      },
+      "criticalInteractions": [
+        {"triggerDrugId": "fluvoxamine", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [5.0, 10.0], "severity": "CONTRAINDICATED", "clinicalNote": "氟伏沙明强抑制 CYP1A2，氯氮平 AUC 升高 5-10 倍，可致死"},
+        {"triggerDrugId": "carbamazepine", "mechanism": "CYP_INDUCTION", "aucFoldChange": [0.5, 0.5], "severity": "CONTRAINDICATED", "clinicalNote": "卡马西平诱导 CYP3A4 + 协同骨髓抑制；应避免联用"}
+      ],
+      "monitoring": {"frequency": "WEEKLY_FIRST_18_MONTHS_THEN_MONTHLY", "items": ["WBC", "ANC", "空腹血糖", "血脂", "体重/BMI", "氯氮平血药浓度", "静息心电图（QTc）"]},
+      "references": ["PMID: 10210627 (Clozapine-fluvoxamine)", "AGNP 2017 (Hiemke C. et al., Pharmacopsychiatry 2018)", "FDA Clozapine Prescribing Information 2024"]
+    },
+
+    {
+      "id": "olanzapine",
+      "genericName": "Olanzapine",
+      "genericNameZh": "奥氮平",
+      "brandNames": ["Zyprexa", "Zypadhera", "再普乐"],
+      "category": "ANTIPSYCHOTIC", "subcategory": "ATYPICAL_THIENOBENZODIAZEPINE", "atc": "N05AH03",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.6, "kaPerHour": 1.0, "tMaxHours": 6.0, "doseUnits": ["mg"], "commonDoseRangeMg": [5.0, 20.0]}],
+      "kePerHour": 0.0252, "tHalfHours": 27.5, "tHalfRangeHours": [21.0, 54.0],
+      "vdLPerKg": 14.5, "clLPerHour": 25.0, "proteinBindingPct": 93,
+      "therapeuticWindow": {"low": 20.0, "high": 80.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP1A2", "fraction": 0.4}, {"cyp": "CYP2D6", "fraction": 0.1}], "inhibitors": [], "inducers": [], "note": "剩余 ~50% 经 UGT1A4 直接葡萄糖苷酸化"},
+      "activeMetabolites": [{"id": "n-desmethyl-olanzapine", "name": "N-去甲奥氮平", "activityRatio": 0.3}],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "VERY_HIGH", "anticholinergicLoad": 2, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "HIGH", "sexual": "LOW", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "NONE", "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B", "elderly": "起始 5mg，老年更易体位性低血压",
+        "smoking": {"effect": "CYP1A2 轻度诱导", "doseAdjustment": "吸烟者剂量略增"}},
+      "criticalInteractions": [
+        {"triggerDrugId": "fluvoxamine", "mechanism": "CYP_INHIBITION_MODERATE", "aucFoldChange": [1.5, 2.5], "severity": "MEDIUM", "clinicalNote": "联用时奥氮平浓度升高，可能需减量"},
+        {"triggerDrugId": "carbamazepine", "mechanism": "CYP_INDUCTION", "aucFoldChange": [0.5, 0.7], "severity": "MEDIUM", "clinicalNote": "浓度下降可能失效"}
+      ],
+      "monitoring": {"frequency": "MONTHLY", "items": ["体重/BMI", "腰围", "空腹血糖", "血脂四项", "静息心电图（首诊）"]},
+      "references": ["AGNP 2017", "FDA Zyprexa Prescribing Information"]
+    },
+
+    {
+      "id": "risperidone",
+      "genericName": "Risperidone",
+      "genericNameZh": "利培酮",
+      "brandNames": ["Risperdal", "维思通", "Risperdal Consta (LAI)"],
+      "category": "ANTIPSYCHOTIC", "subcategory": "ATYPICAL_BENZISOXAZOLE", "atc": "N05AX08",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.7, "kaPerHour": 1.0, "tMaxHours": 1.0, "doseUnits": ["mg"], "commonDoseRangeMg": [2.0, 8.0]}],
+      "kePerHour": 0.231, "tHalfHours": 3.0, "tHalfRangeHours": [3.0, 17.0],
+      "vdLPerKg": 1.5, "clLPerHour": 5.0, "proteinBindingPct": 90,
+      "therapeuticWindow": {"low": 20.0, "high": 60.0, "unit": "ng/mL (risperidone + 9-OH-risperidone 总浓度)", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP2D6", "fraction": 0.7}, {"cyp": "CYP3A4", "fraction": 0.3}], "inhibitors": [], "inducers": []},
+      "activeMetabolites": [{"id": "9-hydroxyrisperidone", "name": "9-羟利培酮（帕利哌酮 Paliperidone）", "activityRatio": 1.0, "note": "等效于原药，构成总活性部分"}],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "MEDIUM", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "MEDIUM", "sedation": "MEDIUM", "sexual": "HIGH", "hyperprolactinemia": "HIGH"},
+      "adjustments": {"renal": "REDUCE_50_PCT_EGFR_BELOW_30", "hepatic": "MONITOR", "elderly": "起始 0.5mg bid，老年剂量减半", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "paroxetine", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [3.0, 5.0], "severity": "HIGH", "clinicalNote": "帕罗西汀强抑制 CYP2D6，联用时利培酮浓度升高 3-5 倍，需减量"},
+        {"triggerDrugId": "fluoxetine", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [2.0, 4.0], "severity": "HIGH", "clinicalNote": "氟西汀强抑制 CYP2D6"},
+        {"triggerDrugId": "carbamazepine", "mechanism": "CYP_INDUCTION", "aucFoldChange": [0.4, 0.6], "severity": "MEDIUM", "clinicalNote": "浓度下降可能失效"}
+      ],
+      "monitoring": {"frequency": "MONTHLY", "items": ["EPS（AIMS）", "催乳素", "月经", "体重/BMI"]},
+      "references": ["AGNP 2017", "FDA Risperdal Prescribing Information"]
+    },
+
+    {
+      "id": "quetiapine",
+      "genericName": "Quetiapine",
+      "genericNameZh": "喹硫平",
+      "brandNames": ["Seroquel", "思瑞康", "Seroquel XR"],
+      "category": "ANTIPSYCHOTIC", "subcategory": "ATYPICAL_DIBENZOTHIAZEPINE", "atc": "N05AH04",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.73, "kaPerHour": 1.5, "tMaxHours": 1.5, "doseUnits": ["mg"], "commonDoseRangeMg": [150.0, 800.0]}],
+      "kePerHour": 0.0619, "tHalfHours": 11.2, "tHalfRangeHours": [6.0, 17.0],
+      "vdLPerKg": 8.7, "clLPerHour": 50.0, "proteinBindingPct": 83,
+      "therapeuticWindow": {"low": 50.0, "high": 100.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP3A4", "fraction": 0.85}, {"cyp": "CYP2D6", "fraction": 0.15}], "inhibitors": [], "inducers": []},
+      "activeMetabolites": [{"id": "norquetiapine", "name": "去甲喹硫平（N-desalkylquetiapine）", "activityRatio": 0.5, "note": "活性代谢物，抗抑郁作用可能由其介导"}],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "MEDIUM", "anticholinergicLoad": 1, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "HIGH", "sexual": "LOW", "hyperprolactinemia": "VERY_LOW"},
+      "adjustments": {"renal": "NONE", "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B", "elderly": "起始低剂量，老年易体位性低血压", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "carbamazepine", "mechanism": "CYP_INDUCTION", "aucFoldChange": [0.2, 0.3], "severity": "HIGH", "clinicalNote": "卡马西平强诱导 CYP3A4，喹硫平 AUC 降低至 1/5，可能失效；需剂量增加 5 倍"},
+        {"triggerDrugId": "fluconazole", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [3.0, 5.0], "severity": "HIGH", "clinicalNote": "氟康唑强抑制 CYP3A4"}
+      ],
+      "monitoring": {"frequency": "MONTHLY", "items": ["体重/BMI", "腰围", "空腹血糖", "血脂四项", "静息心电图（首诊）"]},
+      "references": ["AGNP 2017", "FDA Seroquel Prescribing Information"]
+    },
+
+    {
+      "id": "aripiprazole",
+      "genericName": "Aripiprazole",
+      "genericNameZh": "阿立哌唑",
+      "brandNames": ["Abilify", "安律凡", "Abilify Maintena (LAI)"],
+      "category": "ANTIPSYCHOTIC", "subcategory": "ATYPICAL_QUINOLINONE", "atc": "N05AX12",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.87, "kaPerHour": 0.8, "tMaxHours": 3.0, "doseUnits": ["mg"], "commonDoseRangeMg": [5.0, 30.0]}],
+      "kePerHour": 0.0467, "tHalfHours": 14.8, "tHalfRangeHours": [10.0, 19.0],
+      "vdLPerKg": 4.9, "clLPerHour": 3.3, "proteinBindingPct": 99,
+      "therapeuticWindow": {"low": 150.0, "high": 500.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP3A4", "fraction": 0.5}, {"cyp": "CYP2D6", "fraction": 0.5}], "inhibitors": [], "inducers": []},
+      "activeMetabolites": [{"id": "dehydro-aripiprazole", "name": "脱氢阿立哌唑", "activityRatio": 0.4}],
+      "adverseEffects": {"qtcProlongation": "VERY_LOW", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "MEDIUM", "sedation": "LOW", "sexual": "LOW", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "NONE", "hepatic": "NONE", "elderly": "无需调整", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "carbamazepine", "mechanism": "CYP_INDUCTION", "aucFoldChange": [0.3, 0.5], "severity": "HIGH", "clinicalNote": "卡马西平诱导 CYP3A4，剂量需加倍"},
+        {"triggerDrugId": "fluoxetine", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [1.5, 2.0], "severity": "MEDIUM", "clinicalNote": "氟西汀强抑制 CYP2D6，浓度升高"},
+        {"triggerDrugId": "paroxetine", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [1.5, 2.0], "severity": "MEDIUM", "clinicalNote": "帕罗西汀强抑制 CYP2D6"}
+      ],
+      "monitoring": {"frequency": "MONTHLY", "items": ["EPS（AIMS）", "体重/BMI", "血脂"]},
+      "references": ["AGNP 2017", "FDA Abilify Prescribing Information"]
+    },
+
+    {
+      "id": "ziprasidone",
+      "genericName": "Ziprasidone",
+      "genericNameZh": "齐拉西酮",
+      "brandNames": ["Geodon", "Zeldox"],
+      "category": "ANTIPSYCHOTIC", "subcategory": "ATYPICAL_BENZISOXAZOLE", "atc": "N05AE04",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.59, "kaPerHour": 0.8, "tMaxHours": 6.0, "doseUnits": ["mg"], "commonDoseRangeMg": [40.0, 160.0]}],
+      "kePerHour": 0.077, "tHalfHours": 9.0, "tHalfRangeHours": [5.0, 12.0],
+      "vdLPerKg": 1.5, "clLPerHour": 7.5, "proteinBindingPct": 99,
+      "therapeuticWindow": {"low": 50.0, "high": 200.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP3A4", "fraction": 0.7}, {"cyp": "CYP1A2", "fraction": 0.3}], "inhibitors": [], "inducers": []},
+      "activeMetabolites": [],
+      "adverseEffects": {"qtcProlongation": "VERY_HIGH", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "MEDIUM", "sedation": "LOW", "sexual": "LOW", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "NONE", "hepatic": "NONE", "elderly": "无需调整", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "carbamazepine", "mechanism": "CYP_INDUCTION", "aucFoldChange": [0.3, 0.5], "severity": "HIGH", "clinicalNote": "浓度下降，可能失效"},
+        {"triggerDrugId": "fluconazole", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [2.0, 3.0], "severity": "HIGH", "clinicalNote": "氟康唑抑制 CYP3A4，浓度升高 + QTc 风险叠加"}
+      ],
+      "monitoring": {"frequency": "MONTHLY", "items": ["静息心电图（必查）", "电解质（K+/Mg2+）", "体重/BMI", "EPS"]},
+      "references": ["AGNP 2017", "FDA Geodon Prescribing Information"]
+    },
+
+    {
+      "id": "amisulpride",
+      "genericName": "Amisulpride",
+      "genericNameZh": "氨磺必利",
+      "brandNames": ["Solian", "索里昂"],
+      "category": "ANTIPSYCHOTIC", "subcategory": "ATYPICAL_BENZAMIDE", "atc": "N05AL05",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.48, "kaPerHour": 1.2, "tMaxHours": 1.5, "doseUnits": ["mg"], "commonDoseRangeMg": [50.0, 800.0]}],
+      "kePerHour": 0.0495, "tHalfHours": 14.0, "tHalfRangeHours": [11.0, 17.0],
+      "vdLPerKg": 5.8, "clLPerHour": 33.0, "proteinBindingPct": 17,
+      "therapeuticWindow": {"low": 100.0, "high": 320.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [], "inhibitors": [], "inducers": [], "note": "不经 CYP 代谢，主要以原形经肾排出"},
+      "activeMetabolites": [],
+      "adverseEffects": {"qtcProlongation": "MEDIUM", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "MEDIUM", "sedation": "LOW", "sexual": "HIGH", "hyperprolactinemia": "VERY_HIGH"},
+      "adjustments": {"renal": "REDUCE_50_PCT_EGFR_BELOW_30", "hepatic": "NONE", "elderly": "起始低剂量", "smoking": null},
+      "criticalInteractions": [],
+      "monitoring": {"frequency": "MONTHLY", "items": ["催乳素（必查）", "静息心电图", "EPS"]},
+      "references": ["AGNP 2017", "FDA-equivalent EMA SmPC"]
+    },
+
+    {
+      "id": "valproic_acid",
+      "genericName": "Valproic acid",
+      "genericNameZh": "丙戊酸钠",
+      "brandNames": ["Depakote", "Depakene", "德巴金"],
+      "category": "MOOD_STABILIZER", "subcategory": "ANTIEPILEPTIC", "atc": "N03AG01",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.95, "kaPerHour": 0.7, "tMaxHours": 2.0, "doseUnits": ["mg"], "commonDoseRangeMg": [500.0, 2000.0]}],
+      "kePerHour": 0.0495, "tHalfHours": 14.0, "tHalfRangeHours": [8.0, 20.0],
+      "vdLPerKg": 0.18, "clLPerHour": 0.7, "proteinBindingPct": 92,
+      "therapeuticWindow": {"low": 50.0, "high": 100.0, "unit": "μg/mL (总浓度)", "guidelineSource": "AGNP 2017; 游离浓度 5-25 μg/mL"},
+      "cypProfile": {"substrates": [], "inhibitors": [{"cyp": "CYP2C9", "strength": "MODERATE"}], "inducers": [], "note": "主要经 β-氧化 + UGT1A6/1A9/2B7 葡萄糖苷酸化"},
+      "activeMetabolites": [],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "MEDIUM", "anticholinergicLoad": 0, "agranulocytosis": "LOW", "extrapyramidal": "VERY_LOW", "sedation": "MEDIUM", "sexual": "LOW", "hyperprolactinemia": "VERY_LOW"},
+      "adjustments": {"renal": "MONITOR", "hepatic": "CONTRAINDICATED_IN_SEVERE", "elderly": "起始低剂量", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "warfarin", "mechanism": "CYP_INHIBITION_MODERATE", "aucFoldChange": [1.5, 2.0], "severity": "HIGH", "clinicalNote": "丙戊酸抑制 CYP2C9 增强华法林效应，INR 上升"},
+        {"triggerDrugId": "lamotrigine", "mechanism": "PHARMACOKINETIC_OTHER", "aucFoldChange": [1.5, 2.0], "severity": "HIGH", "clinicalNote": "丙戊酸抑制拉莫三嗪葡萄糖苷酸化，半衰期 25h→60h；皮疹风险增加"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["丙戊酸血药浓度", "肝功", "血小板", "血氨（如有症状）"]},
+      "references": ["AGNP 2017", "FDA Depakote Prescribing Information"]
+    },
+
+    {
+      "id": "lithium",
+      "genericName": "Lithium carbonate",
+      "genericNameZh": "碳酸锂",
+      "brandNames": ["Lithobid", "Eskalith", "Priadel"],
+      "category": "MOOD_STABILIZER", "subcategory": "ALKALI_METAL", "atc": "N05AN01",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.95, "kaPerHour": 1.0, "tMaxHours": 1.5, "doseUnits": ["mg", "mmol"], "commonDoseRangeMg": [300.0, 1800.0]}],
+      "kePerHour": 0.0277, "tHalfHours": 25.0, "tHalfRangeHours": [18.0, 36.0],
+      "vdLPerKg": 0.8, "clLPerHour": 1.5, "proteinBindingPct": 0,
+      "therapeuticWindow": {"low": 0.6, "high": 1.2, "unit": "mmol/L", "guidelineSource": "AGNP 2017; 急性躁狂可短期 1.4；老年 0.4-0.8"},
+      "cypProfile": {"substrates": [], "inhibitors": [], "inducers": [], "note": "100% 经肾小球滤过"},
+      "activeMetabolites": [],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "LOW", "sedation": "LOW", "sexual": "LOW", "hyperprolactinemia": "VERY_LOW"},
+      "adjustments": {"renal": "CONTRAINDICATED_EGFR_BELOW_30", "hepatic": "NONE", "elderly": "起始低剂量，目标 0.4-0.8 mmol/L", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "ibuprofen", "mechanism": "PHARMACOKINETIC_OTHER", "aucFoldChange": [1.3, 1.6], "severity": "HIGH", "clinicalNote": "NSAIDs 减少肾血流，锂清除下降 25-60%，急性锂中毒风险"},
+        {"triggerDrugId": "enalapril", "mechanism": "PHARMACOKINETIC_OTHER", "aucFoldChange": [1.3, 1.5], "severity": "HIGH", "clinicalNote": "ACEI 增加锂潴留"},
+        {"triggerDrugId": "hydrochlorothiazide", "mechanism": "PHARMACOKINETIC_OTHER", "aucFoldChange": [1.4, 1.8], "severity": "HIGH", "clinicalNote": "噻嗪利尿剂增加锂近端小管重吸收，血锂上升 50%"},
+        {"triggerDrugId": "haloperidol", "mechanism": "PHARMACODYNAMIC", "aucFoldChange": [1.0, 1.0], "severity": "MEDIUM", "clinicalNote": "联用可能增加神经毒性"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["血锂（稳态后 12h 抽血）", "肾功", "甲状腺功能（TSH/T3/T4）", "血钙", "心电图"]},
+      "references": ["AGNP 2017", "FDA Lithium Prescribing Information"]
+    },
+
+    {
+      "id": "lamotrigine",
+      "genericName": "Lamotrigine",
+      "genericNameZh": "拉莫三嗪",
+      "brandNames": ["Lamictal", "利必通"],
+      "category": "MOOD_STABILIZER", "subcategory": "ANTIEPILEPTIC", "atc": "N03AX09",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.98, "kaPerHour": 1.5, "tMaxHours": 2.5, "doseUnits": ["mg"], "commonDoseRangeMg": [25.0, 400.0]}],
+      "kePerHour": 0.0693, "tHalfHours": 10.0, "tHalfRangeHours": [5.0, 20.0],
+      "vdLPerKg": 1.1, "clLPerHour": 1.6, "proteinBindingPct": 55,
+      "therapeuticWindow": {"low": 3.0, "high": 14.0, "unit": "mg/L (μg/mL)", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [], "inhibitors": [], "inducers": [], "note": "经 UGT1A4 葡萄糖苷酸化"},
+      "activeMetabolites": [],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "LOW", "sexual": "LOW", "hyperprolactinemia": "VERY_LOW"},
+      "adjustments": {"renal": "REDUCE_50_PCT_EGFR_BELOW_30", "hepatic": "MONITOR", "elderly": "无需调整", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "valproic_acid", "mechanism": "PHARMACOKINETIC_OTHER", "aucFoldChange": [1.8, 2.5], "severity": "HIGH", "clinicalNote": "丙戊酸抑制 UGT1A4，拉莫三嗪半衰期 25h→60h；皮疹（SJS）风险显著增加，必须减半剂量"},
+        {"triggerDrugId": "carbamazepine", "mechanism": "CYP_INDUCTION", "aucFoldChange": [0.4, 0.5], "severity": "MEDIUM", "clinicalNote": "卡马西平诱导 UGT，浓度下降需加量"},
+        {"triggerDrugId": "sertraline", "mechanism": "PHARMACOKINETIC_OTHER", "aucFoldChange": [1.0, 1.0], "severity": "MEDIUM", "clinicalNote": "舍曲林轻度抑制 UGT"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["皮疹（重点）", "血药浓度", "肝功", "肾功能"]},
+      "references": ["AGNP 2017", "FDA Lamictal Prescribing Information"]
+    },
+
+    {
+      "id": "fluoxetine",
+      "genericName": "Fluoxetine",
+      "genericNameZh": "氟西汀",
+      "brandNames": ["Prozac", "百忧解"],
+      "category": "ANTIDEPRESSANT", "subcategory": "SSRI", "atc": "N06AB03",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.72, "kaPerHour": 1.0, "tMaxHours": 6.0, "doseUnits": ["mg"], "commonDoseRangeMg": [20.0, 80.0]}],
+      "kePerHour": 0.028, "tHalfHours": 25.0, "tHalfRangeHours": [15.0, 60.0],
+      "vdLPerKg": 35.0, "clLPerHour": 40.0, "proteinBindingPct": 95,
+      "therapeuticWindow": {"low": 100.0, "high": 800.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP2D6", "fraction": 0.7}], "inhibitors": [{"cyp": "CYP2D6", "strength": "STRONG"}], "inducers": []},
+      "activeMetabolites": [{"id": "norfluoxetine", "name": "去甲氟西汀", "activityRatio": 0.5, "note": "活性代谢物，半衰期极长（~7 天）"}],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "LOW", "sexual": "VERY_HIGH", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "MONITOR", "hepatic": "REDUCE_50_PCT_CHILD_PUGH_C", "elderly": "起始 20mg 隔日", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "tramadol", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "HIGH", "clinicalNote": "5-HT 综合征风险"},
+        {"triggerDrugId": "phenelzine", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "CONTRAINDICATED", "clinicalNote": "MAOI + SSRI：5-HT 综合征，可致死；MAOI 停药 14 天后才可用 SSRI，氟西汀因长半衰期需停 5 周"},
+        {"triggerDrugId": "tamoxifen", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [0.5, 0.6], "severity": "HIGH", "clinicalNote": "抑制 CYP2D6 活化代谢，降低他莫昔芬疗效（乳腺癌）"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["自杀倾向（早期）", "血钠（SIADH）", "肝功", "性功能"]},
+      "references": ["AGNP 2017", "FDA Prozac Prescribing Information"]
+    },
+
+    {
+      "id": "sertraline",
+      "genericName": "Sertraline",
+      "genericNameZh": "舍曲林",
+      "brandNames": ["Zoloft", "左洛复"],
+      "category": "ANTIDEPRESSANT", "subcategory": "SSRI", "atc": "N06AB06",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.88, "kaPerHour": 1.2, "tMaxHours": 5.0, "doseUnits": ["mg"], "commonDoseRangeMg": [50.0, 200.0]}],
+      "kePerHour": 0.0432, "tHalfHours": 16.0, "tHalfRangeHours": [10.0, 30.0],
+      "vdLPerKg": 20.0, "clLPerHour": 96.0, "proteinBindingPct": 99,
+      "therapeuticWindow": {"low": 30.0, "high": 200.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP2C19", "fraction": 0.5}, {"cyp": "CYP2B6", "fraction": 0.3}, {"cyp": "CYP2D6", "fraction": 0.2}], "inhibitors": [], "inducers": []},
+      "activeMetabolites": [{"id": "n-desmethylsertraline", "name": "去甲舍曲林", "activityRatio": 0.05}],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "LOW", "sexual": "MEDIUM", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "MONITOR", "hepatic": "REDUCE_50_PCT_CHILD_PUGH_C", "elderly": "起始 25mg", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "phenelzine", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "CONTRAINDICATED", "clinicalNote": "MAOI 禁忌"},
+        {"triggerDrugId": "tramadol", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "HIGH", "clinicalNote": "5-HT 综合征"},
+        {"triggerDrugId": "lamotrigine", "mechanism": "PHARMACOKINETIC_OTHER", "aucFoldChange": [1.0, 1.0], "severity": "MEDIUM", "clinicalNote": "轻度抑制 UGT"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["自杀倾向（早期）", "血钠（SIADH）", "肝功"]},
+      "references": ["AGNP 2017", "FDA Zoloft Prescribing Information"]
+    },
+
+    {
+      "id": "paroxetine",
+      "genericName": "Paroxetine",
+      "genericNameZh": "帕罗西汀",
+      "brandNames": ["Paxil", "Seroxat", "赛乐特"],
+      "category": "ANTIDEPRESSANT", "subcategory": "SSRI", "atc": "N06AB05",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.5, "kaPerHour": 1.5, "tMaxHours": 5.0, "doseUnits": ["mg"], "commonDoseRangeMg": [20.0, 50.0]}],
+      "kePerHour": 0.0578, "tHalfHours": 12.0, "tHalfRangeHours": [10.0, 24.0],
+      "vdLPerKg": 12.0, "clLPerHour": 50.0, "proteinBindingPct": 95,
+      "therapeuticWindow": {"low": 30.0, "high": 200.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [], "inhibitors": [{"cyp": "CYP2D6", "strength": "STRONG"}], "inducers": []},
+      "activeMetabolites": [],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "MEDIUM", "anticholinergicLoad": 2, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "LOW", "sexual": "VERY_HIGH", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "REDUCE_50_PCT_EGFR_BELOW_30", "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B", "elderly": "起始 10mg", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "tamoxifen", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [0.4, 0.5], "severity": "HIGH", "clinicalNote": "强抑制 CYP2D6，降低他莫昔芬活性代谢（乳腺癌治疗失败风险）"},
+        {"triggerDrugId": "risperidone", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [3.0, 5.0], "severity": "HIGH", "clinicalNote": "联用时利培酮浓度升高 3-5 倍"},
+        {"triggerDrugId": "tramadol", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "HIGH", "clinicalNote": "5-HT 综合征"},
+        {"triggerDrugId": "phenelzine", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "CONTRAINDICATED", "clinicalNote": "MAOI 禁忌"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["自杀倾向（早期）", "血钠（SIADH）", "肝功", "性功能"]},
+      "references": ["AGNP 2017", "FDA Paxil Prescribing Information"]
+    },
+
+    {
+      "id": "escitalopram",
+      "genericName": "Escitalopram",
+      "genericNameZh": "艾司西酞普兰",
+      "brandNames": ["Lexapro", "来士普"],
+      "category": "ANTIDEPRESSANT", "subcategory": "SSRI", "atc": "N06AB10",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.8, "kaPerHour": 1.2, "tMaxHours": 4.0, "doseUnits": ["mg"], "commonDoseRangeMg": [10.0, 20.0]}],
+      "kePerHour": 0.0693, "tHalfHours": 10.0, "tHalfRangeHours": [6.0, 16.0],
+      "vdLPerKg": 12.0, "clLPerHour": 30.0, "proteinBindingPct": 56,
+      "therapeuticWindow": {"low": 20.0, "high": 80.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP2C19", "fraction": 0.7}, {"cyp": "CYP3A4", "fraction": 0.3}], "inhibitors": [], "inducers": []},
+      "activeMetabolites": [{"id": "s-desmethylcitalopram", "name": "S-去甲西酞普兰", "activityRatio": 0.1}],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "LOW", "sexual": "MEDIUM", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "MONITOR", "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B", "elderly": "起始 5mg", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "phenelzine", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "CONTRAINDICATED", "clinicalNote": "MAOI 禁忌"},
+        {"triggerDrugId": "tramadol", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "HIGH", "clinicalNote": "5-HT 综合征"},
+        {"triggerDrugId": "lithium", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "MEDIUM", "clinicalNote": "5-HT 增强"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["自杀倾向", "血钠（SIADH）", "静息心电图（剂量 > 20mg 必查）"]},
+      "references": ["AGNP 2017", "FDA Lexapro Prescribing Information"]
+    },
+
+    {
+      "id": "fluvoxamine",
+      "genericName": "Fluvoxamine",
+      "genericNameZh": "氟伏沙明",
+      "brandNames": ["Luvox", "兰释"],
+      "category": "ANTIDEPRESSANT", "subcategory": "SSRI", "atc": "N06AB08",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.53, "kaPerHour": 1.2, "tMaxHours": 3.0, "doseUnits": ["mg"], "commonDoseRangeMg": [50.0, 300.0]}],
+      "kePerHour": 0.0578, "tHalfHours": 12.0, "tHalfRangeHours": [9.0, 17.0],
+      "vdLPerKg": 5.0, "clLPerHour": 30.0, "proteinBindingPct": 80,
+      "therapeuticWindow": {"low": 60.0, "high": 230.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP2D6", "fraction": 0.7}], "inhibitors": [{"cyp": "CYP1A2", "strength": "STRONG"}], "inducers": []},
+      "activeMetabolites": [],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "LOW", "sexual": "MEDIUM", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "NONE", "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B", "elderly": "起始 25mg", "smoking": {"effect": "CYP1A2 诱导 → 氟伏沙明自身浓度降低", "doseAdjustment": "吸烟者剂量可略增（临床意义小）", "abstinenceNote": "戒烟后 1 周内剂量可能需调整"}},
+      "criticalInteractions": [
+        {"triggerDrugId": "clozapine", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [5.0, 10.0], "severity": "CONTRAINDICATED", "clinicalNote": "强抑制 CYP1A2，氯氮平浓度升高 5-10 倍，可致死"},
+        {"triggerDrugId": "olanzapine", "mechanism": "CYP_INHIBITION_MODERATE", "aucFoldChange": [1.5, 2.5], "severity": "MEDIUM", "clinicalNote": "奥氮平浓度升高"},
+        {"triggerDrugId": "theophylline", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [3.0, 5.0], "severity": "HIGH", "clinicalNote": "强抑制 CYP1A2，茶碱中毒风险"},
+        {"triggerDrugId": "tizanidine", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [10.0, 30.0], "severity": "CONTRAINDICATED", "clinicalNote": "替扎尼定浓度升高 10-30 倍，致死性低血压"},
+        {"triggerDrugId": "phenelzine", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "CONTRAINDICATED", "clinicalNote": "MAOI 禁忌"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["自杀倾向", "血钠（SIADH）", "肝功（抑制 CYP）"]},
+      "references": ["AGNP 2017", "FDA Luvox Prescribing Information"]
+    },
+
+    {
+      "id": "citalopram",
+      "genericName": "Citalopram",
+      "genericNameZh": "西酞普兰",
+      "brandNames": ["Celexa", "Cipramil", "喜普妙"],
+      "category": "ANTIDEPRESSANT", "subcategory": "SSRI", "atc": "N06AB04",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.8, "kaPerHour": 1.2, "tMaxHours": 4.0, "doseUnits": ["mg"], "commonDoseRangeMg": [20.0, 40.0]}],
+      "kePerHour": 0.0693, "tHalfHours": 10.0, "tHalfRangeHours": [6.0, 16.0],
+      "vdLPerKg": 12.0, "clLPerHour": 30.0, "proteinBindingPct": 80,
+      "therapeuticWindow": {"low": 50.0, "high": 110.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017; FDA 黑框警告：>40mg 增加 QTc"},
+      "cypProfile": {"substrates": [{"cyp": "CYP2C19", "fraction": 0.7}, {"cyp": "CYP3A4", "fraction": 0.3}], "inhibitors": [], "inducers": []},
+      "activeMetabolites": [{"id": "desmethylcitalopram", "name": "去甲西酞普兰", "activityRatio": 0.1}],
+      "adverseEffects": {"qtcProlongation": "MEDIUM", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "LOW", "sexual": "MEDIUM", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "MONITOR", "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B", "elderly": "起始 20mg，最大 20mg（QTc 风险）", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "phenelzine", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "CONTRAINDICATED", "clinicalNote": "MAOI 禁忌"},
+        {"triggerDrugId": "tramadol", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "HIGH", "clinicalNote": "5-HT 综合征"},
+        {"triggerDrugId": "lithium", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "MEDIUM", "clinicalNote": "5-HT 增强"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["静息心电图（必查·黑框警告）", "电解质（K+/Mg2+）", "自杀倾向"]},
+      "references": ["AGNP 2017", "FDA Celexa Black Box Warning (QTc)"]
+    },
+
+    {
+      "id": "venlafaxine",
+      "genericName": "Venlafaxine",
+      "genericNameZh": "文拉法辛",
+      "brandNames": ["Effexor", "怡诺思", "Effexor XR"],
+      "category": "ANTIDEPRESSANT", "subcategory": "SNRI", "atc": "N06AX16",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.45, "kaPerHour": 1.0, "tMaxHours": 2.0, "doseUnits": ["mg"], "commonDoseRangeMg": [75.0, 225.0]}],
+      "kePerHour": 0.0693, "tHalfHours": 10.0, "tHalfRangeHours": [5.0, 15.0],
+      "vdLPerKg": 8.0, "clLPerHour": 33.0, "proteinBindingPct": 27,
+      "therapeuticWindow": {"low": 100.0, "high": 400.0, "unit": "ng/mL (文拉法辛 + O-去甲文拉法辛 ODV 总浓度)", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP2D6", "fraction": 0.5}, {"cyp": "CYP3A4", "fraction": 0.5}], "inhibitors": [], "inducers": []},
+      "activeMetabolites": [{"id": "o-desmethylvenlafaxine", "name": "O-去甲文拉法辛（ODV）", "activityRatio": 1.0, "note": "等效于原药，活性代谢物"}],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "LOW", "sexual": "HIGH", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "REDUCE_50_PCT_EGFR_BELOW_30", "hepatic": "REDUCE_50_PCT_CHILD_PUGH_C", "elderly": "起始 37.5mg", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "phenelzine", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "CONTRAINDICATED", "clinicalNote": "MAOI 禁忌；MAOI 停药 7 天后才可用 SNRI"},
+        {"triggerDrugId": "tramadol", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "HIGH", "clinicalNote": "5-HT 综合征"},
+        {"triggerDrugId": "lithium", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "MEDIUM", "clinicalNote": "5-HT 增强"},
+        {"triggerDrugId": "metoprolol", "mechanism": "CYP2D6_COMPETITION", "aucFoldChange": [1.5, 2.0], "severity": "MEDIUM", "clinicalNote": "CYP2D6 竞争性抑制，文拉法辛浓度升高，美托洛尔代谢减弱"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["血压（高血压风险）", "肝功", "心电图", "血钠（SIADH）"]},
+      "references": ["AGNP 2017", "FDA Effexor Prescribing Information"]
+    },
+
+    {
+      "id": "duloxetine",
+      "genericName": "Duloxetine",
+      "genericNameZh": "度洛西汀",
+      "brandNames": ["Cymbalta", "欣百达", "Yentreve"],
+      "category": "ANTIDEPRESSANT", "subcategory": "SNRI", "atc": "N06AX21",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.5, "kaPerHour": 1.0, "tMaxHours": 6.0, "doseUnits": ["mg"], "commonDoseRangeMg": [30.0, 120.0]}],
+      "kePerHour": 0.0866, "tHalfHours": 8.0, "tHalfRangeHours": [5.0, 17.0],
+      "vdLPerKg": 10.0, "clLPerHour": 70.0, "proteinBindingPct": 90,
+      "therapeuticWindow": {"low": 30.0, "high": 120.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP1A2", "fraction": 0.7}, {"cyp": "CYP2D6", "fraction": 0.3}], "inhibitors": [], "inducers": []},
+      "activeMetabolites": [],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "LOW", "sexual": "MEDIUM", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "CONTRAINDICATED_EGFR_BELOW_30", "hepatic": "CONTRAINDICATED_IN_SEVERE", "elderly": "起始 30mg", "smoking": {"effect": "CYP1A2 诱导", "doseAdjustment": "吸烟者浓度降低 30%"}},
+      "criticalInteractions": [
+        {"triggerDrugId": "fluvoxamine", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [2.0, 3.0], "severity": "HIGH", "clinicalNote": "氟伏沙明强抑制 CYP1A2，度洛西汀浓度升高 2-3 倍"},
+        {"triggerDrugId": "phenelzine", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "CONTRAINDICATED", "clinicalNote": "MAOI 禁忌"},
+        {"triggerDrugId": "tramadol", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "HIGH", "clinicalNote": "5-HT 综合征"},
+        {"triggerDrugId": "lithium", "mechanism": "SEROTONIN_ADDITIVE", "aucFoldChange": [1.0, 1.0], "severity": "MEDIUM", "clinicalNote": "5-HT 增强"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["肝功（ALT/AST）", "肾功能", "血压", "血钠（SIADH）"]},
+      "references": ["AGNP 2017", "FDA Cymbalta Prescribing Information"]
+    },
+
+    {
+      "id": "diazepam",
+      "genericName": "Diazepam",
+      "genericNameZh": "地西泮",
+      "brandNames": ["Valium", "安定"],
+      "category": "ANXIOLYTIC", "subcategory": "BENZODIAZEPINE_LONG", "atc": "N05BA01",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.86, "kaPerHour": 2.0, "tMaxHours": 1.0, "doseUnits": ["mg"], "commonDoseRangeMg": [2.0, 30.0]}],
+      "kePerHour": 0.028, "tHalfHours": 25.0, "tHalfRangeHours": [10.0, 100.0],
+      "vdLPerKg": 1.5, "clLPerHour": 3.0, "proteinBindingPct": 98,
+      "therapeuticWindow": {"low": 100.0, "high": 2500.0, "unit": "ng/mL (含活性代谢物 N-去甲地西泮)", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [{"cyp": "CYP2C19", "fraction": 0.5}, {"cyp": "CYP3A4", "fraction": 0.5}], "inhibitors": [], "inducers": []},
+      "activeMetabolites": [
+        {"id": "nordazepam", "name": "N-去甲地西泮（活性）", "activityRatio": 1.0, "note": "半衰期 50-100h"},
+        {"id": "oxazepam", "name": "奥沙西泮（活性）", "activityRatio": 0.5, "note": "葡萄糖苷酸化直接排出"},
+        {"id": "temazepam", "name": "替马西泮（活性）", "activityRatio": 0.5}
+      ],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "HIGH", "sexual": "LOW", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "MONITOR", "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B", "elderly": "起始低剂量，老年跌倒风险", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "fluoxetine", "mechanism": "CYP_INHIBITION_STRONG", "aucFoldChange": [1.5, 2.5], "severity": "HIGH", "clinicalNote": "氟西汀抑制 CYP2C19/3A4，地西泮浓度升高 2 倍，作用延长"},
+        {"triggerDrugId": "carbamazepine", "mechanism": "CYP_INDUCTION", "aucFoldChange": [0.3, 0.5], "severity": "MEDIUM", "clinicalNote": "卡马西平诱导，地西泮失效"},
+        {"triggerDrugId": "olanzapine", "mechanism": "PHARMACODYNAMIC", "aucFoldChange": [1.0, 1.0], "severity": "MEDIUM", "clinicalNote": "中枢抑制叠加，警觉性下降"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["依赖性（重点）", "认知功能", "跌倒风险", "呼吸抑制（联合阿片时）"]},
+      "references": ["AGNP 2017", "FDA Valium Prescribing Information"]
+    },
+
+    {
+      "id": "lorazepam",
+      "genericName": "Lorazepam",
+      "genericNameZh": "劳拉西泮",
+      "brandNames": ["Ativan", "罗拉"],
+      "category": "ANXIOLYTIC", "subcategory": "BENZODIAZEPINE_INTERMEDIATE", "atc": "N05BA06",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [{"route": "ORAL", "f": 0.93, "kaPerHour": 3.0, "tMaxHours": 1.5, "doseUnits": ["mg"], "commonDoseRangeMg": [0.5, 6.0]}],
+      "kePerHour": 0.0693, "tHalfHours": 10.0, "tHalfRangeHours": [8.0, 15.0],
+      "vdLPerKg": 1.0, "clLPerHour": 4.5, "proteinBindingPct": 85,
+      "therapeuticWindow": {"low": 20.0, "high": 250.0, "unit": "ng/mL", "guidelineSource": "AGNP 2017"},
+      "cypProfile": {"substrates": [], "inhibitors": [], "inducers": [], "note": "经 UGT2B7 葡萄糖苷酸化为无活性代谢物（绕开 CYP）"},
+      "activeMetabolites": [{"id": "lorazepam-glucuronide", "name": "劳拉西泮葡萄糖苷酸", "activityRatio": 0.0, "note": "无活性"}],
+      "adverseEffects": {"qtcProlongation": "LOW", "metabolicSyndrome": "LOW", "anticholinergicLoad": 0, "agranulocytosis": "VERY_LOW", "extrapyramidal": "VERY_LOW", "sedation": "HIGH", "sexual": "LOW", "hyperprolactinemia": "LOW"},
+      "adjustments": {"renal": "MONITOR", "hepatic": "MONITOR", "elderly": "起始低剂量，老年跌倒风险", "smoking": null},
+      "criticalInteractions": [
+        {"triggerDrugId": "olanzapine", "mechanism": "PHARMACODYNAMIC", "aucFoldChange": [1.0, 1.0], "severity": "MEDIUM", "clinicalNote": "中枢抑制叠加"},
+        {"triggerDrugId": "clozapine", "mechanism": "PHARMACODYNAMIC", "aucFoldChange": [1.0, 1.0], "severity": "MEDIUM", "clinicalNote": "协同镇静+呼吸抑制风险；过量可致死"}
+      ],
+      "monitoring": {"frequency": "EVERY_3_MONTHS", "items": ["依赖性", "认知功能", "跌倒风险", "呼吸"]},
+      "references": ["AGNP 2017", "FDA Ativan Prescribing Information"]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "requests": [
+    {
+      "aspect_ratio": "1:1",
+      "resolution": "2K",
+      "output_file": "dosecare_logo_clean3d.png",
+      "prompt": "App icon for a medical polypharmacy management app called DoseCare, clean 3D style, soft shadows, subtle highlights, depth. A single rounded pill capsule in soft sky blue and gentle mint green, standing upright, with a small soft white heart shape integrated into the capsule's surface suggesting care and safety. Centered design, safe area margins, soft pastel color palette (sky blue #5B8DBE, mint #6BBEA8, lavender accent #8E6FBE), high quality, professional, production ready, clean design, pure white background, solid white, no patterns, no gradients on background, front-facing view, straight on, no perspective, no tilt, no 3D angle, no rotation, no text, no labels, no watermarks, no scene, no environment, no device mockup, icon only, isolated, nothing else in frame"
+    },
+    {
+      "aspect_ratio": "1:1",
+      "resolution": "2K",
+      "output_file": "dosecare_logo_gradient.png",
+      "prompt": "App icon for a medical polypharmacy management app called DoseCare, gradient style, smooth vibrant color transitions. Two rounded pill capsules interlocked in a heart-like composition, one in soft sky blue gradient, one in warm lavender purple gradient, with a subtle soft glow around the pair suggesting care. Centered design, safe area margins, modern medical app aesthetic, harmonious blue purple green pastel palette, high quality, professional, production ready, clean design, pure white background, solid white, no patterns, no gradients on background, front-facing view, straight on, no perspective, no tilt, no 3D angle, no rotation, no text, no labels, no watermarks, no scene, no environment, no device mockup, icon only, isolated, nothing else in frame"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+                    GNU AFFERO GENERAL PUBLIC LICENSE
+                       Version 3, 19 November 2007
+
+ Copyright (C) 2026 DoseCare contributors
+
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Affero General Public License as published
+ by the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+
+ You should have received a copy of the GNU Affero General Public License
+ along with this program.  If not, see <https://www.gnu.org/licenses/agpl-3.0.txt>.
+
+ SPDX-License-Identifier: AGPL-3.0-or-later
+
+ ---
+
+ 选用 AGPL-3.0 的理由：
+ - GPL-3.0 在"网络服务"上有漏洞：医院可以私有部署、修改代码、不开源
+ - AGPL-3.0 明确把"通过网络提供服务"也算"分发"，强制要求衍生代码开源
+ - 保护"用户贡献"：如果医院部署后加了重要功能，必须回馈社区
+ - 与未来医院合作的常见 AGPL 实践（Nextcloud、Mastodon 等）一致
+ - 不影响个人使用、商业化集成（只要遵守条款）

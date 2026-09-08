@@ -1,0 +1,627 @@
+package com.dosecare.app.ui
+
+import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Lightbulb
+import androidx.compose.material.icons.filled.Schedule
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.dosecare.app.domain.catalog.Drug
+import com.dosecare.app.domain.catalog.DrugCatalogService
+import com.dosecare.app.domain.catalog.OverdoseSeverity
+import com.dosecare.app.domain.catalog.RiskLevel
+import com.dosecare.app.domain.pk.DoseEvent
+import com.dosecare.app.domain.pk.PkEngine
+import com.dosecare.app.domain.pk.PkModel
+
+/**
+ * 药物详情屏 (v0.2.2 → v0.5.1 加通俗模式)
+ *
+ * v0.5.1 升级:
+ * - 顶部加"📖 通俗模式" toggle, 默认 OFF (专业人士)
+ * - ON 时, 每个学术参数下用小字 + 💡 显示普通用户能懂的描述
+ * - 学术 vs 通俗一键切换, 方便患者和家属自己看懂
+ */
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun DrugDetailScreen(
+    drugId: String,
+    catalog: DrugCatalogService,
+    onBack: () -> Unit
+) {
+    BackHandler(enabled = true, onBack = onBack)
+    val drug = remember(drugId) { catalog.tryGetById(drugId) }
+    var plainMode by remember { mutableStateOf(false) }
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        drug?.genericNameZh ?: "药物详情",
+                        fontWeight = FontWeight.SemiBold
+                    )
+                },
+                navigationIcon = {
+                    IconButton(onClick = onBack) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "返回")
+                    }
+                },
+                actions = {
+                    // 通俗模式 toggle
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Icon(
+                            if (plainMode) Icons.Default.Visibility else Icons.Default.VisibilityOff,
+                            contentDescription = "通俗模式",
+                            tint = if (plainMode) MaterialTheme.colorScheme.primary
+                                   else MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                        Spacer(Modifier.width(4.dp))
+                        Switch(
+                            checked = plainMode,
+                            onCheckedChange = { plainMode = it }
+                        )
+                    }
+                    Spacer(Modifier.width(8.dp))
+                }
+            )
+        }
+    ) { padding ->
+        if (drug == null) {
+            Box(Modifier.fillMaxSize().padding(padding), contentAlignment = Alignment.Center) {
+                Text("未找到药物: $drugId")
+            }
+            return@Scaffold
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(padding)
+                .verticalScroll(rememberScrollState())
+                .padding(16.dp),
+            verticalArrangement = Arrangement.spacedBy(12.dp)
+        ) {
+            HeaderCard(drug, plainMode)
+            CypRoleCard(drug, plainMode)
+            if (drug.therapeuticWindow != null) WindowCard(drug, plainMode)
+            PkPreviewCard(drug, plainMode)
+            if (drug.pharmacology != null) PharmacologyCard(drug, plainMode)
+            AdverseEffectsCard(drug, plainMode)
+            if (drug.overdose != null) OverdoseCard(drug, plainMode)
+            AdjustmentsCard(drug, plainMode)
+            if (drug.criticalInteractions.isNotEmpty()) CriticalInteractionsCard(drug, catalog, plainMode)
+            if (drug.monitoring.items.isNotEmpty()) MonitoringCard(drug, plainMode)
+            Spacer(Modifier.height(16.dp))
+        }
+    }
+}
+
+/** 通俗解释小条 */
+@Composable
+private fun PlainNote(text: String) {
+    Row(modifier = Modifier.padding(top = 2.dp, start = 0.dp, end = 0.dp)) {
+        Icon(
+            Icons.Default.Lightbulb,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.tertiary,
+            modifier = Modifier.size(14.dp)
+        )
+        Spacer(Modifier.width(4.dp))
+        Text(
+            text,
+            style = MaterialTheme.typography.labelSmall,
+            color = MaterialTheme.colorScheme.tertiary
+        )
+    }
+}
+
+@Composable
+private fun HeaderCard(drug: Drug, plain: Boolean) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
+    ) {
+        Column(Modifier.padding(20.dp)) {
+            Text(drug.genericNameZh, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
+            Text(
+                drug.genericName,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
+            )
+            Spacer(Modifier.height(8.dp))
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                if (drug.atc != null) {
+                    AssistChip(onClick = {}, label = { Text("ATC ${drug.atc}") })
+                    Spacer(Modifier.width(8.dp))
+                }
+                AssistChip(
+                    onClick = {},
+                    label = { Text(drug.category.displayName) }
+                )
+            }
+            if (drug.brandNames.isNotEmpty()) {
+                Spacer(Modifier.height(12.dp))
+                Text(
+                    "商品名：${drug.brandNames.joinToString("、")}",
+                    style = MaterialTheme.typography.bodySmall
+                )
+            }
+            if (plain) {
+                Spacer(Modifier.height(8.dp))
+                PlainNote("ATC 码 = 世界卫生组织给每种药分的唯一编号,医生用来识别同类药")
+            }
+        }
+    }
+}
+
+@Composable
+private fun CypRoleCard(drug: Drug, plain: Boolean) {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp)) {
+            SectionTitle("CYP 角色")
+            Spacer(Modifier.height(4.dp))
+            CypRow("作为底物（被代谢）", drug.cypProfile.substrates.map { "${it.cyp.displayName} ${(it.fraction * 100).toInt()}%" })
+            if (plain && drug.cypProfile.substrates.isNotEmpty()) PlainNote(Plain.cypSubstrate())
+            CypRow("作为抑制剂（影响其他药）", drug.cypProfile.inhibitors.map { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" })
+            if (plain && drug.cypProfile.inhibitors.isNotEmpty()) {
+                val strongest = drug.cypProfile.inhibitors.maxByOrNull { strengthRank(it.strength.name) }
+                if (strongest != null) PlainNote(Plain.cypInhibitor(strongest.strength.name))
+            }
+            CypRow("作为诱导剂（影响其他药）", drug.cypProfile.inducers.map { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" })
+            if (plain && drug.cypProfile.inducers.isNotEmpty()) {
+                val strongest = drug.cypProfile.inducers.maxByOrNull { strengthRank(it.strength.name) }
+                if (strongest != null) PlainNote(Plain.cypInducer(strongest.strength.name))
+            }
+            // 主要代谢途径 (即使 CYP 也有结构化描述, 非 CYP 标 Phase II / 肾排 / 等)
+            if (drug.cypProfile.primaryPathway != null) {
+                Spacer(Modifier.height(6.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Text("主要代谢途径", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.weight(1f))
+                    if (drug.cypProfile.pathwayType != null) {
+                        Surface(
+                            shape = RoundedCornerShape(4.dp),
+                            color = pathwayColor(drug.cypProfile.pathwayType).copy(alpha = 0.15f)
+                        ) {
+                            Text(
+                                drug.cypProfile.pathwayType.displayName,
+                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
+                                style = MaterialTheme.typography.labelSmall,
+                                color = pathwayColor(drug.cypProfile.pathwayType),
+                                fontWeight = FontWeight.SemiBold
+                            )
+                        }
+                    }
+                }
+                Text(drug.cypProfile.primaryPathway, style = MaterialTheme.typography.bodyMedium)
+                if (plain) PlainNote(Plain.metabolism(drug.cypProfile.pathwayType))
+            }
+        }
+    }
+}
+
+private fun pathwayColor(pt: com.dosecare.app.domain.catalog.PathwayType): Color = when (pt) {
+    com.dosecare.app.domain.catalog.PathwayType.CYP450 -> Color(0xFF1976D2)               // 蓝: 主药代酶
+    com.dosecare.app.domain.catalog.PathwayType.UGT_GLUCURONIDATION -> Color(0xFF388E3C)    // 绿: 葡萄糖苷酸化, 通常无显著 CYP 相互作用
+    com.dosecare.app.domain.catalog.PathwayType.GLUCURONIDATION -> Color(0xFF388E3C)
+    com.dosecare.app.domain.catalog.PathwayType.RENAL_EXCRETION -> Color(0xFF7B1FA2)       // 紫: 肾排泄, 通常无 CYP 相互作用
+    com.dosecare.app.domain.catalog.PathwayType.HYDROLYSIS -> Color(0xFF0097A7)          // 青: 水解
+    com.dosecare.app.domain.catalog.PathwayType.ESTERASE -> Color(0xFF0097A7)
+    com.dosecare.app.domain.catalog.PathwayType.DEIODINATION -> Color(0xFF5D4037)        // 棕: 脱碘
+    com.dosecare.app.domain.catalog.PathwayType.MAO -> Color(0xFFD32F2F)                  // 红: 单胺氧化酶
+    com.dosecare.app.domain.catalog.PathwayType.DPP4 -> Color(0xFFF57C00)                  // 橙
+    com.dosecare.app.domain.catalog.PathwayType.BETA_OXIDATION -> Color(0xFF7B1FA2)
+    com.dosecare.app.domain.catalog.PathwayType.OTHER -> Color(0xFF888888)
+}
+
+@Composable
+private fun CypRow(label: String, items: List<String>) {
+    Column(Modifier.padding(vertical = 6.dp)) {
+        Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Spacer(Modifier.height(2.dp))
+        if (items.isEmpty()) {
+            Text("—", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        } else {
+            Text(items.joinToString("、"), style = MaterialTheme.typography.bodyMedium)
+        }
+    }
+}
+
+private fun strengthRank(s: String) = when (s) {
+    "STRONG" -> 3
+    "MODERATE" -> 2
+    "WEAK" -> 1
+    else -> 0
+}
+
+private fun strengthZh(name: String): String = when (name) {
+    "STRONG" -> "强"
+    "MODERATE" -> "中"
+    "WEAK" -> "弱"
+    else -> name
+}
+
+@Composable
+private fun WindowCard(drug: Drug, plain: Boolean) {
+    val w = drug.therapeuticWindow!!
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
+    ) {
+        Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
+            Icon(Icons.Default.Schedule, contentDescription = null, tint = MaterialTheme.colorScheme.secondary)
+            Spacer(Modifier.width(12.dp))
+            Column {
+                Text("治疗窗", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSecondaryContainer)
+                Text(
+                    "${"%.0f".format(w.low)} - ${"%.0f".format(w.high)} ${w.unit}",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.SemiBold
+                )
+                Text(
+                    "参考：${w.guidelineSource}",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
+                )
+                if (plain) {
+                    PlainNote(Plain.therapeuticWindow(w.low, w.high, w.unit))
+                    w.guidelineSource?.let { PlainNote(Plain.guideline(it)) }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun PkPreviewCard(drug: Drug, plain: Boolean) {
+    val model = drug.pkModel
+    if (model !is PkModel.OneCompartmentWithAbsorption) return
+    val css = remember(drug.id) { computeCss(drug) }
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp)) {
+            SectionTitle("PK 估算（演示：200 mg bid 第 5 天，70 kg）")
+            Spacer(Modifier.height(8.dp))
+            Text(css, style = MaterialTheme.typography.bodyMedium)
+            Spacer(Modifier.height(4.dp))
+            Text(
+                "t½ ${"%.1f".format(model.tHalfHours)} h · 蛋白结合 ${drug.proteinBindingPct}%",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            if (plain) {
+                Spacer(Modifier.height(4.dp))
+                PlainNote(Plain.halfLife(model.tHalfHours))
+                PlainNote(Plain.proteinBinding(drug.proteinBindingPct))
+                // Cmax/Cmin/Cavg 通俗解释
+                val parts = css.split("·").map { it.trim() }
+                parts.forEach { p ->
+                    when {
+                        p.startsWith("Cmax=") -> {
+                            val n = p.removePrefix("Cmax=").trim()
+                            val (v, u) = splitNumUnit(n)
+                            if (v != null) PlainNote(Plain.cmax(v, u))
+                        }
+                        p.startsWith("Cmin=") -> {
+                            val n = p.removePrefix("Cmin=").trim()
+                            val (v, u) = splitNumUnit(n)
+                            if (v != null) PlainNote(Plain.cmin(v, u))
+                        }
+                        p.startsWith("Cavg=") -> {
+                            val n = p.removePrefix("Cavg=").trim()
+                            val (v, u) = splitNumUnit(n)
+                            if (v != null) PlainNote(Plain.cavg(v, u))
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun PharmacologyCard(drug: Drug, plain: Boolean) {
+    val text = drug.pharmacology ?: return
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer.copy(alpha = 0.3f))
+    ) {
+        Column(Modifier.padding(16.dp)) {
+            SectionTitle("药理作用")
+            Spacer(Modifier.height(8.dp))
+            Text(text, style = MaterialTheme.typography.bodyMedium)
+        }
+    }
+}
+
+/** 解析 "1234 ng/mL" → (1234.0, "ng/mL") */
+private fun splitNumUnit(s: String): Pair<Double?, String> {
+    val m = Regex("([0-9.]+)\\s*(\\S+)").find(s)
+    return if (m != null) {
+        val v = m.groupValues[1].toDoubleOrNull()
+        val u = m.groupValues[2]
+        v to u
+    } else null to ""
+}
+
+private fun computeCss(drug: Drug): String = runCatching {
+    val model = drug.pkModel as PkModel.OneCompartmentWithAbsorption
+    val engine = PkEngine()
+    val doses = (0 until 10).map { DoseEvent(200.0, it * 12.0) }
+    val curve = engine.multiDoseCurve(
+        model = model,
+        doseEvents = doses,
+        tStart = 96.0, tEnd = 120.0, stepHours = 0.25
+    )
+    val factor = drug.cMaxUnitFactor
+    val unit = drug.therapeuticWindow?.unit?.let { it.substringBefore(" ") } ?: "mg/L"
+    "Cmax=${"%.1f".format(curve.cMax * factor)} · " +
+        "Cmin=${"%.1f".format(curve.cMin * factor)} · " +
+        "Cavg=${"%.1f".format(curve.cAvg * factor)} $unit"
+}.getOrDefault("—")
+
+@Composable
+private fun AdverseEffectsCard(drug: Drug, plain: Boolean) {
+    val ae = drug.adverseEffects
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp)) {
+            SectionTitle("关键不良反应")
+            Spacer(Modifier.height(8.dp))
+            RiskRow("QTc 延长", ae.qtcProlongation); if (plain) PlainNote(Plain.qtcProlongation(ae.qtcProlongation))
+            RiskRow("代谢综合征", ae.metabolicSyndrome); if (plain) PlainNote(Plain.metabolicSyndrome(ae.metabolicSyndrome))
+            RiskRow("粒细胞缺乏", ae.agranulocytosis); if (plain) PlainNote(Plain.agranulocytosis(ae.agranulocytosis))
+            RiskRow("锥体外系反应", ae.extrapyramidal); if (plain) PlainNote(Plain.extrapyramidal(ae.extrapyramidal))
+            RiskRow("镇静", ae.sedation); if (plain) PlainNote(Plain.sedation(ae.sedation))
+            RiskRow("性功能影响", ae.sexual); if (plain) PlainNote(Plain.sexual(ae.sexual))
+            RiskRow("高泌乳素", ae.hyperprolactinemia); if (plain) PlainNote(Plain.hyperprolactinemia(ae.hyperprolactinemia))
+            Row(Modifier.padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+                Text("抗胆碱能负荷", style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+                Text("${ae.anticholinergicLoad} / 3", style = MaterialTheme.typography.bodyMedium, color = anticholinergicColor(ae.anticholinergicLoad))
+            }
+            if (plain) PlainNote(Plain.anticholinergicLoad(ae.anticholinergicLoad))
+        }
+    }
+}
+
+@Composable
+private fun RiskRow(label: String, level: RiskLevel) {
+    Row(Modifier.padding(vertical = 4.dp), verticalAlignment = Alignment.CenterVertically) {
+        Text(label, style = MaterialTheme.typography.bodyMedium, modifier = Modifier.weight(1f))
+        Surface(
+            shape = RoundedCornerShape(4.dp),
+            color = riskColor(level).copy(alpha = 0.18f)
+        ) {
+            Text(
+                level.displayName(),
+                modifier = Modifier.padding(horizontal = 10.dp, vertical = 3.dp),
+                style = MaterialTheme.typography.labelSmall,
+                color = riskColor(level),
+                fontWeight = FontWeight.SemiBold
+            )
+        }
+    }
+}
+
+@Composable
+private fun OverdoseCard(drug: Drug, plain: Boolean) {
+    val o = drug.overdose ?: return
+    val sevColor = overdoseColor(o.severity)
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = sevColor.copy(alpha = 0.10f))
+    ) {
+        Column(Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(
+                    Icons.Default.Warning,
+                    contentDescription = null,
+                    tint = sevColor,
+                    modifier = Modifier.size(20.dp)
+                )
+                Spacer(Modifier.width(8.dp))
+                SectionTitle("药物过量 (70kg 成人)")
+                Spacer(Modifier.weight(1f))
+                Surface(
+                    shape = RoundedCornerShape(4.dp),
+                    color = sevColor.copy(alpha = 0.18f)
+                ) {
+                    Text(
+                        o.severity.displayName,
+                        modifier = Modifier.padding(horizontal = 10.dp, vertical = 3.dp),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = sevColor,
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+            }
+            Spacer(Modifier.height(10.dp))
+            Text("典型症状", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(o.symptoms, style = MaterialTheme.typography.bodyMedium)
+            Spacer(Modifier.height(8.dp))
+            // 剂量估计
+            if (o.toxicDoseEstimateMg != null || o.fatalDoseEstimateMg != null) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    if (o.toxicDoseEstimateMg != null) {
+                        Text(
+                            "⚠️ 中毒 ~${o.toxicDoseEstimateMg.toInt()} mg",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = Color(0xFFFB8C00)
+                        )
+                    }
+                    if (o.fatalDoseEstimateMg != null) {
+                        if (o.toxicDoseEstimateMg != null) Spacer(Modifier.width(12.dp))
+                        Text(
+                            "☠️ 致死 ~${o.fatalDoseEstimateMg.toInt()} mg",
+                            style = MaterialTheme.typography.labelMedium,
+                            color = Color(0xFFB71C1C),
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                }
+                Spacer(Modifier.height(8.dp))
+            }
+            Text("抢救要点", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Text(o.management, style = MaterialTheme.typography.bodySmall)
+            o.antidote?.let { ant ->
+                Spacer(Modifier.height(6.dp))
+                Surface(
+                    shape = RoundedCornerShape(4.dp),
+                    color = Color(0xFFB71C1C).copy(alpha = 0.12f)
+                ) {
+                    Text(
+                        "💉 特异性解毒剂: $ant",
+                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                        style = MaterialTheme.typography.labelSmall,
+                        color = Color(0xFFB71C1C),
+                        fontWeight = FontWeight.SemiBold
+                    )
+                }
+            }
+            Spacer(Modifier.height(6.dp))
+            Text("数据源: ${o.dataSource}", style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+    }
+}
+
+private fun overdoseColor(sev: OverdoseSeverity): Color = when (sev) {
+    OverdoseSeverity.LIFE_THREATENING -> Color(0xFFB71C1C)
+    OverdoseSeverity.SEVERE -> Color(0xFFD32F2F)
+    OverdoseSeverity.MODERATE -> Color(0xFFFB8C00)
+    OverdoseSeverity.MILD -> Color(0xFF66BB6A)
+}
+
+private fun riskColor(level: RiskLevel): Color = when (level) {
+    RiskLevel.VERY_HIGH -> Color(0xFFB71C1C)
+    RiskLevel.HIGH -> Color(0xFFE53935)
+    RiskLevel.MEDIUM -> Color(0xFFFB8C00)
+    RiskLevel.LOW -> Color(0xFF66BB6A)
+    RiskLevel.VERY_LOW -> Color(0xFF888888)
+}
+
+private fun anticholinergicColor(score: Int): Color = when {
+    score >= 3 -> Color(0xFFB71C1C)
+    score >= 2 -> Color(0xFFFB8C00)
+    score >= 1 -> Color(0xFFFFA726)
+    else -> Color(0xFF66BB6A)
+}
+
+private fun RiskLevel.displayName(): String = when (this) {
+    RiskLevel.VERY_HIGH -> "极高"
+    RiskLevel.HIGH -> "高"
+    RiskLevel.MEDIUM -> "中"
+    RiskLevel.LOW -> "低"
+    RiskLevel.VERY_LOW -> "极低"
+}
+
+@Composable
+private fun AdjustmentsCard(drug: Drug, plain: Boolean) {
+    val a = drug.adjustments
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp)) {
+            SectionTitle("剂量调整")
+            Spacer(Modifier.height(8.dp))
+            KvRow("肾功能", a.renal.name.replace("_", " "))
+            if (plain) PlainNote(Plain.renalAdj(a.renal))
+            KvRow("肝功能", a.hepatic.name.replace("_", " "))
+            if (plain) PlainNote(Plain.hepaticAdj(a.hepatic))
+            a.elderly?.let {
+                KvRow("老年", it)
+                if (plain) PlainNote(Plain.elderly())
+            }
+            a.smoking?.let {
+                KvRow("吸烟", "${it.effect}（${it.doseAdjustment}）")
+                it.abstinenceNote?.let { n -> KvRow("戒烟", n) }
+            }
+        }
+    }
+}
+
+@Composable
+private fun KvRow(label: String, value: String) {
+    Column(Modifier.padding(vertical = 4.dp)) {
+        Text(label, style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        Text(value, style = MaterialTheme.typography.bodyMedium)
+    }
+}
+
+@Composable
+private fun CriticalInteractionsCard(drug: Drug, catalog: DrugCatalogService, plain: Boolean) {
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.errorContainer)
+    ) {
+        Column(Modifier.padding(16.dp)) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Icon(Icons.Default.Warning, contentDescription = null, tint = MaterialTheme.colorScheme.error)
+                Spacer(Modifier.width(8.dp))
+                Text("关键相互作用提示", style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.SemiBold)
+            }
+            Spacer(Modifier.height(8.dp))
+            drug.criticalInteractions.forEach { hint ->
+                val trigger = catalog.tryGetById(hint.triggerDrugId)
+                if (trigger != null) {
+                    Column(Modifier.padding(vertical = 6.dp)) {
+                        Text(
+                            "${trigger.genericNameZh} (${trigger.genericName})",
+                            style = MaterialTheme.typography.titleSmall,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                        Text(
+                            "${hint.mechanism.name.replace("_", " ")} · ${hint.severity}",
+                            style = MaterialTheme.typography.labelSmall,
+                            color = MaterialTheme.colorScheme.onErrorContainer.copy(alpha = 0.8f)
+                        )
+                        Text(
+                            "AUC 变化：${hint.aucFoldChange.first} - ${hint.aucFoldChange.second} 倍",
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                        if (plain) PlainNote(Plain.auc() + " — 倍数 = 联用时浓度变化倍数")
+                        Spacer(Modifier.height(2.dp))
+                        Text(hint.clinicalNote, style = MaterialTheme.typography.bodySmall)
+                    }
+                    HorizontalDivider(Modifier.padding(vertical = 4.dp))
+                }
+            }
+        }
+    }
+}
+
+@Composable
+private fun MonitoringCard(drug: Drug, plain: Boolean) {
+    Card(modifier = Modifier.fillMaxWidth()) {
+        Column(Modifier.padding(16.dp)) {
+            SectionTitle("监测要求")
+            Spacer(Modifier.height(4.dp))
+            drug.monitoring.frequency?.let {
+                Text("频次：$it", style = MaterialTheme.typography.bodyMedium, fontWeight = FontWeight.Medium)
+                Spacer(Modifier.height(4.dp))
+            }
+            Text(
+                drug.monitoring.items.joinToString("、"),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+        }
+    }
+}
+
+@Composable
+private fun SectionTitle(text: String) {
+    Text(text, style = MaterialTheme.typography.titleSmall, fontWeight = FontWeight.SemiBold)
+}

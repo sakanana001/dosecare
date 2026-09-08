@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        Material 3 主题（基线主题，真正颜色由 Compose 的 DoseCareTheme 控制）
+        用 Theme.Material3.DayNight.NoActionBar 让系统栏透明
+    -->
+    <style name="Theme.DoseCare" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

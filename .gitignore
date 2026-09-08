@@ -1,0 +1,139 @@
+# ========================================================================
+# DoseCare .gitignore
+# ========================================================================
+
+# ----- Android Build Artifacts -----
+*.apk
+*.ap_
+*.aab
+*.aar
+*.dex
+*.class
+*.hprof
+bin/
+gen/
+out/
+release/
+
+# ----- Gradle -----
+.gradle/
+build/
+.kotlin/
+**/build/
+*.gradle.kts.bak
+
+# ----- Local SDK Config -----
+# local.properties 包含本机 SDK 路径,绝不能 commit
+local.properties
+
+# ----- Android Studio / IntelliJ -----
+*.iml
+.idea/
+.navigation/
+captures/
+.externalNativeBuild/
+.cxx/
+
+# ----- Keystore / Secrets -----
+# 任何 release signing key 都不应入仓
+*.jks
+*.keystore
+keystore/
+secrets/
+*.env
+
+# ----- Backup files -----
+*.bak
+*.bak.*
+*.tmp
+*.swp
+*.swo
+*~
+*_orig.*
+
+# ----- Gradle / Script Logs (开发期调试日志,不入仓) -----
+*.log
+gradle-*.log
+gradle-v0*.log
+junit-*.log
+lorazepam-*.log
+compile-*.log
+run-*.log
+rule-*.log
+help.txt
+progress.html
+compile-*.bat
+compile-*.sh
+lorazepam-*.ps1
+run-*.ps1
+run-*.ps1.txt
+run_tests.ps1
+
+# scripts/ 下的开发期日志 (data-gen patches)
+scripts/*.log
+scripts/*-log
+scripts/v0*-gen.log
+scripts/extract.log
+scripts/copy*.log
+scripts/strip.log
+scripts/unmatched*.log
+scripts/pinyin-*.log
+scripts/debug.log
+scripts/g.log
+scripts/check*.log
+
+# ----- OS -----
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ----- Editor / IDE -----
+.vscode/
+*.sublime-project
+*.sublime-workspace
+.atom/
+
+# ----- Test outputs -----
+test-results/
+reports/
+.jacoco/
+coverage/
+*.exec
+
+# ----- KSP / Hilt generated -----
+# (不排除,应该在仓里追踪)
+# 但 build/ 里生成的已由 build/ 排除
+
+# ----- Misc ----
+# 老测试截图 (v0.6 时期 5-tab 界面,已废弃,改用 docs/screenshots/)
+app/src/main/assets/test_*.png
+app/src/main/assets/test_screenshot.png
+
+# 临时编译输出
+*.classpath
+*.project
+*.settings/
+.factorypath
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# ----- 项目特殊 -----
+# .minimax/ 是 agent 工作区 (.trash/ 等),不入仓
+.minimax/
+*.minimax/
+
+# ----- 打包 / 开发期产物 -----
+dist/
+
+docs/desktop-archive/
+
+build.log
+install.log
+gradle-apk-*.log
+gradle-build.log
+gradle-cat*.log
+gradle-compile*.log

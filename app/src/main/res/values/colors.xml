@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primary_brand">#2C5F8D</color>
+    <color name="secondary_brand">#7E5CAD</color>
+    <color name="error_brand">#B71C1C</color>
+</resources>

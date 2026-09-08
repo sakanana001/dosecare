@@ -1,0 +1,2920 @@
+{
+  "schemaVersion": "0.5.0",
+  "generatedAt": "2026-09-07T11:35:00Z",
+  "source": [
+    "国家药监局《麻醉药品和精神药品品种目录》(2013 版 + 后续增补)",
+    "FDA DailyMed (SPL) - 药品标签 PK / CYP / 相互作用",
+    "AGNP Consensus 2017 (Hiemke C. et al., Pharmacopsychiatry 2018) - 精神科 TDM 共识",
+    "Flockhart CYP Drug Interaction Table (Indiana University)",
+    "PMID 同行评议文献"
+  ],
+  "disclaimer": "本目录的所有数据基于公开文献与药品说明书,仅供参考。中国精麻目录品种根据国家药品监督管理局公告。个体差异显著。任何用药调整请咨询医师或临床药师。",
+  "drugs": [
+    {
+      "id": "morphine",
+      "genericName": "Morphine",
+      "genericNameZh": "吗啡",
+      "brandNames": [
+        "MS Contin",
+        "美施康定"
+      ],
+      "category": "ANALGESIC",
+      "subcategory": "OPIOID_FULL_AGONIST",
+      "atc": "N02AA01",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.3,
+          "kaPerHour": 1.2,
+          "tMaxHours": 1.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            5.0,
+            30.0
+          ]
+        }
+      ],
+      "kePerHour": 0.2772588722239781,
+      "tHalfHours": 2.5,
+      "tHalfRangeHours": [
+        1.5,
+        4.5
+      ],
+      "vdLPerKg": 3.2,
+      "clLPerHour": 62.1059873781711,
+      "proteinBindingPct": 35,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "UGT2B7",
+            "fraction": 0.6
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "μ-阿片受体完全激动剂; 6-葡萄糖醛酸化代谢 (UGT2B7); M3G/M6G 活性代谢物"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "MEDIUM",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 2.5-5mg q4-6h prn; 缓滴定",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "高剂量 MAOI 联用: 高血压危象 + 呼吸抑制"
+        },
+        {
+          "triggerDrugId": "SSRIs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "5-HT 综合征风险 (尤其曲马多/哌替啶, 吗啡较弱)"
+        },
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "中重度呼吸抑制; FDA 黑框"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用严重呼吸抑制"
+        },
+        {
+          "triggerDrugId": "naloxone",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            0.0,
+            0.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "纳洛酮逆转过量"
+        },
+        {
+          "triggerDrugId": "rifampin",
+          "mechanism": "PHARMACOKINETIC_OTHER",
+          "aucFoldChange": [
+            0.5,
+            0.7
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "UGT 诱导, 吗啡效应降低"
+        }
+      ],
+      "monitoring": {
+        "frequency": "EVERY_3_MONTHS",
+        "items": [
+          "疼痛评分",
+          "排便",
+          "呼吸频率",
+          "过量/成瘾风险评估",
+          "肾功能"
+        ]
+      },
+      "references": [
+        "国家药监局《麻醉药品和精神药品品种目录》(2013)",
+        "AGNP 2017",
+        "FDA MS Contin Prescribing Information"
+      ]
+    },
+    {
+      "id": "fentanyl",
+      "genericName": "Fentanyl",
+      "genericNameZh": "芬太尼",
+      "brandNames": [
+        "Duragesic",
+        "多瑞吉",
+        "Sublimaze"
+      ],
+      "category": "ANALGESIC",
+      "subcategory": "OPIOID_FULL_AGONIST",
+      "atc": "N02AB03",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.7,
+          "kaPerHour": 1.5,
+          "tMaxHours": 0.5,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            0.025,
+            0.3
+          ]
+        }
+      ],
+      "kePerHour": 0.19804205158855578,
+      "tHalfHours": 3.5,
+      "tHalfRangeHours": [
+        2,
+        6
+      ],
+      "vdLPerKg": 4.0,
+      "clLPerHour": 55.45177444479562,
+      "proteinBindingPct": 80,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.7
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "高脂溶性, 透皮贴剂 72h 缓释; CYP3A4 N-脱烷基代谢; IV 起效 1-2 min, 峰 5-15 min"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "MEDIUM",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 12.5-25 mcg/h 贴剂 q72h; 滴定",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "CYP3A4_strong_inhibitors",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            2.0,
+            3.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "酮康唑/利托那韦/克拉霉素联用: 芬太尼浓度 2-3 倍, 严重呼吸抑制; FDA 黑框"
+        },
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用 14 天内, 严重呼吸抑制"
+        },
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "中重度呼吸抑制"
+        },
+        {
+          "triggerDrugId": "other_CNS_depressants",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "酒精/BZD/抗精神病联用: 严重镇静/呼吸抑制"
+        },
+        {
+          "triggerDrugId": "naloxone",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            0.0,
+            0.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "逆转过量; 注意: 短效, 需重复给药"
+        }
+      ],
+      "monitoring": {
+        "frequency": "EVERY_3_MONTHS",
+        "items": [
+          "疼痛评分",
+          "呼吸频率",
+          "过量风险评估",
+          "贴剂局部皮肤",
+          "体温 (影响吸收)"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (芬太尼透皮贴剂)",
+        "FDA Duragesic Black Box Warning",
+        "PMID: 16842621"
+      ]
+    },
+    {
+      "id": "sufentanil",
+      "genericName": "Sufentanil",
+      "genericNameZh": "舒芬太尼",
+      "brandNames": [
+        "Sufenta",
+        "舒芬太尼注射液"
+      ],
+      "category": "ANALGESIC",
+      "subcategory": "OPIOID_FULL_AGONIST",
+      "atc": "N01AH03",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.85,
+          "kaPerHour": 2.0,
+          "tMaxHours": 0.15,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            0.005,
+            0.05
+          ]
+        }
+      ],
+      "kePerHour": 0.2567211779851649,
+      "tHalfHours": 2.7,
+      "tHalfRangeHours": [
+        1.5,
+        4
+      ],
+      "vdLPerKg": 1.7,
+      "clLPerHour": 30.549820180234626,
+      "proteinBindingPct": 93,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.9
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "芬太尼衍生物, 效价 5-10x 芬太尼; 主要用于术中麻醉/镇痛"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "NONE",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "减量 30-50%",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "CYP3A4_strong_inhibitors",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            1.5,
+            2.5
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "CYP3A4 抑制延长效应"
+        },
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "术中联用常见, 但需密切监测呼吸"
+        }
+      ],
+      "monitoring": {
+        "frequency": "PER_PROCEDURE",
+        "items": [
+          "术中持续监测",
+          "术后呼吸"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (舒芬太尼)",
+        "FDA Sufenta Prescribing Information"
+      ]
+    },
+    {
+      "id": "remifentanil",
+      "genericName": "Remifentanil",
+      "genericNameZh": "瑞芬太尼",
+      "brandNames": [
+        "Ultiva",
+        "瑞捷"
+      ],
+      "category": "ANALGESIC",
+      "subcategory": "OPIOID_FULL_AGONIST",
+      "atc": "N01AH06",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 1.0,
+          "kaPerHour": 3.0,
+          "tMaxHours": 0.08,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            0.0005,
+            0.005
+          ]
+        }
+      ],
+      "kePerHour": 6.931471805599452,
+      "tHalfHours": 0.1,
+      "tHalfRangeHours": [
+        0.07,
+        0.15
+      ],
+      "vdLPerKg": 0.3,
+      "clLPerHour": 145.5609079175885,
+      "proteinBindingPct": 70,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "超短效阿片; 血浆/组织非特异性酯酶水解, 代谢不依赖肝肾"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "NONE",
+        "hepatic": "NONE",
+        "elderly": "起始 0.05-0.1 mcg/kg/min",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "术中联用: 协同镇静, 需减瑞芬剂量"
+        }
+      ],
+      "monitoring": {
+        "frequency": "PER_PROCEDURE",
+        "items": [
+          "术中持续监测"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (瑞芬太尼)",
+        "FDA Ultiva Prescribing Information"
+      ]
+    },
+    {
+      "id": "oxycodone",
+      "genericName": "Oxycodone",
+      "genericNameZh": "羟考酮",
+      "brandNames": [
+        "OxyContin",
+        "奥施康定",
+        "Percocet"
+      ],
+      "category": "ANALGESIC",
+      "subcategory": "OPIOID_FULL_AGONIST",
+      "atc": "N02AA05",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.7,
+          "kaPerHour": 1.0,
+          "tMaxHours": 1.5,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            5.0,
+            80.0
+          ]
+        }
+      ],
+      "kePerHour": 0.19804205158855578,
+      "tHalfHours": 3.5,
+      "tHalfRangeHours": [
+        2.5,
+        5
+      ],
+      "vdLPerKg": 2.5,
+      "clLPerHour": 34.657359027997266,
+      "proteinBindingPct": 45,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.7
+          },
+          {
+            "cyp": "CYP2D6",
+            "fraction": 0.3
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "CYP3A4 → noroxycodone (无活性); CYP2D6 → oxymorphone (强活性, 效价 14x)"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "MEDIUM",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 2.5-5mg q6h prn; 缓滴定",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "CYP3A4_strong_inhibitors",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            2.0,
+            3.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "酮康唑等: 羟考酮浓度 2-3 倍, 严重过量; FDA 黑框"
+        },
+        {
+          "triggerDrugId": "CYP2D6_strong_inhibitors",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            1.0,
+            1.5
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "帕罗西汀/氟西汀: 减少 oxymorphone 生成, 效应略降"
+        },
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用 14 天内: 高血压危象/呼吸抑制"
+        },
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "FDA 黑框: 中重度呼吸抑制"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用严重镇静/呼吸抑制"
+        }
+      ],
+      "monitoring": {
+        "frequency": "EVERY_3_MONTHS",
+        "items": [
+          "疼痛评分",
+          "呼吸",
+          "便秘",
+          "过量/成瘾风险",
+          "肝肾功能"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (羟考酮)",
+        "FDA OxyContin Black Box Warning",
+        "AGNP 2017"
+      ]
+    },
+    {
+      "id": "hydromorphone",
+      "genericName": "Hydromorphone",
+      "genericNameZh": "氢吗啡酮",
+      "brandNames": [
+        "Dilaudid",
+        "多菲诺"
+      ],
+      "category": "ANALGESIC",
+      "subcategory": "OPIOID_FULL_AGONIST",
+      "atc": "N02AA03",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.5,
+          "kaPerHour": 1.2,
+          "tMaxHours": 1.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            1.0,
+            8.0
+          ]
+        }
+      ],
+      "kePerHour": 0.2665950694461328,
+      "tHalfHours": 2.6,
+      "tHalfRangeHours": [
+        1.5,
+        4
+      ],
+      "vdLPerKg": 4.0,
+      "clLPerHour": 74.64661944491719,
+      "proteinBindingPct": 8,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "UGT2B7",
+            "fraction": 0.7
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "吗啡类似物, 效价 5-7x 吗啡 (IV); UGT 葡萄糖醛酸化, 不依赖 CYP"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "MEDIUM",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 0.5-1mg q4-6h prn",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用 14 天内, 严重呼吸抑制"
+        },
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "FDA 黑框: 中重度呼吸抑制"
+        }
+      ],
+      "monitoring": {
+        "frequency": "EVERY_3_MONTHS",
+        "items": [
+          "疼痛评分",
+          "呼吸",
+          "便秘",
+          "过量/成瘾风险",
+          "肝肾功能"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (氢吗啡酮)",
+        "FDA Dilaudid Prescribing Information"
+      ]
+    },
+    {
+      "id": "pethidine",
+      "genericName": "Pethidine",
+      "genericNameZh": "哌替啶",
+      "brandNames": [
+        "Demerol",
+        "度冷丁",
+        "Dolantin"
+      ],
+      "category": "ANALGESIC",
+      "subcategory": "OPIOID_FULL_AGONIST",
+      "atc": "N02AB02",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.5,
+          "kaPerHour": 1.5,
+          "tMaxHours": 1.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            25.0,
+            100.0
+          ]
+        }
+      ],
+      "kePerHour": 0.21660849392498288,
+      "tHalfHours": 3.2,
+      "tHalfRangeHours": [
+        2,
+        4
+      ],
+      "vdLPerKg": 4.0,
+      "clLPerHour": 60.65037829899521,
+      "proteinBindingPct": 65,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2B6",
+            "fraction": 0.5
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "去甲哌替啶 (normeperidine) 活性代谢物, t½ 15-30h, 肾衰时蓄积致癫痫"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 1,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "MEDIUM",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "CONTRAINDICATED_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "减量 50%",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 5-HT 综合征 + 高血压危象, 历史上有致死病例; 停 MAOI ≥14d"
+        },
+        {
+          "triggerDrugId": "SSRIs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "5-HT 综合征风险 (曲马多/哌替啶/右美沙芬)"
+        },
+        {
+          "triggerDrugId": "TCAs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "5-HT 综合征风险"
+        },
+        {
+          "triggerDrugId": "phenytoin",
+          "mechanism": "PHARMACOKINETIC_OTHER",
+          "aucFoldChange": [
+            0.5,
+            0.7
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "苯妥英加速代谢, 效应降低"
+        },
+        {
+          "triggerDrugId": "renal_failure",
+          "mechanism": "PHARMACOKINETIC_OTHER",
+          "aucFoldChange": [
+            2.0,
+            5.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "去甲哌替啶蓄积, 抽搐阈值降低"
+        }
+      ],
+      "monitoring": {
+        "frequency": "EVERY_3_MONTHS",
+        "items": [
+          "疼痛评分",
+          "神经症状 (震颤/肌阵挛)",
+          "肾功能",
+          "呼吸"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (哌替啶)",
+        "FDA Demerol Black Box (MAOI)",
+        "PMID: 1459232"
+      ]
+    },
+    {
+      "id": "codeine",
+      "genericName": "Codeine",
+      "genericNameZh": "可待因",
+      "brandNames": [
+        "可待因片"
+      ],
+      "category": "ANALGESIC",
+      "subcategory": "OPIOID_PRODRUG",
+      "atc": "R05DA04",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.9,
+          "kaPerHour": 1.5,
+          "tMaxHours": 1.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            15.0,
+            60.0
+          ]
+        }
+      ],
+      "kePerHour": 0.23104906018664842,
+      "tHalfHours": 3.0,
+      "tHalfRangeHours": [
+        2.5,
+        4
+      ],
+      "vdLPerKg": 3.0,
+      "clLPerHour": 48.52030263919617,
+      "proteinBindingPct": 7,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2D6",
+            "fraction": 0.95
+          },
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.05
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "前体药; CYP2D6 → 吗啡 (10%) 强活性; 慢代谢者镇痛差, 超快代谢者过量风险高"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "MEDIUM",
+        "sexual": "MEDIUM",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "MONITOR",
+        "elderly": "减量 50%",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "CYP2D6_inhibitors",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            0.3,
+            0.5
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "帕罗西汀/氟西汀/安非他酮: 阻断可待因→吗啡转化, 镇痛失效"
+        },
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 高血压危象/呼吸抑制"
+        },
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "FDA 黑框: 中重度呼吸抑制"
+        },
+        {
+          "triggerDrugId": "SSRIs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "5-HT 综合征风险"
+        }
+      ],
+      "monitoring": {
+        "frequency": "EVERY_3_MONTHS",
+        "items": [
+          "CYP2D6 基因型 (首次用药前)",
+          "镇痛效果",
+          "呼吸"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (可待因)",
+        "FDA Codeine Black Box (CYP2D6)",
+        "CPIC CYP2D6 Guideline"
+      ]
+    },
+    {
+      "id": "cocaine",
+      "genericName": "Cocaine",
+      "genericNameZh": "可卡因",
+      "brandNames": [
+        "古柯碱"
+      ],
+      "category": "OTHER",
+      "subcategory": "STIMULANT_LOCAL_ANESTHETIC",
+      "atc": "N01BC01",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.4,
+          "kaPerHour": 2.0,
+          "tMaxHours": 0.5,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            10.0,
+            100.0
+          ]
+        }
+      ],
+      "kePerHour": 0.6931471805599453,
+      "tHalfHours": 1.0,
+      "tHalfRangeHours": [
+        0.7,
+        1.5
+      ],
+      "vdLPerKg": 1.5,
+      "clLPerHour": 72.78045395879425,
+      "proteinBindingPct": 90,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.7
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "DA/NE 再摄取抑制; 表面局麻; 高度成瘾, 中国 I 类管制"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "HIGH",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "LOW",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "NONE",
+        "hepatic": "NONE",
+        "elderly": "N/A (临床少用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 高血压危象/心律失常/死亡"
+        },
+        {
+          "triggerDrugId": "beta_blockers",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "非选择性 β 阻滞 + 可卡因: 冠脉痉挛, 反常高血压; 优先用维拉帕米"
+        },
+        {
+          "triggerDrugId": "QTc_prolonging_agents",
+          "mechanism": "QTc_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用致 QT 延长/尖端扭转型室速"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "心血管",
+          "精神状态",
+          "成瘾风险",
+          "心电图"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (可卡因 I 类管制)",
+        "FDA Cocaine Topical",
+        "PMID: 16542618"
+      ]
+    },
+    {
+      "id": "dihydroetorphine",
+      "genericName": "Dihydroetorphine",
+      "genericNameZh": "二氢埃托啡",
+      "brandNames": [
+        "二氢埃托啡舌下片"
+      ],
+      "category": "ANALGESIC",
+      "subcategory": "OPIOID_SUPER_AGONIST",
+      "atc": "N02AX06",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.3,
+          "kaPerHour": 1.5,
+          "tMaxHours": 0.3,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            0.02,
+            0.04
+          ]
+        }
+      ],
+      "kePerHour": 0.2772588722239781,
+      "tHalfHours": 2.5,
+      "tHalfRangeHours": [
+        1.5,
+        4
+      ],
+      "vdLPerKg": 2.0,
+      "clLPerHour": 38.816242111356935,
+      "proteinBindingPct": 60,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.6
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "效价 1000-10000x 吗啡; 中国原创精麻, 临床极少用, 主要用于戒毒"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "MEDIUM",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "MONITOR",
+        "elderly": "减量",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 严重呼吸抑制"
+        },
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "中重度呼吸抑制"
+        },
+        {
+          "triggerDrugId": "naloxone",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            0.0,
+            0.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "逆转过量"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "疼痛",
+          "呼吸",
+          "成瘾风险",
+          "肝肾"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (二氢埃托啡)",
+        "中国药典 2020"
+      ]
+    },
+    {
+      "id": "ketamine",
+      "genericName": "Ketamine",
+      "genericNameZh": "氯胺酮",
+      "brandNames": [
+        "K粉",
+        "Ketalar"
+      ],
+      "category": "OTHER",
+      "subcategory": "NMDA_ANTAGONIST_DISSOCIATIVE",
+      "atc": "N01AX03",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.9,
+          "kaPerHour": 1.5,
+          "tMaxHours": 0.2,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            50.0,
+            300.0
+          ]
+        }
+      ],
+      "kePerHour": 0.2772588722239781,
+      "tHalfHours": 2.5,
+      "tHalfRangeHours": [
+        1.5,
+        4
+      ],
+      "vdLPerKg": 3.0,
+      "clLPerHour": 58.2243631670354,
+      "proteinBindingPct": 27,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.5
+          },
+          {
+            "cyp": "CYP2B6",
+            "fraction": 0.3
+          }
+        ],
+        "inhibitors": [
+          {
+            "cyp": "CYP2B6",
+            "strength": "WEAK"
+          }
+        ],
+        "inducers": [],
+        "note": "NMDA 受体拮抗; 产生分离性麻醉; 也用于难治性抑郁 (Esketamine/Spravato); 中国 I 类精麻"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "NONE",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "减量 30%",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 高血压危象"
+        },
+        {
+          "triggerDrugId": "SSRIs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "5-HT 综合征风险"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 严重呼吸抑制"
+        },
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用镇静叠加"
+        },
+        {
+          "triggerDrugId": "haloperidol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用降低抽搐阈值"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "精神状态",
+          "血压",
+          "肝功能",
+          "滥用风险"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (氯胺酮 I 类)",
+        "FDA Spravato (Esketamine) REMS",
+        "WHO Critical Review 2014"
+      ]
+    },
+    {
+      "id": "mdma",
+      "genericName": "MDMA",
+      "genericNameZh": "二甲基色胺",
+      "brandNames": [
+        "摇头丸",
+        "Ecstasy"
+      ],
+      "category": "OTHER",
+      "subcategory": "EMPATHOGEN_AMPHETAMINE",
+      "atc": "N/A",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.8,
+          "kaPerHour": 1.5,
+          "tMaxHours": 2.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            50.0,
+            150.0
+          ]
+        }
+      ],
+      "kePerHour": 0.08664339756999316,
+      "tHalfHours": 8.0,
+      "tHalfRangeHours": [
+        6,
+        10
+      ],
+      "vdLPerKg": 6.0,
+      "clLPerHour": 36.39022697939713,
+      "proteinBindingPct": 65,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2D6",
+            "fraction": 0.5
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "5-HT/DA/NE 释放; 中国 I 类精麻; 部分国家 PTSD 治疗试验中 (MAPS)"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "MEDIUM",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "LOW",
+        "sexual": "MEDIUM",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "MONITOR",
+        "elderly": "N/A",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 5-HT 综合征致命风险"
+        },
+        {
+          "triggerDrugId": "SSRIs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "5-HT 综合征; 但临床研究显示 SSRI 减弱 MDMA 主观效果"
+        },
+        {
+          "triggerDrugId": "SNRIs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "5-HT 综合征风险"
+        },
+        {
+          "triggerDrugId": "TCAs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "5-HT 综合征"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "精神状态",
+          "心血管",
+          "体温调节",
+          "肝肾"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (MDMA I 类)",
+        "MAPS 临床研究 (PTSD)",
+        "PMID: 32999017"
+      ]
+    },
+    {
+      "id": "triazolam",
+      "genericName": "Triazolam",
+      "genericNameZh": "三唑仑",
+      "brandNames": [
+        "Halcion",
+        "海乐神"
+      ],
+      "category": "ANXIOLYTIC",
+      "subcategory": "BZD_TRIAZOLO",
+      "atc": "N05CD05",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.85,
+          "kaPerHour": 2.0,
+          "tMaxHours": 1.5,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            0.125,
+            0.5
+          ]
+        }
+      ],
+      "kePerHour": 0.2772588722239781,
+      "tHalfHours": 2.5,
+      "tHalfRangeHours": [
+        1.5,
+        5
+      ],
+      "vdLPerKg": 1.5,
+      "clLPerHour": 29.1121815835177,
+      "proteinBindingPct": 90,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.95
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "超短效 BZD; CYP3A4 1'-羟基化; 中国 I 类精麻 (1 类精神药品)"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 0.125mg, 最高 0.25mg/d (Beers 慎用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "CYP3A4_strong_inhibitors",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            2.0,
+            5.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "酮康唑/利托那韦/克拉霉素: 三唑仑浓度升 4 倍, 严重镇静/呼吸抑制; FDA 黑框"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "FDA 黑框: 中重度呼吸抑制"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "严重镇静"
+        },
+        {
+          "triggerDrugId": "fluvoxamine",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            2.0,
+            3.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "CYP3A4 强抑制 (注: 氟伏沙明强抑制 1A2/2C19, 对 3A4 中度), 浓度升 2-3 倍"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "睡眠",
+          "日间镇静",
+          "跌倒风险",
+          "依赖性"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (三唑仑 I 类)",
+        "FDA Halcion Black Box",
+        "AGNP 2017"
+      ]
+    },
+    {
+      "id": "ghb",
+      "genericName": "GHB",
+      "genericNameZh": "γ-羟丁酸",
+      "brandNames": [
+        "Xyrem",
+        "Sodium Oxybate"
+      ],
+      "category": "ANXIOLYTIC",
+      "subcategory": "GABA_AGONIST_NATRIUM_OXYBAT",
+      "atc": "N07XX04",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.9,
+          "kaPerHour": 1.5,
+          "tMaxHours": 0.75,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            2250.0,
+            9000.0
+          ]
+        }
+      ],
+      "kePerHour": 1.3862943611198906,
+      "tHalfHours": 0.5,
+      "tHalfRangeHours": [
+        0.4,
+        0.8
+      ],
+      "vdLPerKg": 0.4,
+      "clLPerHour": 38.816242111356935,
+      "proteinBindingPct": 0,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "GABA-B 受体激动; 极短 t½; 中国 I 类精麻; 西方用于发作性睡病"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "MEDIUM",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "NONE",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "N/A",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 严重呼吸抑制"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 严重呼吸抑制/死亡"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 严重呼吸抑制"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "呼吸",
+          "滥用风险",
+          "血钠"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (GHB I 类)",
+        "FDA Xyrem REMS",
+        "PMID: 19237834"
+      ]
+    },
+    {
+      "id": "amphetamine",
+      "genericName": "Amphetamine",
+      "genericNameZh": "苯丙胺",
+      "brandNames": [
+        "Adderall",
+        "苯丙胺"
+      ],
+      "category": "STIMULANT",
+      "subcategory": "AMPHETAMINE",
+      "atc": "N06BA01",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.9,
+          "kaPerHour": 1.5,
+          "tMaxHours": 2.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            5.0,
+            30.0
+          ]
+        }
+      ],
+      "kePerHour": 0.06931471805599453,
+      "tHalfHours": 10.0,
+      "tHalfRangeHours": [
+        8,
+        12
+      ],
+      "vdLPerKg": 6.0,
+      "clLPerHour": 29.1121815835177,
+      "proteinBindingPct": 20,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2D6",
+            "fraction": 0.5
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "DA/NE 释放剂; 中国 I 类精麻; ADHD 治疗用 (美国 Schedule II)"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "MEDIUM",
+        "metabolicSyndrome": "MEDIUM",
+        "anticholinergicLoad": 1,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "LOW",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "MONITOR",
+        "elderly": "N/A (老年不常用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 高血压危象, 联用 14 天内禁用"
+        },
+        {
+          "triggerDrugId": "SSRIs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "5-HT 综合征风险"
+        },
+        {
+          "triggerDrugId": "antipsychotics",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用降低抽搐阈值"
+        },
+        {
+          "triggerDrugId": "acidifying_agents",
+          "mechanism": "PHARMACOKINETIC_OTHER",
+          "aucFoldChange": [
+            0.3,
+            0.5
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "NH4Cl 等酸性药物: 苯丙胺肾清除增加, 效应降低"
+        },
+        {
+          "triggerDrugId": "alkalinizing_agents",
+          "mechanism": "PHARMACOKINETIC_OTHER",
+          "aucFoldChange": [
+            1.5,
+            2.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "NaHCO3 等: 苯丙胺浓度升高"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "心血管",
+          "精神状态",
+          "滥用风险",
+          "体重"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (苯丙胺 I 类)",
+        "FDA Adderall (Schedule II)",
+        "AGNP 2017"
+      ]
+    },
+    {
+      "id": "alprazolam",
+      "genericName": "Alprazolam",
+      "genericNameZh": "阿普唑仑",
+      "brandNames": [
+        "Xanax",
+        "佳静安定"
+      ],
+      "category": "ANXIOLYTIC",
+      "subcategory": "BZD_TRIAZOLO",
+      "atc": "N05BA12",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.9,
+          "kaPerHour": 1.5,
+          "tMaxHours": 1.5,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            0.25,
+            4.0
+          ]
+        }
+      ],
+      "kePerHour": 0.057762265046662105,
+      "tHalfHours": 12.0,
+      "tHalfRangeHours": [
+        9,
+        16
+      ],
+      "vdLPerKg": 1.0,
+      "clLPerHour": 4.043358553266347,
+      "proteinBindingPct": 80,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.95
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "中效 BZD; 4-羟基化 + 5-(2-羟基苯基) 代谢; 戒断反应重"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 0.25mg bid-tid, 缓滴定 (Beers 慎用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "CYP3A4_strong_inhibitors",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            2.0,
+            4.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "酮康唑/利托那韦/克拉霉素: 阿普唑仑浓度 2-4 倍, 严重镇静"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "FDA 黑框: 中重度呼吸抑制"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "严重镇静/呼吸抑制"
+        },
+        {
+          "triggerDrugId": "fluoxetine",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            1.5,
+            2.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "CYP3A4 中度抑制, 阿普唑仑浓度升 1.5-2 倍"
+        },
+        {
+          "triggerDrugId": "anticonvulsants",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用: 中枢抑制加重, 但抗癫痫协同"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "焦虑评分",
+          "日间镇静",
+          "跌倒风险",
+          "依赖性",
+          "肝功能"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (阿普唑仑 II 类)",
+        "FDA Xanax Black Box (with opioid)",
+        "AGNP 2017"
+      ]
+    },
+    {
+      "id": "estazolam",
+      "genericName": "Estazolam",
+      "genericNameZh": "艾司唑仑",
+      "brandNames": [
+        "ProSom",
+        "舒乐安定"
+      ],
+      "category": "ANXIOLYTIC",
+      "subcategory": "BZD_TRIAZOLO",
+      "atc": "N05CD04",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.85,
+          "kaPerHour": 1.5,
+          "tMaxHours": 2.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            0.5,
+            2.0
+          ]
+        }
+      ],
+      "kePerHour": 0.046209812037329684,
+      "tHalfHours": 15.0,
+      "tHalfRangeHours": [
+        10,
+        24
+      ],
+      "vdLPerKg": 1.0,
+      "clLPerHour": 3.234686842613078,
+      "proteinBindingPct": 93,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.9
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "中长效 BZD; 中国常用, II 类精麻; 4-羟基化代谢"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 0.5mg qn, 缓滴定 (Beers 慎用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "CYP3A4_strong_inhibitors",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            2.0,
+            3.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "酮康唑等: 艾司唑仑浓度 2-3 倍"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "FDA 黑框: 中重度呼吸抑制"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "严重镇静"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "睡眠",
+          "日间镇静",
+          "依赖性"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (艾司唑仑 II 类)",
+        "FDA ProSom Prescribing Information",
+        "AGNP 2017"
+      ]
+    },
+    {
+      "id": "nitrazepam",
+      "genericName": "Nitrazepam",
+      "genericNameZh": "硝西泮",
+      "brandNames": [
+        "Mogadon",
+        "硝基安定"
+      ],
+      "category": "ANXIOLYTIC",
+      "subcategory": "BZD_LONG",
+      "atc": "N05CD02",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.8,
+          "kaPerHour": 1.5,
+          "tMaxHours": 2.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            2.5,
+            10.0
+          ]
+        }
+      ],
+      "kePerHour": 0.027725887222397813,
+      "tHalfHours": 25.0,
+      "tHalfRangeHours": [
+        18,
+        36
+      ],
+      "vdLPerKg": 2.0,
+      "clLPerHour": 3.881624211135694,
+      "proteinBindingPct": 87,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.7
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "长效 BZD; 7-氨基和 7-乙酰氨基代谢; 老年人日间嗜睡风险高"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 2.5mg qn, Beers 慎用",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "FDA 黑框"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "严重镇静"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "睡眠",
+          "日间嗜睡",
+          "跌倒风险",
+          "依赖性"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (硝西泮 II 类)",
+        "AGNP 2017"
+      ]
+    },
+    {
+      "id": "midazolam",
+      "genericName": "Midazolam",
+      "genericNameZh": "咪达唑仑",
+      "brandNames": [
+        "Versed",
+        "力月西"
+      ],
+      "category": "ANXIOLYTIC",
+      "subcategory": "BZD_IMIDAZO",
+      "atc": "N05CD08",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.5,
+          "kaPerHour": 2.5,
+          "tMaxHours": 0.3,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            2.5,
+            15.0
+          ]
+        }
+      ],
+      "kePerHour": 0.2772588722239781,
+      "tHalfHours": 2.5,
+      "tHalfRangeHours": [
+        1.5,
+        4
+      ],
+      "vdLPerKg": 1.5,
+      "clLPerHour": 29.1121815835177,
+      "proteinBindingPct": 95,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.95
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "短效 BZD; 1'-羟基化代谢 (1-OH-midazolam 活性); 严重 CYP3A4 抑制剂会显著延长镇静"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 1-2mg, 缓滴定 (Beers 慎用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "CYP3A4_strong_inhibitors",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            3.0,
+            5.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "酮康唑/利托那韦/克拉霉素/红霉素: 咪达唑仑浓度 3-5 倍, 镇静延长数小时; FDA 黑框 (口服)"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "FDA 黑框"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "严重镇静/呼吸抑制"
+        },
+        {
+          "triggerDrugId": "CYP3A4_inducers",
+          "mechanism": "CYP_INDUCTION",
+          "aucFoldChange": [
+            0.2,
+            0.5
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "利福平/卡马西平: 咪达唑仑效应降低"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "镇静程度",
+          "呼吸",
+          "肝功能"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (咪达唑仑 II 类)",
+        "FDA Versed Black Box",
+        "AGNP 2017"
+      ]
+    },
+    {
+      "id": "zopiclone",
+      "genericName": "Zopiclone",
+      "genericNameZh": "佐匹克隆",
+      "brandNames": [
+        "Imovane",
+        "忆梦返"
+      ],
+      "category": "ANXIOLYTIC",
+      "subcategory": "Z_DRUG_NON_BZD",
+      "atc": "N05CF01",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.8,
+          "kaPerHour": 1.5,
+          "tMaxHours": 1.5,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            3.75,
+            7.5
+          ]
+        }
+      ],
+      "kePerHour": 0.13862943611198905,
+      "tHalfHours": 5.0,
+      "tHalfRangeHours": [
+        3.5,
+        7
+      ],
+      "vdLPerKg": 1.5,
+      "clLPerHour": 14.55609079175885,
+      "proteinBindingPct": 45,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.6
+          },
+          {
+            "cyp": "CYP2C9",
+            "fraction": 0.3
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "Z 类催眠 (ω1 BZD 受体部分激动); 老年人/肝损需减量"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 3.75mg qn (Beers 慎用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "CYP3A4_strong_inhibitors",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            1.5,
+            2.5
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "酮康唑/利托那韦: 佐匹克隆浓度 1.5-2.5 倍"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "FDA 黑框: 中重度呼吸抑制"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "严重镇静"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "睡眠",
+          "日间嗜睡",
+          "苦味 (含服后)"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (佐匹克隆 II 类)",
+        "FDA Imovane",
+        "AGNP 2017"
+      ]
+    },
+    {
+      "id": "phenobarbital",
+      "genericName": "Phenobarbital",
+      "genericNameZh": "苯巴比妥",
+      "brandNames": [
+        "Luminal",
+        "鲁米那"
+      ],
+      "category": "ANTIEPILEPTIC",
+      "subcategory": "BARBITURATE_LONG",
+      "atc": "N03AA02",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.9,
+          "kaPerHour": 1.0,
+          "tMaxHours": 2.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            30.0,
+            200.0
+          ]
+        }
+      ],
+      "kePerHour": 0.006931471805599453,
+      "tHalfHours": 100.0,
+      "tHalfRangeHours": [
+        50,
+        150
+      ],
+      "vdLPerKg": 0.5,
+      "clLPerHour": 0.24260151319598086,
+      "proteinBindingPct": 50,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2C9",
+            "fraction": 0.4
+          },
+          {
+            "cyp": "CYP2C19",
+            "fraction": 0.3
+          }
+        ],
+        "inhibitors": [
+          {
+            "cyp": "CYP2C19",
+            "strength": "WEAK"
+          }
+        ],
+        "inducers": [
+          {
+            "cyp": "CYP3A4",
+            "strength": "STRONG"
+          },
+          {
+            "cyp": "CYP2B6",
+            "strength": "STRONG"
+          },
+          {
+            "cyp": "CYP2C9",
+            "strength": "STRONG"
+          },
+          {
+            "cyp": "CYP1A2",
+            "strength": "MODERATE"
+          },
+          {
+            "cyp": "UGT1A1",
+            "strength": "MODERATE"
+          }
+        ],
+        "note": "长效巴比妥; 强 CYP 诱导剂; 中国 II 类精麻; 经典抗癫痫 + 镇静"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "MEDIUM",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "减量 30-50% (Beers 慎用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "warfarin",
+          "mechanism": "CYP_INDUCTION",
+          "aucFoldChange": [
+            0.3,
+            0.5
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "强 CYP 诱导: 华法林清除增加 50%, INR 显著降低, 需大幅加量"
+        },
+        {
+          "triggerDrugId": "oral_contraceptives",
+          "mechanism": "CYP_INDUCTION",
+          "aucFoldChange": [
+            0.3,
+            0.5
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "强 CYP3A4 诱导: 避孕药效降低, 需换非肝代谢避孕"
+        },
+        {
+          "triggerDrugId": "doxycycline",
+          "mechanism": "CYP_INDUCTION",
+          "aucFoldChange": [
+            0.5,
+            0.7
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "CYP 诱导: 多西环素半衰期减半, 需加量或换药"
+        },
+        {
+          "triggerDrugId": "many_anticonvulsants",
+          "mechanism": "CYP_INDUCTION",
+          "aucFoldChange": [
+            0.3,
+            0.7
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "互诱导: 拉莫三嗪/丙戊酸/卡马西平等水平降低"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 严重镇静/呼吸抑制"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "严重镇静"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "血药浓度 (TDM)",
+          "肝功能",
+          "血常规",
+          "认知/记忆",
+          "跌倒风险",
+          "骨密度 (长期)"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (苯巴比妥 II 类)",
+        "AGNP 2017 TDM (治疗窗 10-40 mg/L)",
+        "FDA Luminal"
+      ]
+    },
+    {
+      "id": "amobarbital",
+      "genericName": "Amobarbital",
+      "genericNameZh": "异戊巴比妥",
+      "brandNames": [
+        "Amytal",
+        "异戊巴比妥钠"
+      ],
+      "category": "ANXIOLYTIC",
+      "subcategory": "BARBITURATE_INTERMEDIATE",
+      "atc": "N05CA02",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.95,
+          "kaPerHour": 1.0,
+          "tMaxHours": 1.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            60.0,
+            200.0
+          ]
+        }
+      ],
+      "kePerHour": 0.04332169878499658,
+      "tHalfHours": 16.0,
+      "tHalfRangeHours": [
+        10,
+        25
+      ],
+      "vdLPerKg": 1.0,
+      "clLPerHour": 3.0325189149497604,
+      "proteinBindingPct": 60,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.5
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [
+          {
+            "cyp": "CYP3A4",
+            "strength": "MODERATE"
+          }
+        ],
+        "note": "中效巴比妥; 中国 II 类精麻; 主要用于催眠/术前镇静; Wada 试验 (颈动脉注射测大脑半球功能)"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "减量 50% (Beers 慎用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "warfarin",
+          "mechanism": "CYP_INDUCTION",
+          "aucFoldChange": [
+            0.5,
+            0.7
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "CYP 诱导: 华法林清除加快"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 严重镇静/呼吸抑制"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "严重镇静"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "镇静程度",
+          "呼吸",
+          "肝肾"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (异戊巴比妥 II 类)",
+        "AGNP 2017"
+      ]
+    },
+    {
+      "id": "secobarbital",
+      "genericName": "Secobarbital",
+      "genericNameZh": "司可巴比妥",
+      "brandNames": [
+        "Seconal",
+        "速可眠"
+      ],
+      "category": "ANXIOLYTIC",
+      "subcategory": "BARBITURATE_SHORT",
+      "atc": "N05CA06",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.9,
+          "kaPerHour": 1.0,
+          "tMaxHours": 0.5,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            50.0,
+            200.0
+          ]
+        }
+      ],
+      "kePerHour": 0.024755256448569473,
+      "tHalfHours": 28.0,
+      "tHalfRangeHours": [
+        15,
+        40
+      ],
+      "vdLPerKg": 1.5,
+      "clLPerHour": 2.5993019270997944,
+      "proteinBindingPct": 45,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.5
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [
+          {
+            "cyp": "CYP3A4",
+            "strength": "MODERATE"
+          }
+        ],
+        "note": "短效巴比妥; 中国 II 类精麻; 速可眠; 既往用于失眠"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "减量 50% (Beers 慎用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "warfarin",
+          "mechanism": "CYP_INDUCTION",
+          "aucFoldChange": [
+            0.5,
+            0.7
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "CYP 诱导: 华法林清除加快"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 严重镇静/呼吸抑制"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "严重镇静"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "镇静",
+          "呼吸",
+          "依赖性"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (司可巴比妥 II 类)",
+        "AGNP 2017"
+      ]
+    },
+    {
+      "id": "chloral_hydrate",
+      "genericName": "Chloral Hydrate",
+      "genericNameZh": "水合氯醛",
+      "brandNames": [
+        "水合氯醛溶液",
+        "Chloral Hydrate"
+      ],
+      "category": "ANXIOLYTIC",
+      "subcategory": "CHLORAL_DERIVATIVE",
+      "atc": "N05CC01",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 1.0,
+          "kaPerHour": 1.0,
+          "tMaxHours": 0.5,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            250.0,
+            2000.0
+          ]
+        }
+      ],
+      "kePerHour": 0.08664339756999316,
+      "tHalfHours": 8.0,
+      "tHalfRangeHours": [
+        4,
+        14
+      ],
+      "vdLPerKg": 0.8,
+      "clLPerHour": 4.852030263919617,
+      "proteinBindingPct": 35,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2E1",
+            "fraction": 0.5
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "三氯乙醛水合物; 代谢为三氯乙醇 (活性); 中国 II 类精麻; 儿童检查/操作前镇静常用"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "MEDIUM",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "减量 50%",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "warfarin",
+          "mechanism": "PHARMACOKINETIC_OTHER",
+          "aucFoldChange": [
+            1.3,
+            1.5
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "水合氯醛置换华法林蛋白结合, INR 短期升高"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 严重镇静/呼吸抑制"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 三氯乙醛 + 乙醇 = 强效 CNS 抑制, 类似 'Mickey Finn' 经典鸡尾酒"
+        },
+        {
+          "triggerDrugId": "furosemide",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用: 潮红/血压波动/烦躁 (类戒酒硫反应)"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "镇静",
+          "心电图 (QT)",
+          "肝肾"
+        ]
+      },
+      "references": [
+        "国家药监局精麻目录 (水合氯醛 II 类)",
+        "FDA Chloral Hydrate",
+        "AGNP 2017"
+      ]
+    }
+  ]
+}

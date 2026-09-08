@@ -1,0 +1,1528 @@
+{
+  "schemaVersion": "0.6.0",
+  "generatedAt": "2026-09-07T12:30:00Z",
+  "source": [
+    "FDA DailyMed (SPL) - 药品标签 PK / CYP / 相互作用",
+    "AGNP Consensus 2017 (Hiemke C. et al., Pharmacopsychiatry 2018)",
+    "Flockhart CYP Drug Interaction Table (Indiana University)",
+    "ClinicalTrials.gov + PMID 公开临床试验 PK 数据",
+    "ACR/AUA/UpToDate 等临床指南"
+  ],
+  "disclaimer": "本目录的所有数据基于公开文献与药品说明书。v0.6 新增缓释/控释版/异构体/活性代谢物版药物;多房室 PK 模型 (2 房室, 3 房室) 支持;临床试验 PK 数据校准 (PMID/FDA 标签)。个体差异大,遵医嘱。",
+  "drugs": [
+    {
+      "id": "bupropion_xl",
+      "genericName": "Bupropion XL",
+      "genericNameZh": "安非他酮缓释片",
+      "brandNames": [
+        "Wellbutrin XL",
+        "悦婷"
+      ],
+      "category": "ANTIDEPRESSANT",
+      "subcategory": "NDRI_ER",
+      "atc": "N06AX12",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.85,
+          "kaPerHour": 1.2,
+          "tMaxHours": 5.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            150.0,
+            450.0
+          ]
+        }
+      ],
+      "kePerHour": 0.033007008598092635,
+      "tHalfHours": 21.0,
+      "tHalfRangeHours": [
+        16,
+        30
+      ],
+      "vdLPerKg": 12.0,
+      "clLPerHour": 27.725887222397812,
+      "proteinBindingPct": 84,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2B6",
+            "fraction": 0.95
+          }
+        ],
+        "inhibitors": [
+          {
+            "cyp": "CYP2D6",
+            "strength": "STRONG"
+          }
+        ],
+        "inducers": [],
+        "note": "NDRI 抗抑郁 + 戒烟; 缓释 XL 一天 1 次; 强 CYP2D6 抑制剂 (影响很多药); 降低癫痫阈值 (禁大剂量/贪食症)"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "LOW",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 150mg qd, 缓滴定",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "CYP2D6_substrates",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            2.0,
+            5.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "强 CYP2D6 抑制剂: 帕罗西汀/氟西汀/曲马多/他莫昔芬/卡维地洛/美托洛尔 浓度升高 2-5 倍"
+        },
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 高血压危象"
+        },
+        {
+          "triggerDrugId": "seizure_threshold_lowering",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 抗精神病/抗抑郁/茶碱/曲马多 叠加降低癫痫阈值"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用降低癫痫阈值"
+        }
+      ],
+      "monitoring": {
+        "frequency": "EVERY_3_MONTHS",
+        "items": [
+          "抑郁评分",
+          "血压",
+          "肝功能",
+          "癫痫阈值 (大剂量)"
+        ]
+      },
+      "references": [
+        "FDA Wellbutrin XL Prescribing Information",
+        "AGNP 2017",
+        "PMID: 11817525 (bupropion PK)"
+      ],
+      "clinicalTrialRefs": [
+        "FDA 标签: Cmax ~140 ng/mL at 150mg steady state",
+        "PMID 11817525: t1/2 21±7h",
+        "CL/F ~160 L/h"
+      ]
+    },
+    {
+      "id": "venlafaxine_xr",
+      "genericName": "Venlafaxine XR",
+      "genericNameZh": "文拉法辛缓释胶囊",
+      "brandNames": [
+        "Effexor XR",
+        "怡诺思"
+      ],
+      "category": "ANTIDEPRESSANT",
+      "subcategory": "SNRI_ER",
+      "atc": "N06AX16",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.45,
+          "kaPerHour": 0.7,
+          "tMaxHours": 6.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            37.5,
+            225.0
+          ]
+        }
+      ],
+      "kePerHour": 0.13862943611198905,
+      "tHalfHours": 5.0,
+      "tHalfRangeHours": [
+        4,
+        8
+      ],
+      "vdLPerKg": 7.5,
+      "clLPerHour": 72.78045395879425,
+      "proteinBindingPct": 27,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2D6",
+            "fraction": 0.7
+          },
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.3
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "SNRI 抗抑郁; 缓释 XR 一天 1 次; 活性代谢物 O-去甲文拉法辛 (desvenlafaxine, 单独作为药上市)"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "LOW",
+        "sexual": "HIGH",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 37.5mg qd",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 5-HT 综合征致命风险; 停 MAOI 14d"
+        },
+        {
+          "triggerDrugId": "CYP2D6_strong_inhibitors",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            2.0,
+            3.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "帕罗西汀/氟西汀/安非他酮: 文拉法辛 + O-去甲代谢产物 浓度升高 2-3 倍"
+        },
+        {
+          "triggerDrugId": "SSRIs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用 5-HT 综合征"
+        },
+        {
+          "triggerDrugId": "triptans",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用 5-HT 综合征 (虽真实发生率低)"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY_FIRST_3_MONTHS_THEN_EVERY_3_MONTHS",
+        "items": [
+          "抑郁/焦虑评分",
+          "血压 (剂量依赖升高)",
+          "心率",
+          "5-HT 综合征症状",
+          "肝肾功能"
+        ]
+      },
+      "references": [
+        "FDA Effexor XR Prescribing Information",
+        "AGNP 2017",
+        "PMID: 8533959"
+      ],
+      "clinicalTrialRefs": [
+        "FDA 标签: 75mg XR Cmax ~150 ng/mL, t1/2 5h",
+        "PMID 8533959: AUC 线性",
+        "Steady state 3d"
+      ]
+    },
+    {
+      "id": "paroxetine_cr",
+      "genericName": "Paroxetine CR",
+      "genericNameZh": "帕罗西汀控释片",
+      "brandNames": [
+        "Paxil CR",
+        "赛乐特"
+      ],
+      "category": "ANTIDEPRESSANT",
+      "subcategory": "SSRI_CR",
+      "atc": "N06AB05",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.5,
+          "kaPerHour": 0.6,
+          "tMaxHours": 8.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            12.5,
+            75.0
+          ]
+        }
+      ],
+      "kePerHour": 0.033007008598092635,
+      "tHalfHours": 21.0,
+      "tHalfRangeHours": [
+        16,
+        30
+      ],
+      "vdLPerKg": 17.0,
+      "clLPerHour": 39.27834023173024,
+      "proteinBindingPct": 95,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2D6",
+            "fraction": 0.95
+          }
+        ],
+        "inhibitors": [
+          {
+            "cyp": "CYP2D6",
+            "strength": "STRONG"
+          }
+        ],
+        "inducers": [],
+        "note": "SSRI 抗抑郁; CR 控释一天 1 次 (普通片剂要 1 天 1 次但缓释); CYP2D6 自抑 (自己代谢自己, 稳态后清除减半); 高蛋白结合"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "MEDIUM",
+        "anticholinergicLoad": 1,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "MEDIUM",
+        "sexual": "HIGH",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 12.5mg qd, 勿超 40mg/d (Beers 慎用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 5-HT 综合征致命; 停 MAOI 14d"
+        },
+        {
+          "triggerDrugId": "CYP2D6_substrates",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            2.0,
+            5.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "强 CYP2D6 抑制: 可待因→吗啡失效; 曲马多失效; 他莫昔芬→endoxifen 失效"
+        },
+        {
+          "triggerDrugId": "tamoxifen",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            0.3,
+            0.5
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "乳腺癌患者禁忌: 减少 endoxifen (活性代谢物), 降低药效 50%+"
+        },
+        {
+          "triggerDrugId": "MAOIs_TRYPTOPHAN",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 5-HT 综合征"
+        },
+        {
+          "triggerDrugId": "anticholinergics",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用: 抗胆碱能叠加"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY_FIRST_3_MONTHS_THEN_EVERY_3_MONTHS",
+        "items": [
+          "抑郁评分",
+          "5-HT 综合征症状",
+          "骨密度 (长期 SSRI)",
+          "钠 (低钠风险)",
+          "出血风险"
+        ]
+      },
+      "references": [
+        "FDA Paxil CR Prescribing Information",
+        "AGNP 2017",
+        "CPIC CYP2D6"
+      ],
+      "clinicalTrialRefs": [
+        "FDA 标签: 25mg CR Cmax ~30 ng/mL, t1/2 21h",
+        "PMID 7582517: CYP2D6 self-inhibition",
+        "Steady state ~2 周"
+      ]
+    },
+    {
+      "id": "fluoxetine_weekly",
+      "genericName": "Fluoxetine Weekly",
+      "genericNameZh": "氟西汀每周一次",
+      "brandNames": [
+        "Prozac Weekly",
+        "百忧解周制剂"
+      ],
+      "category": "ANTIDEPRESSANT",
+      "subcategory": "SSRI_WEEKLY",
+      "atc": "N06AB03",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.7,
+          "kaPerHour": 0.4,
+          "tMaxHours": 8.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            90.0,
+            90.0
+          ]
+        }
+      ],
+      "kePerHour": 0.007220283130832763,
+      "tHalfHours": 96.0,
+      "tHalfRangeHours": [
+        72,
+        144
+      ],
+      "vdLPerKg": 35.0,
+      "clLPerHour": 17.68969367054027,
+      "proteinBindingPct": 95,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2D6",
+            "fraction": 0.7
+          }
+        ],
+        "inhibitors": [
+          {
+            "cyp": "CYP2D6",
+            "strength": "STRONG"
+          }
+        ],
+        "inducers": [],
+        "note": "氟西汀缓释 (enteric-coated) 90mg qw; 极长 t½ (4-6 天) + 活性代谢物 norfluoxetine (t½ 7-15d), 总半衰期可达 1-6 周; 停药需 5 周洗脱"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "MEDIUM",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "LOW",
+        "sexual": "HIGH",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "NONE",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 90mg qw (Beers 慎用)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 5-HT 综合征致命; 因 t½ 长, 停 fluoxetine 后需 5 周才可开始 MAOI"
+        },
+        {
+          "triggerDrugId": "CYP2D6_substrates",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            2.0,
+            5.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "强 CYP2D6 抑制, 同 paroxetine"
+        },
+        {
+          "triggerDrugId": "warfarin",
+          "mechanism": "PHARMACOKINETIC_OTHER",
+          "aucFoldChange": [
+            1.3,
+            1.5
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "5-HT 抑制血小板 + 蛋白结合置换, INR 升高"
+        },
+        {
+          "triggerDrugId": "tamoxifen",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            0.3,
+            0.5
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "同 paroxetine, 乳腺癌禁忌"
+        }
+      ],
+      "monitoring": {
+        "frequency": "EVERY_3_MONTHS",
+        "items": [
+          "抑郁评分",
+          "5-HT 综合征",
+          "骨密度",
+          "钠 (低钠)",
+          "出血风险"
+        ]
+      },
+      "references": [
+        "FDA Prozac Weekly Prescribing Information",
+        "PMID: 10867106",
+        "AGNP 2017"
+      ],
+      "clinicalTrialRefs": [
+        "FDA 标签: 90mg qw Cmax 氟西汀+norfluoxetine 200-500 ng/mL",
+        "PMID 10867106: 维持治疗等同于日服 20mg",
+        "t1/2 母药 4-6d, 代谢物 7-15d"
+      ]
+    },
+    {
+      "id": "arformoterol",
+      "genericName": "Arformoterol",
+      "genericNameZh": "阿福特罗 (R-福莫特罗)",
+      "brandNames": [
+        "Brovana",
+        "阿福特罗吸入液"
+      ],
+      "category": "OTHER",
+      "subcategory": "LABA_R_ENANTIOMER",
+      "atc": "R03AC13",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.3,
+          "kaPerHour": 1.5,
+          "tMaxHours": 1.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            0.015,
+            0.03
+          ]
+        }
+      ],
+      "kePerHour": 0.02665950694461328,
+      "tHalfHours": 26.0,
+      "tHalfRangeHours": [
+        20,
+        35
+      ],
+      "vdLPerKg": 4.0,
+      "clLPerHour": 7.464661944491718,
+      "proteinBindingPct": 52,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2D6",
+            "fraction": 0.5
+          },
+          {
+            "cyp": "CYP2C19",
+            "fraction": 0.3
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "R-福莫特罗 (formoterol 的活性 R 对映体, S-对映体几乎无活性); 长效 β2 激动; COPD 雾化吸入"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "MEDIUM",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "LOW",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "NONE",
+        "hepatic": "NONE",
+        "elderly": "无需调整",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "beta_blockers",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "非选择性 β 阻滞 (普萘洛尔) 降低/抵消 β2 激动效"
+        },
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用加重心血管反应 (心律失常/高血压危象)"
+        },
+        {
+          "triggerDrugId": "TCAs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用增强心血管反应"
+        },
+        {
+          "triggerDrugId": "diuretics_loop_thiazide",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用: 低钾 → QT 延长风险叠加 β2"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "肺功能 (FEV1)",
+          "心率",
+          "血钾",
+          "心电图 (QT)",
+          "血糖 (DM 患者)"
+        ]
+      },
+      "references": [
+        "FDA Brovana Prescribing Information",
+        "PMID: 12690655 (arformoterol 立体化学)",
+        "ATS/ERS COPD 指南"
+      ],
+      "clinicalTrialRefs": [
+        "FDA 标签: 15 mcg bid 雾化 Cmax ~4 pg/mL, t1/2 26h",
+        "PMID 12690655: R-对映体效力 1000×S-对映体"
+      ]
+    },
+    {
+      "id": "levalbuterol",
+      "genericName": "Levalbuterol",
+      "genericNameZh": "左沙丁胺醇 (R-沙丁胺醇)",
+      "brandNames": [
+        "Xopenex",
+        "左旋沙丁胺醇"
+      ],
+      "category": "OTHER",
+      "subcategory": "SABA_R_ENANTIOMER",
+      "atc": "R03AC02",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.5,
+          "kaPerHour": 2.0,
+          "tMaxHours": 0.5,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            0.63,
+            1.25
+          ]
+        }
+      ],
+      "kePerHour": 0.2100446001696804,
+      "tHalfHours": 3.3,
+      "tHalfRangeHours": [
+        2.5,
+        4.5
+      ],
+      "vdLPerKg": 2.0,
+      "clLPerHour": 29.406244023755256,
+      "proteinBindingPct": 12,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2A6",
+            "fraction": 0.5
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "R-沙丁胺醇 (albuterol 的活性对映体, S-对映体可能反而促气道收缩); 短效 β2 激动; 哮喘/喘息"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "LOW",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "NONE",
+        "elderly": "起始低剂量, 注意震颤/心悸",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "beta_blockers",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "非选择性 β 阻滞抵消 β2 效"
+        },
+        {
+          "triggerDrugId": "diuretics",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用: 低钾 → 心律失常"
+        },
+        {
+          "triggerDrugId": "MAOIs_TCAs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用增强心血管反应"
+        }
+      ],
+      "monitoring": {
+        "frequency": "PER_PRESCRIPTION",
+        "items": [
+          "症状控制",
+          "心率",
+          "血钾",
+          "震颤"
+        ]
+      },
+      "references": [
+        "FDA Xopenex Prescribing Information",
+        "PMID: 12102631 (levalbuterol vs albuterol)"
+      ],
+      "clinicalTrialRefs": [
+        "FDA 标签: 1.25mg 雾化 Cmax ~1.1 ng/mL, t1/2 3.3h",
+        "PMID 12102631: R 对映体选择性"
+      ]
+    },
+    {
+      "id": "dextroamphetamine",
+      "genericName": "Dextroamphetamine",
+      "genericNameZh": "右旋安非他命",
+      "brandNames": [
+        "Dexedrine",
+        "右旋苯丙胺"
+      ],
+      "category": "STIMULANT",
+      "subcategory": "D_AMPHETAMINE",
+      "atc": "N06BA02",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.9,
+          "kaPerHour": 1.5,
+          "tMaxHours": 2.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            5.0,
+            40.0
+          ]
+        }
+      ],
+      "kePerHour": 0.06931471805599453,
+      "tHalfHours": 10.0,
+      "tHalfRangeHours": [
+        8,
+        12
+      ],
+      "vdLPerKg": 6.0,
+      "clLPerHour": 29.1121815835177,
+      "proteinBindingPct": 20,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2D6",
+            "fraction": 0.5
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "D-苯丙胺 (amphetamine 的活性右旋对映体, L-对映体心血管副作用更多); ADHD/发作性睡病"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "MEDIUM",
+        "metabolicSyndrome": "MEDIUM",
+        "anticholinergicLoad": 1,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "LOW",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "MONITOR",
+        "elderly": "N/A",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 高血压危象, 联用 14 天内禁用"
+        },
+        {
+          "triggerDrugId": "SSRIs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "5-HT 综合征风险"
+        },
+        {
+          "triggerDrugId": "antipsychotics",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用降低抽搐阈值, 可能拮抗抗精神病效"
+        },
+        {
+          "triggerDrugId": "antihypertensives",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用降低降压效"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "ADHD 评分",
+          "心血管",
+          "精神状态",
+          "滥用风险",
+          "体重"
+        ]
+      },
+      "references": [
+        "FDA Dexedrine Prescribing Information",
+        "AGNP 2017"
+      ],
+      "clinicalTrialRefs": [
+        "FDA 标签: 10mg IR Cmax ~40 ng/mL, t1/2 10h",
+        "D-对映体活性比 L-: 2×中枢, 1×外周"
+      ]
+    },
+    {
+      "id": "levetiracetam",
+      "genericName": "Levetiracetam",
+      "genericNameZh": "左乙拉西坦",
+      "brandNames": [
+        "Keppra",
+        "开浦兰"
+      ],
+      "category": "ANTIEPILEPTIC",
+      "subcategory": "LEV_ANTIEPILEPTIC",
+      "atc": "N03AX14",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 1.0,
+          "kaPerHour": 1.5,
+          "tMaxHours": 1.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            500.0,
+            3000.0
+          ]
+        }
+      ],
+      "kePerHour": 0.09902102579427789,
+      "tHalfHours": 7.0,
+      "tHalfRangeHours": [
+        6,
+        8
+      ],
+      "vdLPerKg": 0.7,
+      "clLPerHour": 4.852030263919617,
+      "proteinBindingPct": 10,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "S-对映体 (S-LEV), R-无活性; 独特机制 (SV2A 突触囊泡蛋白); 不经 CYP 代谢, 肾原型排泄; 无蛋白结合, 相互作用少"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "MEDIUM",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "NONE",
+        "elderly": "起始 500mg bid, 缓滴定",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "other_antiepileptics",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用: 协同但需监测 CNS 抑制; 拉莫三嗪/丙戊酸浓度可能变化"
+        },
+        {
+          "triggerDrugId": "methotrexate",
+          "mechanism": "PHARMACOKINETIC_OTHER",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "LOW",
+          "clinicalNote": "联用: 减少 MTX 清除 (罕见)"
+        }
+      ],
+      "monitoring": {
+        "frequency": "EVERY_3_MONTHS",
+        "items": [
+          "癫痫发作频率",
+          "情绪/抑郁",
+          "肾功能 (肾清)",
+          "血常规"
+        ]
+      },
+      "references": [
+        "FDA Keppra Prescribing Information",
+        "AGNP 2017"
+      ],
+      "clinicalTrialRefs": [
+        "FDA 标签: 500mg bid Cmax ~23 μg/mL, t1/2 7h",
+        "肾清率 0.96 mL/min/kg",
+        "无 CYP 代谢"
+      ]
+    },
+    {
+      "id": "desvenlafaxine",
+      "genericName": "Desvenlafaxine",
+      "genericNameZh": "去甲文拉法辛",
+      "brandNames": [
+        "Pristiq",
+        "去甲文拉法辛缓释"
+      ],
+      "category": "ANTIDEPRESSANT",
+      "subcategory": "SNRI_METABOLITE",
+      "atc": "N06AX23",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.8,
+          "kaPerHour": 0.7,
+          "tMaxHours": 7.5,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            50.0,
+            200.0
+          ]
+        }
+      ],
+      "kePerHour": 0.06301338005090412,
+      "tHalfHours": 11.0,
+      "tHalfRangeHours": [
+        9,
+        15
+      ],
+      "vdLPerKg": 7.0,
+      "clLPerHour": 30.87655622494302,
+      "proteinBindingPct": 30,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "UGT1A1",
+            "fraction": 0.5
+          },
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.3
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "O-去甲文拉法辛, 文拉法辛活性代谢物 (单独作为药上市); 主要 UGT 葡萄糖醛酸化代谢, 不经 CYP2D6"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "LOW",
+        "sexual": "HIGH",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "起始 50mg qd",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 5-HT 综合征致命"
+        },
+        {
+          "triggerDrugId": "SSRIs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 5-HT 综合征"
+        },
+        {
+          "triggerDrugId": "triptans",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用: 5-HT 综合征 (虽低发生率)"
+        },
+        {
+          "triggerDrugId": "warfarin",
+          "mechanism": "PHARMACOKINETIC_OTHER",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用 INR 略升"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY_FIRST_3_MONTHS_THEN_EVERY_3_MONTHS",
+        "items": [
+          "抑郁评分",
+          "血压",
+          "5-HT 综合征",
+          "肝肾功能"
+        ]
+      },
+      "references": [
+        "FDA Pristiq Prescribing Information",
+        "AGNP 2017",
+        "PMID: 14593464"
+      ],
+      "clinicalTrialRefs": [
+        "FDA 标签: 100mg qd Cmax ~376 ng/mL, t1/2 11h",
+        "UGT 代谢, CYP 影响小"
+      ]
+    },
+    {
+      "id": "norfluoxetine",
+      "genericName": "Norfluoxetine",
+      "genericNameZh": "去甲氟西汀",
+      "brandNames": [
+        "活性代谢物 (无单独制剂)"
+      ],
+      "category": "ANTIDEPRESSANT",
+      "subcategory": "SSRI_METABOLITE",
+      "atc": "N06AB04",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.7,
+          "kaPerHour": 0.4,
+          "tMaxHours": 8.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            10.0,
+            30.0
+          ]
+        }
+      ],
+      "kePerHour": 0.0028881132523331052,
+      "tHalfHours": 240.0,
+      "tHalfRangeHours": [
+        168,
+        360
+      ],
+      "vdLPerKg": 35.0,
+      "clLPerHour": 7.075877468216108,
+      "proteinBindingPct": 95,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP2D6",
+            "fraction": 0.7
+          }
+        ],
+        "inhibitors": [
+          {
+            "cyp": "CYP2D6",
+            "strength": "STRONG"
+          }
+        ],
+        "inducers": [],
+        "note": "氟西汀的活性 N-去甲代谢物; 自身 t½ 极长 (7-15d, 个体差异大), 是氟西汀长 t½ 主因; 与母药同等 SSRI 活性; 临床多为母亲给药产生, 罕见单独给药"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "MEDIUM",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "LOW",
+        "sexual": "HIGH",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "REDUCE_50_PCT_CHILD_PUGH_B",
+        "elderly": "Beers 慎用 (长 t½)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "CONTRAINDICATED",
+          "clinicalNote": "联用: 5-HT 综合征致命; 长 t½ → 停 norfluoxetine 5 周才可 MAOI"
+        },
+        {
+          "triggerDrugId": "CYP2D6_substrates",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            2.0,
+            5.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "强 CYP2D6 抑制, 同 fluoxetine/paroxetine"
+        },
+        {
+          "triggerDrugId": "tamoxifen",
+          "mechanism": "CYP_INHIBITION_STRONG",
+          "aucFoldChange": [
+            0.3,
+            0.5
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "乳腺癌禁忌: 减少 endoxifen (活性代谢物)"
+        }
+      ],
+      "monitoring": {
+        "frequency": "EVERY_3_MONTHS",
+        "items": [
+          "血药浓度 (稳态 1-2 月)",
+          "抑郁",
+          "5-HT 综合征",
+          "骨密度",
+          "钠"
+        ]
+      },
+      "references": [
+        "PMID: 10867106 (fluoxetine PK 综述)",
+        "AGNP 2017",
+        "FDA Prozac (母药)"
+      ],
+      "clinicalTrialRefs": [
+        "PMID 10867106: norfluoxetine t1/2 7-15d, 个体差异 ~5×",
+        "母药+代谢物 稳态 4 周",
+        "CYP2D6 抑制 母药≈代谢物"
+      ]
+    },
+    {
+      "id": "norketamine",
+      "genericName": "Norketamine",
+      "genericNameZh": "去甲氯胺酮",
+      "brandNames": [
+        "活性代谢物 (无单独制剂, 抗抑郁研究中)"
+      ],
+      "category": "OTHER",
+      "subcategory": "NMDA_METABOLITE",
+      "atc": "N/A",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.9,
+          "kaPerHour": 1.5,
+          "tMaxHours": 1.0,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            10.0,
+            50.0
+          ]
+        }
+      ],
+      "kePerHour": 0.057762265046662105,
+      "tHalfHours": 12.0,
+      "tHalfRangeHours": [
+        8,
+        16
+      ],
+      "vdLPerKg": 4.0,
+      "clLPerHour": 16.173434213065388,
+      "proteinBindingPct": 25,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [
+          {
+            "cyp": "CYP3A4",
+            "fraction": 0.5
+          },
+          {
+            "cyp": "CYP2B6",
+            "fraction": 0.4
+          }
+        ],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "氯胺酮的活性 N-去甲代谢物; 母药 t½ 2-3h, 代谢物 t½ 12h, 抗抑郁效主要来自 norketamine; 鼻喷 esketamine (Spravato) 也产生 norketamine"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "LOW",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "MONITOR",
+        "hepatic": "MONITOR",
+        "elderly": "起始低剂量, 监测镇静/解离",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "MAOIs",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 高血压危象"
+        },
+        {
+          "triggerDrugId": "opioids",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 严重呼吸抑制 (μ-阿片协同)"
+        },
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "联用镇静叠加, 恢复期延长"
+        },
+        {
+          "triggerDrugId": "SSRIs",
+          "mechanism": "SEROTONIN_ADDITIVE",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "MEDIUM",
+          "clinicalNote": "5-HT 综合征风险 (但临床发生率低)"
+        }
+      ],
+      "monitoring": {
+        "frequency": "MONTHLY",
+        "items": [
+          "抑郁评分",
+          "血压",
+          "解离/幻觉",
+          "滥用风险",
+          "肝肾"
+        ]
+      },
+      "references": [
+        "PMID: 19237834 (ketamine/norketamine PK)",
+        "FDA Spravato (esketamine) 标签"
+      ],
+      "clinicalTrialRefs": [
+        "PMID 19237834: norketamine t1/2 12h, AUC 母药 3×, 抗抑郁效持续 1 周"
+      ]
+    },
+    {
+      "id": "morphine_6_glucuronide",
+      "genericName": "Morphine-6-Glucuronide",
+      "genericNameZh": "吗啡-6-葡萄糖醛酸苷",
+      "brandNames": [
+        "活性代谢物 (无单独制剂, 肾衰蓄积)"
+      ],
+      "category": "ANALGESIC",
+      "subcategory": "OPIOID_METABOLITE",
+      "atc": "N02AX99",
+      "pkModel": "ONE_COMPARTMENT_ORAL",
+      "forms": [
+        {
+          "route": "ORAL",
+          "f": 0.3,
+          "kaPerHour": 1.0,
+          "tMaxHours": 1.5,
+          "doseUnits": [
+            "mg"
+          ],
+          "commonDoseRangeMg": [
+            5.0,
+            30.0
+          ]
+        }
+      ],
+      "kePerHour": 0.46209812037329684,
+      "tHalfHours": 1.5,
+      "tHalfRangeHours": [
+        1,
+        3
+      ],
+      "vdLPerKg": 0.15,
+      "clLPerHour": 4.852030263919617,
+      "proteinBindingPct": 15,
+      "therapeuticWindow": null,
+      "cypProfile": {
+        "substrates": [],
+        "inhibitors": [],
+        "inducers": [],
+        "note": "吗啡活性 M6G 代谢物 (效价 2× 吗啡, 强 μ-阿片激动); UGT2B7 葡萄糖醛酸化; 肾衰时蓄积 (t½ 延长至 50h), 老年人/肾衰镇静/呼吸抑制主因"
+      },
+      "activeMetabolites": [],
+      "adverseEffects": {
+        "qtcProlongation": "LOW",
+        "metabolicSyndrome": "LOW",
+        "anticholinergicLoad": 0,
+        "agranulocytosis": "VERY_LOW",
+        "extrapyramidal": "LOW",
+        "sedation": "HIGH",
+        "sexual": "MEDIUM",
+        "hyperprolactinemia": "LOW"
+      },
+      "adjustments": {
+        "renal": "REDUCE_50_PCT_EGFR_BELOW_30",
+        "hepatic": "MONITOR",
+        "elderly": "起始 2.5mg q6h prn, 缓滴定 (肾清 ↓)",
+        "smoking": null
+      },
+      "criticalInteractions": [
+        {
+          "triggerDrugId": "renal_failure",
+          "mechanism": "PHARMACOKINETIC_OTHER",
+          "aucFoldChange": [
+            2.0,
+            5.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "肾衰蓄积: eGFR<30 时 t½ 50h, 严重呼吸抑制/镇静"
+        },
+        {
+          "triggerDrugId": "BZD",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "FDA 黑框: 中重度呼吸抑制"
+        },
+        {
+          "triggerDrugId": "alcohol",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            1.0,
+            1.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "联用: 严重镇静/呼吸抑制"
+        },
+        {
+          "triggerDrugId": "naloxone",
+          "mechanism": "PHARMACODYNAMIC",
+          "aucFoldChange": [
+            0.0,
+            0.0
+          ],
+          "severity": "HIGH",
+          "clinicalNote": "逆转过量 (部分)"
+        }
+      ],
+      "monitoring": {
+        "frequency": "EVERY_3_MONTHS",
+        "items": [
+          "疼痛评分",
+          "呼吸",
+          "肾功能",
+          "过量风险"
+        ]
+      },
+      "references": [
+        "PMID: 1459232 (M6G 临床药理)",
+        "AGNP 2017",
+        "FDA Morphine 标签"
+      ],
+      "clinicalTrialRefs": [
+        "PMID 1459232: M6G t1/2 1.5h (正常), 50h (肾衰)",
+        "效价 母药 2-4×",
+        "肾清率 母药 10-20×"
+      ]
+    }
+  ]
+}
