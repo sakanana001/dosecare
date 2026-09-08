@@ -12,6 +12,46 @@ DoseCare 的所有重要变更都记录在这里。格式基于 [Keep a Changelo
 
 ---
 
+## [0.9b] - 2026-09-08 · 多语言系统 bugfix (localeConfig + attachBaseContext)
+
+### Fixed
+- **API 33+ per-app language 需要 `localeConfig`** — v0.9a 在 Android 17 emulator (API 37) 上 setApplicationLocales 不完整生效
+  - 加 `app/src/main/res/xml/locales_config.xml` (3 locale: zh-CN / en / ja)
+  - manifest `<application>` 加 `android:localeConfig="@xml/locales_config"`
+- **Activity recreate 后 Resources Configuration 不刷新** — 之前 Activity recreate 后 stringResource() 还是返回旧 locale
+  - MainActivity 加 `attachBaseContext()` override,根据 SharedPreferences 选的语言强制 createConfigurationContext
+  - 这样无论 AppCompat 是否触发 Activity recreate,新 Activity 第一时间拿到正确 Resources
+- **JVM Locale (java.time / java.text) 跟 Android framework 错位** — emulator 上 framework=en-US 但 JVM=zh-CN
+  - LocaleController.applyLocale 加 `Locale.setDefault()` 同步 (无论显式还是 SYSTEM 模式)
+  - 解决 CalendarCompose 的月/日/星期名始终是 emulator 默认值的问题
+
+### Changed
+- LocaleController:
+  - 加 `peekLanguage(context)` 静态读 SharedPreferences (无副作用)
+  - 加 `currentActivity` 引用 + `registerActivity/unregisterActivity` 生命周期管理
+- MainActivity:
+  - 加 `attachBaseContext()` override (必须在 super 之前)
+  - 加 `registerActivity/unregisterActivity(this)`
+  - 改用 v0.9a 的 peekLanguage(context) 而非依赖 StateFlow
+- AndroidManifest:
+  - 加 `android:localeConfig="@xml/locales_config"` 到 `<application>`
+- New file: `app/src/main/res/xml/locales_config.xml`
+
+### Verified (emulator API 37 Android 17)
+- ✅ 启动默认 (SYSTEM 模式) → 跟 emulator 框架 locale (en-US) 走英文
+- ✅ 切到日本語 → 立刻 stringResource 走日文 + Activity 自动 recreate
+- ✅ 切到简体中文 → 立刻中文
+- ✅ 切到 English → 立刻英文
+- ✅ force-stop + 重开 → 持久化语言 (SharedPreferences + attachBaseContext 双重保险)
+- ✅ Language Picker Dialog 4 选项 (跟随系统 / 简体中文 / English / 日本語)
+
+### Known Limitations
+- 日历 widget 内的 "2026 年 9 月" / "周二" 等系统级时间格式 (Compose Material 3 内置) 仍跟 system JVM locale 走
+  实际设备上 framework + JVM 一致所以正常,emulator 才有这个矛盾
+  v0.9c 计划把 CalendarCompose.kt 重写,完全用 stringResource 控制月/日显示
+
+---
+
 ## [0.9a] - 2026-09-08 · 多语言系统 (zh-CN / en / ja)
 
 ### Added

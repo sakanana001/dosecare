@@ -92,7 +92,7 @@ fun LanguageSettingsCard(modifier: Modifier = Modifier) {
                 showDialog = false
                 if (lang != localeState.language) {
                     LocaleController.setLanguage(context, lang)
-                    // 不需要手动 recreate, AppCompatDelegate.setApplicationLocales 内部会触发
+                    // setLanguage 内部会调 activity.recreate() 强制刷新
                 }
             },
             onDismiss = { showDialog = false }

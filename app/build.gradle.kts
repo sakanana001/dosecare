@@ -15,8 +15,8 @@ android {
         applicationId = "com.dosecare.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 9
-        versionName = "0.9a"
+        versionCode = 10
+        versionName = "0.9b"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }

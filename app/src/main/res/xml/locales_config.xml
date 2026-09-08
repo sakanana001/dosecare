@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  v0.9a 多语言: Per-App Language 配置 (API 33+ 系统级设置需要)
+  告诉系统这个 app 支持哪些 locale, 否则 setApplicationLocales 在 API 33+ 不完整生效
+  ref: https://developer.android.com/guide/topics/resources/app-languages
+-->
+<locale-config xmlns:android="http://schemas.android.com/apk/res/android">
+    <locale android:name="zh-CN" />
+    <locale android:name="en" />
+    <locale android:name="ja" />
+</locale-config>
