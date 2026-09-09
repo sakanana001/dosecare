@@ -22,12 +22,12 @@ sealed interface Interaction {
 /**
  * 严重度等级
  */
-enum class Severity(val rank: Int, val displayName: String, val color: String) {
-    CONTRAINDICATED(5, "禁忌", "#B71C1C"),
-    HIGH(4, "高度警示", "#EF6C00"),
-    MEDIUM(3, "中度警示", "#FBC02D"),
-    LOW(2, "轻度提示", "#9E9E9E"),
-    INFO(1, "信息", "#E0E0E0");
+enum class Severity(val rank: Int, @androidx.annotation.StringRes val displayNameRes: Int, val displayName: String, val color: String) {
+    CONTRAINDICATED(5, com.dosecare.app.R.string.sevrule_contraindicated, "禁忌", "#B71C1C"),
+    HIGH(4, com.dosecare.app.R.string.sevrule_high, "高度警示", "#EF6C00"),
+    MEDIUM(3, com.dosecare.app.R.string.sevrule_medium, "中度警示", "#FBC02D"),
+    LOW(2, com.dosecare.app.R.string.sevrule_low, "轻度提示", "#9E9E9E"),
+    INFO(1, com.dosecare.app.R.string.sevrule_info, "信息", "#E0E0E0");
 
     companion object {
         fun fromAucFold(fold: Double): Severity = when {

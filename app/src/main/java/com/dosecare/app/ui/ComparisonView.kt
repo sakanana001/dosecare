@@ -240,7 +240,7 @@ private fun DrugHeaderCard(drug: Drug, modifier: Modifier = Modifier) {
             )
             Spacer(Modifier.height(4.dp))
             Text(
-                drug.category.displayName,
+                stringResource(drug.category.displayNameRes),
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.6f),
                 textAlign = TextAlign.Center
@@ -507,7 +507,7 @@ private fun buildComparisonSections(
             drugA.genericNameZh to drugB.genericNameZh,
             drugA.genericName to drugB.genericName,
             (drugA.atc ?: "—") to (drugB.atc ?: "—"),
-            drugA.category.displayName to drugB.category.displayName,
+            stringResource(drugA.category.displayNameRes) to stringResource(drugB.category.displayNameRes),
             (drugA.subcategory ?: "—") to (drugB.subcategory ?: "—"),
         ),
         R.string.cmp_section_pk to listOf(
@@ -578,7 +578,7 @@ private fun fmtOverdoseShort(d: Drug): String {
     val toxic = o.toxicDoseEstimateMg?.toInt()?.let { stringResource(R.string.cmp_label_toxic, it) } ?: ""
     val fatal = o.fatalDoseEstimateMg?.toInt()?.let { stringResource(R.string.cmp_label_fatal, it) } ?: ""
     val doses = listOf(toxic, fatal).filter { it.isNotEmpty() }.joinToString(" / ")
-    val sev = o.severity.displayName
+    val sev = stringResource(o.severity.displayNameRes)
     val antid = o.antidote?.let { stringResource(R.string.cmp_label_antidote, it) } ?: ""
     return when {
         doses.isEmpty() && antid.isEmpty() -> stringResource(R.string.cmp_label_severity, sev)
@@ -589,24 +589,24 @@ private fun fmtOverdoseShort(d: Drug): String {
 
 private fun fmtCypSubs(d: Drug): String = d.cypProfile.substrates
     .joinToString("、") { "${it.cyp.displayName} ${(it.fraction * 100).toInt()}%" }
-    .ifEmpty { "—" }
+    .ifEmpty { "—" }  // NOTE: cyp.displayName 是国际化无关的枚举名 (CYP1A2 等), 无需 i18n
 
 @Composable
-private fun fmtCypInh(d: Drug): String = d.cypProfile.inhibitors
-    .map { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" }
-    .joinToString("、")
-    .ifEmpty { "—" }
+private fun fmtCypInh(d: Drug): String {
+    val labels = d.cypProfile.inhibitors.map { "${stringResource(it.cyp.displayNameRes)} ${strengthZh(it.strength.name)}" }
+    return labels.joinToString("、").ifEmpty { "—" }
+}
 
 @Composable
-private fun fmtCypInd(d: Drug): String = d.cypProfile.inducers
-    .map { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" }
-    .joinToString("、")
-    .ifEmpty { "—" }
+private fun fmtCypInd(d: Drug): String {
+    val labels = d.cypProfile.inducers.map { "${stringResource(it.cyp.displayNameRes)} ${strengthZh(it.strength.name)}" }
+    return labels.joinToString("、").ifEmpty { "—" }
+}
 
 @Composable
 private fun fmtPathway(d: Drug): String {
     val cp = d.cypProfile
-    val pt = cp.pathwayType?.displayName ?: stringResource(R.string.cmp_label_pathway_empty)
+    val pt = cp.pathwayType?.let { stringResource(it.displayNameRes) } ?: stringResource(R.string.cmp_label_pathway_empty)
     val pp = cp.primaryPathway ?: "—"
     return "$pt · $pp"
 }

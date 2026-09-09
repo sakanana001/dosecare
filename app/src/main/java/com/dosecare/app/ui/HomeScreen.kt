@@ -69,7 +69,7 @@ internal fun CategoryChip(category: DrugCategory) {
         color = color.copy(alpha = 0.15f)
     ) {
         Text(
-            category.displayName,
+            stringResource(category.displayNameRes),
             modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
             style = MaterialTheme.typography.labelSmall,
             color = color
@@ -129,7 +129,8 @@ internal fun WindowInfo(drug: Drug) {
 
 @Composable
 internal fun CypInfo(drug: Drug) {
-    val subs = drug.cypProfile.substrates.joinToString { "${it.cyp.displayName} (${(it.fraction * 100).toInt()}%)" }
+    val subsLabels = drug.cypProfile.substrates.map { "${stringResource(it.cyp.displayNameRes)} (${(it.fraction * 100).toInt()}%)" }
+    val subs = subsLabels.joinToString()
     if (subs.isEmpty()) return
     Text(
         stringResource(R.string.home_metabolism, subs),

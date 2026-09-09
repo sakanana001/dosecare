@@ -146,9 +146,9 @@ fun DiaryTab() {
                     modifier = Modifier.fillMaxWidth().padding(24.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    // TODO(v0.9b): "今天还没有日记,点右上 + 写一条" 需要 i18n
+                    // TODO(v0.9e done): 改 R.string.home_no_diary (3 语言)
                     Text(
-                        text = "今天还没有日记,点右上 + 写一条",
+                        text = stringResource(R.string.home_no_diary),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

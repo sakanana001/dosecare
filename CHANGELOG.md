@@ -5,10 +5,38 @@ DoseCare 的所有重要变更都记录在这里。格式基于 [Keep a Changelo
 ## [Unreleased]
 
 ### Planned
-- v0.9e: WorkManager 提醒 + 通知权限 + 系统日历写入
-- v0.9e: 日历事件点实时刷新 (接 `dose_taken` 表后,跨 tab 状态变化触发 dayEvents 重算)
-- v0.9e: TDM 个体化校准 (基于历史血药浓度回算 ke / Vd)
+- v0.9f: WorkManager 提醒 + 通知权限 + 系统日历写入
+- v0.9f: 日历事件点实时刷新 (接 `dose_taken` 表后,跨 tab 状态变化触发 dayEvents 重算)
+- v0.9f: TDM 个体化校准 (基于历史血药浓度回算 ke / Vd)
 - v1.0: 性能优化 (启动 < 800ms)、可访问性 (a11y) 通过、隐私政策上线
+
+---
+
+## [0.9e] - 2026-09-09 · 全面 i18n 收尾 (Diary 空态 + DrugDetail 标题 + 5 enum 翻译)
+
+### Fixed (用户报 3 处)
+- **Diary 主页 '今天还没有日记，点右上 + 写一条'** → R.string.home_no_diary (DiaryTab.kt L151)
+- **DrugDetailScreen 标题 ja/en 模式显示中文** → 改 locale-aware (zh=genericNameZh, en/ja=genericName), 副名也跟 locale 切换
+- **药品目录两大类里的分类名称硬编码中文** (抗精神病药/抗抑郁药/...) → DrugCategory (33) + IndicationGroup (43) + OverdoseSeverity (4) + CypEnzyme (8) + PathwayType (11) + Severity (rules 5) = **6 个 enum 加 @StringRes displayNameRes 字段**, 104 个新 key × 3 语言 = 312 个翻译
+
+### Added
+- 6 个 enum 全部加 `@StringRes val displayNameRes: Int` 字段
+- 104 个新 R.string key (drug_cat_*, ind_*, sev_*, cyp_*, pathway_*, sevrule_*), strings.xml 3 文件共 532 key 100% 对齐
+- 修复一个潜在 bug: CypRow 的 .map { "${it.cyp.displayName} ..." } lambda 内调用 stringResource (non-composable context) — 改用 pre-compute 的 List<String>
+
+### Changed
+- `DrugCategory` / `IndicationGroup` / `OverdoseSeverity` / `CypEnzyme` / `PathwayType` / `Severity`(rules) enum 全部加 displayNameRes
+- 9 个 UI 文件更新调用方: HomeScreen/DrugDetailScreen/ComparisonView/BottomNavTabs/SearchableDrugPicker (CategoryChip、CypRow、CypInfo、fmtOverdoseShort、fmtPathway、fmtCypInh/Ind)
+- enum 文件加 `com.dosecare.app.R.string.xxx` 全限定名 (跨 package 引用 R)
+- versionCode 12→13, versionName 0.9d→0.9e
+
+### Migration
+- 老用户 v0.9d → v0.9e: 数据无变化, UI 文本进一步本地化
+- 所有 enum 的 displayName 字段保留 (作为中文 fallback / sort key), displayNameRes 是新增字段
+
+---
+
+## [0.9d] - 2026-09-09 · 补全 i18n 全面排查 (日历 / 目录 / 药名 / TDM / 警示语)
 
 ---
 

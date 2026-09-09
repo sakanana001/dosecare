@@ -11,15 +11,15 @@ package com.dosecare.app.domain.catalog
  * 数据源：Flockhart Table (Indiana University), FDA Guidance
  */
 
-enum class CypEnzyme(val displayName: String) {
-    CYP1A2("CYP1A2"),
-    CYP2B6("CYP2B6"),
-    CYP2D6("CYP2D6"),
-    CYP3A4("CYP3A4"),
-    CYP2C9("CYP2C9"),
-    CYP2C19("CYP2C19"),
-    CYP2E1("CYP2E1"),
-    P_GP("P-糖蛋白")  // 转运体；不是 CYP 但常与 CYP 效应联动
+enum class CypEnzyme(@androidx.annotation.StringRes val displayNameRes: Int, val displayName: String) {
+    CYP1A2(com.dosecare.app.R.string.cyp_cyp1a2, "CYP1A2"),
+    CYP2B6(com.dosecare.app.R.string.cyp_cyp2b6, "CYP2B6"),
+    CYP2D6(com.dosecare.app.R.string.cyp_cyp2d6, "CYP2D6"),
+    CYP3A4(com.dosecare.app.R.string.cyp_cyp3a4, "CYP3A4"),
+    CYP2C9(com.dosecare.app.R.string.cyp_cyp2c9, "CYP2C9"),
+    CYP2C19(com.dosecare.app.R.string.cyp_cyp2c19, "CYP2C19"),
+    CYP2E1(com.dosecare.app.R.string.cyp_cyp2e1, "CYP2E1"),
+    P_GP(com.dosecare.app.R.string.cyp_p_gp, "P-糖蛋白")  // 转运体；不是 CYP 但常与 CYP 效应联动
 }
 
 /**
@@ -28,18 +28,18 @@ enum class CypEnzyme(val displayName: String) {
  * 当 substrates 为空时, 用 primaryPathway 字段标非 CYP 途径 (e.g. UGT 葡萄糖苷酸化)
  * 当 substrates 非空时, pathwayType 一般是 CYP450
  */
-enum class PathwayType(val displayName: String) {
-    CYP450("CYP450 氧化"),                      // 肝 CYP 酶系
-    UGT_GLUCURONIDATION("UGT 葡萄糖苷酸化"),    // Phase II 葡糖醛酸结合
-    RENAL_EXCRETION("肾排泄 (原型)"),           // 100% 肾原型,无代谢
-    HYDROLYSIS("水解"),                         // 血浆/组织酯酶水解
-    ESTERASE("酯酶水解"),                       // 乙酰胆碱酯酶等
-    DEIODINATION("脱碘"),                       // 甲状腺素 T4→T3
-    MAO("单胺氧化酶"),                          // MAO-A/B
-    DPP4("DPP-IV 酶降解"),                      // GLP-1 类似物
-    GLUCURONIDATION("葡萄糖醛酸化"),            // 泛指
-    BETA_OXIDATION("β-氧化"),                   // 脂肪酸 β-氧化 (e.g. 丙戊酸)
-    OTHER("其他")
+enum class PathwayType(@androidx.annotation.StringRes val displayNameRes: Int, val displayName: String) {
+    CYP450(com.dosecare.app.R.string.pathway_cyp450, "CYP450 氧化"),                      // 肝 CYP 酶系
+    UGT_GLUCURONIDATION(com.dosecare.app.R.string.pathway_ugt_glucuronidation, "UGT 葡萄糖苷酸化"),    // Phase II 葡糖醛酸结合
+    RENAL_EXCRETION(com.dosecare.app.R.string.pathway_renal_excretion, "肾排泄 (原型)"),           // 100% 肾原型,无代谢
+    HYDROLYSIS(com.dosecare.app.R.string.pathway_hydrolysis, "水解"),                         // 血浆/组织酯酶水解
+    ESTERASE(com.dosecare.app.R.string.pathway_esterase, "酯酶水解"),                       // 乙酰胆碱酯酶等
+    DEIODINATION(com.dosecare.app.R.string.pathway_deiodination, "脱碘"),                       // 甲状腺素 T4→T3
+    MAO(com.dosecare.app.R.string.pathway_mao, "单胺氧化酶"),                          // MAO-A/B
+    DPP4(com.dosecare.app.R.string.pathway_dpp4, "DPP-IV 酶降解"),                      // GLP-1 类似物
+    GLUCURONIDATION(com.dosecare.app.R.string.pathway_glucuronidation, "葡萄糖醛酸化"),            // 泛指
+    BETA_OXIDATION(com.dosecare.app.R.string.pathway_beta_oxidation, "β-氧化"),                   // 脂肪酸 β-氧化 (e.g. 丙戊酸)
+    OTHER(com.dosecare.app.R.string.pathway_other, "其他")
 }
 
 enum class EffectStrength {

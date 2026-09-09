@@ -265,7 +265,7 @@ private fun DrugListItem(drug: Drug, onClick: () -> Unit) {
                 val primaryName = if (isChinesePrimary) drug.genericNameZh else drug.genericName
                 val secondaryName = if (isChinesePrimary) drug.genericName else drug.genericNameZh
                 Text(
-                    "$primaryName · ${drug.category.displayName}" +
+                    "$primaryName · ${stringResource(drug.category.displayNameRes)}" +
                         if (drug.brandNames.isNotEmpty()) stringResource(R.string.search_brand_prefix, drug.brandNames.take(2).joinToString("/")) else "",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant

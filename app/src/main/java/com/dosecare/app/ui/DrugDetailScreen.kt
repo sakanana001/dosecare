@@ -67,7 +67,11 @@ fun DrugDetailScreen(
             TopAppBar(
                 title = {
                     Text(
-                        drug?.genericNameZh ?: stringResource(R.string.drug_not_found, ""),
+                        (drug?.let {
+                val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
+                val isChinesePrimary = locale.language == "zh"
+                if (isChinesePrimary) it.genericNameZh else it.genericName
+            } ?: stringResource(R.string.drug_not_found, "")),
                         fontWeight = FontWeight.SemiBold
                     )
                 },
@@ -150,10 +154,14 @@ private fun HeaderCard(drug: Drug, plain: Boolean) {
         modifier = Modifier.fillMaxWidth(),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primaryContainer)
     ) {
+        val locale2 = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
+        val isChinesePrimary2 = locale2.language == "zh"
+        val drugNamePrimary = if (isChinesePrimary2) drug.genericNameZh else drug.genericName
+        val drugNameSecondary = if (isChinesePrimary2) drug.genericName else drug.genericNameZh
         Column(Modifier.padding(20.dp)) {
-            Text(drug.genericNameZh, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
+            Text(drugNamePrimary, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
             Text(
-                drug.genericName,
+                drugNameSecondary,
                 style = MaterialTheme.typography.titleSmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f)
             )
@@ -165,7 +173,7 @@ private fun HeaderCard(drug: Drug, plain: Boolean) {
                 }
                 AssistChip(
                     onClick = {},
-                    label = { Text(drug.category.displayName) }
+                    label = { Text(stringResource(drug.category.displayNameRes)) }
                 )
             }
             if (drug.brandNames.isNotEmpty()) {
@@ -189,14 +197,17 @@ private fun CypRoleCard(drug: Drug, plain: Boolean) {
         Column(Modifier.padding(16.dp)) {
             SectionTitle(stringResource(R.string.drug_section_cyp))
             Spacer(Modifier.height(4.dp))
-            CypRow(stringResource(R.string.cyp_role_substrate), drug.cypProfile.substrates.map { "${it.cyp.displayName} ${(it.fraction * 100).toInt()}%" })
+            val substrateLabels = drug.cypProfile.substrates.map { "${stringResource(it.cyp.displayNameRes)} ${(it.fraction * 100).toInt()}%" }
+            CypRow(stringResource(R.string.cyp_role_substrate), substrateLabels)
             if (plain && drug.cypProfile.substrates.isNotEmpty()) PlainNote(Plain.cypSubstrate())
-            CypRow(stringResource(R.string.cyp_role_inhibitor), drug.cypProfile.inhibitors.map { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" })
+            val inhibitorLabels = drug.cypProfile.inhibitors.map { "${stringResource(it.cyp.displayNameRes)} ${strengthZh(it.strength.name)}" }
+            CypRow(stringResource(R.string.cyp_role_inhibitor), inhibitorLabels)
             if (plain && drug.cypProfile.inhibitors.isNotEmpty()) {
                 val strongest = drug.cypProfile.inhibitors.maxByOrNull { strengthRank(it.strength.name) }
                 if (strongest != null) PlainNote(Plain.cypInhibitor(strongest.strength.name))
             }
-            CypRow(stringResource(R.string.cyp_role_inducer), drug.cypProfile.inducers.map { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" })
+            val inducerLabels = drug.cypProfile.inducers.map { "${stringResource(it.cyp.displayNameRes)} ${strengthZh(it.strength.name)}" }
+            CypRow(stringResource(R.string.cyp_role_inducer), inducerLabels)
             if (plain && drug.cypProfile.inducers.isNotEmpty()) {
                 val strongest = drug.cypProfile.inducers.maxByOrNull { strengthRank(it.strength.name) }
                 if (strongest != null) PlainNote(Plain.cypInducer(strongest.strength.name))
@@ -211,10 +222,9 @@ private fun CypRoleCard(drug: Drug, plain: Boolean) {
                             shape = RoundedCornerShape(4.dp),
                             color = pathwayColor(drug.cypProfile.pathwayType).copy(alpha = 0.15f)
                         ) {
-                            // TODO(v0.9b): pathwayType.displayName (e.g. "CYP450 氧化", "UGT 葡萄糖苷酸化") 是 domain data
-                            //            可以保留, 但如需 i18n 需要在 PathwayType enum 上加 displayNameRes
+                            // TODO(v0.9e done): 改 stringResource(pathway.displayNameRes)
                             Text(
-                                drug.cypProfile.pathwayType.displayName,
+                                stringResource(drug.cypProfile.pathwayType.displayNameRes),
                                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = pathwayColor(drug.cypProfile.pathwayType),
@@ -461,9 +471,9 @@ private fun OverdoseCard(drug: Drug, plain: Boolean) {
                     shape = RoundedCornerShape(4.dp),
                     color = sevColor.copy(alpha = 0.18f)
                 ) {
-                    // TODO(v0.9b): o.severity.displayName (OverdoseSeverity) 是 domain data
+                    // TODO(v0.9e done): 改 stringResource(o.severity.displayNameRes)
                     Text(
-                        o.severity.displayName,
+                        stringResource(o.severity.displayNameRes),
                         modifier = Modifier.padding(horizontal = 10.dp, vertical = 3.dp),
                         style = MaterialTheme.typography.labelSmall,
                         color = sevColor,

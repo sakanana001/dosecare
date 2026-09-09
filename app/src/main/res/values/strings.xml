@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ====== App 基础 ====== -->
     <string name="app_name">DoseCare</string>
@@ -491,7 +491,7 @@
 
     <!-- ====== 搜索选药 placeholder + 计数 / 品牌 ====== -->
     <string name="search_placeholder">点击搜索选药…</string>
-    <string name="search_count_with_query"> · 搜索:\"%1$s\"</string>
+    <string name="search_count_with_query"> · 搜索:&quot;%1$s&quot;</string>
     <string name="search_brand_prefix"> · 品牌: %1$s</string>
 
     <!-- ====== TDM 模块 (InteractiveConcentrationChart + TdmModule) ====== -->
@@ -509,5 +509,133 @@
     <string name="interaction_qtc_format">估算 QTc %1$.0f ms</string>
     <string name="interaction_acb_format">ACB 评分 %1$d</string>
     <string name="interaction_serotonin_format">涉及 %1$d 个 5-HT 增强药</string>
+
+
+    <!-- ====== DrugCategory enum displayName (33 values × 3 lang) ====== -->
+    <string name="drug_cat_antipsychotic">抗精神病药</string>
+    <string name="drug_cat_mood_stabilizer">心境稳定剂</string>
+    <string name="drug_cat_antidepressant">抗抑郁药</string>
+    <string name="drug_cat_anxiolytic">抗焦虑/苯二氮䓬类</string>
+    <string name="drug_cat_stimulant">ADHD 兴奋剂</string>
+    <string name="drug_cat_anticholinergic">抗胆碱能</string>
+    <string name="drug_cat_antiparkinsonian">抗帕金森</string>
+    <string name="drug_cat_antiepileptic">抗癫痫</string>
+    <string name="drug_cat_alzheimers">抗痴呆/认知改善</string>
+    <string name="drug_cat_antimigraine">抗偏头痛</string>
+    <string name="drug_cat_muscle_relaxant">肌松剂</string>
+    <string name="drug_cat_anesthetic">麻醉 (局麻/全麻)</string>
+    <string name="drug_cat_antivertigo">抗眩晕</string>
+    <string name="drug_cat_antidiabetic">降糖药</string>
+    <string name="drug_cat_thyroid">甲状腺</string>
+    <string name="drug_cat_corticosteroid">肾上腺皮质激素</string>
+    <string name="drug_cat_antihypertensive">降压药</string>
+    <string name="drug_cat_statin">调脂药</string>
+    <string name="drug_cat_antiarrhythmic">抗心律失常</string>
+    <string name="drug_cat_anticoagulant">抗凝/抗血小板</string>
+    <string name="drug_cat_ppi">质子泵抑制剂 (PPI)</string>
+    <string name="drug_cat_osteoporosis_drug">骨质疏松药</string>
+    <string name="drug_cat_gout">抗痛风</string>
+    <string name="drug_cat_bph_agent">前列腺增生药</string>
+    <string name="drug_cat_hormone_replacement">激素替代</string>
+    <string name="drug_cat_bronchodilator">支气管扩张剂</string>
+    <string name="drug_cat_analgesic">止痛药</string>
+    <string name="drug_cat_antihistamine">抗组胺</string>
+    <string name="drug_cat_antibiotic">抗感染 (抗真菌/抗结核/抗 HIV)</string>
+    <string name="drug_cat_substance_use">物质依赖治疗</string>
+    <string name="drug_cat_supplement">营养补充剂</string>
+    <string name="drug_cat_herbal">草本补充剂</string>
+    <string name="drug_cat_other">其他</string>
+
+    <!-- ====== IndicationGroup enum displayName (43 values × 3 lang) ====== -->
+    <string name="ind_depression">Depression</string>
+    <string name="ind_schizophrenia">Schizophrenia</string>
+    <string name="ind_bipolar">Bipolar Disorder</string>
+    <string name="ind_anxiety">Anxiety Disorder</string>
+    <string name="ind_insomnia">Insomnia</string>
+    <string name="ind_adhd">ADHD</string>
+    <string name="ind_ocd">OCD</string>
+    <string name="ind_ptsd">PTSD</string>
+    <string name="ind_eating_disorder">Eating Disorder</string>
+    <string name="ind_epilepsy">Epilepsy</string>
+    <string name="ind_parkinson">Parkinson\'s Disease</string>
+    <string name="ind_alzheimers">Alzheimer\'s Disease</string>
+    <string name="ind_migraine">Migraine</string>
+    <string name="ind_neuropathic_pain">Neuropathic Pain</string>
+    <string name="ind_pain">Pain</string>
+    <string name="ind_anesthesia">Anesthesia</string>
+    <string name="ind_diabetes">Diabetes</string>
+    <string name="ind_hypertension">Hypertension</string>
+    <string name="ind_dyslipidemia">Dyslipidemia</string>
+    <string name="ind_thyroid">Thyroid Disease</string>
+    <string name="ind_anticoagulation">Anticoagulation / Antiplatelet</string>
+    <string name="ind_asthma_copd">Asthma / COPD</string>
+    <string name="ind_osteoporosis">Osteoporosis</string>
+    <string name="ind_heart_failure">Heart Failure</string>
+    <string name="ind_arrhythmia">Arrhythmia</string>
+    <string name="ind_bph">BPH</string>
+    <string name="ind_gerd">GERD</string>
+    <string name="ind_substance_use">Substance Use (Alcohol/Opioid)</string>
+    <string name="ind_nicotine">Nicotine Dependence</string>
+    <string name="ind_infection">Infection (Bacterial/Fungal/Viral)</string>
+    <string name="ind_gout">Gout</string>
+    <string name="ind_inflammation">Inflammation / Immune</string>
+    <string name="ind_allergy">Allergy</string>
+    <string name="ind_adrenal">Adrenal Cortex</string>
+    <string name="ind_hormone">Hormone Replacement</string>
+    <string name="ind_supplement">Supplement</string>
+    <string name="ind_di">Diabetes Insipidus</string>
+    <string name="ind_anticholinergic">Anticholinergic (EPS)</string>
+    <string name="ind_antidepressant_augmentation">Antidepressant Augmentation</string>
+    <string name="ind_withdrawal">Withdrawal</string>
+    <string name="ind_nausea">Nausea / Vomiting</string>
+    <string name="ind_sedation">Sedation</string>
+    <string name="ind_other">Other</string>
+
+    <!-- ====== OverdoseSeverity enum displayName (4 values × 3 lang) ====== -->
+    <string name="sev_mild">轻度</string>
+    <string name="sev_moderate">中度</string>
+    <string name="sev_severe">重度</string>
+    <string name="sev_life_threatening">危及生命</string>
+
+    <!-- ====== CypEnzyme enum displayName (8 values × 3 lang) ====== -->
+    <string name="cyp_cyp1a2">CYP1A2</string>
+    <string name="cyp_cyp2b6">CYP2B6</string>
+    <string name="cyp_cyp2d6">CYP2D6</string>
+    <string name="cyp_cyp3a4">CYP3A4</string>
+    <string name="cyp_cyp2c9">CYP2C9</string>
+    <string name="cyp_cyp2c19">CYP2C19</string>
+    <string name="cyp_cyp2e1">CYP2E1</string>
+    <string name="cyp_p_gp">P-糖蛋白</string>
+
+    <!-- ====== PathwayType enum displayName (11 values × 3 lang) ====== -->
+    <string name="pathway_cyp450">CYP450 氧化</string>
+    <string name="pathway_ugt_glucuronidation">UGT 葡萄糖苷酸化</string>
+    <string name="pathway_renal_excretion">肾排泄 (原型)</string>
+    <string name="pathway_hydrolysis">水解</string>
+    <string name="pathway_esterase">酯酶水解</string>
+    <string name="pathway_deiodination">脱碘</string>
+    <string name="pathway_mao">单胺氧化酶</string>
+    <string name="pathway_dpp4">DPP-IV 酶降解</string>
+    <string name="pathway_glucuronidation">葡萄糖醛酸化</string>
+    <string name="pathway_beta_oxidation">β-氧化</string>
+    <string name="pathway_other">其他</string>
+
+
+    <!-- ====== DrugCategory enum displayName (33 values × 3 lang) ====== -->
+
+    <!-- ====== IndicationGroup enum displayName (43 values × 3 lang) ====== -->
+
+    <!-- ====== OverdoseSeverity enum displayName (4 values × 3 lang) ====== -->
+
+    <!-- ====== CypEnzyme enum displayName (8 values × 3 lang) ====== -->
+
+    <!-- ====== PathwayType enum displayName (11 values × 3 lang) ====== -->
+
+    <!-- ====== Other ====== -->
+    <string name="sevrule_contraindicated">禁忌</string>
+    <string name="sevrule_high">高度警示</string>
+    <string name="sevrule_medium">中度警示</string>
+    <string name="sevrule_low">轻度提示</string>
+    <string name="sevrule_info">信息</string>
 
 </resources>

@@ -23,45 +23,45 @@ import com.dosecare.app.domain.pk.PkModel.Route
 /**
  * 药物分类（顶层）
  */
-enum class DrugCategory(val displayName: String) {
+enum class DrugCategory(@androidx.annotation.StringRes val displayNameRes: Int, val displayName: String) {
     // 精神神经
-    ANTIPSYCHOTIC("抗精神病药"),
-    MOOD_STABILIZER("心境稳定剂"),
-    ANTIDEPRESSANT("抗抑郁药"),
-    ANXIOLYTIC("抗焦虑/苯二氮䓬类"),
-    STIMULANT("ADHD 兴奋剂"),
-    ANTICHOLINERGIC("抗胆碱能"),
-    ANTIPARKINSONIAN("抗帕金森"),
-    ANTIEPILEPTIC("抗癫痫"),
-    ALZHEIMERS("抗痴呆/认知改善"),
-    ANTIMIGRAINE("抗偏头痛"),
-    MUSCLE_RELAXANT("肌松剂"),
-    ANESTHETIC("麻醉 (局麻/全麻)"),
-    ANTIVERTIGO("抗眩晕"),
+    ANTIPSYCHOTIC(com.dosecare.app.R.string.drug_cat_antipsychotic, "抗精神病药"),
+    MOOD_STABILIZER(com.dosecare.app.R.string.drug_cat_mood_stabilizer, "心境稳定剂"),
+    ANTIDEPRESSANT(com.dosecare.app.R.string.drug_cat_antidepressant, "抗抑郁药"),
+    ANXIOLYTIC(com.dosecare.app.R.string.drug_cat_anxiolytic, "抗焦虑/苯二氮䓬类"),
+    STIMULANT(com.dosecare.app.R.string.drug_cat_stimulant, "ADHD 兴奋剂"),
+    ANTICHOLINERGIC(com.dosecare.app.R.string.drug_cat_anticholinergic, "抗胆碱能"),
+    ANTIPARKINSONIAN(com.dosecare.app.R.string.drug_cat_antiparkinsonian, "抗帕金森"),
+    ANTIEPILEPTIC(com.dosecare.app.R.string.drug_cat_antiepileptic, "抗癫痫"),
+    ALZHEIMERS(com.dosecare.app.R.string.drug_cat_alzheimers, "抗痴呆/认知改善"),
+    ANTIMIGRAINE(com.dosecare.app.R.string.drug_cat_antimigraine, "抗偏头痛"),
+    MUSCLE_RELAXANT(com.dosecare.app.R.string.drug_cat_muscle_relaxant, "肌松剂"),
+    ANESTHETIC(com.dosecare.app.R.string.drug_cat_anesthetic, "麻醉 (局麻/全麻)"),
+    ANTIVERTIGO(com.dosecare.app.R.string.drug_cat_antivertigo, "抗眩晕"),
     // 内科
-    ANTIDIABETIC("降糖药"),
-    THYROID("甲状腺"),
-    CORTICOSTEROID("肾上腺皮质激素"),
-    ANTIHYPERTENSIVE("降压药"),
-    STATIN("调脂药"),
-    ANTIARRHYTHMIC("抗心律失常"),
-    ANTICOAGULANT("抗凝/抗血小板"),
-    PPI("质子泵抑制剂 (PPI)"),
-    OSTEOPOROSIS_DRUG("骨质疏松药"),
-    GOUT("抗痛风"),
-    BPH_AGENT("前列腺增生药"),
-    HORMONE_REPLACEMENT("激素替代"),
-    BRONCHODILATOR("支气管扩张剂"),
+    ANTIDIABETIC(com.dosecare.app.R.string.drug_cat_antidiabetic, "降糖药"),
+    THYROID(com.dosecare.app.R.string.drug_cat_thyroid, "甲状腺"),
+    CORTICOSTEROID(com.dosecare.app.R.string.drug_cat_corticosteroid, "肾上腺皮质激素"),
+    ANTIHYPERTENSIVE(com.dosecare.app.R.string.drug_cat_antihypertensive, "降压药"),
+    STATIN(com.dosecare.app.R.string.drug_cat_statin, "调脂药"),
+    ANTIARRHYTHMIC(com.dosecare.app.R.string.drug_cat_antiarrhythmic, "抗心律失常"),
+    ANTICOAGULANT(com.dosecare.app.R.string.drug_cat_anticoagulant, "抗凝/抗血小板"),
+    PPI(com.dosecare.app.R.string.drug_cat_ppi, "质子泵抑制剂 (PPI)"),
+    OSTEOPOROSIS_DRUG(com.dosecare.app.R.string.drug_cat_osteoporosis_drug, "骨质疏松药"),
+    GOUT(com.dosecare.app.R.string.drug_cat_gout, "抗痛风"),
+    BPH_AGENT(com.dosecare.app.R.string.drug_cat_bph_agent, "前列腺增生药"),
+    HORMONE_REPLACEMENT(com.dosecare.app.R.string.drug_cat_hormone_replacement, "激素替代"),
+    BRONCHODILATOR(com.dosecare.app.R.string.drug_cat_bronchodilator, "支气管扩张剂"),
     // 疼痛
-    ANALGESIC("止痛药"),
+    ANALGESIC(com.dosecare.app.R.string.drug_cat_analgesic, "止痛药"),
     // 抗感染
-    ANTIHISTAMINE("抗组胺"),
-    ANTIBIOTIC("抗感染 (抗真菌/抗结核/抗 HIV)"),
+    ANTIHISTAMINE(com.dosecare.app.R.string.drug_cat_antihistamine, "抗组胺"),
+    ANTIBIOTIC(com.dosecare.app.R.string.drug_cat_antibiotic, "抗感染 (抗真菌/抗结核/抗 HIV)"),
     // 其他
-    SUBSTANCE_USE("物质依赖治疗"),
-    SUPPLEMENT("营养补充剂"),
-    HERBAL("草本补充剂"),
-    OTHER("其他")
+    SUBSTANCE_USE(com.dosecare.app.R.string.drug_cat_substance_use, "物质依赖治疗"),
+    SUPPLEMENT(com.dosecare.app.R.string.drug_cat_supplement, "营养补充剂"),
+    HERBAL(com.dosecare.app.R.string.drug_cat_herbal, "草本补充剂"),
+    OTHER(com.dosecare.app.R.string.drug_cat_other, "其他")
 }
 
 /**
@@ -135,11 +135,11 @@ data class Drug(
 )
 
 /** 药物过量严重度 */
-enum class OverdoseSeverity(val displayName: String) {
-    MILD("轻度"),
-    MODERATE("中度"),
-    SEVERE("重度"),
-    LIFE_THREATENING("危及生命")
+enum class OverdoseSeverity(@androidx.annotation.StringRes val displayNameRes: Int, val displayName: String) {
+    MILD(com.dosecare.app.R.string.sev_mild, "轻度"),
+    MODERATE(com.dosecare.app.R.string.sev_moderate, "中度"),
+    SEVERE(com.dosecare.app.R.string.sev_severe, "重度"),
+    LIFE_THREATENING(com.dosecare.app.R.string.sev_life_threatening, "危及生命")
 }
 
 /** 药物过量信息 */

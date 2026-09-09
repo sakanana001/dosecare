@@ -493,7 +493,7 @@ fun CatalogTab(
                 byCategory.forEach { (category, drugs) ->
                     item(key = "cat_${category.name}") {
                         CategoryHeader(
-                            category = category.displayName,
+                            category = stringResource(category.displayNameRes),
                             count = drugs.size,
                             isExpanded = category.name in expandedCategories,
                             onToggle = {
@@ -524,7 +524,7 @@ fun CatalogTab(
                 byIndication.forEach { (indication, drugs) ->
                     item(key = "ind_${indication.name}") {
                         CategoryHeader(
-                            category = indication.displayName,
+                            category = stringResource(indication.displayNameRes),
                             count = drugs.size,
                             isExpanded = indication.name in expandedIndications,
                             onToggle = {
@@ -972,7 +972,7 @@ fun InteractionsTab(
                                 } ?: "?"
                                 Row(verticalAlignment = Alignment.Top, modifier = Modifier.padding(vertical = 2.dp)) {
                                     Text(
-                                        "• $drugName (${o.severity.displayName})",
+                                        "• $drugName (${stringResource(o.severity.displayNameRes)})",
                                         style = MaterialTheme.typography.bodySmall,
                                         color = Color(0xFFB71C1C),
                                         fontWeight = FontWeight.SemiBold,
@@ -1061,7 +1061,7 @@ internal fun DrugPicker(
                                     Column {
                                         Text(pName, style = MaterialTheme.typography.bodyLarge)
                                         Text(
-                                            "${drug.category.displayName}",
+                                            stringResource(drug.category.displayNameRes),
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
@@ -1105,7 +1105,7 @@ internal fun InteractionRow(interaction: Interaction) {
                     shape = RoundedCornerShape(4.dp)
                 ) {
                     Text(
-                        interaction.severity.displayName,
+                        stringResource(interaction.severity.displayNameRes),
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 2.dp),
                         style = MaterialTheme.typography.labelSmall,
                         color = Color.White,
@@ -1146,7 +1146,7 @@ private fun MechanismLine(interaction: Interaction) {
     val text = when (interaction) {
         is CypInteraction -> stringResource(
             R.string.compare_mechanism_auc,
-            interaction.cyp.displayName,
+            interaction.cyp.displayName,  // CYP1A2 等是通用代码, 无需 i18n
             "%.1f".format(interaction.patientAdjustedFold),
             "%.1f".format(interaction.patientAdjustedFold)
         )

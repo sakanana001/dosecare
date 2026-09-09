@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ====== App 基本 ====== -->
     <string name="app_name">DoseCare</string>
@@ -490,7 +490,7 @@
 
     <!-- ====== 薬品検索プレースホルダ + 件数 / ブランド ====== -->
     <string name="search_placeholder">タップして薬品を検索…</string>
-    <string name="search_count_with_query"> · 検索:\"%1$s\"</string>
+    <string name="search_count_with_query"> · 検索:&quot;%1$s&quot;</string>
     <string name="search_brand_prefix"> · ブランド: %1$s</string>
 
     <!-- ====== TDM モジュール (InteractiveConcentrationChart + TdmModule) ====== -->
@@ -508,5 +508,133 @@
     <string name="interaction_qtc_format">推定 QTc %1$.0f ms</string>
     <string name="interaction_acb_format">ACB スコア %1$d</string>
     <string name="interaction_serotonin_format">%1$d 個のセロトニン作動薬が関与</string>
+
+
+    <!-- ====== DrugCategory enum displayName (33 values × 3 lang) ====== -->
+    <string name="drug_cat_antipsychotic">抗精神病薬</string>
+    <string name="drug_cat_mood_stabilizer">気分安定薬</string>
+    <string name="drug_cat_antidepressant">抗うつ薬</string>
+    <string name="drug_cat_anxiolytic">抗不安薬 / ベンゾジアゼピン</string>
+    <string name="drug_cat_stimulant">ADHD 興奮剤</string>
+    <string name="drug_cat_anticholinergic">抗コリン薬</string>
+    <string name="drug_cat_antiparkinsonian">抗パーキンソン薬</string>
+    <string name="drug_cat_antiepileptic">抗てんかん薬</string>
+    <string name="drug_cat_alzheimers">抗認知症薬</string>
+    <string name="drug_cat_antimigraine">抗片頭痛薬</string>
+    <string name="drug_cat_muscle_relaxant">筋弛緩薬</string>
+    <string name="drug_cat_anesthetic">麻酔薬 (局所/全身)</string>
+    <string name="drug_cat_antivertigo">抗めまい薬</string>
+    <string name="drug_cat_antidiabetic">糖尿病治療薬</string>
+    <string name="drug_cat_thyroid">甲状腺</string>
+    <string name="drug_cat_corticosteroid">副腎皮質ステロイド</string>
+    <string name="drug_cat_antihypertensive">降圧薬</string>
+    <string name="drug_cat_statin">脂質異常症治療薬 (スタチン)</string>
+    <string name="drug_cat_antiarrhythmic">抗不整脈薬</string>
+    <string name="drug_cat_anticoagulant">抗凝固/抗血小板薬</string>
+    <string name="drug_cat_ppi">プロトンポンプ阻害薬 (PPI)</string>
+    <string name="drug_cat_osteoporosis_drug">骨粗鬆症治療薬</string>
+    <string name="drug_cat_gout">抗痛風薬</string>
+    <string name="drug_cat_bph_agent">前立腺肥大症治療薬</string>
+    <string name="drug_cat_hormone_replacement">ホルモン補充療法</string>
+    <string name="drug_cat_bronchodilator">気管支拡張薬</string>
+    <string name="drug_cat_analgesic">鎮痛薬</string>
+    <string name="drug_cat_antihistamine">抗ヒスタミン薬</string>
+    <string name="drug_cat_antibiotic">抗感染症薬 (抗真菌/TB/HIV)</string>
+    <string name="drug_cat_substance_use">物質依存治療薬</string>
+    <string name="drug_cat_supplement">栄養補助食品</string>
+    <string name="drug_cat_herbal">ハーブサプリメント</string>
+    <string name="drug_cat_other">その他</string>
+
+    <!-- ====== IndicationGroup enum displayName (43 values × 3 lang) ====== -->
+    <string name="ind_depression">うつ病</string>
+    <string name="ind_schizophrenia">統合失調症</string>
+    <string name="ind_bipolar">双極性障害</string>
+    <string name="ind_anxiety">不安障害</string>
+    <string name="ind_insomnia">不眠症</string>
+    <string name="ind_adhd">注意欠陥多動性障害</string>
+    <string name="ind_ocd">強迫性障害</string>
+    <string name="ind_ptsd">PTSD (心的外傷後ストレス障害)</string>
+    <string name="ind_eating_disorder">摂食障害</string>
+    <string name="ind_epilepsy">てんかん</string>
+    <string name="ind_parkinson">パーキンソン病</string>
+    <string name="ind_alzheimers">アルツハイマー病</string>
+    <string name="ind_migraine">片頭痛</string>
+    <string name="ind_neuropathic_pain">神経障害性疼痛</string>
+    <string name="ind_pain">疼痛</string>
+    <string name="ind_anesthesia">麻酔</string>
+    <string name="ind_diabetes">糖尿病</string>
+    <string name="ind_hypertension">高血圧</string>
+    <string name="ind_dyslipidemia">脂質異常症</string>
+    <string name="ind_thyroid">甲状腺疾患</string>
+    <string name="ind_anticoagulation">抗凝固/抗血小板</string>
+    <string name="ind_asthma_copd">喘息 / COPD</string>
+    <string name="ind_osteoporosis">骨粗鬆症</string>
+    <string name="ind_heart_failure">心不全</string>
+    <string name="ind_arrhythmia">不整脈</string>
+    <string name="ind_bph">前立腺肥大症</string>
+    <string name="ind_gerd">胃食道逆流症</string>
+    <string name="ind_substance_use">物質依存 (アルコール/オピオイド)</string>
+    <string name="ind_nicotine">ニコチン依存</string>
+    <string name="ind_infection">感染症 (細菌/真菌/ウイルス)</string>
+    <string name="ind_gout">痛風</string>
+    <string name="ind_inflammation">炎症/免疫</string>
+    <string name="ind_allergy">アレルギー</string>
+    <string name="ind_adrenal">副腎皮質</string>
+    <string name="ind_hormone">ホルモン補充</string>
+    <string name="ind_supplement">サプリメント</string>
+    <string name="ind_di">尿崩症</string>
+    <string name="ind_anticholinergic">抗コリン (EPS)</string>
+    <string name="ind_antidepressant_augmentation">抗うつ増強</string>
+    <string name="ind_withdrawal">離脱症状</string>
+    <string name="ind_nausea">悪心・嘔吐</string>
+    <string name="ind_sedation">鎮静</string>
+    <string name="ind_other">その他</string>
+
+    <!-- ====== OverdoseSeverity enum displayName (4 values × 3 lang) ====== -->
+    <string name="sev_mild">軽度</string>
+    <string name="sev_moderate">中等度</string>
+    <string name="sev_severe">重度</string>
+    <string name="sev_life_threatening">生命を脅かす</string>
+
+    <!-- ====== CypEnzyme enum displayName (8 values × 3 lang) ====== -->
+    <string name="cyp_cyp1a2">CYP1A2</string>
+    <string name="cyp_cyp2b6">CYP2B6</string>
+    <string name="cyp_cyp2d6">CYP2D6</string>
+    <string name="cyp_cyp3a4">CYP3A4</string>
+    <string name="cyp_cyp2c9">CYP2C9</string>
+    <string name="cyp_cyp2c19">CYP2C19</string>
+    <string name="cyp_cyp2e1">CYP2E1</string>
+    <string name="cyp_p_gp">P-糖タンパク質</string>
+
+    <!-- ====== PathwayType enum displayName (11 values × 3 lang) ====== -->
+    <string name="pathway_cyp450">CYP450 酸化</string>
+    <string name="pathway_ugt_glucuronidation">UGT グルクロン酸抱合</string>
+    <string name="pathway_renal_excretion">腎排泄 (未変化体)</string>
+    <string name="pathway_hydrolysis">加水分解</string>
+    <string name="pathway_esterase">エステラーゼ加水分解</string>
+    <string name="pathway_deiodination">脱ヨウ素</string>
+    <string name="pathway_mao">モノアミンオキシダーゼ</string>
+    <string name="pathway_dpp4">DPP-IV 分解</string>
+    <string name="pathway_glucuronidation">グルクロン酸抱合</string>
+    <string name="pathway_beta_oxidation">β酸化</string>
+    <string name="pathway_other">その他</string>
+
+
+    <!-- ====== DrugCategory enum displayName (33 values × 3 lang) ====== -->
+
+    <!-- ====== IndicationGroup enum displayName (43 values × 3 lang) ====== -->
+
+    <!-- ====== OverdoseSeverity enum displayName (4 values × 3 lang) ====== -->
+
+    <!-- ====== CypEnzyme enum displayName (8 values × 3 lang) ====== -->
+
+    <!-- ====== PathwayType enum displayName (11 values × 3 lang) ====== -->
+
+    <!-- ====== Other ====== -->
+    <string name="sevrule_contraindicated">禁忌</string>
+    <string name="sevrule_high">高度の警告</string>
+    <string name="sevrule_medium">中程度の警告</string>
+    <string name="sevrule_low">軽度の注意</string>
+    <string name="sevrule_info">情報</string>
 
 </resources>

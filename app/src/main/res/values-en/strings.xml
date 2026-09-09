@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ====== App 基础 ====== -->
     <string name="app_name">DoseCare</string>
@@ -136,7 +136,7 @@
     <!-- ====== CalendarTab ====== -->
     <string name="calendar_title">My Meds · %1$d groups</string>
     <string name="calendar_new_group">New group</string>
-    <string name="calendar_new_group_hint">e.g. \"Morning meds\" / \"Bedtime meds\"</string>
+    <string name="calendar_new_group_hint">e.g. &quot;Morning meds&quot; / &quot;Bedtime meds&quot;</string>
     <string name="calendar_temp_drug">Temporary medication</string>
     <string name="calendar_temp_drug_hint">Single record, not in any group (e.g. headache / sleep aid / short-course antibiotic)</string>
     <string name="calendar_n_drugs">%1$d drugs</string>
@@ -155,9 +155,9 @@
     <string name="calendar_taken_time">Taken time</string>
     <string name="calendar_now">Now: %1$s</string>
     <string name="calendar_delete_drug">Delete this medication</string>
-    <string name="calendar_delete_drug_confirm">Delete \"%1$s\"? All historical check-ins for this drug will also be deleted.</string>
+    <string name="calendar_delete_drug_confirm">Delete &quot;%1$s&quot;? All historical check-ins for this drug will also be deleted.</string>
     <string name="calendar_delete_group">Delete entire group</string>
-    <string name="calendar_delete_group_confirm">Delete \"%1$s\"? The %2$d drug(s) in this group and all their check-in history will be deleted, cannot be undone.</string>
+    <string name="calendar_delete_group_confirm">Delete &quot;%1$s&quot;? The %2$d drug(s) in this group and all their check-in history will be deleted, cannot be undone.</string>
     <string name="calendar_color_label">Pick icon color:</string>
     <string name="calendar_group_name">Group name</string>
     <string name="calendar_pinyin_hint">Chinese / English / Pinyin initial</string>
@@ -352,7 +352,7 @@
     <string name="plain_guideline_acr">American College of Rheumatology guideline</string>
     <string name="plain_guideline_aua">American Urological Association guideline</string>
     <string name="plain_guideline_beers">Beers Criteria for Potentially Inappropriate Medication Use in Older Adults (2019 American Geriatrics Society)</string>
-    <string name="plain_guideline_china_national">China NMPA \"Narcotic and Psychotropic Substances Catalog\"</string>
+    <string name="plain_guideline_china_national">China NMPA &quot;Narcotic and Psychotropic Substances Catalog&quot;</string>
     <string name="plain_guideline_china_general">Chinese Pharmacopoeia / Domestic drug label</string>
 
     <!-- ====== DrugDetailScreen CYP roles / side effect row labels ====== -->
@@ -490,7 +490,7 @@
 
     <!-- ====== Drug search placeholder + count / brand ====== -->
     <string name="search_placeholder">Tap to search a drug…</string>
-    <string name="search_count_with_query"> · search:\"%1$s\"</string>
+    <string name="search_count_with_query"> · search:&quot;%1$s&quot;</string>
     <string name="search_brand_prefix"> · brand: %1$s</string>
 
     <!-- ====== TDM module (InteractiveConcentrationChart + TdmModule) ====== -->
@@ -508,5 +508,133 @@
     <string name="interaction_qtc_format">Estimated QTc %1$.0f ms</string>
     <string name="interaction_acb_format">ACB score %1$d</string>
     <string name="interaction_serotonin_format">%1$d serotonergic drug(s) involved</string>
+
+
+    <!-- ====== DrugCategory enum displayName (33 values × 3 lang) ====== -->
+    <string name="drug_cat_antipsychotic">Antipsychotic</string>
+    <string name="drug_cat_mood_stabilizer">Mood Stabilizer</string>
+    <string name="drug_cat_antidepressant">Antidepressant</string>
+    <string name="drug_cat_anxiolytic">Anxiolytic / Benzodiazepine</string>
+    <string name="drug_cat_stimulant">ADHD Stimulant</string>
+    <string name="drug_cat_anticholinergic">Anticholinergic</string>
+    <string name="drug_cat_antiparkinsonian">Antiparkinsonian</string>
+    <string name="drug_cat_antiepileptic">Antiepileptic</string>
+    <string name="drug_cat_alzheimers">Anti-dementia / Cognition</string>
+    <string name="drug_cat_antimigraine">Antimigraine</string>
+    <string name="drug_cat_muscle_relaxant">Muscle Relaxant</string>
+    <string name="drug_cat_anesthetic">Anesthetic (Local/General)</string>
+    <string name="drug_cat_antivertigo">Antivertigo</string>
+    <string name="drug_cat_antidiabetic">Antidiabetic</string>
+    <string name="drug_cat_thyroid">Thyroid</string>
+    <string name="drug_cat_corticosteroid">Corticosteroid</string>
+    <string name="drug_cat_antihypertensive">Antihypertensive</string>
+    <string name="drug_cat_statin">Statin (Lipid-lowering)</string>
+    <string name="drug_cat_antiarrhythmic">Antiarrhythmic</string>
+    <string name="drug_cat_anticoagulant">Anticoagulant / Antiplatelet</string>
+    <string name="drug_cat_ppi">Proton Pump Inhibitor (PPI)</string>
+    <string name="drug_cat_osteoporosis_drug">Osteoporosis Drug</string>
+    <string name="drug_cat_gout">Antigout</string>
+    <string name="drug_cat_bph_agent">BPH Agent</string>
+    <string name="drug_cat_hormone_replacement">Hormone Replacement</string>
+    <string name="drug_cat_bronchodilator">Bronchodilator</string>
+    <string name="drug_cat_analgesic">Analgesic</string>
+    <string name="drug_cat_antihistamine">Antihistamine</string>
+    <string name="drug_cat_antibiotic">Anti-infective (Antifungal / TB / HIV)</string>
+    <string name="drug_cat_substance_use">Substance Use Disorder Tx</string>
+    <string name="drug_cat_supplement">Supplement</string>
+    <string name="drug_cat_herbal">Herbal Supplement</string>
+    <string name="drug_cat_other">Other</string>
+
+    <!-- ====== IndicationGroup enum displayName (43 values × 3 lang) ====== -->
+    <string name="ind_depression">Depression</string>
+    <string name="ind_schizophrenia">Schizophrenia</string>
+    <string name="ind_bipolar">Bipolar Disorder</string>
+    <string name="ind_anxiety">Anxiety Disorder</string>
+    <string name="ind_insomnia">Insomnia</string>
+    <string name="ind_adhd">ADHD</string>
+    <string name="ind_ocd">OCD</string>
+    <string name="ind_ptsd">PTSD</string>
+    <string name="ind_eating_disorder">Eating Disorder</string>
+    <string name="ind_epilepsy">Epilepsy</string>
+    <string name="ind_parkinson">Parkinson\'s Disease</string>
+    <string name="ind_alzheimers">Alzheimer\'s Disease</string>
+    <string name="ind_migraine">Migraine</string>
+    <string name="ind_neuropathic_pain">Neuropathic Pain</string>
+    <string name="ind_pain">Pain</string>
+    <string name="ind_anesthesia">Anesthesia</string>
+    <string name="ind_diabetes">Diabetes</string>
+    <string name="ind_hypertension">Hypertension</string>
+    <string name="ind_dyslipidemia">Dyslipidemia</string>
+    <string name="ind_thyroid">Thyroid Disease</string>
+    <string name="ind_anticoagulation">Anticoagulation / Antiplatelet</string>
+    <string name="ind_asthma_copd">Asthma / COPD</string>
+    <string name="ind_osteoporosis">Osteoporosis</string>
+    <string name="ind_heart_failure">Heart Failure</string>
+    <string name="ind_arrhythmia">Arrhythmia</string>
+    <string name="ind_bph">BPH</string>
+    <string name="ind_gerd">GERD</string>
+    <string name="ind_substance_use">Substance Use (Alcohol/Opioid)</string>
+    <string name="ind_nicotine">Nicotine Dependence</string>
+    <string name="ind_infection">Infection (Bacterial/Fungal/Viral)</string>
+    <string name="ind_gout">Gout</string>
+    <string name="ind_inflammation">Inflammation / Immune</string>
+    <string name="ind_allergy">Allergy</string>
+    <string name="ind_adrenal">Adrenal Cortex</string>
+    <string name="ind_hormone">Hormone Replacement</string>
+    <string name="ind_supplement">Supplement</string>
+    <string name="ind_di">Diabetes Insipidus</string>
+    <string name="ind_anticholinergic">Anticholinergic (EPS)</string>
+    <string name="ind_antidepressant_augmentation">Antidepressant Augmentation</string>
+    <string name="ind_withdrawal">Withdrawal</string>
+    <string name="ind_nausea">Nausea / Vomiting</string>
+    <string name="ind_sedation">Sedation</string>
+    <string name="ind_other">Other</string>
+
+    <!-- ====== OverdoseSeverity enum displayName (4 values × 3 lang) ====== -->
+    <string name="sev_mild">Mild</string>
+    <string name="sev_moderate">Moderate</string>
+    <string name="sev_severe">Severe</string>
+    <string name="sev_life_threatening">Life-threatening</string>
+
+    <!-- ====== CypEnzyme enum displayName (8 values × 3 lang) ====== -->
+    <string name="cyp_cyp1a2">CYP1A2</string>
+    <string name="cyp_cyp2b6">CYP2B6</string>
+    <string name="cyp_cyp2d6">CYP2D6</string>
+    <string name="cyp_cyp3a4">CYP3A4</string>
+    <string name="cyp_cyp2c9">CYP2C9</string>
+    <string name="cyp_cyp2c19">CYP2C19</string>
+    <string name="cyp_cyp2e1">CYP2E1</string>
+    <string name="cyp_p_gp">P-glycoprotein</string>
+
+    <!-- ====== PathwayType enum displayName (11 values × 3 lang) ====== -->
+    <string name="pathway_cyp450">CYP450 oxidation</string>
+    <string name="pathway_ugt_glucuronidation">UGT glucuronidation</string>
+    <string name="pathway_renal_excretion">Renal excretion (unchanged)</string>
+    <string name="pathway_hydrolysis">Hydrolysis</string>
+    <string name="pathway_esterase">Esterase hydrolysis</string>
+    <string name="pathway_deiodination">Deiodination</string>
+    <string name="pathway_mao">Monoamine oxidase</string>
+    <string name="pathway_dpp4">DPP-IV degradation</string>
+    <string name="pathway_glucuronidation">Glucuronidation</string>
+    <string name="pathway_beta_oxidation">β-oxidation</string>
+    <string name="pathway_other">Other</string>
+
+
+    <!-- ====== DrugCategory enum displayName (33 values × 3 lang) ====== -->
+
+    <!-- ====== IndicationGroup enum displayName (43 values × 3 lang) ====== -->
+
+    <!-- ====== OverdoseSeverity enum displayName (4 values × 3 lang) ====== -->
+
+    <!-- ====== CypEnzyme enum displayName (8 values × 3 lang) ====== -->
+
+    <!-- ====== PathwayType enum displayName (11 values × 3 lang) ====== -->
+
+    <!-- ====== Other ====== -->
+    <string name="sevrule_contraindicated">Contraindicated</string>
+    <string name="sevrule_high">High Alert</string>
+    <string name="sevrule_medium">Medium Alert</string>
+    <string name="sevrule_low">Low Notice</string>
+    <string name="sevrule_info">Info</string>
 
 </resources>
