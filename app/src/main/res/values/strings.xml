@@ -263,4 +263,205 @@
     <string name="calendar_prev_month">上个月</string>
     <string name="calendar_next_month">下个月</string>
 
+    <!-- ====== Diary 心情 (6 选 1) ====== -->
+    <string name="mood_happy">开心</string>
+    <string name="mood_calm">平静</string>
+    <string name="mood_anxious">焦虑</string>
+    <string name="mood_depressed">低落</string>
+    <string name="mood_angry">愤怒</string>
+    <string name="mood_tired">疲惫</string>
+
+    <!-- ====== Plain 通俗模式 (DrugDetailScreen / ComparisonView toggle) ====== -->
+    <!-- PK 参数 -->
+    <string name="plain_half_life_short">短效 (体内代谢快, 通常一天 3-4 次服药)</string>
+    <string name="plain_half_life_medium">中效 (一天 1-2 次服药即可)</string>
+    <string name="plain_half_life_long">长效 (一天 1 次服药, 偶尔漏服问题不大)</string>
+    <string name="plain_half_life_xlong">超长效 (体内停留很久, 停药后 1-4 周还有残余效应)</string>
+    <string name="plain_protein_high">高度锁在血液里 (剩余 %1$d%% 进入细胞起效, 难被透析)</string>
+    <string name="plain_protein_mid">中度结合 (剩下 %1$d%% 游离起效)</string>
+    <string name="plain_protein_low">低度结合 (大部分 %1$d%% 游离, 容易分布到全身)</string>
+    <string name="plain_therapeutic_window">血药浓度低于 %1$s %2$s 时药效不足, 高于 %3$s %2$s 时容易中毒; 抽血化验应落在这个范围内</string>
+    <string name="plain_cmax">服药后血药浓度峰值 %1$s %2$s (刚吃完药时最高)</string>
+    <string name="plain_cmin">下次服药前血药浓度 %1$s %2$s (药效最弱的时刻)</string>
+    <string name="plain_cavg">稳态平均浓度 %1$s %2$s (长期服用后血液里的平均水平)</string>
+    <string name="plain_auc">AUC: 药物在体内"总暴露量", 值越大表示身体接触药物越多</string>
+
+    <!-- CYP 角色 -->
+    <string name="plain_cyp_substrate">这个药在肝脏里被某些酶拆解。吃的剂量越多、酶被抑制 → 浓度升高, 容易过量</string>
+    <string name="plain_metabolism_cyp">这个药主要被肝脏 CYP 酶系统代谢, 容易跟其他 CYP 抑制剂/诱导剂产生相互作用</string>
+    <string name="plain_metabolism_ugt">经葡萄糖苷酸化代谢 (Phase II), 通常不跟 CYP 抑制剂/诱导剂相互作用, 相互作用少</string>
+    <string name="plain_metabolism_renal">原型经肾排出, 不经肝代谢, 几乎无 CYP 介导的药物相互作用, 肾衰时需减量</string>
+    <string name="plain_metabolism_hydrolysis">经血浆/组织酯酶水解, 不依赖肝肾功能, 几乎无药物相互作用</string>
+    <string name="plain_metabolism_deiodination">经脱碘酶代谢 (甲状腺素特殊路径), 相互作用少</string>
+    <string name="plain_metabolism_mao">经单胺氧化酶代谢, 注意 tyramine 反应 (奶酪效应)</string>
+    <string name="plain_metabolism_dpp4">DPP-IV 酶降解 (GLP-1 类似物), 注射给药</string>
+    <string name="plain_metabolism_beta_oxidation">经脂肪酸 β-氧化 + UGT 葡萄糖苷酸化, 多途径代谢</string>
+    <string name="plain_metabolism_other">其他途径代谢, 详见 catalog</string>
+    <string name="plain_cyp_inhibitor_strong">强抑制剂: 让其它药在体内停留更久, 浓度可升高 5 倍以上 (联用必须减量)</string>
+    <string name="plain_cyp_inhibitor_moderate">中度抑制剂: 让其它药浓度升高 2-5 倍 (联用需要观察)</string>
+    <string name="plain_cyp_inhibitor_weak">弱抑制剂: 影响很小, 一般无需调整</string>
+    <string name="plain_cyp_inducer_strong">强诱导剂: 让其它药在体内停留变短, 浓度可降低 50%% 以上 (联用常需加量或换药, 避孕药会失效)</string>
+    <string name="plain_cyp_inducer_moderate">中度诱导剂: 让其它药浓度降低 30-50%%</string>
+    <string name="plain_cyp_inducer_weak">弱诱导剂: 影响较小</string>
+
+    <!-- 调整 (renal/hepatic/elderly) -->
+    <string name="plain_renal_none">肾功能正常无需调整</string>
+    <string name="plain_renal_monitor">肾功能下降时需密切监测肾功和血药浓度</string>
+    <string name="plain_renal_reduce_egfr30">肾小球滤过率 (eGFR) 低于 30 时, 剂量减半 (严重肾衰禁用)</string>
+    <string name="plain_renal_contra_egfr30">eGFR 低于 30 时禁用 (会进一步损害肾功能)</string>
+    <string name="plain_hepatic_none">肝功能正常无需调整</string>
+    <string name="plain_hepatic_monitor">肝功能异常时需监测肝功</string>
+    <string name="plain_hepatic_reduce_pugh_b">中度肝损 (Child-Pugh B) 时, 剂量减半</string>
+    <string name="plain_hepatic_reduce_pugh_c">重度肝损 (Child-Pugh C) 时, 剂量减半或停用</string>
+    <string name="plain_hepatic_contra_severe">严重肝病禁用 (肝脏代谢不了会蓄积中毒)</string>
+    <string name="plain_elderly">老年人代谢变慢 + 肝肾衰退, 起始剂量要低, 缓慢加量, 注意跌倒/认知变化</string>
+
+    <!-- 不良反应 -->
+    <string name="plain_qtc_low">基本不延长心电图 QT 间期, 心脏安全性好</string>
+    <string name="plain_qtc_medium">中度延长 QT 间期, 联用其他 QT 延长药或低钾低镁时心律失常风险升高</string>
+    <string name="plain_qtc_high">显著延长 QT 间期, 可能诱发尖端扭转型室速 (致命心律失常); 联用其他 QT 药属禁忌</string>
+    <string name="plain_metabolic_low">不影响血糖/血脂/体重</string>
+    <string name="plain_metabolic_medium">可能引起血糖升高、体重增加 (几个月内 +5-10 斤常见)</string>
+    <string name="plain_metabolic_high">明显代谢紊乱: 显著增重 + 血脂异常 + 糖尿病风险; 用药期间需监测体重/血糖/血脂</string>
+    <string name="plain_agran_low">粒细胞缺乏风险极低 (无特殊监测要求)</string>
+    <string name="plain_agran_medium">可能引起白细胞下降, 需定期验血常规</string>
+    <string name="plain_agran_high">显著粒细胞缺乏风险 (致命感染), 必须每 1-4 周验血常规; 一旦发热立即就诊</string>
+    <string name="plain_eps_low">基本无锥体外系反应 (肌张力异常/震颤/静坐不能)</string>
+    <string name="plain_eps_medium">可能引起肌强直、震颤、静坐不能、急性肌张力障碍</string>
+    <string name="plain_eps_high">显著 EPS 风险: 帕金森样症状/静坐不能/迟发性运动障碍 (不可逆); 联用多种抗精神病叠加</string>
+    <string name="plain_sedation_low">基本不引起嗜睡, 可正常驾驶</string>
+    <string name="plain_sedation_medium">可能引起轻度嗜睡, 服药初期避免驾驶/操作机械</string>
+    <string name="plain_sedation_high">明显镇静, 服药后避免驾驶/登高; 老年人增加跌倒/髋部骨折风险</string>
+    <string name="plain_sedation_xhigh">深度镇静, 严重影响日常; 联用其他镇静药 → 呼吸抑制风险</string>
+    <string name="plain_sexual_low">基本不影响性功能</string>
+    <string name="plain_sexual_medium">可能引起性欲下降/勃起障碍; 部分患者会换药</string>
+    <string name="plain_sexual_high">明显性功能影响 (性欲↓、勃起障碍、射精障碍), 是患者停药主因之一</string>
+    <string name="plain_prolactin_low">不影响泌乳素水平</string>
+    <string name="plain_prolactin_medium">轻度泌乳素升高, 一般无症状</string>
+    <string name="plain_prolactin_high">显著升高泌乳素: 女性月经紊乱/闭经/溢乳, 男性乳房发育/性功能下降; 长期高泌乳素增加骨密度下降风险</string>
+    <string name="plain_anticholinergic_0">无抗胆碱能负担, 不会引起口干/便秘/认知下降</string>
+    <string name="plain_anticholinergic_1">轻度抗胆碱能: 可能口干或轻度便秘</string>
+    <string name="plain_anticholinergic_2">中度: 明显口干/便秘/视物模糊, 老年人认知下降风险</string>
+    <string name="plain_anticholinergic_3plus">重度: 严重口干/便秘/视物模糊/尿潴留/谵妄; 老年人必须避免 (Beers 慎用)</string>
+
+    <!-- 引用/指南 -->
+    <string name="plain_guideline_agnp">2017 国际精神科 TDM 共识 (Hiemke 等, Pharmacopsychiatry 2018)</string>
+    <string name="plain_guideline_fda">FDA 药品标签 (美国食品药品监督管理局批准说明书)</string>
+    <string name="plain_guideline_cpic">CPIC 药物基因剂量指南 (临床药物基因组学联盟)</string>
+    <string name="plain_guideline_pmid">PubMed 医学文献数据库收录的同行评议研究</string>
+    <string name="plain_guideline_acr">美国风湿病学会指南</string>
+    <string name="plain_guideline_aua">美国泌尿外科学会指南</string>
+    <string name="plain_guideline_beers">Beers 老年人潜在不适当用药标准 (2019 美国老年医学会)</string>
+    <string name="plain_guideline_china_national">国家药品监督管理局《麻醉药品和精神药品品种目录》</string>
+    <string name="plain_guideline_china_general">中国药典 / 国内药品说明书</string>
+
+    <!-- ====== DrugDetailScreen CYP 角色 / 不良反应行标签 ====== -->
+    <string name="plain_atc_note">ATC 码 = 世界卫生组织给每种药分的唯一编号,医生用来识别同类药</string>
+    <string name="cyp_role_substrate">作为底物（被代谢）</string>
+    <string name="cyp_role_inhibitor">作为抑制剂（影响其他药）</string>
+    <string name="cyp_role_inducer">作为诱导剂（影响其他药）</string>
+    <string name="risk_qtc">QTc 延长</string>
+    <string name="risk_metabolic">代谢综合征</string>
+    <string name="risk_agranulocytosis">粒细胞缺乏</string>
+    <string name="risk_eps">锥体外系反应</string>
+    <string name="risk_sedation">镇静</string>
+    <string name="risk_sexual">性功能影响</string>
+    <string name="risk_prolactin">高泌乳素</string>
+    <string name="adj_renal">肾功能</string>
+    <string name="adj_hepatic">肝功能</string>
+    <string name="adj_elderly">老年</string>
+    <string name="adj_smoking">吸烟</string>
+    <string name="adj_quit_smoking">戒烟</string>
+    <string name="auc_extra"> — 倍数 = 联用时浓度变化倍数</string>
+
+    <!-- ====== ComparisonView 双药对比: section 标题 + 内容 ====== -->
+    <string name="cmp_section_basic">基本信息</string>
+    <string name="cmp_section_pk">药代动力学</string>
+    <string name="cmp_section_window">治疗窗</string>
+    <string name="cmp_section_cyp">CYP 角色</string>
+    <string name="cmp_section_adverse">关键不良反应</string>
+    <string name="cmp_section_adjust">剂量调整</string>
+    <string name="cmp_section_monitor">监测</string>
+    <string name="cmp_section_overdose">药物过量</string>
+    <string name="cmp_section_desc_basic">药物的中文/英文通用名、商品名、世界卫生组织分类编号 (ATC)</string>
+    <string name="cmp_section_desc_pk">药物在体内怎么被吸收、分布、代谢、排泄。F=生物利用度,t½=半衰期 (血药浓度降到一半的时间)</string>
+    <string name="cmp_section_desc_window">血药浓度低 = 药效不足, 高 = 中毒。抽血化验应落在这个区间内</string>
+    <string name="cmp_section_desc_cyp">CYP = 肝脏里拆解药物的酶。底物=被拆的, 抑制剂=会拖慢别的药, 诱导剂=会加快别的药 (让别的药失效)</string>
+    <string name="cmp_section_desc_adverse">服药后可能出现的副作用。极低=基本不用担心, 极高=必须监测</string>
+    <string name="cmp_section_desc_adjust">肾/肝/老年人是否需要减量。eGFR &lt; 30 是肾衰警示线</string>
+    <string name="cmp_section_desc_monitor">服药期间要做的检查 (血常规/肝功/心电图 等), 频次根据风险定</string>
+
+    <!-- ====== ComparisonView KeyDiff 通俗差异 (label + tag) ====== -->
+    <string name="cmp_diff_window_format">• 治疗窗 (血药安全范围): %1$s = %2$s, %3$s = %4$s (单位相同)</string>
+    <string name="cmp_diff_window_no_a">• %1$s 无明确治疗窗, %2$s 需要 TDM 监测</string>
+    <string name="cmp_diff_window_no_b">• %1$s 无明确治疗窗, %2$s 需要 TDM 监测</string>
+    <string name="cmp_diff_half_life_short">短效</string>
+    <string name="cmp_diff_half_life_medium">长效</string>
+    <string name="cmp_diff_half_life_xlong">超长效</string>
+    <string name="cmp_diff_half_life_format">• 半衰期: %1$s ≈ %2$dh (%3$s), %4$s ≈ %5$dh (%6$s)</string>
+    <string name="cmp_diff_only_a_format">• %1$s 独有的高风险: %2$s</string>
+    <string name="cmp_diff_only_b_format">• %1$s 独有的高风险: %2$s</string>
+    <string name="cmp_diff_cyp_inh_a">• %1$s 是 CYP 抑制剂, %2$s 不是 → 联用时 %3$s 会让 %4$s 浓度升高</string>
+    <string name="cmp_diff_cyp_inh_b">• %1$s 是 CYP 抑制剂, %2$s 不是 → 联用时 %3$s 会让 %4$s 浓度升高</string>
+    <string name="cmp_diff_cyp_ind_a">• %1$s 是 CYP 强诱导剂, 会让 %2$s 失效 (需加量或换药)</string>
+    <string name="cmp_diff_cyp_ind_b">• %1$s 是 CYP 强诱导剂, 会让 %2$s 失效 (需加量或换药)</string>
+    <string name="cmp_diff_elderly_diff">• 老年人使用注意: 两药说明不一致, 请遵医嘱</string>
+    <string name="cmp_diff_highrisk_qt">QT 延长</string>
+    <string name="cmp_diff_highrisk_agran">粒缺</string>
+    <string name="cmp_diff_highrisk_eps">EPS</string>
+    <string name="cmp_diff_highrisk_sedation">镇静</string>
+
+    <!-- ====== ComparisonView 字段标签 ====== -->
+    <string name="cmp_label_protein_binding">蛋白结合 %1$d%%</string>
+    <string name="cmp_label_pathway">代谢途径: %1$s</string>
+    <string name="cmp_label_qtc">QTc 延长: %1$s</string>
+    <string name="cmp_label_metabolic">代谢综合征: %1$s</string>
+    <string name="cmp_label_agranulocytosis">粒细胞缺乏: %1$s</string>
+    <string name="cmp_label_eps">EPS: %1$s</string>
+    <string name="cmp_label_sedation">镇静: %1$s</string>
+    <string name="cmp_label_sexual">性功能: %1$s</string>
+    <string name="cmp_label_prolactin">高泌乳素: %1$s</string>
+    <string name="cmp_label_anticholinergic">抗胆碱能: %1$d / 3</string>
+    <string name="cmp_label_renal">肾: %1$s</string>
+    <string name="cmp_label_hepatic">肝: %1$s</string>
+    <string name="cmp_label_elderly_val">老年: %1$s</string>
+    <string name="cmp_label_elderly_empty">老年: —</string>
+    <string name="cmp_label_freq_val">频次: %1$s</string>
+    <string name="cmp_label_freq_empty">频次: —</string>
+    <string name="cmp_label_items">项目: %1$s</string>
+    <string name="cmp_label_items_empty">项目: —</string>
+    <string name="cmp_label_toxic">中毒 ≥%1$d mg</string>
+    <string name="cmp_label_fatal">致死 ≥%1$d mg</string>
+    <string name="cmp_label_antidote"> · 解毒剂:%1$s</string>
+    <string name="cmp_label_severity">严重度: %1$s</string>
+    <string name="cmp_label_severity_with_doses">严重度: %1$s · %2$s%3$s</string>
+    <string name="cmp_label_no_entry">未录入</string>
+    <string name="cmp_label_pathway_empty">未标</string>
+
+    <!-- ====== ComparisonView RiskLevel 翻译 ====== -->
+    <string name="risk_level_very_high">极高</string>
+    <string name="risk_level_high">高</string>
+    <string name="risk_level_medium">中</string>
+    <string name="risk_level_low">低</string>
+    <string name="risk_level_very_low">极低</string>
+    <string name="cyp_strength_strong">强</string>
+    <string name="cyp_strength_moderate">中</string>
+    <string name="cyp_strength_weak">弱</string>
+
+    <!-- ====== DrugDetailScreen section 标题 (与 ComparisonView 同名 section 区分) ====== -->
+    <string name="drug_section_cyp">CYP 角色</string>
+    <string name="drug_section_pk">PK 估算（演示：200 mg bid 第 5 天，70 kg）</string>
+    <string name="drug_section_pharmacology">药理作用</string>
+    <string name="drug_section_adverse">关键不良反应</string>
+    <string name="drug_section_overdose">药物过量 (70kg 成人)</string>
+    <string name="drug_section_adjust">剂量调整</string>
+    <string name="drug_section_monitor">监测要求</string>
+    <string name="drug_anticholinergic_score">%1$d / 3</string>
+    <string name="drug_pk_meta">t½ %1$.1f h · 蛋白结合 %2$d%%</string>
+
+    <!-- ====== ComparisonView 通俗模式 toggle / diff empty ====== -->
+    <string name="cmp_lay_diff_title">📖 关键差异 (通俗版)</string>
+    <string name="cmp_lay_diff_empty">两药在主要指标上没有明显差异。具体使用仍请遵医嘱。</string>
+    <string name="cmp_lay_disclaimer">⚠️ 各项参数请以实际药品说明书/化验值为准。\n用药调整、相互作用警示请遵医嘱或咨询临床药师。</string>
+
 </resources>

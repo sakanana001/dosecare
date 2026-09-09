@@ -263,4 +263,205 @@
     <string name="calendar_prev_month">前の月</string>
     <string name="calendar_next_month">次の月</string>
 
+    <!-- ====== Diary 気分 (6 択 1) ====== -->
+    <string name="mood_happy">嬉しい</string>
+    <string name="mood_calm">穏やか</string>
+    <string name="mood_anxious">不安</string>
+    <string name="mood_depressed">落ち込み</string>
+    <string name="mood_angry">怒り</string>
+    <string name="mood_tired">疲れた</string>
+
+    <!-- ====== Plain 平易モード (DrugDetailScreen / ComparisonView トグル) ====== -->
+    <!-- PK パラメータ -->
+    <string name="plain_half_life_short">短時間作用型 (体内代謝が速く、通常1日3-4回服用)</string>
+    <string name="plain_half_life_medium">中間作用型 (1日1-2回服用で十分)</string>
+    <string name="plain_half_life_long">長時間作用型 (1日1回服用、時々飲み忘れても問題なし)</string>
+    <string name="plain_half_life_xlong">超長時間作用型 (体内に長く留まる; 服薬中止後1-4週間は残存効果)</string>
+    <string name="plain_protein_high">血漿蛋白と強く結合 (残り %1$d%% のみ遊離して細胞へ作用、透析で除去困難)</string>
+    <string name="plain_protein_mid">中程度に結合 (残り %1$d%% が遊離)</string>
+    <string name="plain_protein_low">結合は弱い (大部分 %1$d%% が遊離、全身に分布しやすい)</string>
+    <string name="plain_therapeutic_window">血中濃度が %1$s %2$s 未満では効果不十分、%3$s %2$s を超えると中毒リスク; 採血検査はこの範囲内が目標</string>
+    <string name="plain_cmax">服薬後の血中濃度ピーク: %1$s %2$s (服薬直後が最高)</string>
+    <string name="plain_cmin">次回服薬前の血中濃度: %1$s %2$s (効果が最も弱い時点)</string>
+    <string name="plain_cavg">定常状態の平均濃度: %1$s %2$s (長期服用後の血中平均値)</string>
+    <string name="plain_auc">AUC: 体内の総薬物暴露量; 値が大きいほど身体が薬に接触する量が多い</string>
+
+    <!-- CYP 役割 -->
+    <string name="plain_cyp_substrate">この薬は肝臓の酵素で分解される。服用量が多い、酵素が阻害される → 濃度上昇、過剰投与リスク</string>
+    <string name="plain_metabolism_cyp">主に肝臓のCYP酵素系で代謝されるため、CYP阻害薬/誘導薬と相互作用しやすい</string>
+    <string name="plain_metabolism_ugt">グルクロニド抱合 (Phase II) で代謝;CYP阻害薬/誘導薬との相互作用は通常なし; 相互作用は少ない</string>
+    <string name="plain_metabolism_renal">主に腎臓から未変化体で排泄; 肝代謝なし; CYP介在の相互作用ほぼなし; 腎不全時は減量</string>
+    <string name="plain_metabolism_hydrolysis">血漿/組織エステラーゼで加水分解; 肝腎機能に依存しない; 薬物相互作用ほぼなし</string>
+    <string name="plain_metabolism_deiodination">脱ヨウ素酵素で代謝 (甲状腺ホルモン特有の経路); 相互作用少ない</string>
+    <string name="plain_metabolism_mao">モノアミンオキシダーゼで代謝; チラミン反応 (チーズ効果) に注意</string>
+    <string name="plain_metabolism_dpp4">DPP-IV酵素で分解 (GLP-1アナログ); 注射投与</string>
+    <string name="plain_metabolism_beta_oxidation">脂肪酸β酸化 + UGTグルクロニド抱合; 複数経路で代謝</string>
+    <string name="plain_metabolism_other">その他の経路で代謝; 詳細はカタログ参照</string>
+    <string name="plain_cyp_inhibitor_strong">強い阻害薬: 併用薬の体内滞留を延長し、濃度が5倍以上上昇する恐れ (併用時は必ず減量)</string>
+    <string name="plain_cyp_inhibitor_moderate">中程度阻害薬: 併用薬の濃度を2-5倍上昇 (併用時は経過観察)</string>
+    <string name="plain_cyp_inhibitor_weak">弱い阻害薬: 影響はわずか; 通常調整不要</string>
+    <string name="plain_cyp_inducer_strong">強い誘導薬: 併用薬の体内滞留を短縮、濃度が50%%以上低下 (併用時は増量や変更; 経口避妊薬は効果消失)</string>
+    <string name="plain_cyp_inducer_moderate">中程度誘導薬: 併用薬の濃度を30-50%%低下</string>
+    <string name="plain_cyp_inducer_weak">弱い誘導薬: 影響は小さい</string>
+
+    <!-- 調整 (腎/肝/高齢) -->
+    <string name="plain_renal_none">腎機能正常なら調整不要</string>
+    <string name="plain_renal_monitor">腎機能低下時は腎機能と血中濃度を厳重にモニター</string>
+    <string name="plain_renal_reduce_egfr30">eGFR &lt; 30 で半量 (重度腎不全では禁忌)</string>
+    <string name="plain_renal_contra_egfr30">eGFR &lt; 30 では禁忌 (腎機能をさらに悪化させる)</string>
+    <string name="plain_hepatic_none">肝機能正常なら調整不要</string>
+    <string name="plain_hepatic_monitor">肝機能異常時は肝機能をモニター</string>
+    <string name="plain_hepatic_reduce_pugh_b">中等度肝障害 (Child-Pugh B) で半量</string>
+    <string name="plain_hepatic_reduce_pugh_c">重度肝障害 (Child-Pugh C) で半量または中止</string>
+    <string name="plain_hepatic_contra_severe">重度肝疾患では禁忌 (蓄積して中毒)</string>
+    <string name="plain_elderly">高齢者は代謝が低下し肝腎機能も衰えるため、低用量から開始し緩徐に増量; 転倒や認知機能の変化に注意</string>
+
+    <!-- 副作用 -->
+    <string name="plain_qtc_low">QT延長はほぼなし; 心臓への安全性良好</string>
+    <string name="plain_qtc_medium">中等度にQT延長; 他のQT延長薬併用や低K/Mg血症時に不整脈リスク上昇</string>
+    <string name="plain_qtc_high">著しいQT延長; torsades de pointes (致死的) 不整脈リスク; 他のQT延長薬との併用禁忌</string>
+    <string name="plain_metabolic_low">血糖/脂質/体重への影響なし</string>
+    <string name="plain_metabolic_medium">血糖上昇・体重増加の可能性 (数ヶ月で+2.5-5kg 増加は一般的)</string>
+    <string name="plain_metabolic_high">明らかな代謝異常: 顕著な体重増加、脂質異常、糖尿病リスク; 治療中は体重/血糖/脂質をモニター</string>
+    <string name="plain_agran_low">無顆粒球症リスクは非常に低い (特別なモニター不要)</string>
+    <string name="plain_agran_medium">白血球減少の可能性; 定期的な血液検査が必要</string>
+    <string name="plain_agran_high">重大な無顆粒球症リスク (致死的感染症); 1-4週間ごとの血液検査必須; 発熱時は直ちに受診</string>
+    <string name="plain_eps_low">錐体外路症状ほぼなし (筋ジストニー/振戦/アカシジア)</string>
+    <string name="plain_eps_medium">筋強剛、振戦、アカシジア、急性ジストニーの可能性</string>
+    <string name="plain_eps_high">著しいEPSリスク: パーキンソン症状/アカシジア/遅発性ジスキネジア (不可逆); 複数の抗精神病薬併用で相加効果</string>
+    <string name="plain_sedation_low">傾眠なし; 運転可能</string>
+    <string name="plain_sedation_medium">軽度の傾眠の可能性; 服薬初期は運転/機械操作を避ける</string>
+    <string name="plain_sedation_high">明らかな鎮静; 服薬後運転・高所作業禁止; 高齢者は転倒/股関節骨折リスク増加</string>
+    <string name="plain_sedation_xhigh">強い鎮静; 日常生活に重大な影響; 他の鎮静薬併用で呼吸抑制リスク</string>
+    <string name="plain_sexual_low">性機能への影響ほぼなし</string>
+    <string name="plain_sexual_medium">性欲低下/勃起障害の可能性; 患者によっては薬剤変更</string>
+    <string name="plain_sexual_high">明らかな性機能障害 (性欲低下、ED、射精障害); 中止理由の代表</string>
+    <string name="plain_prolactin_low">プロラクチンレベルへの影響なし</string>
+    <string name="plain_prolactin_medium">軽度プロラクチン上昇; 通常無症状</string>
+    <string name="plain_prolactin_high">顕著なプロラクチン上昇: 女性は月経異常/無月経/乳汁漏出、男性は女性化乳房/性機能低下; 長期高プロラクチン血症で骨密度低下リスク</string>
+    <string name="plain_anticholinergic_0">抗コリン負荷なし; 口渇/便秘/認知機能低下なし</string>
+    <string name="plain_anticholinergic_1">軽度抗コリン作用: 口渇や軽度の便秘の可能性</string>
+    <string name="plain_anticholinergic_2">中等度: 明らかな口渇/便秘/霧視; 高齢者は認知機能低下リスク</string>
+    <string name="plain_anticholinergic_3plus">重度: 重度の口渇/便秘/霧視/尿閉/せん妄; 高齢者は避ける (Beers caution)</string>
+
+    <!-- 引用/ガイドライン -->
+    <string name="plain_guideline_agnp">2017年国際精神科TDMコンセンサス (Hiemkeら, Pharmacopsychiatry 2018)</string>
+    <string name="plain_guideline_fda">FDA医薬品ラベル (米国FDA承認の添付文書)</string>
+    <string name="plain_guideline_cpic">CPIC 薬物遺伝子投与量ガイドライン (臨床薬理遺伝学実装コンソーシアム)</string>
+    <string name="plain_guideline_pmid">PubMed 医学文献データベース収録の査読済み研究</string>
+    <string name="plain_guideline_acr">米国リウマチ学会ガイドライン</string>
+    <string name="plain_guideline_aua">米国泌尿器科学会ガイドライン</string>
+    <string name="plain_guideline_beers">Beers 高齢者潜在的不適切処方基準 (2019年米国老年医学会)</string>
+    <string name="plain_guideline_china_national">中国国家薬品監督管理局『麻薬および向精神薬品品目リスト』</string>
+    <string name="plain_guideline_china_general">中国薬典 / 国内添付文書</string>
+
+    <!-- ====== DrugDetailScreen CYP 役割 / 副作用行ラベル ====== -->
+    <string name="plain_atc_note">ATCコード = WHOが各薬に付与する固有の分類番号。臨床医が同系統の薬を識別するために使用</string>
+    <string name="cyp_role_substrate">基質として (代謝される)</string>
+    <string name="cyp_role_inhibitor">阻害薬として (他薬に影響)</string>
+    <string name="cyp_role_inducer">誘導薬として (他薬に影響)</string>
+    <string name="risk_qtc">QTc延長</string>
+    <string name="risk_metabolic">代謝症候群</string>
+    <string name="risk_agranulocytosis">無顆粒球症</string>
+    <string name="risk_eps">錐体外路症状</string>
+    <string name="risk_sedation">鎮静</string>
+    <string name="risk_sexual">性機能障害</string>
+    <string name="risk_prolactin">高プロラクチン血症</string>
+    <string name="adj_renal">腎機能</string>
+    <string name="adj_hepatic">肝機能</string>
+    <string name="adj_elderly">高齢者</string>
+    <string name="adj_smoking">喫煙</string>
+    <string name="adj_quit_smoking">禁煙</string>
+    <string name="auc_extra"> — 倍数 = 併用時の濃度変化倍数</string>
+
+    <!-- ====== ComparisonView 2剤比較: セクションタイトル + 内容 ====== -->
+    <string name="cmp_section_basic">基本情報</string>
+    <string name="cmp_section_pk">薬物動態</string>
+    <string name="cmp_section_window">治療域</string>
+    <string name="cmp_section_cyp">CYP役割</string>
+    <string name="cmp_section_adverse">主な副作用</string>
+    <string name="cmp_section_adjust">用量調整</string>
+    <string name="cmp_section_monitor">モニタリング</string>
+    <string name="cmp_section_overdose">過剰投与</string>
+    <string name="cmp_section_desc_basic">薬剤の一般名/商品名、WHO ATC分類コード</string>
+    <string name="cmp_section_desc_pk">体内での吸収・分布・代謝・排泄。F=バイオアベイラビリティ、t½=半減期 (血中濃度が半分になる時間)</string>
+    <string name="cmp_section_desc_window">血中濃度が低い=効果不十分、高い=中毒。採血検査はこの範囲内が目標</string>
+    <string name="cmp_section_desc_cyp">CYP = 肝臓の薬物分解酵素。基質=分解される、阻害薬=他薬を遅らせる、誘導薬=他薬を速める (効果を弱める)</string>
+    <string name="cmp_section_desc_adverse">服用後に現れる可能性のある副作用。極低=ほぼ心配不要、極高=必ずモニター</string>
+    <string name="cmp_section_desc_adjust">腎/肝/高齢者で減量が必要か。eGFR &lt; 30 が腎不全の警告ライン</string>
+    <string name="cmp_section_desc_monitor">服用中の検査 (血液一般/肝機能/心電図等)、頻度はリスクにより決定</string>
+
+    <!-- ====== ComparisonView KeyDiff 平易な差分 (label + tag) ====== -->
+    <string name="cmp_diff_window_format">• 治療域 (血中安全濃度範囲): %1$s = %2$s、%3$s = %4$s (同じ単位)</string>
+    <string name="cmp_diff_window_no_a">• %1$s には明確な治療域なし、%2$s はTDMモニタリングが必要</string>
+    <string name="cmp_diff_window_no_b">• %1$s には明確な治療域なし、%2$s はTDMモニタリングが必要</string>
+    <string name="cmp_diff_half_life_short">短時間作用型</string>
+    <string name="cmp_diff_half_life_medium">長時間作用型</string>
+    <string name="cmp_diff_half_life_xlong">超長時間作用型</string>
+    <string name="cmp_diff_half_life_format">• 半減期: %1$s ≈ %2$dh (%3$s)、%4$s ≈ %5$dh (%6$s)</string>
+    <string name="cmp_diff_only_a_format">• %1$s のみの高リスク: %2$s</string>
+    <string name="cmp_diff_only_b_format">• %1$s のみの高リスク: %2$s</string>
+    <string name="cmp_diff_cyp_inh_a">• %1$s はCYP阻害薬だが%2$sは違う → 併用で%3$sが%4$sの濃度を上げる</string>
+    <string name="cmp_diff_cyp_inh_b">• %1$s はCYP阻害薬だが%2$sは違う → 併用で%3$sが%4$sの濃度を上げる</string>
+    <string name="cmp_diff_cyp_ind_a">• %1$s は強いCYP誘導薬、%2$s の効果を消失させる (増量または変更が必要)</string>
+    <string name="cmp_diff_cyp_ind_b">• %1$s は強いCYP誘導薬、%2$s の効果を消失させる (増量または変更が必要)</string>
+    <string name="cmp_diff_elderly_diff">• 高齢者使用注意: 2剤の添付文書記載が異なる、医師に相談</string>
+    <string name="cmp_diff_highrisk_qt">QT延長</string>
+    <string name="cmp_diff_highrisk_agran">無顆粒球症</string>
+    <string name="cmp_diff_highrisk_eps">EPS</string>
+    <string name="cmp_diff_highrisk_sedation">鎮静</string>
+
+    <!-- ====== ComparisonView フィールドラベル ====== -->
+    <string name="cmp_label_protein_binding">蛋白結合 %1$d%%</string>
+    <string name="cmp_label_pathway">代謝経路: %1$s</string>
+    <string name="cmp_label_qtc">QTc延長: %1$s</string>
+    <string name="cmp_label_metabolic">代謝症候群: %1$s</string>
+    <string name="cmp_label_agranulocytosis">無顆粒球症: %1$s</string>
+    <string name="cmp_label_eps">EPS: %1$s</string>
+    <string name="cmp_label_sedation">鎮静: %1$s</string>
+    <string name="cmp_label_sexual">性機能: %1$s</string>
+    <string name="cmp_label_prolactin">高プロラクチン: %1$s</string>
+    <string name="cmp_label_anticholinergic">抗コリン負荷: %1$d / 3</string>
+    <string name="cmp_label_renal">腎: %1$s</string>
+    <string name="cmp_label_hepatic">肝: %1$s</string>
+    <string name="cmp_label_elderly_val">高齢者: %1$s</string>
+    <string name="cmp_label_elderly_empty">高齢者: —</string>
+    <string name="cmp_label_freq_val">頻度: %1$s</string>
+    <string name="cmp_label_freq_empty">頻度: —</string>
+    <string name="cmp_label_items">項目: %1$s</string>
+    <string name="cmp_label_items_empty">項目: —</string>
+    <string name="cmp_label_toxic">中毒 ≥%1$d mg</string>
+    <string name="cmp_label_fatal">致死 ≥%1$d mg</string>
+    <string name="cmp_label_antidote"> · 解毒剤:%1$s</string>
+    <string name="cmp_label_severity">重症度: %1$s</string>
+    <string name="cmp_label_severity_with_doses">重症度: %1$s · %2$s%3$s</string>
+    <string name="cmp_label_no_entry">未入力</string>
+    <string name="cmp_label_pathway_empty">未表記</string>
+
+    <!-- ====== ComparisonView RiskLevel 翻訳 ====== -->
+    <string name="risk_level_very_high">極高</string>
+    <string name="risk_level_high">高</string>
+    <string name="risk_level_medium">中</string>
+    <string name="risk_level_low">低</string>
+    <string name="risk_level_very_low">極低</string>
+    <string name="cyp_strength_strong">強い</string>
+    <string name="cyp_strength_moderate">中程度</string>
+    <string name="cyp_strength_weak">弱い</string>
+
+    <!-- ====== DrugDetailScreen セクションタイトル (ComparisonView と区別) ====== -->
+    <string name="drug_section_cyp">CYP 役割</string>
+    <string name="drug_section_pk">PK 推定 (デモ: 200 mg bid 5 日目, 70 kg)</string>
+    <string name="drug_section_pharmacology">薬理作用</string>
+    <string name="drug_section_adverse">主な副作用</string>
+    <string name="drug_section_overdose">過量服薬 (70kg 成人)</string>
+    <string name="drug_section_adjust">用量調整</string>
+    <string name="drug_section_monitor">モニタリング要件</string>
+    <string name="drug_anticholinergic_score">%1$d / 3</string>
+    <string name="drug_pk_meta">t½ %1$.1f h · 蛋白結合 %2$d%%</string>
+
+    <!-- ====== ComparisonView 平易モードトグル / diff 空 ====== -->
+    <string name="cmp_lay_diff_title">📖 重要な差異 (平易版)</string>
+    <string name="cmp_lay_diff_empty">2剤は主要指標で明らかな差異がありません。実際の使用は医師に従ってください。</string>
+    <string name="cmp_lay_disclaimer">⚠️ すべてのパラメータは実際の添付文書/検査値で確認してください。\n投薬調整、相互作用警告は医師または臨床薬剤師にご相談ください。</string>
+
 </resources>

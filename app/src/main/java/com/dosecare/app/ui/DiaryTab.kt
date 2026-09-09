@@ -217,7 +217,7 @@ private fun DiaryCard(
                 Text(text = mood.emoji, style = MaterialTheme.typography.titleLarge)
                 Spacer(Modifier.width(8.dp))
                 Text(
-                    text = mood.displayName,
+                    text = stringResource(mood.displayNameRes),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.weight(1f)
@@ -280,8 +280,7 @@ private fun DiaryEditorDialog(
                     onExpandedChange = { moodOpen = it }
                 ) {
                     OutlinedTextField(
-                        // TODO(v0.9b): m.displayName 是 DiaryMood enum 字段, 跟 Severity 同理
-                        value = "${mood.emoji} ${mood.displayName}",
+                        value = "${mood.emoji} ${stringResource(mood.displayNameRes)}",
                         onValueChange = {},
                         readOnly = true,
                         label = { Text(stringResource(R.string.diary_mood)) },
@@ -291,7 +290,7 @@ private fun DiaryEditorDialog(
                     ExposedDropdownMenu(expanded = moodOpen, onDismissRequest = { moodOpen = false }) {
                         DiaryMood.entries.forEach { m ->
                             DropdownMenuItem(
-                                text = { Text("${m.emoji} ${m.displayName}") },
+                                text = { Text("${m.emoji} ${stringResource(m.displayNameRes)}") },
                                 onClick = { mood = m; moodOpen = false }
                             )
                         }

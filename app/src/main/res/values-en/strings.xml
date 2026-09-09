@@ -263,4 +263,205 @@
     <string name="calendar_prev_month">Previous month</string>
     <string name="calendar_next_month">Next month</string>
 
+    <!-- ====== Diary moods (6 options) ====== -->
+    <string name="mood_happy">Happy</string>
+    <string name="mood_calm">Calm</string>
+    <string name="mood_anxious">Anxious</string>
+    <string name="mood_depressed">Depressed</string>
+    <string name="mood_angry">Angry</string>
+    <string name="mood_tired">Tired</string>
+
+    <!-- ====== Plain layman mode (DrugDetailScreen / ComparisonView toggle) ====== -->
+    <!-- PK parameters -->
+    <string name="plain_half_life_short">Short-acting (metabolized quickly; usually 3-4 doses per day)</string>
+    <string name="plain_half_life_medium">Medium-acting (1-2 doses per day is enough)</string>
+    <string name="plain_half_life_long">Long-acting (once-daily dosing; occasional missed doses are fine)</string>
+    <string name="plain_half_life_xlong">Very long-acting (stays in body a long time; residual effects last 1-4 weeks after stopping)</string>
+    <string name="plain_protein_high">Highly bound to blood proteins (only %1$d%% free to enter cells; hard to dialyze)</string>
+    <string name="plain_protein_mid">Moderately bound (%1$d%% free fraction)</string>
+    <string name="plain_protein_low">Low binding (most %1$d%% free; easily distributed throughout the body)</string>
+    <string name="plain_therapeutic_window">Blood levels below %1$s %2$s may be ineffective; above %3$s %2$s risk toxicity; lab draws should fall in this range</string>
+    <string name="plain_cmax">Peak blood level after dose: %1$s %2$s (highest right after taking)</string>
+    <string name="plain_cmin">Trough level before next dose: %1$s %2$s (weakest effect)</string>
+    <string name="plain_cavg">Steady-state average level: %1$s %2$s (long-term average in blood)</string>
+    <string name="plain_auc">AUC: total drug exposure in the body; higher value means more drug contact</string>
+
+    <!-- CYP roles -->
+    <string name="plain_cyp_substrate">This drug is broken down by liver enzymes. Higher dose or enzyme inhibition raises blood levels → overdose risk</string>
+    <string name="plain_metabolism_cyp">Mainly metabolized by liver CYP enzymes; prone to interactions with CYP inhibitors/inducers</string>
+    <string name="plain_metabolism_ugt">Metabolized by glucuronidation (Phase II); usually no CYP-mediated interactions; few interactions</string>
+    <string name="plain_metabolism_renal">Excreted unchanged by the kidneys; no hepatic metabolism; almost no CYP-mediated interactions; reduce dose in renal failure</string>
+    <string name="plain_metabolism_hydrolysis">Hydrolyzed by plasma/tissue esterases; does not depend on liver/kidney function; few drug interactions</string>
+    <string name="plain_metabolism_deiodination">Metabolized by deiodinase (thyroid hormone-specific pathway); few interactions</string>
+    <string name="plain_metabolism_mao">Metabolized by monoamine oxidase; watch for tyramine reaction (cheese effect)</string>
+    <string name="plain_metabolism_dpp4">Degraded by DPP-IV enzyme (GLP-1 analogs); injectable administration</string>
+    <string name="plain_metabolism_beta_oxidation">Via fatty acid β-oxidation + UGT glucuronidation; multi-pathway metabolism</string>
+    <string name="plain_metabolism_other">Other metabolic pathways; see catalog for details</string>
+    <string name="plain_cyp_inhibitor_strong">Strong inhibitor: makes other drugs stay longer in body; levels may rise 5× (must reduce co-administered dose)</string>
+    <string name="plain_cyp_inhibitor_moderate">Moderate inhibitor: raises other drug levels 2-5× (monitor when co-administered)</string>
+    <string name="plain_cyp_inhibitor_weak">Weak inhibitor: minimal effect; usually no adjustment needed</string>
+    <string name="plain_cyp_inducer_strong">Strong inducer: shortens other drug residence; levels may drop 50%% or more (often need higher dose or alternative; oral contraceptives may fail)</string>
+    <string name="plain_cyp_inducer_moderate">Moderate inducer: lowers other drug levels 30-50%%</string>
+    <string name="plain_cyp_inducer_weak">Weak inducer: minor effect</string>
+
+    <!-- Adjustments (renal/hepatic/elderly) -->
+    <string name="plain_renal_none">No adjustment if kidney function is normal</string>
+    <string name="plain_renal_monitor">If kidney function declines, closely monitor renal function and drug levels</string>
+    <string name="plain_renal_reduce_egfr30">When eGFR &lt; 30, halve the dose (contraindicated in severe renal failure)</string>
+    <string name="plain_renal_contra_egfr30">Contraindicated when eGFR &lt; 30 (may further damage kidney function)</string>
+    <string name="plain_hepatic_none">No adjustment if liver function is normal</string>
+    <string name="plain_hepatic_monitor">Monitor liver function if abnormal</string>
+    <string name="plain_hepatic_reduce_pugh_b">Moderate liver impairment (Child-Pugh B): halve the dose</string>
+    <string name="plain_hepatic_reduce_pugh_c">Severe liver impairment (Child-Pugh C): halve or discontinue</string>
+    <string name="plain_hepatic_contra_severe">Contraindicated in severe liver disease (accumulation → toxicity)</string>
+    <string name="plain_elderly">Elderly have slower metabolism and declining liver/kidney function; start low, titrate slowly, watch for falls and cognitive changes</string>
+
+    <!-- Side effects -->
+    <string name="plain_qtc_low">Minimal QT prolongation; good cardiac safety profile</string>
+    <string name="plain_qtc_medium">Moderate QT prolongation; arrhythmia risk rises with other QT-prolonging drugs or low K+/Mg2+</string>
+    <string name="plain_qtc_high">Marked QT prolongation; risk of torsades de pointes (fatal arrhythmia); contraindicated with other QT drugs</string>
+    <string name="plain_metabolic_low">No effect on blood glucose/lipids/weight</string>
+    <string name="plain_metabolic_medium">May raise blood glucose and weight gain (+2.5-5 kg over months is common)</string>
+    <string name="plain_metabolic_high">Significant metabolic disturbance: weight gain, dyslipidemia, diabetes risk; monitor weight/glucose/lipids during treatment</string>
+    <string name="plain_agran_low">Agranulocytosis risk very low (no special monitoring required)</string>
+    <string name="plain_agran_medium">May cause white blood cell drop; periodic CBC required</string>
+    <string name="plain_agran_high">Significant agranulocytosis risk (fatal infection); CBC every 1-4 weeks mandatory; seek care immediately if fever</string>
+    <string name="plain_eps_low">Minimal extrapyramidal symptoms (dystonia/tremor/akathisia)</string>
+    <string name="plain_eps_medium">May cause rigidity, tremor, akathisia, acute dystonia</string>
+    <string name="plain_eps_high">Marked EPS risk: parkinsonism/akathisia/tardive dyskinesia (irreversible); additive with multiple antipsychotics</string>
+    <string name="plain_sedation_low">Minimal sedation; safe to drive</string>
+    <string name="plain_sedation_medium">Mild sedation possible; avoid driving/operating machinery early in treatment</string>
+    <string name="plain_sedation_high">Marked sedation; avoid driving/climbing; increased fall/hip-fracture risk in elderly</string>
+    <string name="plain_sedation_xhigh">Deep sedation; severely impairs daily activities; respiratory depression risk with other sedatives</string>
+    <string name="plain_sexual_low">Minimal effect on sexual function</string>
+    <string name="plain_sexual_medium">May cause decreased libido/erectile dysfunction; some patients switch drugs</string>
+    <string name="plain_sexual_high">Marked sexual dysfunction (low libido, ED, ejaculatory disorder); common reason for discontinuation</string>
+    <string name="plain_prolactin_low">No effect on prolactin</string>
+    <string name="plain_prolactin_medium">Mild prolactin elevation; usually asymptomatic</string>
+    <string name="plain_prolactin_high">Marked prolactin elevation: menstrual irregularity/amenorrhea/galactorrhea in women, gynecomastia/sexual dysfunction in men; long-term risk of decreased bone density</string>
+    <string name="plain_anticholinergic_0">No anticholinergic burden; no dry mouth/constipation/cognitive decline</string>
+    <string name="plain_anticholinergic_1">Mild anticholinergic: possible dry mouth or mild constipation</string>
+    <string name="plain_anticholinergic_2">Moderate: marked dry mouth/constipation/blurred vision; cognitive decline risk in elderly</string>
+    <string name="plain_anticholinergic_3plus">Severe: marked dry mouth/constipation/blurred vision/urinary retention/delirium; avoid in elderly (Beers caution)</string>
+
+    <!-- Guidelines / references -->
+    <string name="plain_guideline_agnp">2017 International Psychiatric TDM Consensus (Hiemke et al., Pharmacopsychiatry 2018)</string>
+    <string name="plain_guideline_fda">FDA drug label (US FDA-approved prescribing information)</string>
+    <string name="plain_guideline_cpic">CPIC pharmacogenomic dosing guidelines (Clinical Pharmacogenetics Implementation Consortium)</string>
+    <string name="plain_guideline_pmid">Peer-reviewed research indexed in PubMed medical literature database</string>
+    <string name="plain_guideline_acr">American College of Rheumatology guideline</string>
+    <string name="plain_guideline_aua">American Urological Association guideline</string>
+    <string name="plain_guideline_beers">Beers Criteria for Potentially Inappropriate Medication Use in Older Adults (2019 American Geriatrics Society)</string>
+    <string name="plain_guideline_china_national">China NMPA \"Narcotic and Psychotropic Substances Catalog\"</string>
+    <string name="plain_guideline_china_general">Chinese Pharmacopoeia / Domestic drug label</string>
+
+    <!-- ====== DrugDetailScreen CYP roles / side effect row labels ====== -->
+    <string name="plain_atc_note">ATC code = the unique identifier WHO assigns to each drug, used by clinicians to identify drugs in the same class</string>
+    <string name="cyp_role_substrate">As substrate (metabolized)</string>
+    <string name="cyp_role_inhibitor">As inhibitor (affects other drugs)</string>
+    <string name="cyp_role_inducer">As inducer (affects other drugs)</string>
+    <string name="risk_qtc">QTc prolongation</string>
+    <string name="risk_metabolic">Metabolic syndrome</string>
+    <string name="risk_agranulocytosis">Agranulocytosis</string>
+    <string name="risk_eps">Extrapyramidal symptoms</string>
+    <string name="risk_sedation">Sedation</string>
+    <string name="risk_sexual">Sexual dysfunction</string>
+    <string name="risk_prolactin">Hyperprolactinemia</string>
+    <string name="adj_renal">Renal function</string>
+    <string name="adj_hepatic">Hepatic function</string>
+    <string name="adj_elderly">Elderly</string>
+    <string name="adj_smoking">Smoking</string>
+    <string name="adj_quit_smoking">Quit smoking</string>
+    <string name="auc_extra"> — multiple = concentration change factor when co-administered</string>
+
+    <!-- ====== ComparisonView two-drug comparison: section titles + content ====== -->
+    <string name="cmp_section_basic">Basics</string>
+    <string name="cmp_section_pk">Pharmacokinetics</string>
+    <string name="cmp_section_window">Therapeutic window</string>
+    <string name="cmp_section_cyp">CYP role</string>
+    <string name="cmp_section_adverse">Key adverse effects</string>
+    <string name="cmp_section_adjust">Dose adjustment</string>
+    <string name="cmp_section_monitor">Monitoring</string>
+    <string name="cmp_section_overdose">Overdose</string>
+    <string name="cmp_section_desc_basic">Drug generic/brand names and the WHO ATC classification code</string>
+    <string name="cmp_section_desc_pk">How the body absorbs, distributes, metabolizes, excretes the drug. F=bioavailability, t½=half-life (time for blood level to halve)</string>
+    <string name="cmp_section_desc_window">Low blood level = ineffective; high = toxic. Lab draws should fall in this range</string>
+    <string name="cmp_section_desc_cyp">CYP = liver enzymes that break down drugs. Substrate = broken down; inhibitor = slows other drugs; inducer = speeds up other drugs (making them less effective)</string>
+    <string name="cmp_section_desc_adverse">Possible side effects. Very low = usually safe; very high = mandatory monitoring</string>
+    <string name="cmp_section_desc_adjust">Whether renal/hepatic impairment or elderly status requires dose reduction. eGFR &lt; 30 is the renal failure warning line</string>
+    <string name="cmp_section_desc_monitor">Tests required during treatment (CBC / liver function / ECG, etc.); frequency depends on risk</string>
+
+    <!-- ====== ComparisonView KeyDiff layman differences (label + tag) ====== -->
+    <string name="cmp_diff_window_format">• Therapeutic window (safe blood level range): %1$s = %2$s, %3$s = %4$s (same unit)</string>
+    <string name="cmp_diff_window_no_a">• %1$s has no defined therapeutic window; %2$s needs TDM monitoring</string>
+    <string name="cmp_diff_window_no_b">• %1$s has no defined therapeutic window; %2$s needs TDM monitoring</string>
+    <string name="cmp_diff_half_life_short">Short-acting</string>
+    <string name="cmp_diff_half_life_medium">Long-acting</string>
+    <string name="cmp_diff_half_life_xlong">Very long-acting</string>
+    <string name="cmp_diff_half_life_format">• Half-life: %1$s ≈ %2$dh (%3$s), %4$s ≈ %5$dh (%6$s)</string>
+    <string name="cmp_diff_only_a_format">• %1$s unique high risk: %2$s</string>
+    <string name="cmp_diff_only_b_format">• %1$s unique high risk: %2$s</string>
+    <string name="cmp_diff_cyp_inh_a">• %1$s is a CYP inhibitor but %2$s is not → co-administration will raise %4$s levels via %3$s</string>
+    <string name="cmp_diff_cyp_inh_b">• %1$s is a CYP inhibitor but %2$s is not → co-administration will raise %4$s levels via %3$s</string>
+    <string name="cmp_diff_cyp_ind_a">• %1$s is a strong CYP inducer, will make %2$s ineffective (need higher dose or alternative)</string>
+    <string name="cmp_diff_cyp_ind_b">• %1$s is a strong CYP inducer, will make %2$s ineffective (need higher dose or alternative)</string>
+    <string name="cmp_diff_elderly_diff">• Elderly use caution: drug labels differ; consult your physician</string>
+    <string name="cmp_diff_highrisk_qt">QT prolongation</string>
+    <string name="cmp_diff_highrisk_agran">Agranulocytosis</string>
+    <string name="cmp_diff_highrisk_eps">EPS</string>
+    <string name="cmp_diff_highrisk_sedation">Sedation</string>
+
+    <!-- ====== ComparisonView field labels ====== -->
+    <string name="cmp_label_protein_binding">Protein binding %1$d%%</string>
+    <string name="cmp_label_pathway">Metabolic pathway: %1$s</string>
+    <string name="cmp_label_qtc">QTc prolongation: %1$s</string>
+    <string name="cmp_label_metabolic">Metabolic syndrome: %1$s</string>
+    <string name="cmp_label_agranulocytosis">Agranulocytosis: %1$s</string>
+    <string name="cmp_label_eps">EPS: %1$s</string>
+    <string name="cmp_label_sedation">Sedation: %1$s</string>
+    <string name="cmp_label_sexual">Sexual dysfunction: %1$s</string>
+    <string name="cmp_label_prolactin">Hyperprolactinemia: %1$s</string>
+    <string name="cmp_label_anticholinergic">Anticholinergic load: %1$d / 3</string>
+    <string name="cmp_label_renal">Renal: %1$s</string>
+    <string name="cmp_label_hepatic">Hepatic: %1$s</string>
+    <string name="cmp_label_elderly_val">Elderly: %1$s</string>
+    <string name="cmp_label_elderly_empty">Elderly: —</string>
+    <string name="cmp_label_freq_val">Frequency: %1$s</string>
+    <string name="cmp_label_freq_empty">Frequency: —</string>
+    <string name="cmp_label_items">Items: %1$s</string>
+    <string name="cmp_label_items_empty">Items: —</string>
+    <string name="cmp_label_toxic">Toxic ≥%1$d mg</string>
+    <string name="cmp_label_fatal">Lethal ≥%1$d mg</string>
+    <string name="cmp_label_antidote"> · Antidote: %1$s</string>
+    <string name="cmp_label_severity">Severity: %1$s</string>
+    <string name="cmp_label_severity_with_doses">Severity: %1$s · %2$s%3$s</string>
+    <string name="cmp_label_no_entry">Not entered</string>
+    <string name="cmp_label_pathway_empty">Not marked</string>
+
+    <!-- ====== ComparisonView RiskLevel translation ====== -->
+    <string name="risk_level_very_high">Very high</string>
+    <string name="risk_level_high">High</string>
+    <string name="risk_level_medium">Medium</string>
+    <string name="risk_level_low">Low</string>
+    <string name="risk_level_very_low">Very low</string>
+    <string name="cyp_strength_strong">Strong</string>
+    <string name="cyp_strength_moderate">Moderate</string>
+    <string name="cyp_strength_weak">Weak</string>
+
+    <!-- ====== DrugDetailScreen section titles (distinct from ComparisonView sections) ====== -->
+    <string name="drug_section_cyp">CYP Role</string>
+    <string name="drug_section_pk">PK Estimate (Demo: 200 mg bid on Day 5, 70 kg)</string>
+    <string name="drug_section_pharmacology">Pharmacology</string>
+    <string name="drug_section_adverse">Key Adverse Effects</string>
+    <string name="drug_section_overdose">Overdose (70 kg adult)</string>
+    <string name="drug_section_adjust">Dose Adjustment</string>
+    <string name="drug_section_monitor">Monitoring Requirements</string>
+    <string name="drug_anticholinergic_score">%1$d / 3</string>
+    <string name="drug_pk_meta">t½ %1$.1f h · Protein binding %2$d%%</string>
+
+    <!-- ====== ComparisonView layman mode toggle / diff empty ====== -->
+    <string name="cmp_lay_diff_title">📖 Key Differences (Layman)</string>
+    <string name="cmp_lay_diff_empty">The two drugs show no obvious differences in main indicators. Follow your physician for actual use.</string>
+    <string name="cmp_lay_disclaimer">⚠️ All parameters should be verified against the actual drug label / lab values.\nFor medication adjustments and interaction alerts, consult your physician or clinical pharmacist.</string>
+
 </resources>

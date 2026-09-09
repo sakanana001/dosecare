@@ -1,10 +1,12 @@
 package com.dosecare.app.data.db
 
+import androidx.annotation.StringRes
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
 import androidx.room.Index
 import androidx.room.PrimaryKey
+import com.dosecare.app.R
 
 /**
  * 用户数据表 Entity (v0.7 Phase C 启用, v0.8a Phase F 扩 diary_entry)
@@ -143,14 +145,16 @@ data class DiaryEntryEntity(
 
 /**
  * 日记心境 (6 选) — 记录当下状态
+ *
+ * v0.9c: displayName 改 @StringRes displayNameRes, UI 用 stringResource(displayNameRes) 走当前 locale
  */
-enum class DiaryMood(val displayName: String, val emoji: String) {
-    Happy("开心", "😊"),
-    Calm("平静", "😌"),
-    Anxious("焦虑", "😟"),
-    Depressed("低落", "😔"),
-    Angry("愤怒", "😠"),
-    Tired("疲惫", "😴");
+enum class DiaryMood(@StringRes val displayNameRes: Int, val emoji: String) {
+    Happy(R.string.mood_happy, "😊"),
+    Calm(R.string.mood_calm, "😌"),
+    Anxious(R.string.mood_anxious, "😟"),
+    Depressed(R.string.mood_depressed, "😔"),
+    Angry(R.string.mood_angry, "😠"),
+    Tired(R.string.mood_tired, "😴");
 
     companion object {
         fun fromName(name: String?): DiaryMood =

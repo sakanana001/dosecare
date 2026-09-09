@@ -1,5 +1,6 @@
 package com.dosecare.app.ui
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -37,12 +38,16 @@ import com.dosecare.app.domain.pk.PkModel
  * - RuleEngine 评估给出动态警示(代谢/相加/风险)
  * - 两者并存,SpecComparison 在前,RuleEngine 结果在后
  *
- * v0.9a i18n: 已处理顶栏 toggle + disclaimer + 关键差异标题.
- *   TODO(v0.9b): buildComparisonSections + PlainKeyDiffCard 的内部中文字符串
- *   (section 标题: 基本信息/药代动力学/治疗窗/CYP 角色/关键不良反应/剂量调整/监测/药物过量;
- *    字段 label: 蛋白结合/代谢途径/QTc 延长/粒细胞缺乏/抗胆碱能/肾/肝/老年/频次/项目/严重度/中毒/致死/解毒剂;
- *    PlainKeyDiffCard 文本生成: 治疗窗/无明确治疗窗/TDM 监测/短效/长效/超长效/QT 延长/粒缺/EPS/镇静/高风险 等)
- *   都需要重构为 stringResource — 目前 strings.xml 未提供这些 key, 留待 v0.9b 父 agent 处理.
+ * v0.9a i18n: 顶栏 toggle + disclaimer + 关键差异标题.
+ * v0.9c i18n done:
+ *   - buildComparisonSections + sectionPlainNote + SpecSection 改用 @StringRes
+ *   - 8 个 section 标题 (基本信息/药代动力学/治疗窗/CYP 角色/关键不良反应/剂量调整/监测/药物过量) → cmp_section_*
+ *   - 7 个 section 通俗解释 → cmp_section_desc_*
+ *   - 25+ 字段 label (蛋白结合/代谢途径/QTc 延长/粒细胞缺乏/EPS/镇静/性功能/高泌乳素/抗胆碱能/肾/肝/老年/频次/项目/中毒/致死/严重度/解毒剂) → cmp_label_*
+ *   - RiskLevel 5 翻译 → risk_level_*
+ *   - CypStrength 3 翻译 → cyp_strength_strong/moderate/weak
+ *   - PlainKeyDiffCard 6 类关键差异 (治疗窗/半衰期/独有风险/CYP 抑制-CYP 诱导/老年) → cmp_diff_*
+ *   - 4 个高风险 tag (QT 延长/粒缺/EPS/镇静) → cmp_diff_highrisk_*
  */
 @Composable
 fun SpecComparison(drugA: Drug, drugB: Drug) {
@@ -117,53 +122,57 @@ private fun PlainKeyDiffCard(drugA: Drug, drugB: Drug) {
         val aLowHigh = "${drugA.therapeuticWindow!!.low.toInt()}-${drugA.therapeuticWindow!!.high.toInt()}"
         val bLowHigh = "${drugB.therapeuticWindow!!.low.toInt()}-${drugB.therapeuticWindow!!.high.toInt()}"
         if (aLowHigh != bLowHigh) {
-            diffs += "• 治疗窗 (血药安全范围): ${drugA.genericNameZh} = $aLowHigh, ${drugB.genericNameZh} = $bLowHigh (单位相同)"
+            diffs += stringResource(R.string.cmp_diff_window_format, drugA.genericNameZh, aLowHigh, drugB.genericNameZh, bLowHigh)
         }
     } else if (drugA.therapeuticWindow == null && drugB.therapeuticWindow != null) {
-        diffs += "• ${drugA.genericNameZh} 无明确治疗窗, ${drugB.genericNameZh} 需要 TDM 监测"
+        diffs += stringResource(R.string.cmp_diff_window_no_a, drugA.genericNameZh, drugB.genericNameZh)
     } else if (drugB.therapeuticWindow == null && drugA.therapeuticWindow != null) {
-        diffs += "• ${drugB.genericNameZh} 无明确治疗窗, ${drugA.genericNameZh} 需要 TDM 监测"
+        diffs += stringResource(R.string.cmp_diff_window_no_b, drugB.genericNameZh, drugA.genericNameZh)
     }
     // 半衰期
     if (drugA.pkModel is PkModel.OneCompartmentWithAbsorption && drugB.pkModel is PkModel.OneCompartmentWithAbsorption) {
         val aT12 = drugA.pkModel.tHalfHours
         val bT12 = drugB.pkModel.tHalfHours
         if (kotlin.math.abs(aT12 - bT12) > 6) {
-            val aDesc = if (aT12 < 24) "短效" else if (aT12 < 72) "长效" else "超长效"
-            val bDesc = if (bT12 < 24) "短效" else if (bT12 < 72) "长效" else "超长效"
-            diffs += "• 半衰期: ${drugA.genericNameZh} ≈ ${aT12.toInt()}h ($aDesc), ${drugB.genericNameZh} ≈ ${bT12.toInt()}h ($bDesc)"
+            val aDesc = if (aT12 < 24) stringResource(R.string.cmp_diff_half_life_short)
+                        else if (aT12 < 72) stringResource(R.string.cmp_diff_half_life_medium)
+                        else stringResource(R.string.cmp_diff_half_life_xlong)
+            val bDesc = if (bT12 < 24) stringResource(R.string.cmp_diff_half_life_short)
+                        else if (bT12 < 72) stringResource(R.string.cmp_diff_half_life_medium)
+                        else stringResource(R.string.cmp_diff_half_life_xlong)
+            diffs += stringResource(R.string.cmp_diff_half_life_format, drugA.genericNameZh, aT12.toInt(), aDesc, drugB.genericNameZh, bT12.toInt(), bDesc)
         }
     }
     // 风险
     val aHigh = mutableListOf<String>().apply {
-        if (drugA.adverseEffects.qtcProlongation == RiskLevel.HIGH || drugA.adverseEffects.qtcProlongation == RiskLevel.VERY_HIGH) add("QT 延长")
-        if (drugA.adverseEffects.agranulocytosis == RiskLevel.HIGH || drugA.adverseEffects.agranulocytosis == RiskLevel.VERY_HIGH) add("粒缺")
-        if (drugA.adverseEffects.extrapyramidal == RiskLevel.HIGH || drugA.adverseEffects.extrapyramidal == RiskLevel.VERY_HIGH) add("EPS")
-        if (drugA.adverseEffects.sedation == RiskLevel.HIGH || drugA.adverseEffects.sedation == RiskLevel.VERY_HIGH) add("镇静")
+        if (drugA.adverseEffects.qtcProlongation == RiskLevel.HIGH || drugA.adverseEffects.qtcProlongation == RiskLevel.VERY_HIGH) add(stringResource(R.string.cmp_diff_highrisk_qt))
+        if (drugA.adverseEffects.agranulocytosis == RiskLevel.HIGH || drugA.adverseEffects.agranulocytosis == RiskLevel.VERY_HIGH) add(stringResource(R.string.cmp_diff_highrisk_agran))
+        if (drugA.adverseEffects.extrapyramidal == RiskLevel.HIGH || drugA.adverseEffects.extrapyramidal == RiskLevel.VERY_HIGH) add(stringResource(R.string.cmp_diff_highrisk_eps))
+        if (drugA.adverseEffects.sedation == RiskLevel.HIGH || drugA.adverseEffects.sedation == RiskLevel.VERY_HIGH) add(stringResource(R.string.cmp_diff_highrisk_sedation))
     }
     val bHigh = mutableListOf<String>().apply {
-        if (drugB.adverseEffects.qtcProlongation == RiskLevel.HIGH || drugB.adverseEffects.qtcProlongation == RiskLevel.VERY_HIGH) add("QT 延长")
-        if (drugB.adverseEffects.agranulocytosis == RiskLevel.HIGH || drugB.adverseEffects.agranulocytosis == RiskLevel.VERY_HIGH) add("粒缺")
-        if (drugB.adverseEffects.extrapyramidal == RiskLevel.HIGH || drugB.adverseEffects.extrapyramidal == RiskLevel.VERY_HIGH) add("EPS")
-        if (drugB.adverseEffects.sedation == RiskLevel.HIGH || drugB.adverseEffects.sedation == RiskLevel.VERY_HIGH) add("镇静")
+        if (drugB.adverseEffects.qtcProlongation == RiskLevel.HIGH || drugB.adverseEffects.qtcProlongation == RiskLevel.VERY_HIGH) add(stringResource(R.string.cmp_diff_highrisk_qt))
+        if (drugB.adverseEffects.agranulocytosis == RiskLevel.HIGH || drugB.adverseEffects.agranulocytosis == RiskLevel.VERY_HIGH) add(stringResource(R.string.cmp_diff_highrisk_agran))
+        if (drugB.adverseEffects.extrapyramidal == RiskLevel.HIGH || drugB.adverseEffects.extrapyramidal == RiskLevel.VERY_HIGH) add(stringResource(R.string.cmp_diff_highrisk_eps))
+        if (drugB.adverseEffects.sedation == RiskLevel.HIGH || drugB.adverseEffects.sedation == RiskLevel.VERY_HIGH) add(stringResource(R.string.cmp_diff_highrisk_sedation))
     }
     val onlyA = aHigh - bHigh.toSet()
     val onlyB = bHigh - aHigh.toSet()
-    if (onlyA.isNotEmpty()) diffs += "• ${drugA.genericNameZh} 独有的高风险: ${onlyA.joinToString("、")}"
-    if (onlyB.isNotEmpty()) diffs += "• ${drugB.genericNameZh} 独有的高风险: ${onlyB.joinToString("、")}"
+    if (onlyA.isNotEmpty()) diffs += stringResource(R.string.cmp_diff_only_a_format, drugA.genericNameZh, onlyA.joinToString("、"))
+    if (onlyB.isNotEmpty()) diffs += stringResource(R.string.cmp_diff_only_b_format, drugB.genericNameZh, onlyB.joinToString("、"))
     // CYP 差异
     if (drugA.cypProfile.inhibitors.isNotEmpty() && drugB.cypProfile.inhibitors.isEmpty()) {
-        diffs += "• ${drugA.genericNameZh} 是 CYP 抑制剂, ${drugB.genericNameZh} 不是 → 联用时 ${drugA.genericNameZh} 会让 ${drugB.genericNameZh} 浓度升高"
+        diffs += stringResource(R.string.cmp_diff_cyp_inh_a, drugA.genericNameZh, drugB.genericNameZh, drugA.genericNameZh, drugB.genericNameZh)
     } else if (drugB.cypProfile.inhibitors.isNotEmpty() && drugA.cypProfile.inhibitors.isEmpty()) {
-        diffs += "• ${drugB.genericNameZh} 是 CYP 抑制剂, ${drugA.genericNameZh} 不是 → 联用时 ${drugB.genericNameZh} 会让 ${drugA.genericNameZh} 浓度升高"
+        diffs += stringResource(R.string.cmp_diff_cyp_inh_b, drugB.genericNameZh, drugA.genericNameZh, drugB.genericNameZh, drugA.genericNameZh)
     } else if (drugA.cypProfile.inducers.isNotEmpty() && drugB.cypProfile.inducers.isEmpty()) {
-        diffs += "• ${drugA.genericNameZh} 是 CYP 强诱导剂, 会让 ${drugB.genericNameZh} 失效 (需加量或换药)"
+        diffs += stringResource(R.string.cmp_diff_cyp_ind_a, drugA.genericNameZh, drugB.genericNameZh)
     } else if (drugB.cypProfile.inducers.isNotEmpty() && drugA.cypProfile.inducers.isEmpty()) {
-        diffs += "• ${drugB.genericNameZh} 是 CYP 强诱导剂, 会让 ${drugA.genericNameZh} 失效 (需加量或换药)"
+        diffs += stringResource(R.string.cmp_diff_cyp_ind_b, drugB.genericNameZh, drugA.genericNameZh)
     }
     // 老年/肾/肝
     if (drugA.adjustments.elderly != drugB.adjustments.elderly && (drugA.adjustments.elderly != null || drugB.adjustments.elderly != null)) {
-        diffs += "• 老年人使用注意: 两药说明不一致, 请遵医嘱"
+        diffs += stringResource(R.string.cmp_diff_elderly_diff)
     }
 
     if (diffs.isEmpty()) {
@@ -242,13 +251,13 @@ private fun DrugHeaderCard(drug: Drug, modifier: Modifier = Modifier) {
 
 @Composable
 private fun SpecSection(
-    title: String,
+    @StringRes titleRes: Int,
     rows: List<Pair<String, String>>,
     plain: Boolean = false,
     drugA: Drug? = null,
     drugB: Drug? = null
 ) {
-    val plainNote = if (plain) sectionPlainNote(title) else null
+    val plainNote = if (plain) sectionPlainNote(titleRes) else null
     Column(modifier = Modifier.fillMaxWidth()) {
         // Section header bar
         Surface(
@@ -262,7 +271,7 @@ private fun SpecSection(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    title,
+                    stringResource(titleRes),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.SemiBold,
                     textAlign = TextAlign.Center,
@@ -270,10 +279,6 @@ private fun SpecSection(
                 )
                 if (plainNote != null) {
                     Spacer(Modifier.height(2.dp))
-                    // TODO(v0.9b): sectionPlainNote() 返回的 section 中文标签需要 i18n
-                    //            这些是 buildComparisonSections() 中硬编码的中文 section 标题
-                    //            (基本信息/药代动力学/治疗窗/CYP 角色/关键不良反应/剂量调整/监测/药物过量)
-                    //            需要重构 buildComparisonSections 用 stringResource
                     Text(
                         "💡 $plainNote",
                         style = MaterialTheme.typography.labelSmall,
@@ -291,15 +296,16 @@ private fun SpecSection(
     }
 }
 
-/** Section 标题对应的通俗解释 */
-private fun sectionPlainNote(title: String): String? = when (title) {
-    "基本信息" -> "药物的中文/英文通用名、商品名、世界卫生组织分类编号 (ATC)"
-    "药代动力学" -> "药物在体内怎么被吸收、分布、代谢、排泄。F=生物利用度,t½=半衰期 (血药浓度降到一半的时间)"
-    "治疗窗" -> "血药浓度低 = 药效不足, 高 = 中毒。抽血化验应落在这个区间内"
-    "CYP 角色" -> "CYP = 肝脏里拆解药物的酶。底物=被拆的, 抑制剂=会拖慢别的药, 诱导剂=会加快别的药 (让别的药失效)"
-    "关键不良反应" -> "服药后可能出现的副作用。极低=基本不用担心, 极高=必须监测"
-    "剂量调整" -> "肾/肝/老年人是否需要减量。eGFR < 30 是肾衰警示线"
-    "监测要求" -> "服药期间要做的检查 (血常规/肝功/心电图 等), 频次根据风险定"
+/** Section 标题对应的通俗解释 (i18n via cmp_section_desc_*) */
+@Composable
+private fun sectionPlainNote(@StringRes titleRes: Int): String? = when (titleRes) {
+    R.string.cmp_section_basic -> stringResource(R.string.cmp_section_desc_basic)
+    R.string.cmp_section_pk -> stringResource(R.string.cmp_section_desc_pk)
+    R.string.cmp_section_window -> stringResource(R.string.cmp_section_desc_window)
+    R.string.cmp_section_cyp -> stringResource(R.string.cmp_section_desc_cyp)
+    R.string.cmp_section_adverse -> stringResource(R.string.cmp_section_desc_adverse)
+    R.string.cmp_section_adjust -> stringResource(R.string.cmp_section_desc_adjust)
+    R.string.cmp_section_monitor -> stringResource(R.string.cmp_section_desc_monitor)
     else -> null
 }
 
@@ -474,30 +480,15 @@ private fun InteractionCard(
 // Data builder
 // ============================================================
 //
-// TODO(v0.9b): buildComparisonSections 内部硬编码中文 section 标题 + 字段 label.
-//              完整 i18n 需要重构:
-//                1) buildComparisonSections 接收 LocalContext/LocalConfiguration,
-//                   用 context.getString(R.string.xxx) 替代硬编码字符串
-//                2) 在 strings.xml 添加 ~30 个 key (compare_section_basics, compare_section_pk,
-//                   compare_section_window, compare_section_cyp, compare_section_adverse,
-//                   compare_section_adjust, compare_section_monitor, compare_section_overdose,
-//                   compare_label_protein_binding, compare_label_pathway, compare_label_qtc,
-//                   compare_label_metabolic_syndrome, compare_label_agranulocytosis,
-//                   compare_label_eps, compare_label_sedation, compare_label_sexual,
-//                   compare_label_hyperprolactinemia, compare_label_anticholinergic,
-//                   compare_label_renal, compare_label_hepatic, compare_label_elderly,
-//                   compare_label_smoking, compare_label_frequency, compare_label_items,
-//                   compare_label_overdose, compare_overdose_toxic, compare_overdose_lethal,
-//                   compare_overdose_severity, compare_overdose_antidote, etc.)
-//                3) sectionPlainNote() 同 Plain.kt 一起 i18n
-//                4) buildComparisonSections 是顶层 (非 composable), 需要传入 Context/Resources
-//                   或者改为 @Composable 函数
-//              留待 v0.9b 处理.
+// v0.9c i18n: buildComparisonSections 改为 @Composable, 返回 List<Pair<@StringRes Int, ...>>,
+//             section 标题用 cmp_section_*, 字段 label 用 cmp_label_*, RiskLevel/CypStrength
+//             翻译用 risk_level_* / cyp_strength_*. 详情见 strings.xml。
 
+@Composable
 private fun buildComparisonSections(
     drugA: Drug,
     drugB: Drug
-): List<Pair<String, List<Pair<String, String>>>> {
+): List<Pair<Int, List<Pair<String, String>>>> {
     val pkA = drugA.pkModel as? PkModel.OneCompartmentWithAbsorption
     val pkB = drugB.pkModel as? PkModel.OneCompartmentWithAbsorption
 
@@ -512,110 +503,127 @@ private fun buildComparisonSections(
     }
 
     return listOf(
-        "基本信息" to listOf(
+        R.string.cmp_section_basic to listOf(
             drugA.genericNameZh to drugB.genericNameZh,
             drugA.genericName to drugB.genericName,
             (drugA.atc ?: "—") to (drugB.atc ?: "—"),
             drugA.category.displayName to drugB.category.displayName,
             (drugA.subcategory ?: "—") to (drugB.subcategory ?: "—"),
         ),
-        "药代动力学" to listOf(
+        R.string.cmp_section_pk to listOf(
             "${pkA?.tHalfHours?.let { "%.1f".format(it) } ?: "—"} h" to
                 "${pkB?.tHalfHours?.let { "%.1f".format(it) } ?: "—"} h",
             "F ${pkA?.f ?: "—"}" to "F ${pkB?.f ?: "—"}",
             "ka ${pkA?.kaPerHour ?: "—"}" to "ka ${pkB?.kaPerHour ?: "—"}",
             "ke ${pkA?.kePerHour ?: "—"}" to "ke ${pkB?.kePerHour ?: "—"}",
             "Vd ${pkA?.vdLiters?.toInt() ?: "—"} L" to "Vd ${pkB?.vdLiters?.toInt() ?: "—"} L",
-            "蛋白结合 ${drugA.proteinBindingPct}%" to "蛋白结合 ${drugB.proteinBindingPct}%",
+            stringResource(R.string.cmp_label_protein_binding, drugA.proteinBindingPct) to
+                stringResource(R.string.cmp_label_protein_binding, drugB.proteinBindingPct),
         ),
-        "治疗窗" to listOf(windowStr),
-        "CYP 角色" to listOf(
+        R.string.cmp_section_window to listOf(windowStr),
+        R.string.cmp_section_cyp to listOf(
             fmtCypSubs(drugA) to fmtCypSubs(drugB),
             fmtCypInh(drugA) to fmtCypInh(drugB),
             fmtCypInd(drugA) to fmtCypInd(drugB),
-            "代谢途径: ${fmtPathway(drugA)}" to "代谢途径: ${fmtPathway(drugB)}"
+            stringResource(R.string.cmp_label_pathway, fmtPathway(drugA)) to
+                stringResource(R.string.cmp_label_pathway, fmtPathway(drugB))
         ),
-        "关键不良反应" to listOf(
-            "QTc 延长: ${riskZh(drugA.adverseEffects.qtcProlongation)}" to
-                "QTc 延长: ${riskZh(drugB.adverseEffects.qtcProlongation)}",
-            "代谢综合征: ${riskZh(drugA.adverseEffects.metabolicSyndrome)}" to
-                "代谢综合征: ${riskZh(drugB.adverseEffects.metabolicSyndrome)}",
-            "粒细胞缺乏: ${riskZh(drugA.adverseEffects.agranulocytosis)}" to
-                "粒细胞缺乏: ${riskZh(drugB.adverseEffects.agranulocytosis)}",
-            "EPS: ${riskZh(drugA.adverseEffects.extrapyramidal)}" to
-                "EPS: ${riskZh(drugB.adverseEffects.extrapyramidal)}",
-            "镇静: ${riskZh(drugA.adverseEffects.sedation)}" to
-                "镇静: ${riskZh(drugB.adverseEffects.sedation)}",
-            "性功能: ${riskZh(drugA.adverseEffects.sexual)}" to
-                "性功能: ${riskZh(drugB.adverseEffects.sexual)}",
-            "高泌乳素: ${riskZh(drugA.adverseEffects.hyperprolactinemia)}" to
-                "高泌乳素: ${riskZh(drugB.adverseEffects.hyperprolactinemia)}",
-            "抗胆碱能: ${drugA.adverseEffects.anticholinergicLoad} / 3" to
-                "抗胆碱能: ${drugB.adverseEffects.anticholinergicLoad} / 3"
+        R.string.cmp_section_adverse to listOf(
+            stringResource(R.string.cmp_label_qtc, riskZh(drugA.adverseEffects.qtcProlongation)) to
+                stringResource(R.string.cmp_label_qtc, riskZh(drugB.adverseEffects.qtcProlongation)),
+            stringResource(R.string.cmp_label_metabolic, riskZh(drugA.adverseEffects.metabolicSyndrome)) to
+                stringResource(R.string.cmp_label_metabolic, riskZh(drugB.adverseEffects.metabolicSyndrome)),
+            stringResource(R.string.cmp_label_agranulocytosis, riskZh(drugA.adverseEffects.agranulocytosis)) to
+                stringResource(R.string.cmp_label_agranulocytosis, riskZh(drugB.adverseEffects.agranulocytosis)),
+            stringResource(R.string.cmp_label_eps, riskZh(drugA.adverseEffects.extrapyramidal)) to
+                stringResource(R.string.cmp_label_eps, riskZh(drugB.adverseEffects.extrapyramidal)),
+            stringResource(R.string.cmp_label_sedation, riskZh(drugA.adverseEffects.sedation)) to
+                stringResource(R.string.cmp_label_sedation, riskZh(drugB.adverseEffects.sedation)),
+            stringResource(R.string.cmp_label_sexual, riskZh(drugA.adverseEffects.sexual)) to
+                stringResource(R.string.cmp_label_sexual, riskZh(drugB.adverseEffects.sexual)),
+            stringResource(R.string.cmp_label_prolactin, riskZh(drugA.adverseEffects.hyperprolactinemia)) to
+                stringResource(R.string.cmp_label_prolactin, riskZh(drugB.adverseEffects.hyperprolactinemia)),
+            stringResource(R.string.cmp_label_anticholinergic, drugA.adverseEffects.anticholinergicLoad) to
+                stringResource(R.string.cmp_label_anticholinergic, drugB.adverseEffects.anticholinergicLoad)
         ),
-        "剂量调整" to listOf(
-            "肾: ${drugA.adjustments.renal.name.replace("_", " ")}" to
-                "肾: ${drugB.adjustments.renal.name.replace("_", " ")}",
-            "肝: ${drugA.adjustments.hepatic.name.replace("_", " ")}" to
-                "肝: ${drugB.adjustments.hepatic.name.replace("_", " ")}",
-            (drugA.adjustments.elderly?.let { "老年: $it" } ?: "老年: —") to
-                (drugB.adjustments.elderly?.let { "老年: $it" } ?: "老年: —")
+        R.string.cmp_section_adjust to listOf(
+            stringResource(R.string.cmp_label_renal, drugA.adjustments.renal.name.replace("_", " ")) to
+                stringResource(R.string.cmp_label_renal, drugB.adjustments.renal.name.replace("_", " ")),
+            stringResource(R.string.cmp_label_hepatic, drugA.adjustments.hepatic.name.replace("_", " ")) to
+                stringResource(R.string.cmp_label_hepatic, drugB.adjustments.hepatic.name.replace("_", " ")),
+            (drugA.adjustments.elderly?.let { stringResource(R.string.cmp_label_elderly_val, it) }
+                ?: stringResource(R.string.cmp_label_elderly_empty)) to
+                (drugB.adjustments.elderly?.let { stringResource(R.string.cmp_label_elderly_val, it) }
+                    ?: stringResource(R.string.cmp_label_elderly_empty))
         ),
-        "监测" to listOf(
-            (drugA.monitoring.frequency?.let { "频次: $it" } ?: "频次: —") to
-                (drugB.monitoring.frequency?.let { "频次: $it" } ?: "频次: —"),
-            ("项目: " + drugA.monitoring.items.joinToString("、").ifEmpty { "—" }) to
-                ("项目: " + drugB.monitoring.items.joinToString("、").ifEmpty { "—" })
+        R.string.cmp_section_monitor to listOf(
+            (drugA.monitoring.frequency?.let { stringResource(R.string.cmp_label_freq_val, it) }
+                ?: stringResource(R.string.cmp_label_freq_empty)) to
+                (drugB.monitoring.frequency?.let { stringResource(R.string.cmp_label_freq_val, it) }
+                    ?: stringResource(R.string.cmp_label_freq_empty)),
+            (if (drugA.monitoring.items.isEmpty()) stringResource(R.string.cmp_label_items_empty)
+             else stringResource(R.string.cmp_label_items, drugA.monitoring.items.joinToString("、"))) to
+                (if (drugB.monitoring.items.isEmpty()) stringResource(R.string.cmp_label_items_empty)
+                 else stringResource(R.string.cmp_label_items, drugB.monitoring.items.joinToString("、")))
         ),
-        "药物过量" to listOf(
+        R.string.cmp_section_overdose to listOf(
             fmtOverdoseShort(drugA) to fmtOverdoseShort(drugB)
         )
     )
 }
 
+@Composable
 private fun fmtOverdoseShort(d: Drug): String {
-    val o = d.overdose ?: return "未录入"
-    val toxic = o.toxicDoseEstimateMg?.toInt()?.let { "中毒 ≥$it mg" } ?: ""
-    val fatal = o.fatalDoseEstimateMg?.toInt()?.let { "致死 ≥$it mg" } ?: ""
+    val o = d.overdose ?: return stringResource(R.string.cmp_label_no_entry)
+    val toxic = o.toxicDoseEstimateMg?.toInt()?.let { stringResource(R.string.cmp_label_toxic, it) } ?: ""
+    val fatal = o.fatalDoseEstimateMg?.toInt()?.let { stringResource(R.string.cmp_label_fatal, it) } ?: ""
     val doses = listOf(toxic, fatal).filter { it.isNotEmpty() }.joinToString(" / ")
     val sev = o.severity.displayName
-    val antid = o.antidote?.let { " · 解毒剂:$it" } ?: ""
-    return if (doses.isEmpty()) "严重度: $sev$antid" else "严重度: $sev · $doses$antid"
+    val antid = o.antidote?.let { stringResource(R.string.cmp_label_antidote, it) } ?: ""
+    return when {
+        doses.isEmpty() && antid.isEmpty() -> stringResource(R.string.cmp_label_severity, sev)
+        doses.isEmpty() -> stringResource(R.string.cmp_label_severity, sev) + antid
+        else -> stringResource(R.string.cmp_label_severity_with_doses, sev, doses, antid)
+    }
 }
 
 private fun fmtCypSubs(d: Drug): String = d.cypProfile.substrates
     .joinToString("、") { "${it.cyp.displayName} ${(it.fraction * 100).toInt()}%" }
     .ifEmpty { "—" }
 
+@Composable
 private fun fmtCypInh(d: Drug): String = d.cypProfile.inhibitors
-    .joinToString("、") { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" }
+    .map { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" }
+    .joinToString("、")
     .ifEmpty { "—" }
 
+@Composable
 private fun fmtCypInd(d: Drug): String = d.cypProfile.inducers
-    .joinToString("、") { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" }
+    .map { "${it.cyp.displayName} ${strengthZh(it.strength.name)}" }
+    .joinToString("、")
     .ifEmpty { "—" }
 
-// TODO(v0.9b): strengthZh / riskZh / fmtPathway 是 domain helper, 硬编码中文.
-//            如果要 i18n 需要在 CypStrength / RiskLevel enum 上加 displayNameRes
-//            或新增 strings.xml key, 然后把这些函数改为 composable 调用 stringResource
+@Composable
 private fun fmtPathway(d: Drug): String {
     val cp = d.cypProfile
-    val pt = cp.pathwayType?.displayName ?: "未标"
+    val pt = cp.pathwayType?.displayName ?: stringResource(R.string.cmp_label_pathway_empty)
     val pp = cp.primaryPathway ?: "—"
     return "$pt · $pp"
 }
 
+@Composable
 private fun strengthZh(name: String): String = when (name) {
-    "STRONG" -> "强"
-    "MODERATE" -> "中"
-    "WEAK" -> "弱"
+    "STRONG" -> stringResource(R.string.cyp_strength_strong)
+    "MODERATE" -> stringResource(R.string.cyp_strength_moderate)
+    "WEAK" -> stringResource(R.string.cyp_strength_weak)
     else -> name
 }
 
+@Composable
 private fun riskZh(level: RiskLevel): String = when (level) {
-    RiskLevel.VERY_HIGH -> "极高"
-    RiskLevel.HIGH -> "高"
-    RiskLevel.MEDIUM -> "中"
-    RiskLevel.LOW -> "低"
-    RiskLevel.VERY_LOW -> "极低"
+    RiskLevel.VERY_HIGH -> stringResource(R.string.risk_level_very_high)
+    RiskLevel.HIGH -> stringResource(R.string.risk_level_high)
+    RiskLevel.MEDIUM -> stringResource(R.string.risk_level_medium)
+    RiskLevel.LOW -> stringResource(R.string.risk_level_low)
+    RiskLevel.VERY_LOW -> stringResource(R.string.risk_level_very_low)
 }

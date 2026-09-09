@@ -5,10 +5,73 @@ DoseCare 的所有重要变更都记录在这里。格式基于 [Keep a Changelo
 ## [Unreleased]
 
 ### Planned
-- v0.9b: WorkManager 提醒 + 通知权限 + 系统日历写入
-- v0.9b: 日历事件点实时刷新 (接 `dose_taken` 表后,跨 tab 状态变化触发 dayEvents 重算)
-- v0.9b: TDM 个体化校准 (基于历史血药浓度回算 ke / Vd)
+- v0.9d: WorkManager 提醒 + 通知权限 + 系统日历写入
+- v0.9d: 日历事件点实时刷新 (接 `dose_taken` 表后,跨 tab 状态变化触发 dayEvents 重算)
+- v0.9d: TDM 个体化校准 (基于历史血药浓度回算 ke / Vd)
 - v1.0: 性能优化 (启动 < 800ms)、可访问性 (a11y) 通过、隐私政策上线
+
+---
+
+## [0.9c] - 2026-09-09 · 补全 i18n (Diary 心情 + 通俗解释 + DrugDetail/ComparisonView 全面排查)
+
+### Added
+- **7 个新 DrugDetailScreen section 标题 key** (`drug_section_*`): CYP 角色 / PK 估算 / 药理作用 / 关键不良反应 / 药物过量 / 剂量调整 / 监测要求 (3 语言)
+- **2 个格式 key**: `drug_anticholinergic_score` (抗胆碱能 X / 3)、`drug_pk_meta` (t½ + 蛋白结合)
+- **1 个高风险 tag key**: `cmp_diff_highrisk_eps` (ComparisonView EPS 风险标签)
+- 全部 3 语言 strings.xml 新增 10 个 key,共 395 key 100% 对齐 (Python 验证 zh=395 en=395 ja=395)
+
+### Fixed
+- **Diary 6 预设心情漏 i18n** — `DiaryMood` enum 字段从 `String displayName` 改为 `@StringRes displayNameRes: Int`,3 处 callsite (DiaryTab.kt line 220/284/294) 改用 `stringResource(mood.displayNameRes)`
+- **Plain.kt 23 个通俗解释函数漏 i18n** — 全部改 @Composable,返回 String via stringResource
+  - PK: halfLife / proteinBinding / therapeuticWindow / cmax / cmin / cavg / auc
+  - CYP: cypSubstrate / cypInhibitor / cypInducer
+  - 调整: renalAdj / hepaticAdj / elderly
+  - 副作用: qtcProlongation / metabolicSyndrome / agranulocytosis / extrapyramidal / sedation / sexual / hyperprolactinemia / anticholinergicLoad
+  - 引用: guideline (7 个 AGNP/FDA/CPIC/PMID/ACR/AUA/Beers/中国国家/中国药典)
+- **DrugDetailScreen.kt 全面排查** (~20 处硬编码):
+  - `PlainNote("ATC 码 = ...")` → `R.string.plain_atc_note`
+  - 3 个 CypRow 标签 (作为底物/抑制剂/诱导剂) → `R.string.cyp_role_substrate/inhibitor/inducer`
+  - 7 个 RiskRow 标签 (QTc 延长/代谢综合征/粒细胞缺乏/锥体外系反应/镇静/性功能影响/高泌乳素) → `R.string.risk_qtc/metabolic/agranulocytosis/eps/sedation/sexual/prolactin`
+  - 5 个 KvRow 标签 (肾功能/肝功能/老年/吸烟/戒烟) → `R.string.adj_renal/hepatic/elderly/smoking/quit_smoking`
+  - 7 个 section 标题 (CYP 角色/PK/药理作用/关键不良反应/药物过量/剂量调整/监测要求) → `R.string.drug_section_*`
+  - `auc_extra` (Plain.auc() 后的 " — 倍数 = 联用时浓度变化倍数" 后缀)
+  - `t½ X h · 蛋白结合 Y%` 行 → `R.string.drug_pk_meta`
+  - `X / 3` 抗胆碱能值 → `R.string.drug_anticholinergic_score`
+  - `strengthZh` (STRONG/MODERATE/WEAK → 强/中/弱) → @Composable + `R.string.cyp_strength_strong/moderate/weak`
+  - `RiskLevel.displayName()` (极高/高/中/低/极低) → @Composable + `R.string.risk_level_very_high/high/medium/low/very_low`
+- **ComparisonView.kt 全面排查** (~40 处硬编码):
+  - `buildComparisonSections` 改 @Composable,返回 `List<Pair<@StringRes Int, ...>>`
+  - `SpecSection` 改 `@StringRes titleRes: Int` 入参
+  - `sectionPlainNote` 改 @Composable + `@StringRes titleId: Int` 入参 (不再用 String match)
+  - 8 个 section 标题 → `R.string.cmp_section_basic/pk/window/cyp/adverse/adjust/monitor/overdose`
+  - 7 个 section 通俗解释 → `R.string.cmp_section_desc_basic/pk/window/cyp/adverse/adjust/monitor`
+  - 25+ 字段 label (蛋白结合/代谢途径/QTc 延长/粒细胞缺乏/EPS/镇静/性功能/高泌乳素/抗胆碱能/肾/肝/老年/频次/项目/中毒/致死/严重度/解毒剂/未录入/未标) → `R.string.cmp_label_*`
+  - PlainKeyDiffCard 6 类关键差异 (治疗窗/半衰期/独有风险/CYP 抑制/CYP 诱导/老年) → `R.string.cmp_diff_*` (15+ key)
+  - 4 个高风险 tag (QT 延长/粒缺/EPS/镇静) → `R.string.cmp_diff_highrisk_qt/agran/eps/sedation`
+  - `fmtPathway` "未标" → `R.string.cmp_label_pathway_empty`
+  - `fmtOverdoseShort` 改 @Composable,3 个分支处理 doses/antidote 组合 (`R.string.cmp_label_severity` / `cmp_label_severity_with_doses`)
+
+### Changed
+- ComparisonView.kt:
+  - `buildComparisonSections` 返回类型 `List<Pair<String, List<Pair<String, String>>>>` → `List<Pair<Int, List<Pair<String, String>>>>`
+  - 加 `import androidx.annotation.StringRes`
+  - `fmtCypInh` / `fmtCypInd` 改 @Composable (调用 `strengthZh`)
+- DrugDetailScreen.kt:
+  - `strengthZh` / `RiskLevel.displayName()` 改 @Composable
+  - 文件头 KDoc 更新:加 v0.9c i18n 章节
+- strings.xml:
+  - 3 文件同时新增 10 key (zh-CN / en / ja),395 key 100% 对齐
+  - 修 en/ja 文件中 6 处 `eGFR < 30` 未转义的 `<` (Android XML 不允许字面 `<`,需 `&lt;`)
+
+### Verified
+- ✅ `compileDebugKotlin` 通过 (无 error,仅 6 个 deprecation 警告与本次重构无关)
+- ✅ 3 字符串文件 395 key 100% 对齐 (Python regex 提取 + Compare-Object 验证)
+- ✅ DrugDetailScreen.kt + ComparisonView.kt 无任何 UI 硬编码中文 (grep 正则 `[\u4e00-\u9fff]` 验证,残留 31+35 处全部在 KDoc / 代码注释 / PathwayType 颜色注释)
+- ✅ 强类型检查: 改 enum 字段 (DiaryMood.displayName) 时用了 `@StringRes` 注解 + `stringResource()` 包装,编译器会拦截遗漏
+
+### Migration
+- 老用户 v0.9b → v0.9c: 数据无变化,纯 UI 文本补全 + 全面 i18n
+- 仍依赖 v0.9a/v0.9b 的多语言架构 (AppCompat 1.7+ per-app language + localeConfig + attachBaseContext)
 
 ---
 
