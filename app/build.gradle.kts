@@ -15,8 +15,8 @@ android {
         applicationId = "com.dosecare.app"
         minSdk = 26
         targetSdk = 36
-        versionCode = 13
-        versionName = "0.9e"
+        versionCode = 14
+        versionName = "0.9f"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables { useSupportLibrary = true }
@@ -90,8 +90,11 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
 
-    // 鎻愰啋閫氱煡
+    // v0.9f 提醒: WorkManager + Hilt-Work 集成 (@HiltWorker 自动注入 Repository)
     implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.androidx.hilt.work)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.androidx.hilt.compiler)
 
     // SQLCipher passphrase 鍔犲瘑瀛樺偍
     implementation(libs.androidx.security.crypto)

@@ -88,7 +88,9 @@ const val TEMP_GROUP_NAME = "临时用药"
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun CalendarTab(
-    catalog: DrugCatalogService
+    catalog: DrugCatalogService,
+    pendingReminder: kotlinx.coroutines.flow.StateFlow<com.dosecare.app.MainActivity.PendingReminder?>? = null,
+    onPendingConsumed: () -> Unit = {}
 ) {
     val context = LocalContext.current
     val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
@@ -96,6 +98,8 @@ fun CalendarTab(
     val scope = rememberCoroutineScope()
 
     var groups by remember { mutableStateOf(repo.loadAll()) }
+    // 由 pendingReminder 触发的 checkInTarget, 用 stable ref 防重组丢失
+    var pendingCheckInTarget by remember { mutableStateOf<CheckInTarget?>(null) }
 
     fun persist() { repo.saveAll(groups) }
     fun updateGroups(transform: (List<PrescriptionGroup>) -> List<PrescriptionGroup>) {
@@ -105,6 +109,60 @@ fun CalendarTab(
     val selectedDate by CalendarViewModel.selectedDate.collectAsState()
     val currentMonth by CalendarViewModel.currentMonth.collectAsState()
     val dayEvents by CalendarViewModel.dayEvents.collectAsState()
+
+    // v0.9f: 监听 pendingReminder (通知 tap 进来), 找到 drug + slot 弹打卡 dialog
+    LaunchedEffect(pendingReminder) {
+        if (pendingReminder == null) return@LaunchedEffect
+        pendingReminder.collect { reminder ->
+            if (reminder == null) return@collect
+            // 找 prescribedDrug
+            val groupWithDrug = groups.firstOrNull { g ->
+                g.drugs.any { it.id == reminder.drugId }
+            }
+            val drug = groupWithDrug?.drugs?.firstOrNull { it.id == reminder.drugId }
+            if (drug == null) {
+                // 药已被删, 弹个 toast 提示
+                android.widget.Toast.makeText(
+                    context,
+                    R.string.reminder_checkin_drug_not_found,
+                    android.widget.Toast.LENGTH_SHORT
+                ).show()
+                onPendingConsumed()
+                return@collect
+            }
+            // 计算 slot 时间 (今天该 slot 的 epochMs)
+            val parts = reminder.slotTime.split(":")
+            if (parts.size != 2) { onPendingConsumed(); return@collect }
+            val hour = parts[0].toIntOrNull() ?: 0
+            val minute = parts[1].toIntOrNull() ?: 0
+            val slotCal = Calendar.getInstance().apply {
+                set(Calendar.HOUR_OF_DAY, hour)
+                set(Calendar.MINUTE, minute)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
+            val slotMs = slotCal.timeInMillis
+            // 选当天
+            CalendarViewModel.selectDate(CalendarViewModel.startOfDay(slotMs))
+            // 弹 checkInTarget
+            val drugEntity = try { catalog.getById(drug.drugId) } catch (e: Exception) { null }
+            pendingCheckInTarget = CheckInTarget(
+                id = "reminder_${reminder.drugId}_${reminder.slotTime}",
+                groupId = groupWithDrug.id,
+                groupName = groupWithDrug.name,
+                groupColor = groupWithDrug.colorIndex,
+                prescribedDrugId = drug.id,
+                drugId = drug.drugId,
+                drugName = drugEntity?.genericNameZh ?: drugEntity?.genericName ?: drug.drugId,
+                doseMg = drug.defaultDoseMg,
+                scheduledMillis = slotMs,
+                isChecked = drug.dosesTaken.any {
+                    kotlin.math.abs(it.timestamp - slotMs) < TimeUnit.HOURS.toMillis(6)
+                }
+            )
+            onPendingConsumed()
+        }
+    }
 
     // 监听整月打卡, 算 dayEvents
     LaunchedEffect(currentMonth, groups) {
@@ -662,12 +720,19 @@ fun CalendarTab(
         }
     }
 
-    // 弹层 4: 打卡 dialog
-    checkInTarget?.let { target ->
+    // 弹层 4: 打卡 dialog (v0.9f: pendingCheckInTarget 优先于 checkInTarget)
+    val activeCheckInTarget = pendingCheckInTarget ?: checkInTarget
+    activeCheckInTarget?.let { target ->
+        // 如果是 pending 触发, 不在 dismiss 时清 pendingCheckInTarget
+        val onDismiss = if (target === pendingCheckInTarget) {
+            { pendingCheckInTarget = null }
+        } else {
+            { checkInTarget = null }
+        }
         CheckInDialog(
             plan = target,
             catalog = catalog,
-            onDismiss = { checkInTarget = null },
+            onDismiss = onDismiss,
             onConfirm = { userTs ->
                 scope.launch {
                     // bug fix: 始终以 slot 时间作为打卡时间,否则 buildDayPlans 的 6h 匹配窗口

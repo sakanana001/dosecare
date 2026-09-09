@@ -637,4 +637,21 @@
     <string name="sevrule_low">軽度の注意</string>
     <string name="sevrule_info">情報</string>
 
-</resources>
+
+    <!-- v0.9f 服薬リマインダー設定 + 通知 + 権限 -->
+    <string name="reminder_settings_title">服薬リマインダー</string>
+    <string name="reminder_settings_desc">服薬時刻にステータスバー通知。タップで直接チェックイン。通知 + アラーム権限が必要。</string>
+    <string name="reminder_perm_notif_granted">✓ 通知権限が許可されました</string>
+    <string name="reminder_perm_notif_denied">✗ 通知権限が未許可 — Android 13+ はユーザー許可が必要</string>
+    <string name="reminder_perm_alarm_granted">✓ 正確なアラーム権限が許可されました</string>
+    <string name="reminder_perm_alarm_denied">✗ 正確なアラーム権限が未許可 — Android 12+ はシステム設定で許可が必要</string>
+    <string name="reminder_perm_open">設定</string>
+    <string name="reminder_perm_warn">権限がない場合、通知が正確に届きません</string>
+    <string name="reminder_test_button">リマインダー テスト (5秒後)</string>
+    <string name="reminder_test_scheduled">スケジュール済 — 5秒後にテスト通知が届きます</string>
+    <string name="reminder_test_failed">スケジュール失敗、logcat を確認</string>
+    <string name="reminder_title">服薬の時間です</string>
+    <string name="reminder_body">%1$s · %2$s</string>
+    <string name="reminder_checkin_title">チェックイン</string>
+    <string name="reminder_checkin_drug_not_found">この薬は削除されました、チェックインできません</string>
+    <string name="reminder_checkin_at">%1$s · 予定 %2$s</string></resources>

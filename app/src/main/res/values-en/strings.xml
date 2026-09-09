@@ -637,4 +637,21 @@
     <string name="sevrule_low">Low Notice</string>
     <string name="sevrule_info">Info</string>
 
-</resources>
+
+    <!-- v0.9f Reminder settings + notification + permissions -->
+    <string name="reminder_settings_title">Medication Reminders</string>
+    <string name="reminder_settings_desc">Status-bar notification when it\'s time to take a medication. Tap to check in directly. Requires Notification + Alarm permissions.</string>
+    <string name="reminder_perm_notif_granted">✓ Notification permission granted</string>
+    <string name="reminder_perm_notif_denied">✗ Notification permission denied — Android 13+ needs user grant</string>
+    <string name="reminder_perm_alarm_granted">✓ Exact alarm permission granted</string>
+    <string name="reminder_perm_alarm_denied">✗ Exact alarm permission denied — Android 12+ needs system settings grant</string>
+    <string name="reminder_perm_open">Open</string>
+    <string name="reminder_perm_warn">Without these permissions, notifications may not appear on time</string>
+    <string name="reminder_test_button">Test reminder (5 sec)</string>
+    <string name="reminder_test_scheduled">Scheduled — a test notification will appear in 5 seconds</string>
+    <string name="reminder_test_failed">Failed to schedule, see logcat</string>
+    <string name="reminder_title">Time to take medication</string>
+    <string name="reminder_body">%1$s · %2$s</string>
+    <string name="reminder_checkin_title">Check in</string>
+    <string name="reminder_checkin_drug_not_found">This drug was deleted, cannot check in</string>
+    <string name="reminder_checkin_at">%1$s · scheduled %2$s</string></resources>

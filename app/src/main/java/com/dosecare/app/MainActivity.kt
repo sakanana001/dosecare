@@ -1,6 +1,7 @@
 package com.dosecare.app
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -9,11 +10,15 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import com.dosecare.app.domain.catalog.DrugCatalogService
+import com.dosecare.app.reminder.NotificationHelper
 import com.dosecare.app.ui.AppRoot
 import com.dosecare.app.ui.locale.LocaleController
 import com.dosecare.app.ui.theme.ThemeController
 import com.dosecare.app.ui.theme.DoseCareTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import java.util.Locale
 import javax.inject.Inject
 
@@ -36,11 +41,23 @@ import javax.inject.Inject
  * - 启动时 LocaleController.load() 应用用户选的语言 (SYSTEM / zh-CN / en / ja)
  * - attachBaseContext 重写 Resources Configuration, 让 Compose stringResource 立即用新 locale
  *   (解决 AppCompatDelegate.setApplicationLocales + Activity.recreate 在某些 API 不触发 Resources 刷新)
+ *
+ * v0.9f 升级:
+ * - onNewIntent 接收 ReminderWorker 推送通知 tap 进来的 Intent
+ * - 解析 drugId + slotTime, 写入 pendingReminder StateFlow
+ * - AppRoot 通过 collectAsState 读, 触发打卡 dialog
  */
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     @Inject lateinit var catalog: DrugCatalogService
+
+    /**
+     * v0.9f: 待处理提醒事件 (通知 tap 进来)
+     * AppRoot collectAsState 后弹打卡 dialog
+     */
+    private val _pendingReminder = MutableStateFlow<PendingReminder?>(null)
+    val pendingReminder: StateFlow<PendingReminder?> = _pendingReminder.asStateFlow()
 
     /**
      * 在 super.attachBaseContext 之前, override Resources Configuration
@@ -84,13 +101,39 @@ class MainActivity : ComponentActivity() {
         setContent {
             val themeState by ThemeController.state.collectAsState()
             DoseCareTheme(themeState = themeState) {
-                AppRoot(catalog = catalog)
+                AppRoot(
+                    catalog = catalog,
+                    pendingReminder = pendingReminder,
+                    onPendingConsumed = { _pendingReminder.value = null }
+                )
             }
         }
+        // v0.9f: 解析启动 intent (用户从 launcher 但之前通知点击事件遗留)
+        intent?.let { handleReminderIntent(it) }
+    }
+
+    override fun onNewIntent(intent: Intent) {
+        super.onNewIntent(intent)
+        // v0.9f: 通知 tap 进来 (singleTask 复用 Activity)
+        setIntent(intent)
+        handleReminderIntent(intent)
     }
 
     override fun onDestroy() {
         LocaleController.unregisterActivity(this)
         super.onDestroy()
     }
+
+    /**
+     * v0.9f: 解析 Reminder 通知 intent, 写入 pendingReminder StateFlow
+     */
+    private fun handleReminderIntent(intent: Intent) {
+        val drugId = intent.getStringExtra(NotificationHelper.EXTRA_REMINDER_DRUG_ID)
+        val slotTime = intent.getStringExtra(NotificationHelper.EXTRA_REMINDER_SLOT_TIME)
+        if (drugId != null && slotTime != null) {
+            _pendingReminder.value = PendingReminder(drugId, slotTime)
+        }
+    }
+
+    data class PendingReminder(val drugId: String, val slotTime: String)
 }

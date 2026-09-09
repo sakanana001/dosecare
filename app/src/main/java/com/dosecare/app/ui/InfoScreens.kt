@@ -65,7 +65,7 @@ fun AboutScreen(onBack: () -> Unit) {
                     )
                     Spacer(Modifier.height(4.dp))
                     Text(
-                        "v0.8d" + if (BuildConfig.DEBUG) " · Debug" else "",
+                        "v0.9f" + if (BuildConfig.DEBUG) " · Debug" else "",
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Text(stringResource(R.string.about_app_id), style = MaterialTheme.typography.labelSmall)

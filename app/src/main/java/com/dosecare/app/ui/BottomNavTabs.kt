@@ -79,7 +79,11 @@ enum class Tab(@StringRes val titleRes: Int, val icon: ImageVector) {
  *      (v0.8b: 开源许可证并入 AboutScreen, 删 OpenSourceScreen)
  */
 @Composable
-fun AppRoot(catalog: DrugCatalogService) {
+fun AppRoot(
+    catalog: DrugCatalogService,
+    pendingReminder: kotlinx.coroutines.flow.StateFlow<com.dosecare.app.MainActivity.PendingReminder?>? = null,
+    onPendingConsumed: () -> Unit = {}
+) {
     var selectedTab by rememberSaveable { mutableStateOf(Tab.Calendar) }
 
     // 子页 nav state
@@ -127,7 +131,9 @@ fun AppRoot(catalog: DrugCatalogService) {
             onShowSettings = { showSettings = true },
             onShowAbout = { showAbout = true },
             onShowContact = { showContact = true },
-            catalog = catalog
+            catalog = catalog,
+            pendingReminder = pendingReminder,
+            onPendingConsumed = onPendingConsumed
         )
     }
 }
@@ -145,7 +151,9 @@ private fun MainScaffold(
     onShowSettings: () -> Unit,
     onShowAbout: () -> Unit,
     onShowContact: () -> Unit,
-    catalog: DrugCatalogService
+    catalog: DrugCatalogService,
+    pendingReminder: kotlinx.coroutines.flow.StateFlow<com.dosecare.app.MainActivity.PendingReminder?>? = null,
+    onPendingConsumed: () -> Unit = {}
 ) {
     // 系统返回键: 在非 Calendar 底栏时退回 Calendar,在 Calendar 时退出 APP
     BackHandler(enabled = selectedTab != Tab.Calendar) {
@@ -184,7 +192,11 @@ private fun MainScaffold(
                 .fillMaxSize()
         ) {
             when (selectedTab) {
-                Tab.Calendar -> CalendarTab(catalog = catalog)
+                Tab.Calendar -> CalendarTab(
+                    catalog = catalog,
+                    pendingReminder = pendingReminder,
+                    onPendingConsumed = onPendingConsumed
+                )
                 Tab.Diary -> DiaryTab()
                 Tab.More -> MoreTab(
                     onShowCatalog = onShowCatalog,
@@ -1221,6 +1233,9 @@ fun SettingsScreen(onBack: () -> Unit) {
 
             // v0.9a: 语言设置入口
             com.dosecare.app.ui.locale.LanguageSettingsCard()
+
+            // v0.9f: 提醒设置入口
+            com.dosecare.app.ui.reminder.ReminderSettingsCard()
 
             Card(modifier = Modifier.fillMaxWidth()) {
                 Column(Modifier.padding(16.dp)) {

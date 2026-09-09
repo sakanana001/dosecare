@@ -2,6 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- v0.9f 提醒通知权限 -->
+    <!-- Android 13+ 通知运行时权限 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- Android 12+ 精确闹钟 (SCHEDULE_EXACT_ALARM) — 需用户授权到系统设置开启 -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <!-- Android 13+ USE_EXACT_ALARM 替代 (无需用户授权, 但仅限日历/闹钟/提醒类 App) — 暂不用 -->
+    <!-- 开机/重装后重新排提醒 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
     <application
         android:name=".DoseCareApp"
         android:allowBackup="false"
@@ -20,12 +29,38 @@
             android:exported="true"
             android:label="@string/app_name"
             android:enableOnBackInvokedCallback="true"
+            android:launchMode="singleTask"
             android:theme="@style/Theme.DoseCare">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- v0.9f 开机/重装广播: 重新排提醒 (避免 BOOT_COMPLETED 之后 WorkManager 队列丢失) -->
+        <receiver
+            android:name=".reminder.ReminderBootReceiver"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <!-- v0.9f: 禁用 WorkManager 2.9+ 的 on-demand ContentProvider 自动初始化
+             (改由 DoseCareApp.Configuration.Provider 显式提供, 用 HiltWorkerFactory) -->
+        <provider
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
+            android:exported="false"
+            tools:node="merge">
+            <meta-data
+                android:name="androidx.work.WorkManagerInitializer"
+                android:value="androidx.startup"
+                tools:node="remove" />
+        </provider>
     </application>
 
 </manifest>

@@ -1,5 +1,6 @@
 package com.dosecare.app.data.repository
 
+import android.util.Log
 import com.dosecare.app.data.db.AppDatabase
 import com.dosecare.app.data.db.DoseTakenEntity
 import com.dosecare.app.data.db.PrescribedDrugDao
@@ -9,6 +10,7 @@ import com.dosecare.app.data.db.PrescriptionGroupEntity
 import com.dosecare.app.domain.prescription.DoseTaken
 import com.dosecare.app.domain.prescription.PrescribedDrug
 import com.dosecare.app.domain.prescription.PrescriptionGroup
+import com.dosecare.app.reminder.ReminderScheduler
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import java.util.UUID
@@ -28,7 +30,8 @@ import javax.inject.Singleton
  */
 @Singleton
 class PrescriptionRepositoryRoom @Inject constructor(
-    private val db: AppDatabase
+    private val db: AppDatabase,
+    private val reminderScheduler: ReminderScheduler
 ) {
     private val groupDao: PrescriptionGroupDao = db.prescriptionGroupDao()
     private val drugDao: PrescribedDrugDao = db.prescribedDrugDao()
@@ -86,6 +89,7 @@ class PrescriptionRepositoryRoom @Inject constructor(
             sortOrder = 0
         )
         groupDao.upsert(entity)
+        rescheduleRemindersSafely()
         return id
     }
 
@@ -104,6 +108,7 @@ class PrescriptionRepositoryRoom @Inject constructor(
             active = true
         )
         drugDao.upsert(entity)
+        rescheduleRemindersSafely()
         return id
     }
 
@@ -120,7 +125,25 @@ class PrescriptionRepositoryRoom @Inject constructor(
         return id
     }
 
-    suspend fun deleteGroup(id: String) = groupDao.deleteById(id)
-    suspend fun deleteDrug(id: String) = drugDao.deleteById(id)
+    suspend fun deleteGroup(id: String) {
+        groupDao.deleteById(id)
+        rescheduleRemindersSafely()
+    }
+    suspend fun deleteDrug(id: String) {
+        drugDao.deleteById(id)
+        rescheduleRemindersSafely()
+    }
     suspend fun deleteDose(id: String) = doseDao.deleteById(id)
+
+    /**
+     * v0.9f 增删改末尾重排提醒
+     * 失败仅记录日志, 不影响主流程 (避免单个 reminder 失败导致数据修改回滚)
+     */
+    private suspend fun rescheduleRemindersSafely() {
+        try {
+            reminderScheduler.scheduleAll()
+        } catch (e: Exception) {
+            Log.w("PrescriptionRepo", "rescheduleReminders failed: ${e.message}")
+        }
+    }
 }
