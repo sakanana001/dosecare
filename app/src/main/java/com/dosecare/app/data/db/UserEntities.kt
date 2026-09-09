@@ -40,6 +40,10 @@ data class PrescriptionGroupEntity(
 
 // ============================================================
 // 2. prescribed_drug — 在用药
+//
+// v0.9g 加 2 字段:
+// - times:       JSON-encoded List<String> "HH:mm" 自定义用药时段; 旧数据 migration 时按 frequencyPerDay 用默认时段
+// - target_date: 临时用药的目标日期 (epoch day 0:00 ms); null = 周期用药, set = 一次性
 // ============================================================
 @Entity(
     tableName = "prescribed_drug",
@@ -58,8 +62,10 @@ data class PrescribedDrugEntity(
     @ColumnInfo(name = "dose_mg") val doseMg: Double,
     @ColumnInfo(name = "weight_kg") val weightKg: Double = 70.0,
     @ColumnInfo(name = "frequency_per_day") val frequencyPerDay: Int,
+    @ColumnInfo(name = "times") val times: String = "[]",       // JSON "[\"08:00\",\"20:00\"]"; 空 = 按 frequencyPerDay 默认
     @ColumnInfo(name = "start_date") val startDate: Long? = null,
     @ColumnInfo(name = "end_date") val endDate: Long? = null,
+    @ColumnInfo(name = "target_date") val targetDate: Long? = null,  // 临时用药日期; null = 周期
     @ColumnInfo(name = "notes") val notes: String? = null,
     @ColumnInfo(name = "active") val active: Boolean = true
 )
@@ -166,4 +172,6 @@ enum class DiaryMood(@StringRes val displayNameRes: Int, val emoji: String) {
 object UserPreferenceKeys {
     const val REMINDER_ENABLED = "reminder_enabled"
     const val LAST_PRESCRIPTION_MIGRATION = "last_prescription_migration"
+    /** v0.9g 终极迁移标志: 把 SharedPreferences 最新数据覆写 Room, UI 切到 Room 之前 */
+    const val LAST_PRESCRIPTION_V09G_MIGRATION = "last_prescription_v09g_migration"
 }

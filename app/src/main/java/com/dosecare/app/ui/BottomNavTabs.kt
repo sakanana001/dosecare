@@ -1224,7 +1224,7 @@ fun SettingsScreen(onBack: () -> Unit) {
                         fontWeight = FontWeight.SemiBold
                     )
                     Text(
-                        "v0.9a" + if (BuildConfig.DEBUG) " · Debug" else "",
+                        "v" + com.dosecare.app.BuildConfig.VERSION_NAME + if (BuildConfig.DEBUG) " · Debug" else "",
                         style = MaterialTheme.typography.bodyMedium
                     )
                     Text(stringResource(R.string.about_app_id), style = MaterialTheme.typography.labelSmall)

@@ -2,6 +2,8 @@
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 @Database(
     entities = [
@@ -24,7 +26,7 @@ import androidx.room.RoomDatabase
         UserPreferenceEntity::class,
         DiaryEntryEntity::class,
     ],
-    version = 4,
+    version = 5,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -49,5 +51,17 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         const val DB_NAME = "dosecare.db"
+
+        /**
+         * v0.9g Migration 4 → 5: prescribed_drug 加 2 字段
+         * - times:       JSON 序列化的 List<String> "HH:mm", 默认 "[]" (= 按 frequencyPerDay 用默认时段)
+         * - target_date: 临时用药目标日期 (epoch day 0:00 ms), null = 周期用药
+         */
+        val MIGRATION_4_5: Migration = object : Migration(4, 5) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE prescribed_drug ADD COLUMN times TEXT NOT NULL DEFAULT '[]'")
+                db.execSQL("ALTER TABLE prescribed_drug ADD COLUMN target_date INTEGER")
+            }
+        }
     }
 }

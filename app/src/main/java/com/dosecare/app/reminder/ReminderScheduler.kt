@@ -8,32 +8,35 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import com.dosecare.app.data.db.AppDatabase
+import com.dosecare.app.data.db.PrescribedDrugEntity
 import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.JsonArray
+import kotlinx.serialization.json.JsonPrimitive
 import java.util.Calendar
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
 /**
- * v0.9f 提醒调度器
+ * v0.9g 提醒调度器
  *
  * 入口 (suspend):
- * - scheduleAll(): 扫所有 active drug × default slots, 入队 OneTimeWorkRequest
+ * - scheduleAll(): 扫所有 active drug × drug.times (自定义时段), 入队 OneTimeWorkRequest
  * - cancelAll(): 取消所有 reminder worker
  *
  * 入口 (sync):
  * - scheduleNextDay(drugId, slotTime): worker 触发后内部调, 排下一天
  * - scheduleTestReminder(...): 测试按钮
  *
- * ⚠️ v0.9f 限制:
- * - 当前 PrescribedDrugEntity 没有 times 字段 (v0.7 Room migration 漏, 已知欠债)
- * - scheduleAll() 暂时按 frequencyPerDay 用默认时段:
- *     freq=1 → 08:00
- *     freq=2 → 08:00, 20:00
- *     freq=3 → 08:00, 14:00, 20:00
- *     freq=4 → 08:00, 12:00, 18:00, 22:00
- *   v0.9g 加 PrescribedDrugEntity.times + migration 后, 改读自定义时段
- * - temp drug (targetDate != null) 跳过 (单次提醒不需要预约)
+ * v0.9g 升级:
+ * - 读 PrescribedDrugEntity.times 字段 (JSON 序列化的 List<String> "HH:mm")
+ * - times 为空 → 走 defaultSlotsFor(frequencyPerDay) fallback
+ *   freq=1 → 08:00
+ *   freq=2 → 08:00, 20:00
+ *   freq=3 → 08:00, 14:00, 20:00
+ *   freq=4 → 08:00, 12:00, 18:00, 22:00
+ * - targetDate != null 视为临时用药 (单次), 跳过
  *
  * 调度算法:
  * - 入队 OneTimeWorkRequest (initialDelay = millisUntilSlot)
@@ -48,6 +51,8 @@ class ReminderScheduler @Inject constructor(
     private val groupDao get() = db.prescriptionGroupDao()
     private val workManager: WorkManager = WorkManager.getInstance(appContext)
 
+    private val json = Json { ignoreUnknownKeys = true; isLenient = true; explicitNulls = false }
+
     /**
      * 取消所有 reminder worker
      */
@@ -57,7 +62,7 @@ class ReminderScheduler @Inject constructor(
     }
 
     /**
-     * 扫所有 active drug × default slots, 入队 OneTimeWorkRequest
+     * 扫所有 active drug × drug.times (or default slots), 入队 OneTimeWorkRequest
      * 在 prescribed_drug 增删改后调
      */
     suspend fun scheduleAll() {
@@ -67,9 +72,9 @@ class ReminderScheduler @Inject constructor(
         val now = System.currentTimeMillis()
         for (drug in drugs) {
             if (!drug.active) continue
-            // 跳过临时用药 (Room 端: frequencyPerDay <= 0 视为临时, 或有特殊标记)
-            if (drug.frequencyPerDay <= 0) continue
-            val slots = defaultSlotsFor(drug.frequencyPerDay)
+            // 临时用药 (targetDate != null) 不入周期提醒队列
+            if (drug.targetDate != null) continue
+            val slots = effectiveSlotsFor(drug)
             for (slot in slots) {
                 if (scheduleNextSlot(drug.id, slot, fromNowMs = now)) {
                     scheduled++
@@ -116,15 +121,44 @@ class ReminderScheduler @Inject constructor(
     // ============== 内部 ==============
 
     /**
-     * v0.9f 临时默认时段 (Room 缺 times 字段的过渡方案)
-     * v0.9g 加 times + migration 后, 改读 drug.times
+     * 拿这个药应该排的时段: 先用 drug.times 自定义; 空时按 frequencyPerDay 用默认
+     */
+    private fun effectiveSlotsFor(drug: PrescribedDrugEntity): List<String> {
+        val custom = parseTimesJson(drug.times)
+        if (custom.isNotEmpty()) return custom
+        return defaultSlotsFor(drug.frequencyPerDay)
+    }
+
+    /**
+     * 默认时段: freq → 时段列表
+     *   freq=1 → 08:00
+     *   freq=2 → 08:00, 20:00
+     *   freq=3 → 08:00, 14:00, 20:00
+     *   freq=4 → 08:00, 12:00, 18:00, 22:00
+     *   freq=0 (异常) 或 < 0 → emptyList()  (临时用药已在外层按 targetDate 跳过)
      */
     private fun defaultSlotsFor(freq: Int): List<String> = when (freq) {
         1 -> listOf("08:00")
         2 -> listOf("08:00", "20:00")
         3 -> listOf("08:00", "14:00", "20:00")
         4 -> listOf("08:00", "12:00", "18:00", "22:00")
-        else -> emptyList()  // freq 0 (临时) 或 异常值, 不排
+        else -> emptyList()
+    }
+
+    /**
+     * 解析 drug.times JSON 字符串 → "HH:mm" 列表
+     *   - "[]" / 空 → emptyList
+     *   - 解析失败 → emptyList (fallback 到 default)
+     */
+    private fun parseTimesJson(jsonStr: String): List<String> {
+        if (jsonStr.isBlank() || jsonStr == "[]") return emptyList()
+        return runCatching {
+            val arr = json.parseToJsonElement(jsonStr) as? JsonArray ?: return emptyList()
+            arr.mapNotNull { el ->
+                val p = el as? JsonPrimitive ?: return@mapNotNull null
+                if (p.isString) p.content else null
+            }
+        }.getOrDefault(emptyList())
     }
 
     private fun scheduleNextSlot(drugId: String, slot: String, fromNowMs: Long): Boolean {

@@ -1,9 +1,16 @@
 package com.dosecare.app.ui
 
+import com.dosecare.app.data.repository.PrescriptionRepositoryRoom
+import com.dosecare.app.domain.prescription.PrescriptionGroup
 import com.dosecare.app.domain.rules.Interaction
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 
 /**
  * 4 个 tab 的状态 object 单例 — 跨 Composable 重组保留状态
@@ -12,6 +19,11 @@ import kotlinx.coroutines.flow.asStateFlow
  * object 在 JVM 上是单例, App 进程不杀就一直活着
  * tab 切换 / 跳详情返回 / Composable 重组, 状态都在
  * 进程被杀丢 (没接 SavedStateHandle, 后续可加)
+ *
+ * v0.9g PrescriptionViewModel 增加 2 个字段:
+ * - groups: StateFlow<List<PrescriptionGroup>> 从 Room observeGroups
+ * - updateGroups(transform): 写 Room
+ * 都需要先调 init(repo, scope) 注入, 由 DoseCareApp.onCreate 启动时调用
  */
 object PrescriptionViewModel {
     private val _expandedGroups = MutableStateFlow<Set<String>>(emptySet())
@@ -23,6 +35,55 @@ object PrescriptionViewModel {
     private val _infoDialogOpen = MutableStateFlow(false)
     val infoDialogOpen: StateFlow<Boolean> = _infoDialogOpen.asStateFlow()
     fun setInfoDialogOpen(v: Boolean) { _infoDialogOpen.value = v }
+
+    // ============== v0.9g: Room-backed groups ==============
+
+    @Volatile
+    private var repoRef: PrescriptionRepositoryRoom? = null
+    @Volatile
+    private var appScopeRef: CoroutineScope? = null
+    @Volatile
+    private var _groups: StateFlow<List<PrescriptionGroup>>? = null
+
+    /**
+     * App.onCreate 阶段调一次: 注入 repo + 启动 observe groups
+     * 重复调 noop
+     */
+    @Synchronized
+    fun init(repo: PrescriptionRepositoryRoom, scope: CoroutineScope) {
+        if (repoRef != null) return
+        repoRef = repo
+        appScopeRef = scope
+        _groups = repo.observeGroups().stateIn(
+            scope = scope,
+            started = SharingStarted.Eagerly,
+            initialValue = emptyList()
+        )
+    }
+
+    /**
+     * 处方组订阅流 (init 之后才能用)
+     * 未 init 时返回空 list
+     */
+    val groups: StateFlow<List<PrescriptionGroup>>
+        get() = _groups ?: MutableStateFlow<List<PrescriptionGroup>>(emptyList()).asStateFlow()
+
+    /**
+     * 写操作: 用 transform 算新 list, 落 Room
+     * RepositoryRoom 的 saveAll/upsertDrug 末尾自动调 ReminderScheduler.scheduleAll(),
+     * 所以改 times 后下一次 reminder 就会用自定义时段
+     */
+    fun updateGroups(transform: (List<PrescriptionGroup>) -> List<PrescriptionGroup>) {
+        val repo = repoRef ?: return
+        val scope = appScopeRef ?: return
+        val current = _groups?.value ?: emptyList()
+        val next = transform(current)
+        if (next != current) {
+            scope.launch(Dispatchers.IO) {
+                repo.saveAll(next)
+            }
+        }
+    }
 }
 
 object CatalogViewModel {

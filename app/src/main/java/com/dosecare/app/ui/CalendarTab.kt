@@ -39,7 +39,6 @@ import com.dosecare.app.domain.catalog.DrugCatalogService
 import com.dosecare.app.domain.prescription.DoseTaken
 import com.dosecare.app.domain.prescription.PrescribedDrug
 import com.dosecare.app.domain.prescription.PrescriptionGroup
-import com.dosecare.app.domain.prescription.PrescriptionRepository
 import com.dosecare.app.ui.theme.AccentColors
 import com.dosecare.app.ui.theme.DarkModePref
 import com.dosecare.app.ui.theme.ThemeController
@@ -94,16 +93,15 @@ fun CalendarTab(
 ) {
     val context = LocalContext.current
     val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
-    val repo = remember(context) { PrescriptionRepository(context) }
     val scope = rememberCoroutineScope()
+    // v0.9g: 从 SharedPreferences 版 PrescriptionRepository 切到 Room 版 (object PrescriptionViewModel 已注入)
+    val groups by PrescriptionViewModel.groups.collectAsState()
 
-    var groups by remember { mutableStateOf(repo.loadAll()) }
     // 由 pendingReminder 触发的 checkInTarget, 用 stable ref 防重组丢失
     var pendingCheckInTarget by remember { mutableStateOf<CheckInTarget?>(null) }
 
-    fun persist() { repo.saveAll(groups) }
     fun updateGroups(transform: (List<PrescriptionGroup>) -> List<PrescriptionGroup>) {
-        groups = transform(groups); persist()
+        PrescriptionViewModel.updateGroups(transform)
     }
 
     val selectedDate by CalendarViewModel.selectedDate.collectAsState()

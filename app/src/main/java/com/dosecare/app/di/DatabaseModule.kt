@@ -52,7 +52,7 @@ object DatabaseModule {
             AppDatabase.DB_NAME
         )
             .openHelperFactory(factory)
-            .fallbackToDestructiveMigration()
+            .addMigrations(AppDatabase.MIGRATION_4_5)  // v0.9g: prescribed_drug 加 times + target_date
             .build()
     }
 
