@@ -313,27 +313,33 @@ private fun TdmSelectionCard(
                         .background(selection.color, CircleShape)
                 )
                 Spacer(Modifier.width(8.dp))
+                val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
+                val isChinesePrimary = locale.language == "zh"
+                val drugNamePrimary = if (isChinesePrimary) selection.drug.genericNameZh else selection.drug.genericName
                 Text(
-                    selection.drug.genericNameZh,
+                    drugNamePrimary,
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.weight(1f)
                 )
-                // TODO(v0.9b): "TDM (无窗)" chip 文本需要 i18n — 需要新增 strings.xml key
-                //            "TDM" 是英文缩写保持不变, "(无窗)" 部分需要 tdm_no_window key
+                // TODO(v0.9d done): chip "TDM" + "(无窗)" 改 R.string.tdm_no_window
                 Text(
-                    "TDM" + if (selection.drug.therapeuticWindow != null) "" else " " + stringResource(R.string.home_no_window),
+                    if (selection.drug.therapeuticWindow != null) "TDM" else stringResource(R.string.tdm_no_window),
+                    style = MaterialTheme.typography.labelSmall,
+                    color = if (selection.drug.therapeuticWindow != null) selection.color else MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
+                    if (selection.drug.therapeuticWindow != null) "TDM" else stringResource(R.string.tdm_no_window),
                     style = MaterialTheme.typography.labelSmall,
                     color = if (selection.drug.therapeuticWindow != null) selection.color else MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 IconButton(onClick = {
                     onUpdate(selection.copy(visible = !selection.visible))
                 }) {
-                    // TODO(v0.9b): "隐藏" / "显示" contentDescription 需要 i18n
-                    //            建议: 新增 strings.xml key (tdm_hide / tdm_show)
+                    // TODO(v0.9d done): 改 R.string.tdm_hide_cd / tdm_show_cd
                     Icon(
                         if (selection.visible) Icons.Default.Visibility else Icons.Default.VisibilityOff,
-                        contentDescription = if (selection.visible) "隐藏" else "显示",
+                        contentDescription = if (selection.visible) stringResource(R.string.tdm_hide_cd) else stringResource(R.string.tdm_show_cd),
                         tint = if (selection.visible) selection.color else MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }

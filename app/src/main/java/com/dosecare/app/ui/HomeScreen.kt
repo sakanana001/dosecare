@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -21,9 +22,16 @@ import com.dosecare.app.domain.catalog.DrugCategory
  *
  * v0.3.2 改 4 底栏后,HomeScreen 主页取消(由 BottomNavTabs.TdmTab/CatalogTab 替代),
  * 这些 helper 仍被 CatalogTab / DrugDetailScreen 引用,所以保留并改为 internal。
+ *
+ * v0.9d i18n: 药物主名按当前 locale 显示 (zh 用 genericNameZh, en/ja 用 genericName),
+ * 副名 (次要语言) 用 drug_name_with_*_subtitle format 包装。
  */
 @Composable
 internal fun DrugCard(drug: Drug, onClick: () -> Unit) {
+    val locale = LocalConfiguration.current.locales[0]
+    val isChinesePrimary = locale.language == "zh"
+    val primaryName = if (isChinesePrimary) drug.genericNameZh else drug.genericName
+    val secondaryName = if (isChinesePrimary) drug.genericName else drug.genericNameZh
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -36,9 +44,9 @@ internal fun DrugCard(drug: Drug, onClick: () -> Unit) {
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(Modifier.weight(1f)) {
-                    Text(drug.genericNameZh, style = MaterialTheme.typography.titleLarge)
+                    Text(primaryName, style = MaterialTheme.typography.titleLarge)
                     Text(
-                        drug.genericName,
+                        secondaryName,
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )

@@ -464,4 +464,49 @@
     <string name="cmp_lay_diff_empty">2剤は主要指標で明らかな差異がありません。実際の使用は医師に従ってください。</string>
     <string name="cmp_lay_disclaimer">⚠️ すべてのパラメータは実際の添付文書/検査値で確認してください。\n投薬調整、相互作用警告は医師または臨床薬剤師にご相談ください。</string>
 
+    <!-- ====== Calendar (My Meds + Diary) 曜日ヘッダー i18n ====== -->
+    <string name="calendar_weekday_short_1">月</string>
+    <string name="calendar_weekday_short_2">火</string>
+    <string name="calendar_weekday_short_3">水</string>
+    <string name="calendar_weekday_short_4">木</string>
+    <string name="calendar_weekday_short_5">金</string>
+    <string name="calendar_weekday_short_6">土</string>
+    <string name="calendar_weekday_short_7">日</string>
+
+    <!-- ====== ホーム / カレンダー 空状態 + グループ管理 ====== -->
+    <string name="home_no_groups">まだグループがありません。右上の + で作成してください。</string>
+    <string name="home_no_plans">この日の服薬予定はありません。</string>
+    <string name="home_no_diary">今日の日記はありません。右上の + で書いてください。</string>
+    <string name="groups_manage">📂 グループ管理</string>
+    <string name="action_new">新規</string>
+    <string name="add_to_existing_group">既存グループに薬追加</string>
+    <string name="checkin_actual_time">実際 %1$s</string>
+
+    <!-- ====== 薬品名 / カテゴリ chip i18n ====== -->
+    <string name="drug_name_format_en">%1$s</string>
+    <string name="drug_name_format_zh">%1$s</string>
+    <string name="drug_name_with_en_subtitle">%1$s (%2$s)</string>
+    <string name="drug_name_with_zh_subtitle">%1$s · %2$s</string>
+
+    <!-- ====== 薬品検索プレースホルダ + 件数 / ブランド ====== -->
+    <string name="search_placeholder">タップして薬品を検索…</string>
+    <string name="search_count_with_query"> · 検索:\"%1$s\"</string>
+    <string name="search_brand_prefix"> · ブランド: %1$s</string>
+
+    <!-- ====== TDM モジュール (InteractiveConcentrationChart + TdmModule) ====== -->
+    <string name="chart_title">濃度-時間曲線</string>
+    <string name="chart_status_format">🔍 %1$.1fx · ドラッグ / ピンチでズーム</string>
+    <string name="chart_status_low">⛔ 低い</string>
+    <string name="chart_status_high">⚠️ 高い</string>
+    <string name="chart_status_in_window">✓ 範囲内</string>
+    <string name="chart_status_not_comparable">· 比較不可</string>
+    <string name="tdm_hide_cd">非表示</string>
+    <string name="tdm_show_cd">表示</string>
+    <string name="tdm_no_window">TDM (範囲なし)</string>
+
+    <!-- ====== 相互作用モジュール (BottomNavTabs 警告文) ====== -->
+    <string name="interaction_qtc_format">推定 QTc %1$.0f ms</string>
+    <string name="interaction_acb_format">ACB スコア %1$d</string>
+    <string name="interaction_serotonin_format">%1$d 個のセロトニン作動薬が関与</string>
+
 </resources>

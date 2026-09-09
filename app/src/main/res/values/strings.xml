@@ -464,4 +464,50 @@
     <string name="cmp_lay_diff_empty">两药在主要指标上没有明显差异。具体使用仍请遵医嘱。</string>
     <string name="cmp_lay_disclaimer">⚠️ 各项参数请以实际药品说明书/化验值为准。\n用药调整、相互作用警示请遵医嘱或咨询临床药师。</string>
 
+    <!-- ====== Calendar (My Meds + Diary) 星期表头 i18n ====== -->
+    <!-- 顺序: 周一 → 周日 (ISO 8601); zh/ja 用数字+十, en 用 Mon..Sun -->
+    <string name="calendar_weekday_short_1">一</string>
+    <string name="calendar_weekday_short_2">二</string>
+    <string name="calendar_weekday_short_3">三</string>
+    <string name="calendar_weekday_short_4">四</string>
+    <string name="calendar_weekday_short_5">五</string>
+    <string name="calendar_weekday_short_6">六</string>
+    <string name="calendar_weekday_short_7">日</string>
+
+    <!-- ====== Home / Calendar tab 顶层空态 + 分组管理 ====== -->
+    <string name="home_no_groups">还没有分组,点右上 + 创建</string>
+    <string name="home_no_plans">当日无安排用药</string>
+    <string name="home_no_diary">今天还没有日记,点右上 + 写一条</string>
+    <string name="groups_manage">📂 分组管理</string>
+    <string name="action_new">新增</string>
+    <string name="add_to_existing_group">为已有分组加药</string>
+    <string name="checkin_actual_time">实际 %1$s</string>
+
+    <!-- ====== 药物名 / 分类 chip i18n (Locale 决定主名: zh=genericNameZh, en/ja=genericName) ====== -->
+    <string name="drug_name_format_en">%1$s</string>
+    <string name="drug_name_format_zh">%1$s</string>
+    <string name="drug_name_with_en_subtitle">%1$s · %2$s</string>
+    <string name="drug_name_with_zh_subtitle">%1$s (%2$s)</string>
+
+    <!-- ====== 搜索选药 placeholder + 计数 / 品牌 ====== -->
+    <string name="search_placeholder">点击搜索选药…</string>
+    <string name="search_count_with_query"> · 搜索:\"%1$s\"</string>
+    <string name="search_brand_prefix"> · 品牌: %1$s</string>
+
+    <!-- ====== TDM 模块 (InteractiveConcentrationChart + TdmModule) ====== -->
+    <string name="chart_title">浓度-时间曲线</string>
+    <string name="chart_status_format">🔍 %1$.1fx · 拖动 / 双指缩放</string>
+    <string name="chart_status_low">⛔ 偏低</string>
+    <string name="chart_status_high">⚠️ 偏高</string>
+    <string name="chart_status_in_window">✓ 窗内</string>
+    <string name="chart_status_not_comparable">· 不可比</string>
+    <string name="tdm_hide_cd">隐藏</string>
+    <string name="tdm_show_cd">显示</string>
+    <string name="tdm_no_window">TDM (无窗)</string>
+
+    <!-- ====== 相互作用模块 (BottomNavTabs 警示语) ====== -->
+    <string name="interaction_qtc_format">估算 QTc %1$.0f ms</string>
+    <string name="interaction_acb_format">ACB 评分 %1$d</string>
+    <string name="interaction_serotonin_format">涉及 %1$d 个 5-HT 增强药</string>
+
 </resources>

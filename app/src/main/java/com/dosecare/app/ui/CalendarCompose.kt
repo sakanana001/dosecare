@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -23,6 +24,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dosecare.app.R
 import java.text.SimpleDateFormat
+import java.time.YearMonth
+import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
 import java.util.Calendar
 import java.util.Locale
 
@@ -35,6 +39,10 @@ import java.util.Locale
  * - 今天: 蓝色边
  *
  * 设计参考: 简洁单色, 选中态用 primary 实心圆.
+ *
+ * v0.9d i18n: 月标题按当前 locale 用 DateTimeFormatter.ofLocalizedDate (zh/ja 显示 "2026年9月",
+ *            en 显示 "September 2026"). 星期表头 (一/二/.../日 vs Mon/Tue/.../Sun vs 月/火/.../日)
+ *            走 stringResource 数组 (calendar_weekday_short_1..7). 详见 strings.xml.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -48,13 +56,21 @@ fun MonthCalendar(
     onNextMonth: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    // TODO(v0.9b): SimpleDateFormat pattern "yyyy 年 M 月" 硬编码中文 (年/月)
-    //            完整 i18n 需要按 locale 切换 pattern (zh: "yyyy 年 M 月", en: "MMMM yyyy", ja: "yyyy 年 M 月")
-    val titleFmt = remember { SimpleDateFormat("yyyy 年 M 月", Locale.CHINA) }
-    val titleCal = remember(currentYear, currentMonth) {
-        Calendar.getInstance().apply { set(currentYear, currentMonth, 1) }
+    // v0.9d: 月标题按当前 locale 走 java.time DateTimeFormatter
+    val locale = LocalConfiguration.current.locales[0]
+    val monthTitle = remember(currentYear, currentMonth, locale) {
+        val calDate = java.util.Date(currentYear - 1900, currentMonth, 1)
+        when (locale.language) {
+            "ja" -> SimpleDateFormat("yyyy 年 M 月", Locale.JAPANESE).apply {
+                timeZone = java.util.TimeZone.getDefault()
+            }.format(calDate)
+            "zh" -> SimpleDateFormat("yyyy 年 M 月", Locale.SIMPLIFIED_CHINESE).apply {
+                timeZone = java.util.TimeZone.getDefault()
+            }.format(calDate)
+            else -> YearMonth.of(currentYear, currentMonth + 1)
+                .format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH))
+        }
     }
-    val monthTitle = remember(titleCal) { titleFmt.format(titleCal.time) }
     val todayStart = remember { CalendarViewModel.startOfDay(System.currentTimeMillis()) }
 
     // 当月 1 号对应的星期 (周一=1, 周日=0/7)
@@ -98,14 +114,22 @@ fun MonthCalendar(
             }
         }
 
-        // 星期表头
-        // TODO(v0.9b): 星期表头 (一/二/三/四/五/六/日) 需要 i18n
-        //            英文用 Mon/Tue/Wed/Thu/Fri/Sat/Sun, 日文用 月/火/水/木/金/土/日
-        //            建议: 新增 strings.xml key array (calendar_weekday_short) 或单条 (calendar_mon_short 等)
+        // 星期表头 (i18n via calendar_weekday_short_1..7)
         Row(modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp)) {
-            listOf("一", "二", "三", "四", "五", "六", "日").forEach { w ->
+            (1..7).forEach { idx ->
+                val text = stringResource(
+                    when (idx) {
+                        1 -> R.string.calendar_weekday_short_1
+                        2 -> R.string.calendar_weekday_short_2
+                        3 -> R.string.calendar_weekday_short_3
+                        4 -> R.string.calendar_weekday_short_4
+                        5 -> R.string.calendar_weekday_short_5
+                        6 -> R.string.calendar_weekday_short_6
+                        else -> R.string.calendar_weekday_short_7
+                    }
+                )
                 Text(
-                    text = w,
+                    text = text,
                     modifier = Modifier.weight(1f),
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.labelMedium,

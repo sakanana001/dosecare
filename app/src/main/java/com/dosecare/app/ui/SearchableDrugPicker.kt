@@ -43,11 +43,13 @@ fun SearchableDrugPicker(
     options: List<Drug>,
     onSelect: (Drug) -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "点击搜索选药…",
+    placeholder: String = stringResource(R.string.search_placeholder),
     prefilter: (Drug) -> Boolean = { true },
     chipColor: Color? = null
 ) {
     var showDialog by remember { mutableStateOf(false) }
+    val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
+    val isChinesePrimary = locale.language == "zh"
 
     Card(
         modifier = modifier.fillMaxWidth(),
@@ -88,8 +90,15 @@ fun SearchableDrugPicker(
                                 .background(chipColor ?: MaterialTheme.colorScheme.primary, RoundedCornerShape(5.dp))
                         )
                         Spacer(Modifier.width(8.dp))
+                        val primarySel = if (isChinesePrimary) selected.genericNameZh else selected.genericName
+                        val secondarySel = if (isChinesePrimary) selected.genericName else selected.genericNameZh
+                        val selText = if (isChinesePrimary) {
+                            stringResource(R.string.drug_name_with_zh_subtitle, primarySel, secondarySel)
+                        } else {
+                            stringResource(R.string.drug_name_with_en_subtitle, primarySel, secondarySel)
+                        }
                         Text(
-                            "${selected.genericNameZh} (${selected.genericName})",
+                            selText,
                             style = MaterialTheme.typography.bodyMedium,
                             fontWeight = FontWeight.Medium
                         )
@@ -194,10 +203,10 @@ private fun SearchableDrugDialog(
                         .padding(16.dp)
                 )
                 // Hint
-                // TODO(v0.9b): " · 搜索:\"$query\"" 部分需要 i18n
+                // TODO(v0.9d done): 改 R.string.search_count_with_query
                 Text(
                     stringResource(R.string.search_filtered, filtered.size, options.size) +
-                        if (query.isNotEmpty()) " · 搜索:\"$query\"" else "",
+                        if (query.isNotEmpty()) stringResource(R.string.search_count_with_query, query) else "",
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant,
                     modifier = Modifier.padding(horizontal = 16.dp)
@@ -233,6 +242,8 @@ private fun SearchableDrugDialog(
 
 @Composable
 private fun DrugListItem(drug: Drug, onClick: () -> Unit) {
+    val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
+    val isChinesePrimary = locale.language == "zh"
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -250,10 +261,12 @@ private fun DrugListItem(drug: Drug, onClick: () -> Unit) {
                     fontWeight = FontWeight.Medium
                 )
                 Spacer(Modifier.height(2.dp))
-                // TODO(v0.9b): " · 品牌: X" 需要 i18n
+                // TODO(v0.9d done): 改 R.string.search_brand_prefix; drug name 按 locale 主名
+                val primaryName = if (isChinesePrimary) drug.genericNameZh else drug.genericName
+                val secondaryName = if (isChinesePrimary) drug.genericName else drug.genericNameZh
                 Text(
-                    "${drug.genericName} · ${drug.category.displayName}" +
-                        if (drug.brandNames.isNotEmpty()) " · 品牌: ${drug.brandNames.take(2).joinToString("/")}" else "",
+                    "$primaryName · ${drug.category.displayName}" +
+                        if (drug.brandNames.isNotEmpty()) stringResource(R.string.search_brand_prefix, drug.brandNames.take(2).joinToString("/")) else "",
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

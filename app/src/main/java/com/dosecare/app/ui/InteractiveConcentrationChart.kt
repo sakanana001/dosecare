@@ -75,7 +75,7 @@ fun InteractiveConcentrationChart(
     series: List<ChartSeries>,
     modifier: Modifier = Modifier,
     height: androidx.compose.ui.unit.Dp = 280.dp,
-    title: String = "浓度-时间曲线",
+    title: String = stringResource(R.string.chart_title),
     showTapTooltip: Boolean = true
 ) {
     if (series.isEmpty()) return
@@ -112,10 +112,9 @@ fun InteractiveConcentrationChart(
                 title, style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold, modifier = Modifier.weight(1f)
             )
-            // TODO(v0.9b): "🔍 Xx · 拖动 / 双指缩放" status bar 需要 i18n
-            //            "拖动 / 双指缩放" 是 UI 提示, 需要新增 strings.xml key
+            // TODO(v0.9d done): 改 R.string.chart_status_format
             Text(
-                "🔍 ${"%.1f".format(scaleX)}x · 拖动 / 双指缩放",
+                stringResource(R.string.chart_status_format, scaleX),
                 style = MaterialTheme.typography.labelSmall,
                 color = colorScheme.onSurfaceVariant
             )
@@ -140,12 +139,12 @@ fun InteractiveConcentrationChart(
                         style = MaterialTheme.typography.labelSmall,
                         color = s.color
                     )
-                    // TODO(v0.9b): "不可比" / "偏低" / "偏高" / "窗内" 状态标签需要 i18n
+                    // TODO(v0.9d done): 4 个状态标签改 stringResource (chart_status_*)
                     val status = when {
-                        s.drug.skipTherapeuticWindowBand -> "· 不可比"
-                        cmaxD < win.low -> "⛔ 偏低"
-                        cmaxD > win.high -> "⚠️ 偏高"
-                        else -> "✓ 窗内"
+                        s.drug.skipTherapeuticWindowBand -> stringResource(R.string.chart_status_not_comparable)
+                        cmaxD < win.low -> stringResource(R.string.chart_status_low)
+                        cmaxD > win.high -> stringResource(R.string.chart_status_high)
+                        else -> stringResource(R.string.chart_status_in_window)
                     }
                     Spacer(Modifier.width(6.dp))
                     Text(

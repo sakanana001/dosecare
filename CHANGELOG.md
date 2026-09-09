@@ -5,10 +5,40 @@ DoseCare 的所有重要变更都记录在这里。格式基于 [Keep a Changelo
 ## [Unreleased]
 
 ### Planned
-- v0.9d: WorkManager 提醒 + 通知权限 + 系统日历写入
-- v0.9d: 日历事件点实时刷新 (接 `dose_taken` 表后,跨 tab 状态变化触发 dayEvents 重算)
-- v0.9d: TDM 个体化校准 (基于历史血药浓度回算 ke / Vd)
+- v0.9e: WorkManager 提醒 + 通知权限 + 系统日历写入
+- v0.9e: 日历事件点实时刷新 (接 `dose_taken` 表后,跨 tab 状态变化触发 dayEvents 重算)
+- v0.9e: TDM 个体化校准 (基于历史血药浓度回算 ke / Vd)
 - v1.0: 性能优化 (启动 < 800ms)、可访问性 (a11y) 通过、隐私政策上线
+
+---
+
+## [0.9d] - 2026-09-09 · 补全 i18n 全面排查 (日历 / 目录 / 药名 / TDM / 警示语)
+
+### Fixed (用户报 5 处)
+- **第一模块首页"还没有分组"** → `R.string.home_no_groups` (CalendarTab.kt L217)
+- **第二模块首页"还没有日记"** → `R.string.home_no_diary` (DiaryTab.kt 之前已修复, 验证有效)
+- **第三模块药品目录药物名称** → DrugCard / DrugPicker 按 locale 选主名 (zh=`genericNameZh`, en/ja=`genericName`), 排序也跟 locale 走
+- **第一/第二模块日历日期** → CalendarCompose.kt + CalendarTab.kt 改用 `LocalConfiguration.current.locales[0] + DateTimeFormatter` (zh/ja "2026 年 9 月", en "September 2026"); 星期表头走 `R.string.calendar_weekday_short_1..7` (一/二/.../日 vs Mon/Tue/.../Sun vs 月/火/.../日)
+- **全面排查** (12+ 处其它硬编码): 互动警示 3 行 (QTc/ACB/5-HT), 浓度曲线标题/状态/4 个窗内状态 (偏低/偏高/窗内/不可比), TDM "(无窗)" chip + 隐藏/显示 contentDescription, 搜索选药 placeholder + 计数 + 品牌, 当日无安排用药 / 分组管理 / 新增 / 为已有分组加药 / 实际 HH:mm 备注
+
+### Added
+- 33 个新 `R.string.*` key (calendar_weekday_short_1..7, home_no_groups/plans/diary, groups_manage, action_new, add_to_existing_group, checkin_actual_time, drug_name_format_*, search_placeholder, search_count_with_query, search_brand_prefix, chart_title, chart_status_format, chart_status_low/high/in_window/not_comparable, tdm_hide/show_cd, tdm_no_window, interaction_qtc/acb/serotonin_format)
+- 3 strings.xml 共 428 key 100% 对齐 (Python Compare-Object 验证)
+
+### Changed
+- `MonthCalendar` + `DayTitle` 改 Locale-aware: 用 `java.time.YearMonth.format(DateTimeFormatter.ofPattern("MMMM yyyy", Locale.ENGLISH))` for en; zh/ja 保留 "yyyy 年 M 月" / "M 月 d 日 EEE" pattern + `Locale.SIMPLIFIED_CHINESE`
+- `DrugCard` / `DrugPicker` / `TdmModule` 药物名按 locale 主次切换, 同时更新 `sortedBy` 排序键
+- `SearchableDrugPicker` placeholder 从 String 默认值改为 `stringResource(R.string.search_placeholder)`
+- `CalendarTab.checkInDialog` "实际 HH:mm" 备注用 `LocalContext.current.getString()` 在 coroutine 回调中取本地化字符串
+- versionCode 11→12, versionName 0.9c→0.9d
+
+### Migration
+- 老用户 v0.9c → v0.9d: 数据无变化, UI 文本进一步本地化
+- 仍基于 v0.9a/v0.9b 多语言架构 (AppCompat 1.7+ per-app language + localeConfig + attachBaseContext)
+
+---
+
+## [0.9c] - 2026-09-09 · 补全 i18n (Diary 心情 + 通俗解释 + DrugDetail/ComparisonView 全面排查)
 
 ---
 

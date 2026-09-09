@@ -46,6 +46,8 @@ import com.dosecare.app.ui.theme.ThemeController
 import com.dosecare.app.ui.theme.ThemeState
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
+import java.time.Month
+import java.time.format.TextStyle
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
@@ -89,6 +91,7 @@ fun CalendarTab(
     catalog: DrugCatalogService
 ) {
     val context = LocalContext.current
+    val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
     val repo = remember(context) { PrescriptionRepository(context) }
     val scope = rememberCoroutineScope()
 
@@ -191,10 +194,27 @@ fun CalendarTab(
                 modifier = Modifier.fillMaxWidth().padding(horizontal = 4.dp, vertical = 4.dp),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                val dayTitle = remember(selectedDate) {
-                    // TODO(v0.9b): SimpleDateFormat pattern "M 月 d 日 EEE" 硬编码中文 (月/日)
-                    //            完整 i18n 需要按 locale 切换 pattern (zh: "M月d日 EEE", en: "MMM d, EEE", ja: "M月d日 EEE")
-                    SimpleDateFormat("M 月 d 日 EEE", Locale.CHINA).format(Date(selectedDate))
+                val dayTitle = remember(selectedDate, locale) {
+                    val cal = Calendar.getInstance().apply { timeInMillis = selectedDate }
+                    when (locale.language) {
+                        "ja" -> SimpleDateFormat("M 月 d 日 EEE", Locale.JAPANESE).format(cal.time)
+                        "zh" -> SimpleDateFormat("M 月 d 日 EEE", Locale.SIMPLIFIED_CHINESE).format(cal.time)
+                        else -> {
+                            val month = cal.get(Calendar.MONTH) + 1
+                            val day = cal.get(Calendar.DAY_OF_MONTH)
+                            val wd = cal.get(Calendar.DAY_OF_WEEK) // 1=Sun..7=Sat
+                            val weekday = when (wd) {
+                                Calendar.MONDAY -> "Mon"
+                                Calendar.TUESDAY -> "Tue"
+                                Calendar.WEDNESDAY -> "Wed"
+                                Calendar.THURSDAY -> "Thu"
+                                Calendar.FRIDAY -> "Fri"
+                                Calendar.SATURDAY -> "Sat"
+                                else -> "Sun"
+                            }
+                            String.format(Locale.ENGLISH, "%s %d, %s", Month.of(month).getDisplayName(TextStyle.SHORT, Locale.ENGLISH), day, weekday)
+                        }
+                    }
                 }
                 Text(
                     text = "💊 $dayTitle",
@@ -212,9 +232,8 @@ fun CalendarTab(
                     modifier = Modifier.fillMaxWidth().padding(24.dp),
                     contentAlignment = Alignment.Center
                 ) {
-                    // TODO(v0.9b): 新增 strings.xml key (还没有分组,点右上 + 创建)
                     Text(
-                        text = "还没有分组,点右上 + 创建",
+                        text = stringResource(R.string.home_no_groups),
                         style = MaterialTheme.typography.bodyMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -229,9 +248,8 @@ fun CalendarTab(
                         modifier = Modifier.fillMaxWidth().padding(24.dp),
                         contentAlignment = Alignment.Center
                     ) {
-                        // TODO(v0.9b): 新增 strings.xml key (当日无安排用药)
                         Text(
-                            text = "当日无安排用药",
+                            text = stringResource(R.string.home_no_plans),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
@@ -282,9 +300,9 @@ fun CalendarTab(
                 Spacer(Modifier.height(8.dp))
                 Divider()
                 Spacer(Modifier.height(4.dp))
-                // TODO(v0.9b): 新增 strings.xml key (📂 分组管理)
+                // TODO(v0.9d done): 改 R.string.groups_manage
                 Text(
-                    text = "📂 分组管理",
+                    text = stringResource(R.string.groups_manage),
                     style = MaterialTheme.typography.titleSmall,
                     fontWeight = FontWeight.SemiBold,
                     modifier = Modifier.padding(horizontal = 4.dp, vertical = 4.dp)
@@ -368,9 +386,9 @@ fun CalendarTab(
     if (showAddSheet) {
         ModalBottomSheet(onDismissRequest = { showAddSheet = false }) {
             Column(modifier = Modifier.padding(16.dp).fillMaxWidth()) {
-                // TODO(v0.9b): 新增 strings.xml key (新增)
+                // TODO(v0.9d done): 改 R.string.action_new
                 Text(
-                    text = "新增",
+                    text = stringResource(R.string.action_new),
                     style = MaterialTheme.typography.titleMedium,
                     fontWeight = FontWeight.SemiBold
                 )
@@ -402,9 +420,9 @@ fun CalendarTab(
                 )
                 if (groups.isNotEmpty()) {
                     HorizontalDivider()
-                    // TODO(v0.9b): 新增 strings.xml key (为已有分组加药)
+                    // TODO(v0.9d done): 改 R.string.add_to_existing_group
                     Text(
-                        text = "为已有分组加药",
+                        text = stringResource(R.string.add_to_existing_group),
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(top = 8.dp, bottom = 4.dp)
@@ -657,8 +675,9 @@ fun CalendarTab(
                     val doseTs = target.scheduledMillis
                     // 自定义时间仅作为 note 保留
                     val note = if (kotlin.math.abs(userTs - doseTs) > TimeUnit.MINUTES.toMillis(1)) {
-                        val noteFmt = java.text.SimpleDateFormat("HH:mm", java.util.Locale.CHINA)
-                        "实际 ${noteFmt.format(java.util.Date(userTs))}"
+                        val noteFmt = java.text.SimpleDateFormat("HH:mm", java.util.Locale.getDefault())
+                        val timeStr = noteFmt.format(java.util.Date(userTs))
+                        context.getString(R.string.checkin_actual_time, timeStr)
                     } else null
                     updateGroups { gs ->
                         gs.map { g ->

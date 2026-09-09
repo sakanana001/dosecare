@@ -464,4 +464,49 @@
     <string name="cmp_lay_diff_empty">The two drugs show no obvious differences in main indicators. Follow your physician for actual use.</string>
     <string name="cmp_lay_disclaimer">⚠️ All parameters should be verified against the actual drug label / lab values.\nFor medication adjustments and interaction alerts, consult your physician or clinical pharmacist.</string>
 
+    <!-- ====== Calendar (My Meds + Diary) weekday header i18n ====== -->
+    <string name="calendar_weekday_short_1">Mon</string>
+    <string name="calendar_weekday_short_2">Tue</string>
+    <string name="calendar_weekday_short_3">Wed</string>
+    <string name="calendar_weekday_short_4">Thu</string>
+    <string name="calendar_weekday_short_5">Fri</string>
+    <string name="calendar_weekday_short_6">Sat</string>
+    <string name="calendar_weekday_short_7">Sun</string>
+
+    <!-- ====== Home / Calendar tab empty states + group management ====== -->
+    <string name="home_no_groups">No groups yet. Tap + (top right) to create one.</string>
+    <string name="home_no_plans">No medications scheduled for this day.</string>
+    <string name="home_no_diary">No diary entry today. Tap + (top right) to write one.</string>
+    <string name="groups_manage">📂 Manage Groups</string>
+    <string name="action_new">New</string>
+    <string name="add_to_existing_group">Add Drug to Existing Group</string>
+    <string name="checkin_actual_time">Actual %1$s</string>
+
+    <!-- ====== Drug name / Category chip i18n (locale decides primary name) ====== -->
+    <string name="drug_name_format_en">%1$s</string>
+    <string name="drug_name_format_zh">%1$s</string>
+    <string name="drug_name_with_en_subtitle">%1$s (%2$s)</string>
+    <string name="drug_name_with_zh_subtitle">%1$s · %2$s</string>
+
+    <!-- ====== Drug search placeholder + count / brand ====== -->
+    <string name="search_placeholder">Tap to search a drug…</string>
+    <string name="search_count_with_query"> · search:\"%1$s\"</string>
+    <string name="search_brand_prefix"> · brand: %1$s</string>
+
+    <!-- ====== TDM module (InteractiveConcentrationChart + TdmModule) ====== -->
+    <string name="chart_title">Concentration-Time Curve</string>
+    <string name="chart_status_format">🔍 %1$.1fx · drag / pinch to zoom</string>
+    <string name="chart_status_low">⛔ Low</string>
+    <string name="chart_status_high">⚠️ High</string>
+    <string name="chart_status_in_window">✓ In window</string>
+    <string name="chart_status_not_comparable">· N/A</string>
+    <string name="tdm_hide_cd">Hide</string>
+    <string name="tdm_show_cd">Show</string>
+    <string name="tdm_no_window">TDM (no window)</string>
+
+    <!-- ====== Interaction module (BottomNavTabs warning text) ====== -->
+    <string name="interaction_qtc_format">Estimated QTc %1$.0f ms</string>
+    <string name="interaction_acb_format">ACB score %1$d</string>
+    <string name="interaction_serotonin_format">%1$d serotonergic drug(s) involved</string>
+
 </resources>

@@ -378,6 +378,7 @@ fun CatalogTab(
     onSettingsClick: () -> Unit
 ) {
     val allDrugs = remember { catalog.all() }
+    val isChinesePrimarySort = androidx.compose.ui.platform.LocalConfiguration.current.locales[0].language == "zh"
     val byCategory = remember(allDrugs) {
         allDrugs.groupBy { it.category }
             .toSortedMap(compareBy { it.displayName })
@@ -501,7 +502,7 @@ fun CatalogTab(
                         )
                     }
                     if (category.name in expandedCategories) {
-                        items(drugs.sortedBy { it.genericNameZh }, key = { "cat_${category.name}_${it.id}" }) { drug ->
+                        items(drugs.sortedBy { if (isChinesePrimarySort) it.genericNameZh else it.genericName.lowercase() }, key = { "cat_${category.name}_${it.id}" }) { drug ->
                             DrugCard(drug, onClick = { onDrugClick(drug.id) })
                         }
                     }
@@ -532,7 +533,7 @@ fun CatalogTab(
                         )
                     }
                     if (indication.name in expandedIndications) {
-                        items(drugs.sortedBy { it.genericNameZh }, key = { "ind_${indication.name}_${it.id}" }) { drug ->
+                        items(drugs.sortedBy { if (isChinesePrimarySort) it.genericNameZh else it.genericName.lowercase() }, key = { "ind_${indication.name}_${it.id}" }) { drug ->
                             DrugCard(drug, onClick = { onDrugClick(drug.id) })
                         }
                     }
@@ -1013,6 +1014,8 @@ internal fun DrugPicker(
     onSelect: (Drug) -> Unit
 ) {
     var expanded by remember { mutableStateOf(false) }
+    val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
+    val isChinesePrimary = locale.language == "zh"
     Card(modifier = Modifier.fillMaxWidth()) {
         Column(Modifier.padding(16.dp)) {
             Row(verticalAlignment = Alignment.CenterVertically) {
@@ -1035,7 +1038,11 @@ internal fun DrugPicker(
                     onExpandedChange = { expanded = !expanded }
                 ) {
                     OutlinedTextField(
-                        value = selected?.let { "${it.genericNameZh} (${it.genericName})" } ?: stringResource(R.string.common_search),
+                        value = selected?.let {
+                            val p = if (isChinesePrimary) it.genericNameZh else it.genericName
+                            val s = if (isChinesePrimary) it.genericName else it.genericNameZh
+                            stringResource(R.string.drug_name_with_zh_subtitle, p, s)
+                        } ?: stringResource(R.string.common_search),
                         onValueChange = {},
                         readOnly = true,
                         trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
@@ -1048,12 +1055,13 @@ internal fun DrugPicker(
                         onDismissRequest = { expanded = false }
                     ) {
                         options.take(50).forEach { drug ->
+                            val pName = if (isChinesePrimary) drug.genericNameZh else drug.genericName
                             DropdownMenuItem(
                                 text = {
                                     Column {
-                                        Text(drug.genericNameZh, style = MaterialTheme.typography.bodyLarge)
+                                        Text(pName, style = MaterialTheme.typography.bodyLarge)
                                         Text(
-                                            "${drug.genericName} · ${drug.category.displayName}",
+                                            "${drug.category.displayName}",
                                             style = MaterialTheme.typography.bodySmall,
                                             color = MaterialTheme.colorScheme.onSurfaceVariant
                                         )
@@ -1142,11 +1150,10 @@ private fun MechanismLine(interaction: Interaction) {
             "%.1f".format(interaction.patientAdjustedFold),
             "%.1f".format(interaction.patientAdjustedFold)
         )
-        // TODO(v0.9b): 以下 3 行需要新增 strings.xml key (估算 QTc, ACB 评分, 5-HT 增强药 涉及 N 个)
-        //            父 agent 需要在 strings.xml/values/strings.xml + values-en/strings.xml + values-ja/strings.xml 同步
-        is QtcInteraction -> "估算 QTc ${"%.0f".format(interaction.finalEstimatedQtcMs)} ms"
-        is AnticholinergicLoadInteraction -> "ACB 评分 ${interaction.totalScore}"
-        is SerotoninSyndromeRisk -> "涉及 ${interaction.serotonergicDrugs.size} 个 5-HT 增强药"
+        // TODO(v0.9d done): 3 行改 R.string.interaction_qtc_format / interaction_acb_format / interaction_serotonin_format
+        is QtcInteraction -> stringResource(R.string.interaction_qtc_format, interaction.finalEstimatedQtcMs)
+        is AnticholinergicLoadInteraction -> stringResource(R.string.interaction_acb_format, interaction.totalScore)
+        is SerotoninSyndromeRisk -> stringResource(R.string.interaction_serotonin_format, interaction.serotonergicDrugs.size)
         else -> null
     }
     if (text != null) {
