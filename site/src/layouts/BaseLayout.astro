@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { getLocaleFromPath, getDictionary, type Locale } from '../i18n/ui';
+
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const locale: Locale = getLocaleFromPath(Astro.url.pathname);
+const t = getDictionary(locale);
+const fullTitle = title === t.site.title
+  ? title
+  : `${title} — ${t.site.title}`;
+const metaDescription = description ?? t.site.description;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? 'https://sakanana001.github.io/PicoHRT').toString();
+---
+
+<!doctype html>
+<html lang={locale === 'zh-Hans' ? 'zh-Hans' : 'en'}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={metaDescription} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/PicoHRT/icon.svg" />
+    <meta name="theme-color" content="#5b6cff" />
+    <meta name="generator" content={Astro.generator} />
+
+    <script is:inline>
+      // Theme bootstrap (runs before paint to avoid flash).
+      (function () {
+        try {
+          var stored = localStorage.getItem('picohrt-theme');
+          var pref = stored === 'auto' || stored === 'light' || stored === 'dark' ? stored : 'auto';
+          var theme =
+            pref === 'auto'
+              ? window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+              : pref;
+          document.documentElement.dataset.theme = theme;
+          document.documentElement.dataset.themeMode = pref;
+        } catch (e) {
+          /* localStorage may be blocked; CSS media queries still apply */
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <Header locale={locale} />
+    <main class="page">
+      <article class="card">
+        <slot />
+      </article>
+    </main>
+    <Footer locale={locale} />
+  </body>
+</html>

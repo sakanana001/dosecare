@@ -1,0 +1,96 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getDictionary, type Locale } from '../../i18n/ui';
+
+const locale: Locale = 'zh-Hans';
+const t = getDictionary(locale);
+---
+
+<BaseLayout title={t.privacy.title} description={t.privacy.leadBody}>
+  <header class="hero">
+    <div class="hero-content">
+      <div class="icon-tile">
+        <svg width="56" height="56" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12c5.16-1.26 9-6.45 9-12V5l-9-4m0 6a3 3 0 0 1 3 3a3 3 0 0 1-3 3a3 3 0 0 1-3-3a3 3 0 0 1 3-3m5.13 8.83C16.79 16.85 14.52 18 12 18s-4.79-1.15-6.13-2.17c-.34-.27-.56-.69-.56-1.12c0-.83.67-1.5 1.5-1.5H8c.83 0 1.5.67 1.5 1.5c0 .16.03.31.08.45A4.5 4.5 0 0 0 12 16a4.5 4.5 0 0 0 2.42-.84c.05-.14.08-.29.08-.45c0-.83.67-1.5 1.5-1.5h1.19c.83 0 1.5.67 1.5 1.5c0 .43-.22.85-.56 1.12Z" />
+        </svg>
+      </div>
+      <div>
+        <h1 class="h1">{t.privacy.title}</h1>
+        <p class="subtitle">{t.home.heroTagline}</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="card-inset">
+    <section class="privacy-section">
+      <h2>{t.privacy.leadTitle}</h2>
+      <p>{t.privacy.leadBody}</p>
+      <p>
+        <a href="https://asterismlabs.io/featherline/privacy/" target="_blank" rel="noopener">
+          {t.privacy.canonical} →
+        </a>
+      </p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>{t.privacy.inRepoTitle}</h2>
+      <p>{t.privacy.inRepoBody}</p>
+      <ul class="bulleted">
+        {t.privacy.inRepoPoints.map((point) => <li>{point}</li>)}
+      </ul>
+    </section>
+
+    <section class="privacy-section">
+      <h2>{t.privacy.debugTitle}</h2>
+      <p>{t.privacy.debugBody}</p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>{t.privacy.encryptionTitle}</h2>
+      <p>{t.privacy.encryptionBody}</p>
+      <ul class="bulleted">
+        {t.privacy.encryptionPoints.map((point) => <li>{point}</li>)}
+      </ul>
+      <p><strong>{t.privacy.encryptionConsequence}</strong></p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>{t.privacy.networkTitle}</h2>
+      <p>{t.privacy.networkBody}</p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>{t.privacy.permissionsTitle}</h2>
+      <p>{t.privacy.permissionsBody}</p>
+      <ul class="bulleted">
+        {t.privacy.permissionsPoints.map((point) => <li><code>{point.split(' — ')[0]}</code> — {point.split(' — ')[1]}</li>)}
+      </ul>
+    </section>
+
+    <section class="privacy-section">
+      <h2>{t.privacy.backupTitle}</h2>
+      <p>{t.privacy.backupBody}</p>
+    </section>
+
+    <section class="privacy-section">
+      <h2>{t.privacy.forkTitle}</h2>
+      <p>{t.privacy.forkBody}</p>
+      <ul class="bulleted">
+        {t.privacy.forkPoints.map((point) => <li>{point}</li>)}
+      </ul>
+    </section>
+
+    <section class="privacy-section">
+      <h2>{t.privacy.contactTitle}</h2>
+      <p>
+        <Fragment set:html={t.privacy.contactBody} />
+      </p>
+    </section>
+
+    <p class="page-end-link">
+      <a href="/PicoHRT/zh-Hans/">
+        <span>← {t.nav.home}</span>
+      </a>
+    </p>
+  </main>
+</BaseLayout>

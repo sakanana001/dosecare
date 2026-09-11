@@ -1,0 +1,157 @@
+{
+  "site": {
+    "title": "PicoHRT",
+    "titleTemplate": "%s — PicoHRT",
+    "description": "PicoHRT is a privacy-first HRT tracker for Android. Log doses, see your routine, keep your records private.",
+    "brandTagline": "PicoHRT",
+    "forkNote": "A fork of Featherline"
+  },
+  "nav": {
+    "home": "Home",
+    "picohrt": "PicoHRT",
+    "download": "Download",
+    "privacy": "Privacy",
+    "menu": "Menu",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
+  },
+  "theme": {
+    "selector": "Color mode",
+    "auto": "Auto color mode",
+    "day": "Day mode",
+    "night": "Night mode"
+  },
+  "language": {
+    "selector": "Change language",
+    "current": "EN"
+  },
+  "home": {
+    "heroTagline": "Log doses, see your routine, keep your records private.",
+    "introTitle": "A privacy-first HRT tracker for Android",
+    "introBody1": "PicoHRT is a medication tracker built for people on long-term hormone therapy who want to keep their personal records private. Everything you log — doses, schedules, labs, personal notes — stays in an encrypted database on your device, under your control.",
+    "introBody2": "PicoHRT is a fork of mkx173/Featherline. We carry the original's design and pre-v0.6.0 engineering forward and add a refined 3-compartment PK engine for testosterone undecanoate, a transdermal gel depot, and a per-user override layer for the parameters you can see in your own labs.",
+    "forkTitle": "Based on Featherline",
+    "forkBody": "PicoHRT is a fork of the Featherline project. The original app, design, and pre-v0.6.0 engineering are the work of Zhaoqian Wang and the Featherline maintainers. PicoHRT continues from v0.6.0 with a rebrand, the refined PK engine, and a per-user override layer. See the upstream project for the canonical history.",
+    "modesTitle": "Hormone modes (MtF / FtM / Non-binary)",
+    "modesIntro": "PicoHRT supports both ends of the gender-affirming hormone therapy spectrum through a single HrtGoal enum. The selected goal controls three things: the default home chart, the available medications in the catalog, and the safety prompts around doses and labs.",
+    "modesMtF": "MtF (transfeminine)",
+    "modesFtM": "FtM (transmasculine)",
+    "modesNB": "Non-binary",
+    "modesUnset": "Unset (legacy default)",
+    "modesMtFDesc": "Default E2 chart, estradiol patches / gel / oral / sublingual, optional cyproterone acetate.",
+    "modesFtMDesc": "Default T chart, first-class medication keys for TE / TC / TU / T gel, CPA disabled. The v3 3-comp engine, gel skin depot, and per-user kClear / k31 override are designed for this mode.",
+    "modesNBDesc": "3-way hormone select (E2 / T / both), all medications available, no goal-specific safety prompts.",
+    "modesUnsetDesc": "E2 chart, all chips visible, no goal-specific prompts. Backward-compatible with Featherline v0.5 and earlier.",
+    "privacyTitle": "Designed with privacy in mind",
+    "privacyLocal": "<strong>Local encrypted storage</strong> — your data stays on your device by default.",
+    "privacyLock": "<strong>Optional app lock</strong> with biometrics or device password.",
+    "privacyHide": "<strong>Optional screen-content hiding</strong> for screenshots and recent apps.",
+    "privacyBackup": "<strong>Password-encrypted backup files</strong> you control — move records to a new device or keep an external copy.",
+    "featuresTitle": "Features at a glance",
+    "features": {
+      "modes": { "title": "Hormone modes", "body": "MtF / FtM / Non-binary goal switch in Settings → Personalization." },
+      "schedules": { "title": "Custom schedules", "body": "Daily or weekly medication plans that match how you actually take your meds." },
+      "reminders": { "title": "Smart reminders", "body": "Locally-scheduled reminders with batch logging when several doses fall together." },
+      "pk": { "title": "PK projection", "body": "Estradiol and testosterone 3-comp RK4 projection from your own dose history." },
+      "labs": { "title": "Blood test tracking", "body": "Log lab values with automatic unit conversion across canonical and clinical units." },
+      "tuning": { "title": "Per-user PK tuning", "body": "Override kClearInjection and 3-comp k31 from the home chart 3-comp badge to match your own labs." },
+      "weight": { "title": "Body weight input", "body": "Optional weight input for a more personalized visualization." },
+      "stock": { "title": "Stock tracking", "body": "Track units on hand, see a projected runway, and get low-stock reminders before you run out." },
+      "widget": { "title": "Home screen widget", "body": "Log a dose straight from your home screen with a quick-log widget." },
+      "journal": { "title": "Journal", "body": "Track meaningful dates on a timeline with upcoming milestones, and write a short note for each day." }
+    },
+    "screenshotsTitle": "Screens",
+    "screenshotsAlt": {
+      "home": "Home tab showing today's doses and a 7-day estimate trend.",
+      "plan": "Plan tab showing a weekly schedule with colour-coded groups.",
+      "history": "History tab showing a monthly view of logged doses.",
+      "editor": "Medication group editor with name, colour, type, and schedule.",
+      "medicines": "Medicines manager showing each medicine's stock and projected runway.",
+      "calibration": "Calibration screen showing past lab test results.",
+      "journal": "Journal tab showing a timeline of milestones and daily notes."
+    },
+    "carouselPrev": "Previous screenshot",
+    "carouselNext": "Next screenshot",
+    "downloadTitle": "Get the app",
+    "downloadCta": "Get PicoHRT",
+    "downloadNote": "PicoHRT is currently distributed as a signed APK on the GitHub Releases page. The app holds no internet permission, so it cannot check for updates — monitor the releases page for new versions.",
+    "disclaimer": "PicoHRT is a personal tracking tool, not a medical device. The visualizations are based on the times and amounts you've logged, calculated using publicly available models. They're meant to help you stay organized and aware of your own routine. For any health decisions or interpretations, always consult your healthcare provider.",
+    "privacyLink": "Read the full privacy policy"
+  },
+  "download": {
+    "title": "Download PicoHRT",
+    "intro": "PicoHRT is currently distributed as a signed debug APK on the GitHub Releases page. Pick the latest release for your device's architecture.",
+    "latestTitle": "Latest release",
+    "latestCta": "Open the GitHub releases page",
+    "latestNote": "Releases are tagged with the cumulative commit count. The current pre-release line is `v0.6.0-rebrand` (picohrt-all-abis-1.3.3-<hash>-<n>.apk).",
+    "howTitle": "How to sideload",
+    "howIntro": "PicoHRT is a debug-signed APK. Your device will need to allow installation from unknown sources for the browser or file manager you use to open the file. The permission is per-app and can be revoked afterwards.",
+    "howSteps": [
+      "Open the GitHub releases page and download the `picohrt-all-abis-1.3.3-<hash>-<n>.apk` asset.",
+      "When prompted, allow your browser or file manager to install unknown apps (this permission is per-app and can be revoked after install).",
+      "Open the downloaded APK. Android will verify the signature, then prompt to install.",
+      "After install, the launcher icon is labelled PicoHRT and the package id is com.picohrt — it installs side-by-side with the upstream Featherline (com.mkx.hrttracker) if you still have it."
+    ],
+    "flavorsTitle": "APK flavors",
+    "flavorsIntro": "Three debug flavors are produced by the build:",
+    "flavors": [
+      { "name": "play", "target": "all-abis", "use": "Generic APK; works on all devices. Pick this if you don't know which to use." },
+      { "name": "arm64", "target": "arm64-v8a", "use": "Most modern Android phones (2017+)." },
+      { "name": "x64", "target": "x86_64", "use": "x86 emulators and a small number of tablets." }
+    ],
+    "buildTitle": "Build from source",
+    "buildIntro": "Building from source requires JDK 17, a recent Android Studio, and an Android SDK whose API level matches the project's compileSdk. See docs/building.md for the full instructions.",
+    "verifyingTitle": "Verifying the build",
+    "verifyingIntro": "Each release ships a detached signature (`*.apk.asc`) and a SHA-256 file. Verify the APK with:",
+    "disclaimer": "Sideloaded APKs do not auto-update. Monitor the releases page or subscribe to GitHub releases to be notified of new versions."
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "leadTitle": "PicoHRT privacy — at a glance",
+    "leadBody": "PicoHRT is a fork of Featherline. Until a hosted PicoHRT privacy policy exists, the upstream Featherline privacy policy at https://asterismlabs.io/featherline/privacy/ is the legal reference and is treated as the controlling document in any conflict. This page documents how those commitments are enforced in code, manifest, and resource files, so an auditor or contributor can verify each claim against source.",
+    "canonical": "Canonical Featherline privacy policy",
+    "inRepoTitle": "What's stored on device",
+    "inRepoBody": "User data lives in three places under the app sandbox:",
+    "inRepoPoints": [
+      "The encrypted Room database `hrt_tracker.db`, with the SQLite WAL/SHM siblings `hrt_tracker.db-shm` and `hrt_tracker.db-wal`. Contents are described in docs/data-model.md.",
+      "The SharedPreferences file `hrt_tracker_secure_storage.xml`. Holds the AES-GCM-wrapped SQLCipher passphrase. No user-visible data, only the wrapped key envelope.",
+      "Eight DataStore files under `datastore/`: `settings.preferences_pb`, `widget_appearance.preferences_pb`, `home_snapshot.pb`, `widget_snapshot.pb`, `anchor_snapshot.pb`, `home_snapshot_metadata.preferences_pb`, `reminder_schedule.preferences_pb`, `medication_reminder_snoozes.preferences_pb`. Settings, widget appearance, home-screen cache, widget cache, anchor-widget cache, and reminder bookkeeping."
+    ],
+    "debugTitle": "Debug builds only",
+    "debugBody": "Debug builds also write a rolling diagnostics log at `files/diagnostics/app-diagnostics.log`. The `AppDiagnosticsLogger` defaults to `enabled = BuildConfig.DEBUG`, and the export service that surfaces this file refuses to run unless `BuildConfig.DEBUG` is true. Release builds neither write nor expose this file. The log records timestamps, tags, and short event strings (reminder fires, snapshot rebuilds, widget refresh reasons) and is not user-visible in release builds.",
+    "encryptionTitle": "Encryption at rest",
+    "encryptionBody": "The Room database is encrypted with SQLCipher using a 256-bit passphrase. The passphrase itself is wrapped with a hardware-bound key:",
+    "encryptionPoints": [
+      "`DatabasePassphraseProvider` generates the SQLCipher passphrase from `SecureRandom` on first launch.",
+      "The passphrase is encrypted with an `AES/GCM/NoPadding` wrapping key whose alias is `hrt_tracker_database_master_key`. The key is generated in and stored by the `AndroidKeyStore` provider; on devices with a hardware-backed Keystore, the key never leaves the secure element.",
+      "The wrapped passphrase blob and its per-encryption IV are persisted to `hrt_tracker_secure_storage.xml`. The wrapping key itself is never persisted to app storage — it lives inside Keystore."
+    ],
+    "encryptionConsequence": "Consequence: a copy of `hrt_tracker.db` lifted off the device cannot be decrypted without the Keystore-bound wrapping key, which is bound to that specific device.",
+    "networkTitle": "Network and telemetry",
+    "networkBody": "PicoHRT holds no `android.permission.INTERNET` permission. The app cannot make outbound HTTP requests. There is no analytics SDK, no crash reporter, no telemetry endpoint. The only background work is a BootCompleted receiver that re-arms pending medication reminders after a reboot — it does not transmit.",
+    "permissionsTitle": "Android permissions used",
+    "permissionsBody": "PicoHRT requests only the permissions it needs for its on-device features:",
+    "permissionsPoints": [
+      "`POST_NOTIFICATIONS` (Android 13+) — required to post medication reminders. Revoking it disables reminders but does not delete any data.",
+      "`RECEIVE_BOOT_COMPLETED` — re-arms pending reminders after a reboot. Revoking it means reminders scheduled while the device was off will not fire until the next manual app open.",
+      "`SCHEDULE_EXACT_ALARM` (Android 12+) — used by AlarmManager to fire reminders at the exact dose time, not at the next minute. Revoking it downgrades reminders to inexact (typically within a few minutes of the scheduled time)."
+    ],
+    "backupTitle": "Backup files",
+    "backupBody": "The encrypted, compressed backup format (.hrtbackup) is documented in docs/backup-format.md. Backup files are encrypted with a user-supplied passphrase. The app does not transmit backups; you move them yourself. The default backup filename is `picohrt-backup-<timestamp>.hrtbackup`.",
+    "forkTitle": "Fork-specific changes",
+    "forkBody": "PicoHRT changes the following privacy-relevant defaults from upstream Featherline:",
+    "forkPoints": [
+      "Package id: `com.picohrt` (upstream: `com.mkx.hrttracker`). The two apps install side-by-side; their data sandboxes are separate.",
+      "Default backup filename: `picohrt-backup-` (upstream: `featherline-backup-`). No data-format change.",
+      "Diagnostics export filename: `picohrt-diagnostics-` (upstream: `featherline-diagnostics-`). Same content shape.",
+      "The in-app About screen links to the PicoHRT GitHub repository and the upstream Featherline project separately. No external link is opened without explicit user confirmation."
+    ],
+    "contactTitle": "Contact",
+    "contactBody": "Until a hosted PicoHRT contact is published, the in-app About screen's feedback email goes to the upstream Featherline maintainer. The PicoHRT fork's GitHub Issues page is the primary contact channel for fork-specific issues: https://github.com/sakanana001/PicoHRT/issues"
+  },
+  "footer": {
+    "copyright": "© 2026 PicoHRT contributors",
+    "forkOf": "Fork of",
+    "forkUpstream": "mkx173/Featherline"
+  }
+}

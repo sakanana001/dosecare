@@ -1,0 +1,157 @@
+{
+  "site": {
+    "title": "PicoHRT",
+    "titleTemplate": "%s — PicoHRT",
+    "description": "PicoHRT 是一款面向 Android 的隐私优先 HRT 用药记录工具。记录用药，看清日常节奏，把数据留在自己手中。",
+    "brandTagline": "PicoHRT",
+    "forkNote": "Featherline 的二次开发分支"
+  },
+  "nav": {
+    "home": "首页",
+    "picohrt": "PicoHRT",
+    "download": "下载",
+    "privacy": "隐私",
+    "menu": "菜单",
+    "openMenu": "打开菜单",
+    "closeMenu": "关闭菜单"
+  },
+  "theme": {
+    "selector": "颜色模式",
+    "auto": "自动颜色模式",
+    "day": "日间模式",
+    "night": "夜间模式"
+  },
+  "language": {
+    "selector": "切换语言",
+    "current": "中"
+  },
+  "home": {
+    "heroTagline": "记录用药，看清你的日常节奏，把数据留在自己手中。",
+    "introTitle": "面向 Android 的隐私优先 HRT 记录工具",
+    "introBody1": "PicoHRT 是为长期使用激素疗法的人设计的用药记录工具，帮你把个人记录保留在自己手中。你记录的所有内容——用药、计划、化验、个人备注——都保存在设备本地的加密数据库中，由你掌控。",
+    "introBody2": "PicoHRT 是 mkx173/Featherline 的二次开发分支。我们沿用原项目的设计与 v0.6.0 之前的工程，并叠加：testosterone undecanoate 的三室 PK 引擎、透皮 gel 皮肤储库、以及面向个人血检的 per-user override 数据层。",
+    "forkTitle": "基于 Featherline",
+    "forkBody": "PicoHRT 是 Featherline 项目的二次开发分支。原应用、设计、v0.6.0 之前的全部工程归 Zhaoqian Wang 及 Featherline 维护者所有。PicoHRT 从 v0.6.0 继续，包括品牌重命名、精修的 PK 引擎以及 per-user override 数据层。完整上游历史见上游项目。",
+    "modesTitle": "激素模式（MtF / FtM / Non-binary）",
+    "modesIntro": "PicoHRT 通过一个 HrtGoal 枚举覆盖跨性别 HRT 的两端用户。选定的目标同时控制三件事：主屏默认曲线、目录里的可用药物、以及围绕剂量和血检的安全提示。",
+    "modesMtF": "MtF（跨性别女性）",
+    "modesFtM": "FtM（跨性别男性）",
+    "modesNB": "Non-binary",
+    "modesUnset": "Unset（遗留默认）",
+    "modesMtFDesc": "默认 E2 曲线；E2 贴片、凝胶、口服、舌下；可选 cyproterone acetate（CPA）抗雄。",
+    "modesFtMDesc": "默认 T 曲线；TE / TC / TU / T gel 一线 medication key；CPA 完全禁用。v3 三室引擎、gel 皮肤储库、per-user kClear / k31 override 都为此模式设计。",
+    "modesNBDesc": "3-way 激素自选（E2 / T / 双）；全部药物可用；无目标相关安全提示。",
+    "modesUnsetDesc": "E2 曲线；全部 chip 可见；无目标相关提示。与 Featherline v0.5 及之前行为一致。",
+    "privacyTitle": "为隐私而设计",
+    "privacyLocal": "<strong>本地加密存储</strong>——数据默认保存在你的设备。",
+    "privacyLock": "<strong>可选的应用锁</strong>，支持生物识别或设备密码。",
+    "privacyHide": "<strong>可选的截图与最近任务内容隐藏</strong>。",
+    "privacyBackup": "<strong>由你掌控的加密备份文件</strong>——可用于迁移到新设备或保留外部副本。",
+    "featuresTitle": "主要功能",
+    "features": {
+      "modes": { "title": "激素模式", "body": "在 设置 → 个性化 → HRT goal 切 MtF / FtM / Non-binary。" },
+      "schedules": { "title": "自定义安排", "body": "支持每日或每周方案，贴合真实节奏。" },
+      "reminders": { "title": "智能提醒", "body": "本地调度的提醒，可在多次用药重叠时批量记录。" },
+      "pk": { "title": "PK 估算", "body": "基于你的用药历史，用三室 RK4 引擎估算雌二醇和睾酮浓度。" },
+      "labs": { "title": "血检追踪", "body": "记录化验值，支持规范单位与临床单位之间的自动换算。" },
+      "tuning": { "title": "Per-user PK 微调", "body": "在 home chart 的 3-comp 徽章里改 kClearInjection 和三室 k31，让模型贴合你自己的血检。" },
+      "weight": { "title": "体重输入", "body": "可选输入体重，使可视化更个性化。" },
+      "stock": { "title": "库存追踪", "body": "记录剩余用量、预估可用天数，并在库存不足前提醒你。" },
+      "widget": { "title": "主屏小组件", "body": "通过快捷小组件，直接从主屏记录用药。" },
+      "journal": { "title": "日记", "body": "在时间线上追踪重要日期及里程碑，并为每天记录简短笔记。" }
+    },
+    "screenshotsTitle": "界面预览",
+    "screenshotsAlt": {
+      "home": "首页显示今天的用药与 7 天估计曲线。",
+      "plan": "计划页面显示按颜色分组的每周方案。",
+      "history": "历史页面显示月历视图与已记录的用药日。",
+      "editor": "药物组编辑器，包含名称、颜色、类型与方案。",
+      "medicines": "药物管理页面，显示每种药物的库存与预计可用天数。",
+      "calibration": "校准页面显示历史化验结果。",
+      "journal": "日志页面显示里程碑时间线与每日笔记。"
+    },
+    "carouselPrev": "上一张截图",
+    "carouselNext": "下一张截图",
+    "downloadTitle": "获取应用",
+    "downloadCta": "下载 PicoHRT",
+    "downloadNote": "PicoHRT 目前以签名 debug APK 形式发布在 GitHub Releases 页面。app 没有 internet 权限，所以无法自动检查更新——需要自己关注 releases 页面。",
+    "disclaimer": "PicoHRT 是一款个人记录工具，不是医疗设备。所有可视化都基于你记录的时间和数量，使用公开模型计算得出，旨在帮助你更好地组织和了解自己的日常。任何健康判断或解读，请咨询你的医疗专业人士。",
+    "privacyLink": "阅读完整隐私政策"
+  },
+  "download": {
+    "title": "下载 PicoHRT",
+    "intro": "PicoHRT 目前以签名 debug APK 形式发布在 GitHub Releases 页面。请按设备架构选最新的 release。",
+    "latestTitle": "最新 release",
+    "latestCta": "打开 GitHub releases 页面",
+    "latestNote": "release tag 包含累计 commit 数。当前 pre-release 线是 `v0.6.0-rebrand`（picohrt-all-abis-1.3.3-<hash>-<n>.apk）。",
+    "howTitle": "如何 sideload",
+    "howIntro": "PicoHRT 是 debug 签名的 APK。设备需要允许所选浏览器或文件管理器安装未知来源应用。该权限是按 app 授予的，安装后可随时撤回。",
+    "howSteps": [
+      "打开 GitHub releases 页面，下载 `picohrt-all-abis-1.3.3-<hash>-<n>.apk` 资源。",
+      "系统提示时，允许浏览器或文件管理器安装未知应用（按 app 授权，安装后可撤回）。",
+      "打开下载的 APK。Android 会校验签名，然后提示安装。",
+      "安装完成后，启动器图标显示为 PicoHRT，包名是 com.picohrt——和上游 Featherline（com.mkx.hrttracker）能共存。"
+    ],
+    "flavorsTitle": "APK flavor",
+    "flavorsIntro": "构建产物有三种 debug flavor：",
+    "flavors": [
+      { "name": "play", "target": "all-abis", "use": "通用 APK，所有设备通用。不知道选哪个就用这个。" },
+      { "name": "arm64", "target": "arm64-v8a", "use": "绝大多数现代 Android 手机（2017+）。" },
+      { "name": "x64", "target": "x86_64", "use": "x86 模拟器和少量平板。" }
+    ],
+    "buildTitle": "从源码构建",
+    "buildIntro": "从源码构建需要 JDK 17、近期版 Android Studio、API level 匹配 compileSdk 的 Android SDK。完整说明见 docs/building.md。",
+    "verifyingTitle": "校验构建",
+    "verifyingIntro": "每次 release 附带 detached signature（`*.apk.asc`）和 SHA-256 文件。校验命令：",
+    "disclaimer": "Sideload 的 APK 不会自动更新。请关注 releases 页面或订阅 GitHub releases 以接收新版本通知。"
+  },
+  "privacy": {
+    "title": "隐私政策",
+    "leadTitle": "PicoHRT 隐私——概览",
+    "leadBody": "PicoHRT 是 Featherline 的二次开发分支。在托管的 PicoHRT 隐私政策发布之前，上游 Featherline 隐私政策（https://asterismlabs.io/featherline/privacy/）作为法律参考，发生冲突时以此为准。本页面记录这些承诺在代码、manifest、资源文件中的落地方式，方便审计者或贡献者按源核对每条声明。",
+    "canonical": "上游 Featherline 隐私政策",
+    "inRepoTitle": "本地存储",
+    "inRepoBody": "用户数据存放在 app 沙箱内的三处：",
+    "inRepoPoints": [
+      "加密的 Room 数据库 `hrt_tracker.db`，以及 SQLite WAL/SHM 兄弟文件 `hrt_tracker.db-shm` 和 `hrt_tracker.db-wal`。具体内容见 docs/data-model.md。",
+      "SharedPreferences 文件 `hrt_tracker_secure_storage.xml`。保存 AES-GCM 包装的 SQLCipher 密码短语。无用户可见数据，只有包装后的密钥信封。",
+      "`datastore/` 下八个 DataStore 文件：`settings.preferences_pb`、`widget_appearance.preferences_pb`、`home_snapshot.pb`、`widget_snapshot.pb`、`anchor_snapshot.pb`、`home_snapshot_metadata.preferences_pb`、`reminder_schedule.preferences_pb`、`medication_reminder_snoozes.preferences_pb`。用于设置、widget 外观、主屏快照、widget 快照、anchor widget 快照、提醒簿记。"
+    ],
+    "debugTitle": "仅 debug build",
+    "debugBody": "debug build 还在 `files/diagnostics/app-diagnostics.log` 写一个滚动诊断日志。`AppDiagnosticsLogger` 默认 `enabled = BuildConfig.DEBUG`，导出该文件的服务也仅在 `BuildConfig.DEBUG = true` 时运行。release build 不写也不暴露此文件。日志记录时间戳、tag、简短事件字符串（提醒触发、快照重算、widget 刷新原因），release build 不可见。",
+    "encryptionTitle": "静态加密",
+    "encryptionBody": "Room 数据库用 SQLCipher 加密，密码短语 256 位。密码短语本身用硬件绑定密钥包装：",
+    "encryptionPoints": [
+      "`DatabasePassphraseProvider` 首次启动时用 `SecureRandom` 生成 SQLCipher 密码短语。",
+      "密码短语用 `AES/GCM/NoPadding` 包装密钥加密，密钥 alias 是 `hrt_tracker_database_master_key`。密钥在 `AndroidKeyStore` provider 内生成和保存；硬件支持 Keystore 的设备上，密钥永远不离开安全单元。",
+      "包装后的密码短语 blob 和每次加密的 IV 存到 `hrt_tracker_secure_storage.xml`。包装密钥本身从不持久化到 app 存储——它只在 Keystore 里。"
+    ],
+    "encryptionConsequence": "结论：把 `hrt_tracker.db` 从设备拷走，没有 Keystore 绑定的包装密钥解不开，而该密钥与设备绑定。",
+    "networkTitle": "网络与遥测",
+    "networkBody": "PicoHRT 不申请 `android.permission.INTERNET` 权限。app 不能主动发起 HTTP 请求。无分析 SDK，无崩溃上报，无遥测端点。后台唯一工作是 BootCompleted 接收器在重启后重排待发的用药提醒——它不发任何数据。",
+    "permissionsTitle": "使用的 Android 权限",
+    "permissionsBody": "PicoHRT 只为本地功能申请必需的权限：",
+    "permissionsPoints": [
+      "`POST_NOTIFICATIONS`（Android 13+）——发用药提醒必需。撤回后提醒停用，但不删数据。",
+      "`RECEIVE_BOOT_COMPLETED`——重启后重排待发提醒。撤回后意味着设备关机期间的提醒不会触发，直到下次手动打开 app。",
+      "`SCHEDULE_EXACT_ALARM`（Android 12+）——让 AlarmManager 在精确的剂量时间触发，而不是下一分钟。撤回后会降级为 inexact（通常偏差几分钟内）。"
+    ],
+    "backupTitle": "备份文件",
+    "backupBody": "加密压缩备份格式（.hrtbackup）见 docs/backup-format.md。备份文件用用户密码短语加密。app 不会上传备份，由用户自己移动。默认备份文件名是 `picohrt-backup-<timestamp>.hrtbackup`。",
+    "forkTitle": "Fork 相关变更",
+    "forkBody": "相比上游 Featherline，PicoHRT 改了以下隐私相关的默认值：",
+    "forkPoints": [
+      "包名：`com.picohrt`（上游：`com.mkx.hrttracker`）。两个 app 可共存，数据沙箱独立。",
+      "默认备份文件名：`picohrt-backup-`（上游：`featherline-backup-`）。数据格式没变。",
+      "诊断导出文件名：`picohrt-diagnostics-`（上游：`featherline-diagnostics-`）。内容格式没变。",
+      "app 内 About 页把 PicoHRT GitHub 仓库和上游 Featherline 项目分两个链接列出。所有外链都需要用户显式确认才打开。"
+    ],
+    "contactTitle": "联系",
+    "contactBody": "在托管的 PicoHRT 联系渠道发布前，app 内 About 页的反馈邮件会发到上游 Featherline 维护者。PicoHRT fork 的 GitHub Issues 是 fork 相关问题的主要联系渠道：https://github.com/sakanana001/PicoHRT/issues"
+  },
+  "footer": {
+    "copyright": "© 2026 PicoHRT 贡献者",
+    "forkOf": "Fork of",
+    "forkUpstream": "mkx173/Featherline"
+  }
+}

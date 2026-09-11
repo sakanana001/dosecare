@@ -1,0 +1,26 @@
+---
+import { getDictionary, type Locale } from '../i18n/ui';
+
+export interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<footer class="footer">
+  <p>
+    {t.footer.copyright}
+    &nbsp;·&nbsp;
+    {t.footer.forkOf}
+    <a href="https://github.com/mkx173/Featherline" target="_blank" rel="noopener">
+      {t.footer.forkUpstream}
+    </a>
+  </p>
+  <p>
+    <a href="https://github.com/sakanana001/PicoHRT" target="_blank" rel="noopener">
+      PicoHRT on GitHub →
+    </a>
+  </p>
+</footer>

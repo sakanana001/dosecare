@@ -1,0 +1,98 @@
+﻿package com.picohrt.ui.calibration
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.picohrt.data.repository.BloodTestRepository
+import com.picohrt.data.repository.SettingsRepository
+import com.picohrt.model.bloodtest.BloodTestPanel
+import com.picohrt.model.settings.SettingsState
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.NonCancellable
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import javax.inject.Inject
+
+@HiltViewModel
+class CalibrationViewModel @Inject constructor(
+    private val bloodTestRepository: BloodTestRepository,
+    private val settingsRepository: SettingsRepository,
+) : ViewModel() {
+    private val isDeletingAllEntries = MutableStateFlow(false)
+    private val deleteAllEntriesResult =
+        MutableStateFlow<CalibrationDeleteAllEntriesResult?>(null)
+    private val cachedPanels = bloodTestRepository.getCachedPanels()
+
+    val uiState: StateFlow<CalibrationUiState> = combine(
+        bloodTestRepository.observePanels(),
+        settingsRepository.settingsState,
+        isDeletingAllEntries,
+        deleteAllEntriesResult,
+    ) { panels, settingsState, isDeletingAllEntries, deleteAllEntriesResult ->
+        CalibrationUiState(
+            panels = panels,
+            settingsState = settingsState,
+            isLoading = false,
+            isDeletingAllEntries = isDeletingAllEntries,
+            deleteAllEntriesResult = deleteAllEntriesResult,
+        )
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        initialValue = CalibrationUiState(
+            panels = cachedPanels.orEmpty(),
+            settingsState = settingsRepository.settingsState.value,
+            isLoading = cachedPanels == null,
+        ),
+    )
+
+    fun deleteAllCalibrationEntries() {
+        if (isDeletingAllEntries.value) {
+            return
+        }
+
+        viewModelScope.launch {
+            isDeletingAllEntries.value = true
+            // Must complete even if the coroutine is cancelled mid-write — a
+            // partially applied delete-all leaves calibration panels stranded.
+            val result = withContext(NonCancellable) {
+                runCatching {
+                    bloodTestRepository.deleteAllPanels()
+                }.fold(
+                    onSuccess = { CalibrationDeleteAllEntriesResult.SUCCESS },
+                    onFailure = { CalibrationDeleteAllEntriesResult.FAILURE },
+                )
+            }
+            isDeletingAllEntries.value = false
+            deleteAllEntriesResult.value = result
+        }
+    }
+
+    fun consumeDeleteAllEntriesResult() {
+        deleteAllEntriesResult.value = null
+    }
+}
+
+data class CalibrationUiState(
+    val panels: List<BloodTestPanel> = emptyList(),
+    val settingsState: SettingsState = SettingsState(),
+    val isLoading: Boolean = false,
+    val isDeletingAllEntries: Boolean = false,
+    val deleteAllEntriesResult: CalibrationDeleteAllEntriesResult? = null,
+)
+
+enum class CalibrationDeleteAllEntriesResult {
+    SUCCESS,
+    FAILURE,
+}
+
+internal fun parseCalibrationNumericInput(input: String): Double? {
+    return input.trim()
+        .replace(',', '.')
+        .toDoubleOrNull()
+        ?.takeIf { value -> value.isFinite() && value >= 0.0 }
+}

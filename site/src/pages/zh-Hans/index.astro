@@ -1,0 +1,204 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getDictionary, type Locale } from '../../i18n/ui';
+
+const locale: Locale = 'zh-Hans';
+const t = getDictionary(locale);
+
+const features = [
+  { key: 'modes', icon: 'mdi:transgender' },
+  { key: 'schedules', icon: 'mdi:calendar-clock' },
+  { key: 'reminders', icon: 'mdi:bell-ring-outline' },
+  { key: 'pk', icon: 'mdi:chart-bell-curve-cumulative' },
+  { key: 'labs', icon: 'mdi:test-tube' },
+  { key: 'tuning', icon: 'mdi:tune-variant' },
+  { key: 'weight', icon: 'mdi:scale-bathroom' },
+  { key: 'stock', icon: 'mdi:package-variant-closed' },
+  { key: 'widget', icon: 'mdi:widgets-outline' },
+  { key: 'journal', icon: 'mdi:notebook-outline' },
+] as const;
+
+const screenshots = [
+  { key: 'home', file: '01-home.svg' },
+  { key: 'plan', file: '02-plan.svg' },
+  { key: 'history', file: '03-history.svg' },
+  { key: 'editor', file: '04-editor.svg' },
+  { key: 'medicines', file: '07-medicines.svg' },
+  { key: 'calibration', file: '06-calibration.svg' },
+  { key: 'journal', file: '08-journal.svg' },
+] as const;
+
+const iconPaths: Record<string, string> = {
+  'mdi:transgender': 'M19.58 3.58L21.85 5.85L18.71 9L21 11.29L19.71 12.58L17.42 10.29L13.42 14.29C13.79 14.95 14 15.71 14 16.5C14 19.54 11.54 22 8.5 22C5.46 22 3 19.54 3 16.5C3 13.46 5.46 11 8.5 11C9.29 11 10.05 11.21 10.71 11.58L14.71 7.58L12.42 5.29L13.71 4L16 6.29L19.58 3.58M8.5 13C6.5 13 5 14.5 5 16.5C5 18.5 6.5 20 8.5 20C10.5 20 12 18.5 12 16.5C12 14.5 10.5 13 8.5 13Z',
+  'mdi:calendar-clock': 'M15 13h1.5v2.82l2.44 1.41l-.75 1.3L15 16.69zm4-5H5v11h4.67c-.43-.91-.67-1.93-.67-3a7 7 0 0 1 7-7c1.07 0 2.09.24 3 .67zM5 21a2 2 0 0 1-2-2V5c0-1.11.89-2 2-2h1V1h2v2h8V1h2v2h1a2 2 0 0 1 2 2v6.1c1.24 1.26 2 2.99 2 4.9a7 7 0 0 1-7 7c-1.91 0-3.64-.76-4.9-2zm11-9.85A4.85 4.85 0 0 0 11.15 16c0 2.68 2.17 4.85 4.85 4.85A4.85 4.85 0 0 0 20.85 16c0-2.68-2.17-4.85-4.85-4.85',
+  'mdi:bell-ring-outline': 'M10 21h4a2 2 0 0 1-2 2a2 2 0 0 1-2-2m11-2v1H3v-1l2-2v-6c0-3.1 2.03-5.83 5-6.71V4a2 2 0 0 1 2-2a2 2 0 0 1 2 2v.29c2.97.88 5 3.61 5 6.71v6zm-4-8a5 5 0 0 0-5-5a5 5 0 0 0-5 5v7h10z',
+  'mdi:chart-bell-curve-cumulative': 'M4 19h16v2H2V2h2v17M22 18c0 .55-.45 1-1 1H7c-.55 0-1-.45-1-1V6c0-.55.45-1 1-1h14c.55 0 1 .45 1 1v12M8 7v11h12V7h-2.5c0 1.93-1.57 3.5-3.5 3.5S10.5 8.93 10.5 7H8',
+  'mdi:test-tube': 'M7 2v2h-1c-.55 0-1 .45-1 1v2h2v11c0 2.21 1.79 4 4 4s4-1.79 4-4V7h2V5c0-.55-.45-1-1-1h-1V2h-2v2h-4V2H7M6 6h1v1h2V6h2v1h2V6h1v3H6V6m0 5h8v6c0 1.1-.9 2-2 2h-4c-1.1 0-2-.9-2-2v-6Z',
+  'mdi:tune-variant': 'M8 3v2H4v2h4v2h2V3H8m6 0v2h-2v2h2v2h2V3h-2m6 0v2h-4v2h4v2h2V3h-2M2 11v2h2v-2H2m4 0v2h10v-2H6m12 0v2h2v-2h-2m-12 4v2H2v2h4v-2h2v-2H6m6 0v6h2v-6h-2m6 0v2h-4v2h4v2h-2v2h2v-2h2v-2h-2v-2h-2v-2h2Z',
+  'mdi:scale-bathroom': 'M5 2h14a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2m7 2a4 4 0 0 0-4 4h3.26l-.41-2.77L12.9 8H16a4 4 0 0 0-4-4m-7 6v10h14V10z',
+  'mdi:package-variant-closed': 'M21 16.5c0 .38-.21.71-.53.88l-7.9 4.44c-.16.12-.36.18-.57.18s-.41-.06-.57-.18l-7.9-4.44A.99.99 0 0 1 3 16.5v-9c0-.38.21-.71.53-.88l7.9-4.44c.16-.12.36-.18.57-.18s.41.06.57.18l7.9 4.44c.32.17.53.5.53.88zM12 4.15l-1.89 1.07L16 8.61l1.96-1.11zM6.04 7.5L12 10.85l1.96-1.1l-5.88-3.4zM5 15.91l6 3.38v-6.71L5 9.21zm14 0v-6.7l-6 3.37v6.71z',
+  'mdi:widgets-outline': 'M16.7 4.5l2.8 2.8l-2.8 2.8l-2.8-2.8zM9 5v4H5V5zm10 10v4h-4v-4zM16.7 1.7L11 7.3l5.7 5.7H13v8h8v-8h-4.3l5.6-5.7zM11 3H3v8h8zM9 15v4H5v-4zm2-2H3v8h8z',
+  'mdi:notebook-outline': 'M17 4v6l-2-2l-2 2V4H9v16h10V4zM3 7V5h2V4a2 2 0 0 1 2-2h12c1.05 0 2 .95 2 2v16c0 1.05-.95 2-2 2H7c-1.05 0-2-.95-2-2v-1H3v-2h2v-4H3v-2h2V7zm2-2v2h2V5zm0 14h2v-2H5zm0-6h2v-2H5z',
+};
+
+function iconFor(key: string): string {
+  const f = features.find((x) => x.key === key);
+  return f ? iconPaths[f.icon] || '' : '';
+}
+---
+
+<BaseLayout title={t.site.title} description={t.site.description}>
+  <header class="hero">
+    <div class="hero-content">
+      <div class="icon-tile">
+        <img src="/PicoHRT/icon.svg" alt="PicoHRT 应用图标" width="96" height="96" />
+      </div>
+      <div>
+        <h1 class="h1">{t.site.brandTagline}</h1>
+        <p class="subtitle">{t.home.heroTagline}</p>
+        <div class="hero-cta">
+          <a class="cta-button" href="/PicoHRT/zh-Hans/download/">
+            <svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7l7-7Z" />
+            </svg>
+            <span>{t.home.downloadCta}</span>
+          </a>
+          <a class="cta-button cta-button--secondary" href="https://github.com/sakanana001/PicoHRT" target="_blank" rel="noopener">
+            <svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33s1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2" />
+            </svg>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="card-inset">
+    <section class="prose-block">
+      <h2 class="h2">{t.home.introTitle}</h2>
+      <p>{t.home.introBody1}</p>
+      <p>{t.home.introBody2}</p>
+    </section>
+
+    <section class="prose-block">
+      <div class="fork-card">
+        <h3 class="h3">{t.home.forkTitle}</h3>
+        <p style="margin: 0;">{t.home.forkBody}</p>
+      </div>
+    </section>
+
+    <section class="prose-block">
+      <h2 class="h2">{t.home.modesTitle}</h2>
+      <p>{t.home.modesIntro}</p>
+      <table class="modes-table">
+        <thead>
+          <tr><th>模式</th><th>行为</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="mode-name">{t.home.modesMtF}</td><td>{t.home.modesMtFDesc}</td></tr>
+          <tr><td class="mode-name">{t.home.modesFtM}</td><td>{t.home.modesFtMDesc}</td></tr>
+          <tr><td class="mode-name">{t.home.modesNB}</td><td>{t.home.modesNBDesc}</td></tr>
+          <tr><td class="mode-name">{t.home.modesUnset}</td><td>{t.home.modesUnsetDesc}</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="prose-block">
+      <h2 class="h2">{t.home.privacyTitle}</h2>
+      <ul class="bulleted">
+        <li><Fragment set:html={t.home.privacyLocal} /></li>
+        <li><Fragment set:html={t.home.privacyLock} /></li>
+        <li><Fragment set:html={t.home.privacyHide} /></li>
+        <li><Fragment set:html={t.home.privacyBackup} /></li>
+      </ul>
+    </section>
+
+    <section class="prose-block">
+      <h2 class="h2">{t.home.featuresTitle}</h2>
+      <ul class="feature-grid">
+        {features.map((f) => (
+          <li class="feature-card">
+            <span class="feature-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path fill="currentColor" d={iconFor(f.key)} /></svg>
+            </span>
+            <div class="feature-card__copy">
+              <h3>{t.home.features[f.key].title}</h3>
+              <p>{t.home.features[f.key].body}</p>
+            </div>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="prose-block">
+      <h2 class="h2">{t.home.screenshotsTitle}</h2>
+      <div class="screenshot-carousel">
+        <button type="button" class="carousel-btn carousel-btn--prev" data-carousel-prev aria-label={t.home.carouselPrev}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.41 16.58L10.83 12l4.58-4.59L14 6l-6 6l6 6z" /></svg>
+        </button>
+        <div class="screenshot-strip" data-carousel>
+          {screenshots.map((s) => (
+            <figure class="screenshot">
+              <img src={`/PicoHRT/screenshots/zh-Hans-light/${s.file}`} alt={t.home.screenshotsAlt[s.key as keyof typeof t.home.screenshotsAlt]} loading="lazy" decoding="async" />
+            </figure>
+          ))}
+        </div>
+        <button type="button" class="carousel-btn carousel-btn--next" data-carousel-next aria-label={t.home.carouselNext}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8.59 16.58L13.17 12L8.59 7.41L10 6l6 6l-6 6z" /></svg>
+        </button>
+      </div>
+    </section>
+
+    <section class="prose-block">
+      <h2 class="h2">{t.home.downloadTitle}</h2>
+      <div class="cta-row">
+        <a class="cta-button" href="/PicoHRT/zh-Hans/download/">
+          <svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M5 20h14v-2H5m14-9h-4V3H9v6H5l7 7l7-7Z" /></svg>
+          <span>{t.home.downloadCta}</span>
+        </a>
+        <a class="cta-button cta-button--secondary" href="https://github.com/sakanana001/PicoHRT/releases" target="_blank" rel="noopener">
+          <svg width="20" height="20" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M16 1H4v22h2V3h10V1zm4 4H8v22h2V17h10V5zm-2 10H10V7h8v8z" /></svg>
+          <span>Releases</span>
+        </a>
+      </div>
+      <p class="cta-note">
+        <svg width="18" height="18" class="cta-note__icon" aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M11 9h2V7h-2m1 13c-4.41 0-8-3.59-8-8s3.59-8 8-8s8 3.59 8 8s-3.59 8-8 8m0-18A10 10 0 0 0 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2m-1 15h2v-6h-2z" /></svg>
+        <span>{t.home.downloadNote}</span>
+      </p>
+    </section>
+
+    <p class="disclaimer">{t.home.disclaimer}</p>
+
+    <p class="page-end-link">
+      <a href="/PicoHRT/zh-Hans/privacy/">
+        <span>{t.home.privacyLink}</span>
+        <span aria-hidden="true"> →</span>
+      </a>
+    </p>
+  </main>
+</BaseLayout>
+
+<script>
+  const carousel = document.querySelector('[data-carousel]') as HTMLElement | null;
+  const prev = document.querySelector('[data-carousel-prev]') as HTMLButtonElement | null;
+  const next = document.querySelector('[data-carousel-next]') as HTMLButtonElement | null;
+  if (carousel && prev && next) {
+    const stepWidth = () => {
+      const first = carousel.querySelector('.screenshot') as HTMLElement | null;
+      const styles = getComputedStyle(carousel);
+      const gap = parseFloat(styles.columnGap || styles.gap || '16') || 16;
+      return (first?.getBoundingClientRect().width ?? 240) + gap;
+    };
+    const sync = () => {
+      const max = carousel.scrollWidth - carousel.clientWidth - 1;
+      prev.disabled = carousel.scrollLeft <= 0;
+      next.disabled = carousel.scrollLeft >= max;
+    };
+    prev.addEventListener('click', () => carousel.scrollBy({ left: -stepWidth(), behavior: 'smooth' }));
+    next.addEventListener('click', () => carousel.scrollBy({ left: stepWidth(), behavior: 'smooth' }));
+    carousel.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    sync();
+  }
+</script>
