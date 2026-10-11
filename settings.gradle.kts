@@ -22,6 +22,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "PicoHRT"
+rootProject.name = "DoseCare"
 include(":app")
 include(":benchmark")

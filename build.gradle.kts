@@ -24,7 +24,7 @@ licenseReport {
     renderers = arrayOf<ReportRenderer>(
         InventoryHtmlReportRenderer(
             "dependency-license-report.html",
-            "PicoHRT runtime dependencies",
+            "DoseCare runtime dependencies",
         ),
         CsvReportRenderer("dependency-license-report.csv"),
     )

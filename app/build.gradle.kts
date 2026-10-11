@@ -66,7 +66,7 @@ android {
         buildConfigField(
             "String",
             "THIRD_PARTY_NOTICES_URL",
-            "\"https://github.com/sakanana001/PicoHRT/blob/$gitFullCommitHash/docs/third-party-notices.md\""
+            "\"https://github.com/sakanana001/dosecare/blob/$gitFullCommitHash/docs/third-party-notices.md\""
         )
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
