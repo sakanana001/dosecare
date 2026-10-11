@@ -20,7 +20,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase
         TrackedDateEntity::class,
         NoteEntity::class,
     ],
-    version = 10,
+    version = 11,
     exportSchema = false,
 )
 abstract class HrtTrackerDatabase : RoomDatabase() {
@@ -208,5 +208,16 @@ internal val MIGRATION_8_9: Migration = object : Migration(8, 9) {
 internal val MIGRATION_9_10: Migration = object : Migration(9, 10) {
     override fun migrate(db: SupportSQLiteDatabase) {
         db.execSQL("ALTER TABLE medication_log_entries ADD COLUMN note TEXT")
+    }
+}
+
+// v10 -> v11: adds `drugCatalogId` to `medicines` for the v0.9g merge, linking a
+// medicine to an entry in the bundled pharmacology catalog (202-drug reference
+// carried over from DoseCare). Defaulted to the empty string so every pre-existing
+// row reads back as "no dossier" — exactly the state it was in before the catalog
+// existed. Not a foreign key on purpose: the catalog ships as an asset, not a table.
+internal val MIGRATION_10_11: Migration = object : Migration(10, 11) {
+    override fun migrate(db: SupportSQLiteDatabase) {
+        db.execSQL("ALTER TABLE medicines ADD COLUMN drugCatalogId TEXT NOT NULL DEFAULT ''")
     }
 }

@@ -58,4 +58,21 @@ data class MedicineEntity(
 
     @ColumnInfo(defaultValue = "0")
     val importedFromExternalTracker: Boolean = false,
+
+    // ----- Pharmacological dossier link (v10 -> v11) -----
+    // v0.9g merge: points at an id in the bundled pharmacology catalog (the 202-drug
+    // reference carried over from DoseCare). Empty string = no dossier, which is the
+    // state for every medicine that predates the catalog and for every medicine the
+    // user created by typing a name rather than picking one from the catalog.
+    //
+    // This is deliberately a soft, optional link rather than a foreign key: the catalog
+    // is read-only reference data shipped as an asset, not a Room table, so it has no
+    // rows to reference and no lifecycle to cascade. A dangling id (catalog entry
+    // removed in a future catalog version) simply degrades to "no dossier" at read time.
+    //
+    // When set, the medicine gains: CYP450 profile -> interaction detection,
+    // therapeutic window -> TDM, indication groups, overdose guidance, and the
+    // hepatic/renal dose adjustments.
+    @ColumnInfo(defaultValue = "")
+    val drugCatalogId: String = "",
 )
