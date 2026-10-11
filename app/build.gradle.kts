@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.google.ksp)
     alias(libs.plugins.hilt.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 val gitCommitCount = providers.exec {
@@ -229,6 +230,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
     implementation(libs.hilt.android)
     implementation(libs.moshi)
+    implementation(libs.kotlinx.serialization.json)
     implementation(libs.sqlcipher.android)
     implementation(libs.argon2kt)
     implementation(libs.haze)
