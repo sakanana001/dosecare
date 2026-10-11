@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PicoHRT</string>
+    <string name="app_name">DoseCare</string>
     <string name="tab_main">主页</string>
     <string name="tab_plan">计划</string>
     <string name="tab_journal">日记</string>

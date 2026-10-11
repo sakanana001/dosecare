@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PicoHRT</string>
+    <string name="app_name">DoseCare</string>
     <string name="tab_main">Home</string>
     <string name="tab_plan">Plan</string>
     <string name="tab_journal">Journal</string>

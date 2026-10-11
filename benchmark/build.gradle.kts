@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.picohrt.macrobenchmark"
+    namespace = "com.dosecare.app.macrobenchmark"
     compileSdk = 37
 
     compileOptions {

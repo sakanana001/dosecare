@@ -8,7 +8,7 @@
     android:initialLayout="@layout/glance_default_loading_layout"
     android:previewLayout="@layout/hrt_widget_anchor_preview"
     android:previewImage="@drawable/widget_preview_anchor"
-    android:configure="com.picohrt.widget.WidgetConfigActivity"
+    android:configure="com.dosecare.app.widget.WidgetConfigActivity"
     android:widgetFeatures="reconfigurable"
     android:resizeMode="horizontal"
     android:widgetCategory="home_screen"

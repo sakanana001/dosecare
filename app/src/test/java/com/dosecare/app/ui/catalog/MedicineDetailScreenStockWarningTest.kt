@@ -1,0 +1,75 @@
+package com.dosecare.app.ui.catalog
+
+import com.dosecare.app.model.medication.Medicine
+import com.dosecare.app.model.medication.MedicineStockProjection
+import com.dosecare.app.model.medication.MedicineStockState
+import com.dosecare.app.model.medication.RunwayProjection
+import com.dosecare.app.model.medication.testMedicine
+import org.junit.Assert.assertEquals
+import org.junit.Test
+
+class MedicineDetailScreenStockWarningTest {
+
+    @Test
+    fun adjustSheetStockProjectionForDisplayKeepsFrozenProjection() {
+        val medicine = testMedicine()
+        val beforeSubmitProjection = stockProjection(
+            medicine = medicine,
+            totalStockUnits = 4.0,
+        )
+        val afterSubmitProjection = stockProjection(
+            medicine = medicine.copy(
+                stock = medicine.stock.copy(unitsRemaining = 3.0),
+            ),
+            totalStockUnits = 3.0,
+        )
+
+        assertEquals(
+            beforeSubmitProjection,
+            adjustSheetStockProjectionForDisplay(
+                isStockProjectionFrozen = true,
+                stockProjection = afterSubmitProjection,
+                frozenStockProjection = beforeSubmitProjection,
+            ),
+        )
+    }
+
+    @Test
+    fun adjustSheetStockProjectionForDisplayUsesLiveProjectionWhenNotFrozen() {
+        val medicine = testMedicine()
+        val beforeSubmitProjection = stockProjection(
+            medicine = medicine,
+            totalStockUnits = 4.0,
+        )
+        val afterSubmitProjection = stockProjection(
+            medicine = medicine.copy(
+                stock = medicine.stock.copy(unitsRemaining = 3.0),
+            ),
+            totalStockUnits = 3.0,
+        )
+
+        assertEquals(
+            afterSubmitProjection,
+            adjustSheetStockProjectionForDisplay(
+                isStockProjectionFrozen = false,
+                stockProjection = afterSubmitProjection,
+                frozenStockProjection = beforeSubmitProjection,
+            ),
+        )
+    }
+}
+
+private fun stockProjection(
+    medicine: Medicine,
+    totalStockUnits: Double,
+): MedicineStockProjection {
+    return MedicineStockProjection(
+        medicine = medicine,
+        dosesPerDayMagnitude = 0.0,
+        totalStockUnits = totalStockUnits,
+        runway = RunwayProjection.NoSchedule,
+        intervalDays = null,
+        maxPerAdministration = 0.0,
+        state = MedicineStockState.NO_RUNWAY,
+    )
+}

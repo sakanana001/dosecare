@@ -1,0 +1,262 @@
+package com.dosecare.app.widget
+
+import android.content.Context
+import com.dosecare.app.R
+import com.dosecare.app.data.repository.HomePkProjectionRecord
+import com.dosecare.app.data.repository.HomeSnapshotRecord
+import com.dosecare.app.model.medication.MedicationGroup
+import com.dosecare.app.model.medication.MedicationLogEntry
+import com.dosecare.app.model.medication.PlanDayScheduleEntry
+import com.dosecare.app.model.medication.buildPlanDaySchedule
+import com.dosecare.app.model.medication.isArchived
+import com.dosecare.app.model.medication.visibleMedicationEntries
+import com.dosecare.app.model.settings.SettingsState
+import com.dosecare.app.util.doseInstructionText
+import com.dosecare.app.util.localizedShortTimeFormatter
+import com.dosecare.app.util.medicationEntryTitle
+import com.dosecare.app.util.medicationRouteLabel
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+import java.util.Locale
+
+internal fun buildWidgetSnapshotRecord(
+    context: Context,
+    homeSnapshot: HomeSnapshotRecord,
+    settings: SettingsState,
+    now: LocalDateTime,
+    zoneId: ZoneId = ZoneId.systemDefault(),
+    timeFormatter: DateTimeFormatter = localizedShortTimeFormatter(
+        Locale.US,
+        uses24HourFormat = true
+    ),
+): WidgetSnapshotRecord {
+    val today = now.toLocalDate()
+    val yesterday = today.minusDays(1)
+    val comingUpEnd = today.plusDays(1).atTime(6, 0)
+    val activeGroups = homeSnapshot.activeGroups
+    val allGroups = activeGroups + homeSnapshot.archivedGroups
+    val scheduleEntries = homeSnapshot.scheduleEntries
+    val visibleEntries = visibleMedicationEntries(
+        homeSnapshot.scheduleEntries,
+        allGroups,
+        settings.showArchivedGroupRecords,
+    )
+    val scheduleGroups = if (settings.showArchivedGroupRecords) allGroups else activeGroups
+    val groupColorByUuid = allGroups.associate { group -> group.uuid to group.colorKey }
+    val archivedGroupUuids = allGroups.filter(MedicationGroup::isArchived)
+        .mapTo(mutableSetOf()) { group -> group.uuid }
+
+    val isOvernight = now.toLocalTime().isBefore(LocalTime.of(6, 0))
+    val lastNightRows = if (isOvernight) {
+        val yesterdaySchedule = buildPlanDaySchedule(
+            date = yesterday,
+            groups = scheduleGroups,
+            entries = visibleEntries,
+            now = now,
+            zoneId = zoneId,
+            includeUnloggedArchivedSlots = false,
+            unloggedArchivedSlotCutoff = now,
+        )
+        val eveningCutoff = LocalTime.of(18, 0)
+        val scheduledLastNight = yesterdaySchedule.scheduledEntries
+            .filter { entry -> !entry.scheduledFor.toLocalTime().isBefore(eveningCutoff) }
+            .map { entry ->
+                entry.toWidgetDoseRow(
+                    context,
+                    timeFormatter,
+                    WidgetDoseChip.LAST_NIGHT,
+                    isFromArchivedGroup = entry.groupUuid in archivedGroupUuids,
+                )
+            }
+        val manualLastNight = yesterdaySchedule.unplannedEntries
+            .map { entry ->
+                entry.toManualWidgetDoseRow(
+                    context = context,
+                    zoneId = zoneId,
+                    colorKey = entry.sourceGroupUuid?.let(groupColorByUuid::get),
+                    contextChip = WidgetDoseChip.LAST_NIGHT,
+                    isFromArchivedGroup = entry.sourceGroupUuid != null &&
+                            entry.sourceGroupUuid in archivedGroupUuids,
+                )
+            }
+            .filter { row -> !row.scheduledAt.toLocalTime().isBefore(eveningCutoff) }
+        (scheduledLastNight + manualLastNight).sortedBy { row -> row.scheduledAt }
+    } else {
+        emptyList()
+    }
+
+    val todaySchedule = buildPlanDaySchedule(
+        date = today,
+        groups = scheduleGroups,
+        entries = visibleEntries,
+        now = now,
+        zoneId = zoneId,
+        includeUnloggedArchivedSlots = false,
+        unloggedArchivedSlotCutoff = now,
+    )
+    val todayScheduledRows = todaySchedule.scheduledEntries
+        .map { entry ->
+            entry.toWidgetDoseRow(
+                context,
+                timeFormatter,
+                null,
+                isFromArchivedGroup = entry.groupUuid in archivedGroupUuids,
+            )
+        }
+    val manualRows = todaySchedule.unplannedEntries
+        .map { entry ->
+            entry.toManualWidgetDoseRow(
+                context = context,
+                zoneId = zoneId,
+                colorKey = entry.sourceGroupUuid?.let(groupColorByUuid::get),
+                contextChip = null,
+                isFromArchivedGroup = entry.sourceGroupUuid != null &&
+                        entry.sourceGroupUuid in archivedGroupUuids,
+            )
+        }
+
+    val isEvening = now.toLocalTime() >= LocalTime.of(18, 0)
+    val comingUpRows = if (isEvening) {
+        val tomorrowSchedule = buildPlanDaySchedule(
+            date = today.plusDays(1),
+            groups = activeGroups,
+            entries = scheduleEntries,
+            now = now,
+            zoneId = zoneId,
+        )
+        tomorrowSchedule.scheduledEntries
+            .filter { entry -> entry.scheduledFor.isBefore(comingUpEnd) }
+            .map { entry ->
+                entry.toWidgetDoseRow(
+                    context,
+                    timeFormatter,
+                    WidgetDoseChip.COMING_UP,
+                    isFromArchivedGroup = entry.groupUuid in archivedGroupUuids,
+                )
+            }
+    } else {
+        emptyList()
+    }
+
+    return WidgetSnapshotRecord(
+        schemaVersion = WIDGET_SNAPSHOT_SCHEMA_VERSION,
+        zoneId = zoneId.id,
+        anchorDateEpochDay = today.toEpochDay(),
+        doneCount = todayScheduledRows.count { row -> row.status == WidgetDoseStatus.DONE },
+        totalCount = todayScheduledRows.size,
+        manualCount = manualRows.size,
+        hasActiveGroups = activeGroups.isNotEmpty(),
+        hideMedicationDetails = settings.hideMedicationDetails,
+        adaptiveColorEnabled = settings.adaptiveColorEnabled,
+        e2DisplayUnit = settings.homeE2DisplayUnit.storageValue,
+        appLanguageTag = settings.appLanguageOption.languageTag,
+        doseRows = lastNightRows + (todayScheduledRows + manualRows).sortedBy { row -> row.scheduledAt } + comingUpRows,
+        pkProjection = homeSnapshot.widgetPkProjection?.toWidgetRecord(),
+    )
+}
+
+private fun MedicationLogEntry.toManualWidgetDoseRow(
+    context: Context,
+    zoneId: ZoneId,
+    colorKey: com.dosecare.app.model.medication.MedicationGroupColorKey?,
+    contextChip: WidgetDoseChip?,
+    isFromArchivedGroup: Boolean,
+): WidgetDoseRow {
+    return WidgetDoseRow(
+        medicationName = medicationEntryTitle(medicine, applicationType, context),
+        groupName = "",
+        colorKey = colorKey,
+        routeLabel = medicationRouteLabel(medicine, applicationType, context),
+        doseText = listOfNotNull(
+            doseInstructionText(
+                context = context,
+                medicine = medicine,
+                doseInstruction = doseInstruction,
+                count = count,
+                doseAmountDelta = doseAmountDelta,
+            ),
+        ).joinToString(separator = " · "),
+        status = WidgetDoseStatus.DONE,
+        scheduledAt = appliedAt.atZone(zoneId).toLocalDateTime(),
+        trailingText = context.getString(R.string.plan_entry_label_manual),
+        isManualRecord = true,
+        isImportedRecord = importSourceApp != null,
+        isFromArchivedGroup = isFromArchivedGroup,
+        contextChip = contextChip,
+        groupUuid = null,
+        scheduleTimeUuid = null,
+        entryUuid = uuid.toString(),
+    )
+}
+
+private fun PlanDayScheduleEntry.toWidgetDoseRow(
+    context: Context,
+    timeFormatter: DateTimeFormatter,
+    contextChip: WidgetDoseChip?,
+    isFromArchivedGroup: Boolean,
+): WidgetDoseRow {
+    val status = when {
+        isFulfilled -> WidgetDoseStatus.DONE
+        hasOutsideScheduleWindowEntry -> WidgetDoseStatus.LOGGED_OUT_OF_WINDOW
+        isPastDue -> WidgetDoseStatus.OVERDUE
+        isDueSoon -> WidgetDoseStatus.DUE_SOON
+        else -> WidgetDoseStatus.UPCOMING
+    }
+    val displayTime = when (status) {
+        WidgetDoseStatus.DONE,
+        WidgetDoseStatus.LOGGED_OUT_OF_WINDOW,
+            -> null
+
+        else -> scheduledFor.format(timeFormatter)
+    }
+    return WidgetDoseRow(
+        medicationName = medicationEntryTitle(
+            medication.medicine, medication.applicationType, context,
+        ),
+        groupName = groupName,
+        colorKey = groupColorKey,
+        routeLabel = medicationRouteLabel(
+            medication.medicine,
+            medication.applicationType,
+            context,
+        ),
+        doseText = listOfNotNull(
+            doseInstructionText(
+                context = context,
+                medicine = medication.medicine,
+                doseInstruction = medication.doseInstruction,
+                count = medication.count,
+                doseAmountDelta = doseAmountDelta,
+            ),
+        ).joinToString(separator = " · "),
+        status = status,
+        scheduledAt = scheduledFor,
+        trailingText = displayTime,
+        isManualRecord = false,
+        isFromArchivedGroup = isFromArchivedGroup,
+        contextChip = contextChip,
+        groupUuid = groupUuid.toString(),
+        scheduleTimeUuid = scheduleTimeUuid?.toString(),
+        medicationUuid = medication.uuid.toString(),
+    )
+}
+
+private fun HomePkProjectionRecord.toWidgetRecord(): WidgetPkProjectionRecord =
+    WidgetPkProjectionRecord(
+        generatedAtEpochMillis = generatedAtEpochMillis,
+        windowStartEpochMillis = windowStartEpochMillis,
+        windowEndEpochMillis = windowEndEpochMillis,
+        pkProjectionExpiresAtEpochMillis = pkProjectionExpiresAtEpochMillis,
+        concentrationUnit = concentrationUnit,
+        timeH = timeH,
+        concentrations = concentrations,
+        doseMarkers = doseMarkers.map { marker ->
+            WidgetPkDoseMarkerRecord(
+                timeH = marker.timeH,
+                concentration = marker.concentration,
+                isPlanned = marker.isPlanned,
+            )
+        },
+    )

@@ -35,7 +35,7 @@ fun signingValue(name: String): String? {
 val isFdroidBuild = providers.gradleProperty("fdroid").isPresent
 
 android {
-    namespace = "com.picohrt"
+    namespace = "com.dosecare.app"
     compileSdk = 37
     flavorDimensions += "distribution"
 
@@ -57,7 +57,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.picohrt"
+        applicationId = "com.dosecare.app"
         minSdk = 26
         targetSdk = 37
         versionCode = gitCommitCount
