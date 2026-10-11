@@ -2129,7 +2129,7 @@ private const val MODEL_REPOSITORY_URL =
     "https://github.com/LaoZhong-Mihari/HRT-Recorder-PKcomponent-Test"
 
 private const val APP_REPOSITORY_URL =
-    "https://github.com/sakanana001/PicoHRT"
+    "https://github.com/sakanana001/dosecare"
 private const val UPSTREAM_REPOSITORY_URL =
     "https://github.com/mkx173/Featherline"
 private const val VERSION_COPY_THROTTLE_MS = 2_000L

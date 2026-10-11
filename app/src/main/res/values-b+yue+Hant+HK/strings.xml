@@ -751,7 +751,7 @@
     <string name="settings_about_privacy_policy">私隱政策</string>
     <string name="settings_about_open_source_licenses">開源授權條款</string>
     <string name="settings_about_model">關於模型</string>
-    <string name="settings_github_repo">PicoHRT GitHub 儲存庫</string>
+    <string name="settings_github_repo">DoseCare GitHub 儲存庫</string>
     <string name="settings_about_upstream_project">上游項目（Featherline）</string>
     <string name="settings_about_upstream_project_summary">基於 Zhaoqian Wang 開發嘅原版 Featherline</string>
     <string name="settings_about_open_link_title">開啟外部連結</string>
@@ -809,7 +809,7 @@
     <string name="onboarding_start_tagline">記錄HRT用藥、檢視血藥濃度、掌握用藥節奏</string>
     <string name="onboarding_start_cta">開始使用</string>
     <string name="onboarding_disclaimer_title">重要說明</string>
-    <string name="onboarding_disclaimer_subtitle">PicoHRT 係一個記錄工具，唔提供醫療建議。血藥濃度數值係根據你嘅用藥計劃計算出嚟嘅模型估算值，唔係實際測量值。呢啲數值唔應該取代化驗檢查或臨床醫生嘅指導。</string>
+    <string name="onboarding_disclaimer_subtitle">DoseCare 係一個記錄工具，唔提供醫療建議。血藥濃度數值係根據你嘅用藥計劃計算出嚟嘅模型估算值，唔係實際測量值。呢啲數值唔應該取代化驗檢查或臨床醫生嘅指導。</string>
     <string name="onboarding_disclaimer_data_heading">資料同私隱</string>
     <string name="onboarding_disclaimer_data_body">所有用藥、劑量同化驗資料都會儲存喺你部裝置嘅本機加密資料庫。呢個應用程式唔會使用任何分析或第三方追蹤服務。預設情況下，你嘅資料唔會離開你部裝置——你可以隨時匯出加密備份。</string>
     <string name="onboarding_disclaimer_estimates_heading">估算同建模</string>
@@ -822,10 +822,10 @@
     <string name="onboarding_disclaimer_acknowledge_read">我已閱讀並同意</string>
     <string name="onboarding_continue">繼續</string>
     <string name="onboarding_notifications_title">開啟用藥提醒</string>
-    <string name="onboarding_notifications_subtitle">為咗喺你預定嘅服藥時間傳送提醒，PicoHRT 需要以下兩項權限；你可以隨時喺系統設定關閉佢哋</string>
-    <string name="onboarding_notifications_permission_subtitle">為咗喺你預定嘅服藥時間傳送提醒，PicoHRT 需要以下權限；你可以隨時喺系統設定關閉佢</string>
-    <string name="onboarding_notifications_master_subtitle">PicoHRT 可以喺你預定嘅服藥時間傳送提醒，你可以隨時喺設定關閉佢</string>
-    <string name="onboarding_notifications_master_alarm_subtitle">PicoHRT 可以喺你預定嘅服藥時間傳送提醒，你亦可以開啟精確鬧鐘，令通知更準時</string>
+    <string name="onboarding_notifications_subtitle">為咗喺你預定嘅服藥時間傳送提醒，DoseCare 需要以下兩項權限；你可以隨時喺系統設定關閉佢哋</string>
+    <string name="onboarding_notifications_permission_subtitle">為咗喺你預定嘅服藥時間傳送提醒，DoseCare 需要以下權限；你可以隨時喺系統設定關閉佢</string>
+    <string name="onboarding_notifications_master_subtitle">DoseCare 可以喺你預定嘅服藥時間傳送提醒，你可以隨時喺設定關閉佢</string>
+    <string name="onboarding_notifications_master_alarm_subtitle">DoseCare 可以喺你預定嘅服藥時間傳送提醒，你亦可以開啟精確鬧鐘，令通知更準時</string>
     <string name="onboarding_notifications_app_title">通知權限</string>
     <string name="onboarding_notifications_app_desc">喺預定嘅服藥時間傳送提醒</string>
     <string name="onboarding_notifications_alarm_title">精確鬧鐘</string>
@@ -833,7 +833,7 @@
     <string name="onboarding_notifications_optional">可選</string>
     <string name="onboarding_skip_notifications">跳過</string>
     <string name="onboarding_useful_title">建議完成嘅設定</string>
-    <string name="onboarding_useful_subtitle">以下步驟為可選項，可幫助 PicoHRT 提供更完整嘅記錄、提醒和估算</string>
+    <string name="onboarding_useful_subtitle">以下步驟為可選項，可幫助 DoseCare 提供更完整嘅記錄、提醒和估算</string>
     <string name="onboarding_useful_plan_title">建立用藥計劃</string>
     <string name="onboarding_useful_plan_desc">新增用藥群組以啟用預測和提醒功能</string>
     <string name="onboarding_useful_plan_added">已新增群組</string>
@@ -842,7 +842,7 @@
     <string name="onboarding_useful_stock_title">追蹤庫存</string>
     <string name="onboarding_useful_stock_desc">記錄剩餘庫存以預估可用天數</string>
     <string name="onboarding_useful_stock_added">已啟用庫存追蹤</string>
-    <string name="onboarding_open_app">開啟 PicoHRT</string>
+    <string name="onboarding_open_app">開啟 DoseCare</string>
     <string name="settings_calibration_remaining_analytes">%1$d 可用</string>
 
     <string name="reminder_notification_two_groups">%1$s 和 %2$s</string>
