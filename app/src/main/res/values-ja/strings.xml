@@ -279,4 +279,17 @@
     <string name="monfreq_before_each_dose">各投与前</string>
     <string name="monfreq_every_6_8_weeks">6〜8 週間ごと</string>
     <string name="monfreq_continuous">継続的</string>
+    <string name="dossier_section_title">薬理情報</string>
+    <string name="dossier_picker_label">カタログと紐づけ</string>
+    <string name="dossier_search_placeholder">202 種の薬を名前か拼音で検索</string>
+    <string name="dossier_summary_format">%1$s · %2$s</string>
+    <string name="dossier_no_indications">適応症記載なし</string>
+    <string name="dossier_unlink_action">カタログとの紐づけを解除</string>
+    <string name="interaction_entry_title">薬物相互作用</string>
+    <string name="interaction_use_my_regimen">現在の処方を使う</string>
+    <string name="interaction_use_my_regimen_n">現在の処方を使う(%1$d)</string>
+    <string name="app_language_english">English</string>
+    <string name="app_language_simplified_chinese">简体中文</string>
+    <string name="app_language_traditional_chinese">繁體中文</string>
+    <string name="app_language_cantonese">粵語</string>
 </resources>
