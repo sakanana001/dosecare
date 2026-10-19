@@ -48,6 +48,7 @@ internal fun MedicineEntity.toMedicineModel(): Medicine {
             generation = stockGeneration,
         ).normalizedFor(preparation),
         importedFromExternalTracker = importedFromExternalTracker,
+        drugCatalogId = drugCatalogId,
     )
 }
 
@@ -147,6 +148,7 @@ internal fun Medicine.toEntity(): MedicineEntity {
         warnAtDaysRemaining = stock.warnAtDaysRemaining,
         stockGeneration = stock.generation,
         importedFromExternalTracker = importedFromExternalTracker,
+        drugCatalogId = drugCatalogId,
     )
 }
 

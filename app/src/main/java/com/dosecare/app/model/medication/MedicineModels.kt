@@ -252,6 +252,14 @@ data class Medicine(
     val displayDoseUnit: MedicineDisplayDoseUnit = MedicineDisplayDoseUnit.MG,
     val stock: MedicineStock,
     val importedFromExternalTracker: Boolean = false,
+    // v0.9g merge: link into the bundled pharmacology catalog (202-drug reference
+    // carried over from DoseCare). Empty string = no pharmacological dossier, which is
+    // the state for every medicine that predates the catalog and for every medicine the
+    // user created by typing a name instead of picking one from the catalog.
+    //
+    // When set, this medicine can be evaluated by the interaction rule engine and gains a
+    // therapeutic window for TDM. See model/pharmacology/ for the catalog itself.
+    val drugCatalogId: String = "",
 ) {
     init {
         if (selection is MedicineSelection.Catalog) {
