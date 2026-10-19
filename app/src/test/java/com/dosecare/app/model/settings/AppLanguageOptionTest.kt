@@ -62,6 +62,22 @@ class AppLanguageOptionTest {
     }
 
     @Test
+    fun fromLocale_mapsJapanese() {
+        assertEquals(
+            AppLanguageOption.JAPANESE,
+            AppLanguageOption.fromLocale(Locale.forLanguageTag("ja")),
+        )
+        assertEquals(
+            AppLanguageOption.JAPANESE,
+            AppLanguageOption.fromLocale(Locale.forLanguageTag("ja-JP")),
+        )
+        assertEquals(
+            AppLanguageOption.JAPANESE,
+            AppLanguageOption.fromLocale(Locale.JAPANESE),
+        )
+    }
+
+    @Test
     fun fromLocale_defaultsToEnglish() {
         assertEquals(
             AppLanguageOption.ENGLISH,

@@ -23,6 +23,7 @@ val AppLanguageOption.labelRes: Int
         AppLanguageOption.SIMPLIFIED_CHINESE -> R.string.app_language_simplified_chinese
         AppLanguageOption.TRADITIONAL_CHINESE -> R.string.app_language_traditional_chinese
         AppLanguageOption.CANTONESE -> R.string.app_language_cantonese
+        AppLanguageOption.JAPANESE -> R.string.app_language_japanese
     }
 
 @get:StringRes

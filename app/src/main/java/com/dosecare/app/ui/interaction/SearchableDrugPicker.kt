@@ -5,6 +5,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
@@ -22,6 +23,9 @@ import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.dosecare.app.R
 import com.dosecare.app.model.pharmacology.Drug
+import com.dosecare.app.ui.components.HazeTopAppBar
+import com.dosecare.app.ui.components.pinnedTopAppBarScrollBehavior
+import com.dosecare.app.ui.components.topAppBarScrollToTop
 import kotlin.math.min
 
 /**
@@ -176,8 +180,18 @@ private fun SearchableDrugDialog(
         ) {
             Column {
                 // Top bar
-                TopAppBar(
+                // v0.9g merge: use the shared Haze wrapper so the picker chrome
+                // honours the app-wide blur switch like every other screen.
+                val listState = rememberLazyListState()
+                val topAppBarState = rememberTopAppBarState()
+                val scrollBehavior = pinnedTopAppBarScrollBehavior(
+                    lazyListState = listState,
+                    state = topAppBarState
+                )
+                HazeTopAppBar(
+                    modifier = Modifier.topAppBarScrollToTop(scrollBehavior, listState),
                     title = { Text(stringResource(R.string.search_select_title, title)) },
+                    scrollBehavior = scrollBehavior,
                     navigationIcon = {
                         IconButton(onClick = onDismiss) {
                             Icon(Icons.Default.Close, contentDescription = stringResource(R.string.common_close))

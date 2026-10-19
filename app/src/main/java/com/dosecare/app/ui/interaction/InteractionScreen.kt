@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.CheckCircle
@@ -22,7 +23,6 @@ import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Settings
 import androidx.compose.material.icons.filled.Warning
-import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -36,13 +36,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -56,6 +57,10 @@ import com.dosecare.app.model.pharmacology.OverdoseSeverity
 import com.dosecare.app.model.pharmacology.QtcInteraction
 import com.dosecare.app.model.pharmacology.SerotoninSyndromeRisk
 import com.dosecare.app.model.pharmacology.Severity
+import com.dosecare.app.ui.components.HazeAlertDialog
+import com.dosecare.app.ui.components.HazeTopAppBar
+import com.dosecare.app.ui.components.pinnedTopAppBarScrollBehavior
+import com.dosecare.app.ui.components.topAppBarScrollToTop
 
 /**
  * 药物相互作用检测：选药 → 评估 → 展示结果。
@@ -91,11 +96,26 @@ fun InteractionScreen(
     val infoDialogOpen by viewModel.infoDialogOpen.collectAsStateWithLifecycle()
     val availableDrugs = remember(selectedIds) { viewModel.allDrugs.filter { it.id !in selectedIds } }
 
+    // v0.9g merge: the base app renders every top bar / dialog through the shared
+    // Haze wrappers (ui/components/HazeChrome.kt) so one blur switch controls all
+    // chrome. Calling Material3's TopAppBar/AlertDialog directly here would paint
+    // an opaque bar over the blur and trip HazeChromeIntegrationTest.
+    val listState = rememberLazyListState()
+    val topAppBarState = rememberTopAppBarState()
+    val scrollBehavior = pinnedTopAppBarScrollBehavior(
+        lazyListState = listState,
+        state = topAppBarState
+    )
+
     Scaffold(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
-            TopAppBar(
+            HazeTopAppBar(
+                modifier = Modifier.topAppBarScrollToTop(scrollBehavior, listState),
                 title = { Text(stringResource(R.string.interaction_title, selectedIds.size)) },
+                scrollBehavior = scrollBehavior,
                 actions = {
                     IconButton(onClick = onSettingsClick) {
                         Icon(Icons.Default.Settings, contentDescription = stringResource(R.string.common_settings))
@@ -140,7 +160,7 @@ fun InteractionScreen(
             }
 
             if (infoDialogOpen) {
-                AlertDialog(
+                HazeAlertDialog(
                     onDismissRequest = { viewModel.setInfoDialogOpen(false) },
                     title = { Text(stringResource(R.string.interaction_info_title)) },
                     text = {

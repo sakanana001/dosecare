@@ -30,12 +30,14 @@ enum class AppLanguageOption(val languageTag: String) {
     ENGLISH(languageTag = "en"),
     SIMPLIFIED_CHINESE(languageTag = "zh-Hans"),
     TRADITIONAL_CHINESE(languageTag = "zh-Hant"),
-    CANTONESE(languageTag = "yue-Hant-HK");
+    CANTONESE(languageTag = "yue-Hant-HK"),
+    JAPANESE(languageTag = "ja");
 
     companion object {
         fun fromLocale(locale: Locale): AppLanguageOption {
             return when {
                 locale.language == "yue" -> CANTONESE
+                locale.language == "ja" -> JAPANESE
                 locale.language != "zh" -> ENGLISH
                 locale.script == "Hans" -> SIMPLIFIED_CHINESE
                 locale.script == "Hant" ||
