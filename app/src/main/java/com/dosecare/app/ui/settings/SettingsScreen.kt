@@ -145,6 +145,9 @@ fun SettingsScreen(
     onInteractionsClick: () -> Unit = {},
     // v0.9h merge: entry point to the plasma-level (TDM) screen (Screen.Tdm).
     onTdmClick: () -> Unit = {},
+    // v0.9i merge: entry point to the two-drug spec comparison screen
+    // (Screen.Comparison).
+    onComparisonClick: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -599,6 +602,7 @@ fun SettingsScreen(
         onCalibrationClick = onCalibrationClick,
         onInteractionsClick = onInteractionsClick,
         onTdmClick = onTdmClick,
+        onComparisonClick = onComparisonClick,
         scrollToTopSignal = scrollToTopSignal,
         modifier = modifier
     )
@@ -995,6 +999,7 @@ internal fun SettingsScreenContent(
     onCalibrationClick: () -> Unit,
     onInteractionsClick: () -> Unit = {},
     onTdmClick: () -> Unit = {},
+    onComparisonClick: () -> Unit = {},
     scrollToTopSignal: Int = 0,
 ) {
     val settingsState = uiState.settingsState
@@ -1141,6 +1146,25 @@ internal fun SettingsScreenContent(
                             leadingContent = {
                                 SettingsLeadingIconSlot(
                                     painter = painterResource(R.drawable.ic_data_info_alert)
+                                )
+                            },
+                            trailingContent = {
+                                SettingsChevronTrailingIcon()
+                            }
+                        )
+                    }
+
+                    // v0.9i merge: two-drug spec comparison. Sits between the
+                    // interaction checker and the blood-level monitor because all
+                    // three read the same pharmacology catalog: the user picks two
+                    // drugs and sees their fields side by side.
+                    item {
+                        SettingsSegmentedListItem(
+                            title = stringResource(R.string.compare_card_title),
+                            onClick = onComparisonClick,
+                            leadingContent = {
+                                SettingsLeadingIconSlot(
+                                    painter = painterResource(R.drawable.ic_insights)
                                 )
                             },
                             trailingContent = {

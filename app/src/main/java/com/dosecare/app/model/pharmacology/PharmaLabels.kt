@@ -134,3 +134,56 @@ fun Severity.labelRes(): Int = when (this) {
     Severity.LOW -> R.string.sevrule_low
     Severity.INFO -> R.string.sevrule_info
 }
+
+/**
+ * v2.0.0 merge: 剂量调整 (肾/肝) 的本地化。
+ *
+ * DoseCare 原版同样没给这两个枚举做标签, 界面上直接显示枚举名
+ * ("CONTRAINDICATED IN SEVERE" / "MONITOR"), 中文和日语界面里都是一串
+ * 大写英文。这里补上映射。
+ */
+fun RenalAdjustment.labelRes(): Int = when (this) {
+    RenalAdjustment.NONE -> R.string.renal_none
+    RenalAdjustment.MONITOR -> R.string.renal_monitor
+    RenalAdjustment.REDUCE_50_PCT_EGFR_BELOW_30 -> R.string.renal_reduce_egfr30
+    RenalAdjustment.CONTRAINDICATED_EGFR_BELOW_30 -> R.string.renal_contraindicated_egfr30
+}
+
+fun HepaticAdjustment.labelRes(): Int = when (this) {
+    HepaticAdjustment.NONE -> R.string.hepatic_none
+    HepaticAdjustment.MONITOR -> R.string.hepatic_monitor
+    HepaticAdjustment.REDUCE_50_PCT_CHILD_PUGH_B -> R.string.hepatic_reduce_pugh_b
+    HepaticAdjustment.REDUCE_50_PCT_CHILD_PUGH_C -> R.string.hepatic_reduce_pugh_c
+    HepaticAdjustment.CONTRAINDICATED_IN_SEVERE -> R.string.hepatic_contraindicated_severe
+}
+
+/**
+ * 监测频次在目录里是自由字符串 (WEEKLY_FIRST_18WEEKS_THEN_MONTHLY 之类),
+ * 不是枚举, 所以按原值查表。
+ *
+ * 返回 null 表示这个值没收录 (目录更新后可能出现新值), 调用方应回落到原字符串
+ * 而不是丢内容。
+ */
+fun monitoringFrequencyRes(raw: String): Int? = when (raw) {
+    "MONTHLY" -> R.string.monfreq_monthly
+    "EVERY_3_MONTHS" -> R.string.monfreq_every_3_months
+    "AS_NEEDED" -> R.string.monfreq_as_needed
+    "EVERY_6_MONTHS" -> R.string.monfreq_every_6_months
+    "EVERY_3_6_MONTHS" -> R.string.monfreq_every_3_6_months
+    "MONTHLY_FIRST_3_MONTHS_THEN_EVERY_3_MONTHS" ->
+        R.string.monfreq_monthly_first_3_then_every_3
+    "MONTHLY_INITIALLY" -> R.string.monfreq_monthly_initially
+    "PER_PROCEDURE" -> R.string.monfreq_per_procedure
+    "EVERY_6_12_MONTHS" -> R.string.monfreq_every_6_12_months
+    "WEEKLY_FIRST_18WEEKS_THEN_MONTHLY" -> R.string.monfreq_weekly_18_then_monthly
+    "WEEKLY_INITIALLY_THEN_MONTHLY" -> R.string.monfreq_weekly_then_monthly
+    "WEEKLY_INITIALLY" -> R.string.monfreq_weekly_initially
+    "PER_PRESCRIPTION" -> R.string.monfreq_per_prescription
+    "DURING_IV_INFUSION" -> R.string.monfreq_during_iv_infusion
+    "BEFORE_EACH_INFUSION" -> R.string.monfreq_before_each_infusion
+    "WEEKLY" -> R.string.monfreq_weekly
+    "BEFORE_EACH_DOSE" -> R.string.monfreq_before_each_dose
+    "EVERY_6_8_WEEKS" -> R.string.monfreq_every_6_8_weeks
+    "CONTINUOUS" -> R.string.monfreq_continuous
+    else -> null
+}

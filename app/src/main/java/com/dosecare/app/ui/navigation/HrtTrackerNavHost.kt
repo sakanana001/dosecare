@@ -76,6 +76,7 @@ import com.dosecare.app.ui.catalog.MedicinesScreen
 import com.dosecare.app.ui.catalog.medicineManagerLaunchMode
 import com.dosecare.app.ui.catalog.nudge.StockTrackingNudgeViewModel
 import com.dosecare.app.ui.catalog.stock.AdjustStockSheet
+import com.dosecare.app.ui.compare.CompareScreen
 import com.dosecare.app.ui.components.HrtSnackbar
 import com.dosecare.app.ui.components.LocalAppContentBottomInset
 import com.dosecare.app.ui.components.LocalChromeHazeState
@@ -190,6 +191,16 @@ sealed class Screen(val route: String, @get:StringRes val label: Int) {
     // immediately below the drug-interaction entry.
     data object Tdm : Screen("tdm", R.string.tdm_entry_title) {
         const val baseRoute = "tdm"
+    }
+
+    // v0.9i merge: two-drug spec comparison, ported from DoseCare's CompareTab
+    // (ui/BottomNavTabs.kt). Same placement rule as Screen.Interactions and
+    // Screen.Tdm: deliberately NOT in topLevelNavigationItems — it is pushed on
+    // top of the Settings tab, and reachable from Settings -> Two-drug spec
+    // comparison, right between the drug-interaction and the blood-level
+    // monitoring entries.
+    data object Comparison : Screen("comparison", R.string.compare_card_title) {
+        const val baseRoute = "comparison"
     }
 
     data object SettingsCalibration : Screen(
@@ -1100,6 +1111,11 @@ fun HrtTrackerNavHost(
                                 navController.navigate(Screen.Tdm.route) {
                                     launchSingleTop = true
                                 }
+                            },
+                            onComparisonClick = {
+                                navController.navigate(Screen.Comparison.route) {
+                                    launchSingleTop = true
+                                }
                             }
                         )
                     }
@@ -1123,6 +1139,20 @@ fun HrtTrackerNavHost(
                 composable(Screen.Tdm.route) { backStackEntry ->
                     RoutedTopChromeHazeProvider(navController, backStackEntry) {
                         TdmScreen(
+                            modifier = modifier,
+                            onSettingsClick = {
+                                navController.navigate(Screen.Settings.route) {
+                                    launchSingleTop = true
+                                }
+                            }
+                        )
+                    }
+                }
+                // v0.9i merge: two-drug spec comparison. Reached from Settings ->
+                // Two-drug spec comparison; not in the bottom navigation.
+                composable(Screen.Comparison.route) { backStackEntry ->
+                    RoutedTopChromeHazeProvider(navController, backStackEntry) {
+                        CompareScreen(
                             modifier = modifier,
                             onSettingsClick = {
                                 navController.navigate(Screen.Settings.route) {
