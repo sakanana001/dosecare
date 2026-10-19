@@ -1187,4 +1187,11 @@
     <!-- v0.9g merge: 用药方案快捷导入 -->
     <string name="interaction_use_my_regimen">用我的用藥方案</string>
     <string name="interaction_use_my_regimen_n">用我的用藥方案（%1$d）</string>
+    <!-- v0.9g merge: 药理档案区块 -->
+    <string name="dossier_section_title">藥理檔案</string>
+    <string name="dossier_picker_label">關聯藥理目錄條目</string>
+    <string name="dossier_search_placeholder">按名稱或拼音搜尋 202 種藥</string>
+    <string name="dossier_summary_format">%1$s · %2$s</string>
+    <string name="dossier_no_indications">未標註適應症</string>
+    <string name="dossier_unlink_action">解除關聯</string>
 </resources>

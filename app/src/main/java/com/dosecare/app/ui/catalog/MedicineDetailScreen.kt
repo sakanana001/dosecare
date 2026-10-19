@@ -108,6 +108,8 @@ import com.dosecare.app.ui.hideBottomSheet
 import com.dosecare.app.ui.medication.LocalSheetDismissFocusRequester
 import com.dosecare.app.ui.medication.MedicationEditorSheetScaffold
 import com.dosecare.app.ui.medication.PatchSpecKind
+import com.dosecare.app.ui.components.HrtSection
+import com.dosecare.app.ui.catalog.dossier.PharmacologyDossierSection
 import com.dosecare.app.ui.medication.hasRawMassDoseField
 import com.dosecare.app.ui.medication.medicinePreparationSummary
 import com.dosecare.app.ui.medication.shortLabelRes
@@ -227,6 +229,9 @@ fun MedicineDetailScreen(
         onSubmitWarnAt = { days -> viewModel.submitWarnAt(days) },
         onConfirmDisableTracking = { viewModel.confirmDisableTracking() },
         onArchive = { viewModel.archive() },
+        onLinkDossier = { drugId -> viewModel.linkDossier(drugId) },
+        onUnlinkDossier = { viewModel.unlinkDossier() },
+        catalogDrugs = viewModel.catalogDrugs,
         modifier = modifier,
     )
 }
@@ -275,6 +280,10 @@ private fun MedicineDetailScreenContent(
     onSubmitWarnAt: (Int) -> Unit,
     onConfirmDisableTracking: () -> Unit,
     onArchive: () -> Unit,
+    // v0.9g merge: pharmacological dossier link (202-drug catalog).
+    onLinkDossier: (String) -> Unit,
+    onUnlinkDossier: () -> Unit,
+    catalogDrugs: List<com.dosecare.app.model.pharmacology.Drug>,
     modifier: Modifier = Modifier,
 ) {
     val listState = rememberLazyListState()
@@ -511,6 +520,19 @@ private fun MedicineDetailScreenContent(
                             }
                         }
                     }
+                }
+
+                // v0.9g merge: pharmacological dossier link. Sits right after the
+                // stock block so the two "what does this medicine need" surfaces sit
+                // together, and before the regimen links that follow.
+                item(key = "medicine-dossier") {
+                    PharmacologyDossierSection(
+                        linkedDrug = uiState.dossier,
+                        catalogDrugs = catalogDrugs,
+                        onLink = { drug -> onLinkDossier(drug.id) },
+                        onUnlink = onUnlinkDossier,
+                        modifier = Modifier.fillMaxWidth(),
+                    )
                 }
 
                 item(key = "linked-groups") {

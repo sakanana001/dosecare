@@ -1299,4 +1299,11 @@
     <!-- v0.9g merge: 用药方案快捷导入 -->
     <string name="interaction_use_my_regimen">Use my regimen</string>
     <string name="interaction_use_my_regimen_n">Use my regimen (%1$d)</string>
+    <!-- v0.9g merge: 药理档案区块 -->
+    <string name="dossier_section_title">Pharmacology</string>
+    <string name="dossier_picker_label">Link to catalog entry</string>
+    <string name="dossier_search_placeholder">Search 202 catalog medicines by name or pinyin</string>
+    <string name="dossier_summary_format">%1$s · %2$s</string>
+    <string name="dossier_no_indications">No indications listed</string>
+    <string name="dossier_unlink_action">Unlink from catalog</string>
 </resources>

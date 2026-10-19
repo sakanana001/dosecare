@@ -279,6 +279,37 @@ class MedicineRepository @Inject internal constructor(
         }
     }
 
+    /**
+     * v0.9g merge: link a medicine to an entry in the bundled pharmacology catalog
+     * (202-drug reference carried over from DoseCare), or clear the link by passing "".
+     *
+     * Runs through `runHomeDataMutation` like every other medicine write, so the home
+     * screen's cached snapshot is invalidated — the home card shows which medicines are
+     * in the current regimen, and a stale snapshot would show the old set.
+     *
+     * The id is not validated against the catalog. The catalog is an asset, not a table,
+     * so there is nothing to constrain the write against, and an id a future catalog
+     * version drops should degrade to "no dossier" at read time rather than fail here.
+     */
+    suspend fun updateDrugCatalogId(
+        uuid: UUID,
+        drugCatalogId: String,
+        now: Instant = Instant.now(),
+    ) {
+        val nowEpochMillis = now.toEpochMilli()
+        homeSnapshotRepository.runHomeDataMutation {
+            databaseHolder.withTransaction { database ->
+                val dao = database.medicineDao()
+                dao.getByUuid(uuid.toString()) ?: throw MedicineNotFoundException(uuid)
+                dao.updateDrugCatalogId(
+                    uuid = uuid.toString(),
+                    drugCatalogId = drugCatalogId,
+                    updatedAtEpochMillis = nowEpochMillis,
+                )
+            }
+        }
+    }
+
     suspend fun setDisplayName(
         uuid: UUID,
         name: String?,

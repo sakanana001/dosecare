@@ -21,6 +21,7 @@ import com.dosecare.app.model.medication.MedicineStock
 import com.dosecare.app.model.medication.MedicineStockProjection
 import com.dosecare.app.model.medication.RunwayProjection
 import com.dosecare.app.model.medication.isArchived
+import com.dosecare.app.model.pharmacology.DrugCatalogService
 import com.dosecare.app.ui.medication.PatchSpecKind
 import com.dosecare.app.util.systemLocale
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -59,6 +60,8 @@ class MedicineDetailViewModel @Inject constructor(
     medicationGroupRepository: MedicationGroupRepository,
     private val stockRepository: MedicineStockRepository,
     private val settingsRepository: SettingsRepository,
+    // v0.9g merge: resolves medicine.drugCatalogId into a catalog Drug for display.
+    private val drugCatalog: com.dosecare.app.model.pharmacology.DrugCatalogService,
     private val savedStateHandle: SavedStateHandle,
 ) : ViewModel() {
 
@@ -541,8 +544,56 @@ class MedicineDetailViewModel @Inject constructor(
             stockMutationResult = stockMutationResult,
             firstDayOfWeek = firstDayOfWeek,
             stockProjection = stockProjection,
+            // v0.9g merge: resolve the link through the catalog. A blank id or one the
+            // catalog no longer carries both read as "no dossier", so a stale link is
+            // visible and clearable instead of looking like a broken row.
+            dossier = medicine?.drugCatalogId
+                ?.takeIf { it.isNotBlank() }
+                ?.let(drugCatalog::tryGetById),
         )
     }
+
+    /**
+     * The whole 202-drug catalog, name-sorted for the dossier picker.
+     *
+     * Computed once: the catalog is an immutable in-memory snapshot loaded at startup,
+     * so there is nothing to invalidate.
+     */
+    val catalogDrugs: List<com.dosecare.app.model.pharmacology.Drug> by lazy {
+        drugCatalog.all().sortedBy { it.genericNameZh }
+    }
+
+    fun openDossierPicker() {
+        _uiState.value = _uiState.value.copy(showDossierPicker = true)
+    }
+
+    fun closeDossierPicker() {
+        _uiState.value = _uiState.value.copy(showDossierPicker = false)
+    }
+
+    /** Link the medicine to a catalog entry. Empty string unlinks. */
+    fun linkDossier(drugId: String) {
+        if (_uiState.value.dossierMutationInProgress) return
+        _uiState.value = _uiState.value.copy(dossierMutationInProgress = true)
+        viewModelScope.launch {
+            runCatching {
+                medicineRepository.updateDrugCatalogId(medicineUuid, drugId)
+            }.onSuccess {
+                _uiState.value = _uiState.value.copy(
+                    dossierMutationInProgress = false,
+                    showDossierPicker = false,
+                )
+            }.onFailure { error ->
+                if (error is CancellationException) throw error
+                // The medicine row disappears only if it was deleted underneath us, in
+                // which case the detail screen is already tearing down. Leaving the
+                // in-progress flag would strand the section, so clear it either way.
+                _uiState.value = _uiState.value.copy(dossierMutationInProgress = false)
+            }
+        }
+    }
+
+    fun unlinkDossier() = linkDossier("")
 
     private data class MutationResults(
         val archiveResult: MedicineArchiveResult?,
@@ -583,6 +634,14 @@ data class MedicineDetailUiState(
     val adjustSheetActiveTab: AdjustSheetTab = AdjustSheetTab.RECEIVED,
     val pendingEnableTracking: Boolean = false,
     val archiveInProgress: Boolean = false,
+    // v0.9g merge: the pharmacology dossier linked to this medicine, resolved from
+    // medicine.drugCatalogId through the catalog service. Null means "not linked" OR
+    // "linked to an id the catalog no longer has" — the two are indistinguishable to the
+    // UI and are deliberately treated the same, so a stale link reads as "no dossier"
+    // rather than as an error the user cannot clear.
+    val dossier: com.dosecare.app.model.pharmacology.Drug? = null,
+    val showDossierPicker: Boolean = false,
+    val dossierMutationInProgress: Boolean = false,
 )
 
 enum class AdjustSheetTab {

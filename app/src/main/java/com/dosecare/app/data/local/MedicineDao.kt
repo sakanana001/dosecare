@@ -131,6 +131,30 @@ interface MedicineDao {
         updatedAtEpochMillis: Long,
     )
 
+    /**
+     * v0.9g merge: link (or unlink, with an empty string) a medicine to an entry in the
+     * bundled pharmacology catalog. The column is NOT NULL with an empty-string default,
+     * so "" is the explicit "no dossier" state rather than a null to distinguish.
+     *
+     * The id is not validated against the catalog here on purpose: the catalog ships as
+     * an asset with no database rows to reference, so a foreign key is impossible, and a
+     * catalog that later drops an entry should leave the medicine readable as "no
+     * dossier" instead of blocking the write or cascading a delete.
+     */
+    @Query(
+        """
+        UPDATE medicines
+        SET drugCatalogId = :drugCatalogId,
+            updatedAtEpochMillis = :updatedAtEpochMillis
+        WHERE uuid = :uuid
+        """
+    )
+    suspend fun updateDrugCatalogId(
+        uuid: String,
+        drugCatalogId: String,
+        updatedAtEpochMillis: Long,
+    )
+
     @Query(
         """
         UPDATE medicines
