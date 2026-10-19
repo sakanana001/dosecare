@@ -20,6 +20,7 @@ import com.dosecare.app.model.medication.MedicineIdentityKey
 import com.dosecare.app.model.medication.MedicinePreparation
 import com.dosecare.app.model.medication.MedicineSelection
 import com.dosecare.app.model.medication.MedicineStock
+import com.dosecare.app.model.pharmacology.DrugCatalogService
 import com.dosecare.app.model.settings.SettingsState
 import com.dosecare.app.ui.theme.HrtTrackerTheme
 import io.mockk.coEvery
@@ -44,6 +45,10 @@ class MedicineDetailScreenPatchOffTest {
         val medicationGroupRepository: MedicationGroupRepository = mockk()
         val stockRepository: MedicineStockRepository = mockk()
         val settingsRepository: SettingsRepository = mockk()
+        // v0.9g merge: the view model resolves medicine.drugCatalogId through the
+        // catalog. This test does not exercise the dossier, so an empty catalog is
+        // enough — tryGetById then returns null ("no dossier linked").
+        val drugCatalog = DrugCatalogService(emptyList())
         every { medicineRepository.getCachedActiveMedicine(patchOff.uuid) } returns patchOff
         every { medicineRepository.observeByUuid(patchOff.uuid) } returns flowOf(patchOff)
         every { medicationGroupRepository.getCachedGroups() } returns emptyList()
@@ -60,6 +65,7 @@ class MedicineDetailScreenPatchOffTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to patchOff.uuid.toString()),
             ),
