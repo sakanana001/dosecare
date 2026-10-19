@@ -1194,4 +1194,32 @@
     <string name="dossier_summary_format">%1$s · %2$s</string>
     <string name="dossier_no_indications">未標註適應症</string>
     <string name="dossier_unlink_action">解除關聯</string>
+    <string name="tdm_title">血中濃度估算 (TDM)</string>
+    <string name="tdm_data_source_info">資料來源同校準說明</string>
+    <string name="tdm_no_drugs">暫時冇可做 TDM 監測嘅藥物(需要 therapeuticWindow 欄位)</string>
+    <string name="tdm_data_source_title">📚 資料來源同校準</string>
+    <string name="tdm_data_source_lines">• PK 參數: AGNP 2017 (Therapeutic Drug Monitoring in Psychiatry) + FDA DailyMed 藥品標籤\n• CYP 譜: Flockhart Table (Indiana University)\n• 治療窗: AGNP 2017 共識指引\n• 體重調整: Vd = vdLPerKg × weight(假設線性)</string>
+    <string name="tdm_limitations">⚠️ 限制</string>
+    <string name="tdm_limitations_lines">• 1 房室口服模型 — 對非線性藥物(苯妥英)唔準確,對腎臟清除藥物(鋰)只係近似\n• 群體平均參數 — 個體差異 2-3 倍(CYP 基因型 / 食煙 / 年齡 / 腎臟 / 肝臟)\n• 多藥曲線只係顯示濃度疊加,唔會模擬 CYP 競爭/酵素抑制動力學\n• v0.4 唔可以代替醫生判斷;實際食藥請聽醫生或者搵臨床藥劑師</string>
+    <string name="tdm_predict_n_drugs">估算 %1$d 藥血中濃度</string>
+    <string name="tdm_add_drug_to_chart">將藥物加入圖表</string>
+    <string name="tdm_add_drug_n">%1$d 個藥可以揀 (有/無 TDM 都可以)</string>
+    <string name="tdm_add">加入</string>
+    <string name="tdm_dose_mg">劑量 (mg)</string>
+    <string name="tdm_weight_kg">體重 (kg)</string>
+    <string name="tdm_freq">頻率:</string>
+    <string name="tdm_chart_title">多藥穩態濃度-時間曲線 (可以點擊/拖曳/縮放)</string>
+    <string name="tdm_hide_cd">隱藏</string>
+    <string name="tdm_show_cd">顯示</string>
+    <string name="tdm_no_window">TDM (冇治療窗)</string>
+    <string name="chart_title">濃度-時間曲線</string>
+    <string name="chart_window_label">治療窗 %1$d-%2$d</string>
+    <string name="chart_reset_view">🔄 重設畫面 (%1$s)</string>
+    <string name="chart_status_format">🔍 %1$.1fx · 拖曳 / 縮放嚟放大</string>
+    <string name="chart_status_low">⛔ 偏低</string>
+    <string name="chart_status_high">⚠️ 偏高</string>
+    <string name="chart_status_in_window">✓ 喺治療窗範圍內</string>
+    <string name="chart_status_not_comparable">· 冇得比較</string>
+    <string name="tdm_entry_title">血中濃度監測</string>
+    <string name="app_language_japanese">日本語</string>
 </resources>

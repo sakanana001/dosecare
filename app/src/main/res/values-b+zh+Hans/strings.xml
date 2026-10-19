@@ -1198,4 +1198,32 @@
     <string name="dossier_summary_format">%1$s · %2$s</string>
     <string name="dossier_no_indications">未标注适应症</string>
     <string name="dossier_unlink_action">解除关联</string>
+    <string name="tdm_title">血药浓度推测 (TDM)</string>
+    <string name="tdm_data_source_info">数据源与校准说明</string>
+    <string name="tdm_no_drugs">暂无可 TDM 监测的药物(需要 therapeuticWindow 字段)</string>
+    <string name="tdm_data_source_title">📚 数据源 &amp; 校准说明</string>
+    <string name="tdm_data_source_lines">• PK 参数: AGNP 2017 (Therapeutic Drug Monitoring in Psychiatry) + FDA DailyMed 药品标签\n• CYP 谱: Flockhart Table (Indiana University)\n• 治疗窗: AGNP 2017 共识指南\n• 体重调整: Vd = vdLPerKg × weight(假设线性)</string>
+    <string name="tdm_limitations">⚠️ 局限性</string>
+    <string name="tdm_limitations_lines">• 1 房室口服模型 — 对非线性药(苯妥英)不准确,对肾清除药(锂)仅近似\n• 群体平均参数 — 个体差异 2-3 倍(CYP 基因型 / 吸烟 / 年龄 / 肾 / 肝)\n• 多药曲线仅显示浓度叠加,不模拟 CYP 竞争/酶抑制动力学\n• v0.4 不替代医师判断;实际用药请遵医嘱或咨询临床药师</string>
+    <string name="tdm_predict_n_drugs">推测 %1$d 药血药浓度</string>
+    <string name="tdm_add_drug_to_chart">添加药到图表</string>
+    <string name="tdm_add_drug_n">%1$d 个药可选 (有/无 TDM 均可)</string>
+    <string name="tdm_add">添加</string>
+    <string name="tdm_dose_mg">剂量 (mg)</string>
+    <string name="tdm_weight_kg">体重 (kg)</string>
+    <string name="tdm_freq">频次:</string>
+    <string name="tdm_chart_title">多药稳态浓度-时间曲线 (可点击/拖动/缩放)</string>
+    <string name="tdm_hide_cd">隐藏</string>
+    <string name="tdm_show_cd">显示</string>
+    <string name="tdm_no_window">TDM (无窗)</string>
+    <string name="chart_title">浓度-时间曲线</string>
+    <string name="chart_window_label">窗 %1$d-%2$d</string>
+    <string name="chart_reset_view">🔄 重置视图 (%1$s)</string>
+    <string name="chart_status_format">🔍 %1$.1fx · 拖动 / 双指缩放</string>
+    <string name="chart_status_low">⛔ 偏低</string>
+    <string name="chart_status_high">⚠️ 偏高</string>
+    <string name="chart_status_in_window">✓ 窗内</string>
+    <string name="chart_status_not_comparable">· 不可比</string>
+    <string name="tdm_entry_title">血药浓度监测</string>
+    <string name="app_language_japanese">日本語</string>
 </resources>

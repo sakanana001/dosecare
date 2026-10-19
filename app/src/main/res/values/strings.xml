@@ -1306,4 +1306,32 @@
     <string name="dossier_summary_format">%1$s · %2$s</string>
     <string name="dossier_no_indications">No indications listed</string>
     <string name="dossier_unlink_action">Unlink from catalog</string>
+    <string name="tdm_title">Plasma Level Estimation (TDM)</string>
+    <string name="tdm_data_source_info">Data source &amp; calibration info</string>
+    <string name="tdm_no_drugs">No TDM-monitorable drugs (requires therapeuticWindow field)</string>
+    <string name="tdm_data_source_title">📚 Data Sources &amp; Calibration</string>
+    <string name="tdm_data_source_lines">• PK parameters: AGNP 2017 (Therapeutic Drug Monitoring in Psychiatry) + FDA DailyMed drug labels\n• CYP spectrum: Flockhart Table (Indiana University)\n• Therapeutic window: AGNP 2017 consensus\n• Weight adjustment: Vd = vdLPerKg × weight (assumes linear)</string>
+    <string name="tdm_limitations">⚠️ Limitations</string>
+    <string name="tdm_limitations_lines">• 1-compartment oral model — inaccurate for non-linear drugs (phenytoin), only approximate for renal-cleared drugs (lithium)\n• Population-averaged parameters — individual variation 2-3× (CYP genotype / smoking / age / renal / hepatic)\n• Multi-drug curves only show concentration overlap; do not model CYP competition / enzyme inhibition dynamics\n• v0.4 does not replace clinical judgment; consult your physician or clinical pharmacist</string>
+    <string name="tdm_predict_n_drugs">Estimate %1$d drug plasma levels</string>
+    <string name="tdm_add_drug_to_chart">Add drug to chart</string>
+    <string name="tdm_add_drug_n">%1$d drugs available (with/without TDM both ok)</string>
+    <string name="tdm_add">Add</string>
+    <string name="tdm_dose_mg">Dose (mg)</string>
+    <string name="tdm_weight_kg">Weight (kg)</string>
+    <string name="tdm_freq">Frequency:</string>
+    <string name="tdm_chart_title">Multi-drug steady-state concentration-time curve (tap/drag/pinch to interact)</string>
+    <string name="tdm_hide_cd">Hide</string>
+    <string name="tdm_show_cd">Show</string>
+    <string name="tdm_no_window">TDM (no window)</string>
+    <string name="chart_title">Concentration-Time Curve</string>
+    <string name="chart_window_label">Window %1$d-%2$d</string>
+    <string name="chart_reset_view">🔄 Reset view (%1$s)</string>
+    <string name="chart_status_format">🔍 %1$.1fx · drag / pinch to zoom</string>
+    <string name="chart_status_low">⛔ Low</string>
+    <string name="chart_status_high">⚠️ High</string>
+    <string name="chart_status_in_window">✓ In window</string>
+    <string name="chart_status_not_comparable">· N/A</string>
+    <string name="tdm_entry_title">Blood level monitoring</string>
+    <string name="app_language_japanese">日本語</string>
 </resources>

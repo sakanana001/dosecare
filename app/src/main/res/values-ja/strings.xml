@@ -145,4 +145,32 @@
     <string name="sevrule_info">情報</string>
     <string name="sevrule_low">軽度の注意</string>
     <string name="sevrule_medium">中程度の警告</string>
+    <string name="tdm_title">血中濃度推定 (TDM)</string>
+    <string name="tdm_data_source_info">データソースとキャリブレーション説明</string>
+    <string name="tdm_no_drugs">TDM モニタリング可能な薬がありません (therapeuticWindow フィールドが必要)</string>
+    <string name="tdm_data_source_title">📚 データソース &amp; キャリブレーション</string>
+    <string name="tdm_data_source_lines">• PK パラメータ: AGNP 2017 (Therapeutic Drug Monitoring in Psychiatry) + FDA DailyMed 添付文書\n• CYP スペクトル: Flockhart Table (Indiana University)\n• 治療域: AGNP 2017 コンセンサス\n• 体重調整: Vd = vdLPerKg × weight (線形と仮定)</string>
+    <string name="tdm_limitations">⚠️ 限界</string>
+    <string name="tdm_limitations_lines">• 1-コンパートメント経口モデル — 非線形薬 (フェニトイン) に不正確、腎クリアランス薬 (リチウム) は近似のみ\n• 集団平均パラメータ — 個人差 2-3 倍 (CYP 遺伝子型 / 喫煙 / 年齢 / 腎 / 肝)\n• 複数薬カーブは濃度の重ね合わせのみ;CYP 競合 / 酵素阻害動力学は模擬しません\n• v0.4 は医師の判断に代わるものではありません;実際の投薬は医師または臨床薬剤師にご相談ください</string>
+    <string name="tdm_predict_n_drugs">%1$d 薬の血中濃度を推定</string>
+    <string name="tdm_add_drug_to_chart">薬をグラフに追加</string>
+    <string name="tdm_add_drug_n">%1$d 薬選択可能 (TDM あり/なし両方可)</string>
+    <string name="tdm_add">追加</string>
+    <string name="tdm_dose_mg">投与量 (mg)</string>
+    <string name="tdm_weight_kg">体重 (kg)</string>
+    <string name="tdm_freq">頻度:</string>
+    <string name="tdm_chart_title">複数薬定常状態濃度-時間曲線 (タップ/ドラッグ/ピンチで操作)</string>
+    <string name="tdm_hide_cd">非表示</string>
+    <string name="tdm_show_cd">表示</string>
+    <string name="tdm_no_window">TDM (範囲なし)</string>
+    <string name="chart_title">濃度-時間曲線</string>
+    <string name="chart_window_label">域 %1$d-%2$d</string>
+    <string name="chart_reset_view">🔄 ビューをリセット (%1$s)</string>
+    <string name="chart_status_format">🔍 %1$.1fx · ドラッグ / ピンチでズーム</string>
+    <string name="chart_status_low">⛔ 低い</string>
+    <string name="chart_status_high">⚠️ 高い</string>
+    <string name="chart_status_in_window">✓ 範囲内</string>
+    <string name="chart_status_not_comparable">· 比較不可</string>
+    <string name="tdm_entry_title">血中濃度モニタリング</string>
+    <string name="app_language_japanese">日本語</string>
 </resources>

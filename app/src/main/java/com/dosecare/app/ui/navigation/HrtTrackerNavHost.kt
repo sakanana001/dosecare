@@ -103,6 +103,7 @@ import com.dosecare.app.ui.plan.PlanScreen
 import com.dosecare.app.ui.postLogStockWarningDestination
 import com.dosecare.app.ui.postLogStockWarningSnackbarMessage
 import com.dosecare.app.ui.settings.SettingsScreen
+import com.dosecare.app.ui.tdm.TdmScreen
 import com.dosecare.app.util.medicineDisplayName
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
@@ -180,6 +181,15 @@ sealed class Screen(val route: String, @get:StringRes val label: Int) {
     // v0.9g merge: reachable from Settings → Interactions.
     data object Interactions : Screen("interactions", R.string.interaction_title) {
         const val baseRoute = "interactions"
+    }
+
+    // v0.9h merge: therapeutic drug monitoring (plasma level estimation), ported
+    // from DoseCare's ui/TdmModule.kt. Same placement rule as Screen.Interactions:
+    // deliberately NOT in topLevelNavigationItems — it is pushed on top of the
+    // Settings tab, and reachable from Settings -> Blood level monitoring,
+    // immediately below the drug-interaction entry.
+    data object Tdm : Screen("tdm", R.string.tdm_entry_title) {
+        const val baseRoute = "tdm"
     }
 
     data object SettingsCalibration : Screen(
@@ -1085,6 +1095,11 @@ fun HrtTrackerNavHost(
                                 navController.navigate(Screen.Interactions.route) {
                                     launchSingleTop = true
                                 }
+                            },
+                            onTdmClick = {
+                                navController.navigate(Screen.Tdm.route) {
+                                    launchSingleTop = true
+                                }
                             }
                         )
                     }
@@ -1094,6 +1109,20 @@ fun HrtTrackerNavHost(
                 composable(Screen.Interactions.route) { backStackEntry ->
                     RoutedTopChromeHazeProvider(navController, backStackEntry) {
                         InteractionScreen(
+                            modifier = modifier,
+                            onSettingsClick = {
+                                navController.navigate(Screen.Settings.route) {
+                                    launchSingleTop = true
+                                }
+                            }
+                        )
+                    }
+                }
+                // v0.9h merge: plasma level estimation. Reached from Settings ->
+                // Blood level monitoring; not in the bottom navigation.
+                composable(Screen.Tdm.route) { backStackEntry ->
+                    RoutedTopChromeHazeProvider(navController, backStackEntry) {
+                        TdmScreen(
                             modifier = modifier,
                             onSettingsClick = {
                                 navController.navigate(Screen.Settings.route) {

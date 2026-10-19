@@ -143,6 +143,8 @@ fun SettingsScreen(
     onCalibrationClick: () -> Unit = {},
     // v0.9g merge: entry point to the drug-interaction screen (Screen.Interactions).
     onInteractionsClick: () -> Unit = {},
+    // v0.9h merge: entry point to the plasma-level (TDM) screen (Screen.Tdm).
+    onTdmClick: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -596,6 +598,7 @@ fun SettingsScreen(
         },
         onCalibrationClick = onCalibrationClick,
         onInteractionsClick = onInteractionsClick,
+        onTdmClick = onTdmClick,
         scrollToTopSignal = scrollToTopSignal,
         modifier = modifier
     )
@@ -991,6 +994,7 @@ internal fun SettingsScreenContent(
     onExportDiagnosticLogsClick: () -> Unit,
     onCalibrationClick: () -> Unit,
     onInteractionsClick: () -> Unit = {},
+    onTdmClick: () -> Unit = {},
     scrollToTopSignal: Int = 0,
 ) {
     val settingsState = uiState.settingsState
@@ -1137,6 +1141,25 @@ internal fun SettingsScreenContent(
                             leadingContent = {
                                 SettingsLeadingIconSlot(
                                     painter = painterResource(R.drawable.ic_data_info_alert)
+                                )
+                            },
+                            trailingContent = {
+                                SettingsChevronTrailingIcon()
+                            }
+                        )
+                    }
+
+                    // v0.9h merge: plasma level estimation (TDM). Sits directly
+                    // under the interaction checker because both read the same
+                    // catalog and the same user-selected drugs; from here the
+                    // entered dose/weight/frequency feed the PK projection.
+                    item {
+                        SettingsSegmentedListItem(
+                            title = stringResource(R.string.tdm_entry_title),
+                            onClick = onTdmClick,
+                            leadingContent = {
+                                SettingsLeadingIconSlot(
+                                    painter = painterResource(R.drawable.ic_labs)
                                 )
                             },
                             trailingContent = {
@@ -1932,7 +1955,8 @@ internal fun shouldShowAdaptiveColor(sdkInt: Int = Build.VERSION.SDK_INT): Boole
 internal fun shouldShowCjkTextOffset(appLanguageOption: AppLanguageOption): Boolean =
     appLanguageOption == AppLanguageOption.SIMPLIFIED_CHINESE ||
         appLanguageOption == AppLanguageOption.TRADITIONAL_CHINESE ||
-        appLanguageOption == AppLanguageOption.CANTONESE
+        appLanguageOption == AppLanguageOption.CANTONESE ||
+        appLanguageOption == AppLanguageOption.JAPANESE
 
 @Composable
 private fun SettingsLeadingIconSlot(
