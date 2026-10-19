@@ -10,7 +10,7 @@ class HistoryScreenFabAnimationSourceTest {
     fun selectionFab_usesMaterialFabAnimationModifier() {
         val source = File(
             projectRoot(),
-            "app/src/main/java/com/picohrt/ui/history/HistoryScreen.kt"
+            "app/src/main/java/com/dosecare/app/ui/history/HistoryScreen.kt"
         ).readText()
         val fabSlot = source.substringAfter("floatingActionButton = {")
             .substringBefore("topBar = {")
@@ -31,7 +31,7 @@ class HistoryScreenFabAnimationSourceTest {
     fun historyEntries_areIndividualLazyItems() {
         val source = File(
             projectRoot(),
-            "app/src/main/java/com/picohrt/ui/history/HistoryScreen.kt"
+            "app/src/main/java/com/dosecare/app/ui/history/HistoryScreen.kt"
         ).readText()
         val groupedEntriesSlot = source.substringAfter("groupedEntries.entries.forEachIndexed")
             .substringBefore("if (effectiveSelectedDate != null)")
@@ -56,7 +56,7 @@ class HistoryScreenFabAnimationSourceTest {
     fun historyEntryTitleSpacing_doesNotDoubleLeadingGap() {
         val source = File(
             projectRoot(),
-            "app/src/main/java/com/picohrt/ui/history/HistoryScreen.kt"
+            "app/src/main/java/com/dosecare/app/ui/history/HistoryScreen.kt"
         ).readText()
         val titleItem = source.substringAfter("key = \"history-entry-title\"")
             .substringBefore("if (visibleEntries.isEmpty())")

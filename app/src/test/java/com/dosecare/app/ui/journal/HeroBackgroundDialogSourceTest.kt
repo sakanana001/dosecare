@@ -10,7 +10,7 @@ class HeroBackgroundDialogSourceTest {
     fun dateColorSwatchIsPlainPrimaryColorWithoutIcon() {
         val source = File(
             projectRoot(),
-            "app/src/main/java/com/picohrt/ui/journal/HeroBackgroundDialog.kt",
+            "app/src/main/java/com/dosecare/app/ui/journal/HeroBackgroundDialog.kt",
         ).readText()
         val dateColorSwatch = source.substringAfter("fun DateColorSwatch(")
             .substringBefore("\n@OptIn")

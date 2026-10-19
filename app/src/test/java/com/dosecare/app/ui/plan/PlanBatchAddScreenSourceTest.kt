@@ -33,8 +33,8 @@ class PlanBatchAddScreenSourceTest {
     private fun planBatchAddScreenSourcePath(): Path {
         val userDir = Path.of(System.getProperty("user.dir"))
         return listOf(
-            userDir.resolve("src/main/java/com/picohrt/ui/plan/PlanBatchAddScreen.kt"),
-            userDir.resolve("app/src/main/java/com/picohrt/ui/plan/PlanBatchAddScreen.kt"),
+            userDir.resolve("src/main/java/com/dosecare/app/ui/plan/PlanBatchAddScreen.kt"),
+            userDir.resolve("app/src/main/java/com/dosecare/app/ui/plan/PlanBatchAddScreen.kt"),
         ).first(Files::exists)
     }
 }

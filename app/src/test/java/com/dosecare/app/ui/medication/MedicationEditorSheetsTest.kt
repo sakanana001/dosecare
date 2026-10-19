@@ -218,8 +218,8 @@ class MedicationEditorSheetsTest {
     private fun medicationDoseEditorContentSourcePath(): Path {
         val userDir = Path.of(System.getProperty("user.dir"))
         return listOf(
-            userDir.resolve("src/main/java/com/picohrt/ui/medication/MedicationDoseEditorContent.kt"),
-            userDir.resolve("app/src/main/java/com/picohrt/ui/medication/MedicationDoseEditorContent.kt"),
+            userDir.resolve("src/main/java/com/dosecare/app/ui/medication/MedicationDoseEditorContent.kt"),
+            userDir.resolve("app/src/main/java/com/dosecare/app/ui/medication/MedicationDoseEditorContent.kt"),
         ).first(Files::exists)
     }
 }

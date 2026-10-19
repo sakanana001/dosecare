@@ -175,9 +175,9 @@ class HazeChromeIntegrationTest {
     @Test
     fun top_app_bar_backdrop_content_draws_behind_top_chrome() {
         val contentContainerFile =
-            File("src/main/java/com/picohrt/ui/components/AppContentContainer.kt")
+            File("src/main/java/com/dosecare/app/ui/components/AppContentContainer.kt")
         val navigationScaffoldFile =
-            File("src/main/java/com/picohrt/ui/navigation/EdgeToEdgeNavigationSuiteScaffold.kt")
+            File("src/main/java/com/dosecare/app/ui/navigation/EdgeToEdgeNavigationSuiteScaffold.kt")
 
         assertTrue(
             "AppContentContainer should expose routed body content as the Haze source.",
@@ -238,7 +238,7 @@ class HazeChromeIntegrationTest {
     @Test
     fun bottom_navigation_bar_uses_haze_chrome_and_transparent_haze_colors() {
         val scaffoldFile =
-            File("src/main/java/com/picohrt/ui/navigation/EdgeToEdgeNavigationSuiteScaffold.kt")
+            File("src/main/java/com/dosecare/app/ui/navigation/EdgeToEdgeNavigationSuiteScaffold.kt")
         val text = scaffoldFile.readText()
         val navHostText = navHostText()
 
@@ -283,7 +283,7 @@ class HazeChromeIntegrationTest {
     @Test
     fun onboarding_bottom_sheets_receive_app_wide_haze_setting_and_source() {
         val mainActivityText =
-            File("src/main/java/com/picohrt/MainActivity.kt").readText()
+            File("src/main/java/com/dosecare/app/MainActivity.kt").readText()
 
         assertTrue(
             "Onboarding is hosted outside HrtTrackerNavHost, so the app shell must " +
@@ -307,9 +307,9 @@ class HazeChromeIntegrationTest {
         val hazeChromeText = hazeChromeText()
         val navHostText = navHostText()
         val mainActivityText =
-            File("src/main/java/com/picohrt/MainActivity.kt").readText()
+            File("src/main/java/com/dosecare/app/MainActivity.kt").readText()
         val settingsScreenText =
-            File("src/main/java/com/picohrt/ui/settings/SettingsScreen.kt").readText()
+            File("src/main/java/com/dosecare/app/ui/settings/SettingsScreen.kt").readText()
 
         assertTrue(
             "Haze needs a central composition local so every chrome/source modifier can be " +
@@ -342,10 +342,10 @@ class HazeChromeIntegrationTest {
     @Test
     fun date_pickers_receive_translucent_haze_colors() {
         val materialPickerText =
-            File("src/main/java/com/picohrt/ui/components/MaterialPickerDialogs.kt")
+            File("src/main/java/com/dosecare/app/ui/components/MaterialPickerDialogs.kt")
                 .readText()
         val planBatchAddText =
-            File("src/main/java/com/picohrt/ui/plan/PlanBatchAddScreen.kt").readText()
+            File("src/main/java/com/dosecare/app/ui/plan/PlanBatchAddScreen.kt").readText()
 
         assertTrue(
             "DatePicker and DateRangePicker draw their own container background, so picker " +
@@ -358,7 +358,7 @@ class HazeChromeIntegrationTest {
     }
 
     private fun uiDir(): File {
-        val uiDir = File("src/main/java/com/picohrt/ui")
+        val uiDir = File("src/main/java/com/dosecare/app/ui")
         require(uiDir.isDirectory) {
             "Expected UI source directory at ${uiDir.absolutePath}; unit tests must run with " +
                     "the app module as the working directory."
@@ -370,10 +370,10 @@ class HazeChromeIntegrationTest {
         .filter { it.isFile && it.extension == "kt" }
 
     private fun hazeChromeText(): String =
-        File("src/main/java/com/picohrt/ui/components/HazeChrome.kt").readText()
+        File("src/main/java/com/dosecare/app/ui/components/HazeChrome.kt").readText()
 
     private fun navHostText(): String =
-        File("src/main/java/com/picohrt/ui/navigation/HrtTrackerNavHost.kt").readText()
+        File("src/main/java/com/dosecare/app/ui/navigation/HrtTrackerNavHost.kt").readText()
 
     private companion object {
         private val HAZE_TOP_APP_BAR_CALL =

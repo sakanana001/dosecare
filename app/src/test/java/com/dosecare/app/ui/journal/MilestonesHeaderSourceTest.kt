@@ -10,7 +10,7 @@ class MilestonesHeaderSourceTest {
     fun pinnedSectionOwnsHeaderTrailingLikeStockSection() {
         val source = File(
             projectRoot(),
-            "app/src/main/java/com/picohrt/ui/journal/JournalScreens.kt",
+            "app/src/main/java/com/dosecare/app/ui/journal/JournalScreens.kt",
         ).readText()
         val pinnedSection = source.substringAfter("item(key = \"milestones-pinned\"")
             .substringBefore("item(key = \"milestones-pinned-timeline-spacer\"")
@@ -36,7 +36,7 @@ class MilestonesHeaderSourceTest {
     fun pinnedHeaderWandUsesStockSectionActionSizing() {
         val source = File(
             projectRoot(),
-            "app/src/main/java/com/picohrt/ui/journal/JournalScreens.kt",
+            "app/src/main/java/com/dosecare/app/ui/journal/JournalScreens.kt",
         ).readText()
         val pinnedSection = source.substringAfter("item(key = \"milestones-pinned\"")
             .substringBefore("item(key = \"milestones-pinned-timeline-spacer\"")

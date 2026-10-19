@@ -12,7 +12,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun widgetConfigActivity_keepsAnchorListLiveAfterSeed() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/WidgetConfigActivity.kt"
+            "app/src/main/java/com/dosecare/app/widget/WidgetConfigActivity.kt"
         )
         val produceBlock = source.substringAfter("produceState<LoadedConfigState?>")
         assertTrue(
@@ -27,7 +27,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun updateAllAnchorWidgets_pushesRemoteViewsSynchronouslyAndReconciles() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/AnchorWidget.kt"
+            "app/src/main/java/com/dosecare/app/widget/AnchorWidget.kt"
         )
         val body = source.substringAfter("suspend fun updateAllAnchorWidgets")
         assertTrue(
@@ -49,7 +49,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun anchorWidgetManager_repaintsWidgetsOnWidgetFacingSettingsChanges() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/AnchorWidgetManager.kt"
+            "app/src/main/java/com/dosecare/app/widget/AnchorWidgetManager.kt"
         )
         val settingsCollector = source.substringAfter("settingsRepository.settingsState")
         assertTrue(
@@ -69,7 +69,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun anchorWidget_collectsWidgetSettingsInsideCompositionAndBakesDisplaySnapshot() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/AnchorWidget.kt"
+            "app/src/main/java/com/dosecare/app/widget/AnchorWidget.kt"
         )
         val composition = source
             .substringAfter("override suspend fun provideGlance")
@@ -97,7 +97,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun widgetDateReceiver_guardsHomeRefreshIndependentlyOfAnchorRefreshes() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/WidgetDateReceiver.kt"
+            "app/src/main/java/com/dosecare/app/widget/WidgetDateReceiver.kt"
         )
         assertTrue(
             "The home snapshot refresh must be guarded like the anchor refreshes: an " +
@@ -113,7 +113,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun composeAnchorRemoteViews_forwardsAppWidgetIdToContent() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/AnchorWidget.kt"
+            "app/src/main/java/com/dosecare/app/widget/AnchorWidget.kt"
         )
         val body = source.substringAfter("internal suspend fun composeAnchorRemoteViews")
         assertTrue(
@@ -128,7 +128,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun widgetConfigActivity_boundsTheAnchorSeedAwait() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/WidgetConfigActivity.kt"
+            "app/src/main/java/com/dosecare/app/widget/WidgetConfigActivity.kt"
         )
         assertTrue(
             "The config window's anchor seed must use the bounded await: the unbounded " +
@@ -142,7 +142,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun widgetConfigScreen_rekeysPreviewOnLiveAnchorChanges() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/WidgetConfigScreen.kt"
+            "app/src/main/java/com/dosecare/app/widget/WidgetConfigScreen.kt"
         )
         val keys = source
             .substringAfter("produceState<WidgetConfigPreviewRender?>")
@@ -159,7 +159,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun widgetConfigActivity_retargetsOnNewIntentForADifferentWidget() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/WidgetConfigActivity.kt"
+            "app/src/main/java/com/dosecare/app/widget/WidgetConfigActivity.kt"
         )
         val onNewIntent = source.substringAfter("override fun onNewIntent")
         assertTrue(
@@ -187,7 +187,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun databaseHolder_signalsOpenOutcomeFromEveryWarmupPath() {
         val holder = source(
-            "app/src/main/java/com/picohrt/data/local/DatabaseHolder.kt"
+            "app/src/main/java/com/dosecare/app/data/local/DatabaseHolder.kt"
         )
         val openAndSignal = holder.substringAfter("fun openAndSignal")
         assertTrue(
@@ -199,7 +199,7 @@ class AnchorSurfaceRefreshSourceTest {
                 openAndSignal.contains("_openFailed.value = false"),
         )
         val preloader = source(
-            "app/src/main/java/com/picohrt/startup/StartupPreloader.kt"
+            "app/src/main/java/com/dosecare/app/startup/StartupPreloader.kt"
         )
         assertTrue(
             "The in-app cold-start open must route through the signalling open, not a " +
@@ -212,7 +212,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun awaitTrackedDates_neverBlocksTheTimedPath() {
         val source = source(
-            "app/src/main/java/com/picohrt/data/repository/JournalRepository.kt"
+            "app/src/main/java/com/dosecare/app/data/repository/JournalRepository.kt"
         )
         val body = source
             .substringAfter("suspend fun awaitTrackedDates()")
@@ -232,7 +232,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun anchorWidgetManager_guardsWidgetAndShortcutRefreshSeparately() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/AnchorWidgetManager.kt"
+            "app/src/main/java/com/dosecare/app/widget/AnchorWidgetManager.kt"
         )
         assertTrue(
             "The journal collector must guard the widget repaint and the shortcut " +
@@ -248,7 +248,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun widgetConfigActivity_confirmsAnchorPlacementOnlyAfterThePersistLands() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/WidgetConfigActivity.kt"
+            "app/src/main/java/com/dosecare/app/widget/WidgetConfigActivity.kt"
         )
         val saveBlock = source
             .substringAfter("onSaveAnchor = {")
@@ -274,7 +274,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun widgetConfigActivity_repaintsAnchorWidgetsThroughTheSynchronousPush() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/WidgetConfigActivity.kt"
+            "app/src/main/java/com/dosecare/app/widget/WidgetConfigActivity.kt"
         )
         val saveBlock = source
             .substringAfter("onSaveAnchor = {")
@@ -292,7 +292,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun updateAllHrtWidgets_routesThroughTheSynchronousPush() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/HrtWidget.kt"
+            "app/src/main/java/com/dosecare/app/widget/HrtWidget.kt"
         )
         val body = source
             .substringAfter("suspend fun updateAllHrtWidgets")
@@ -311,7 +311,7 @@ class AnchorSurfaceRefreshSourceTest {
     @Test
     fun mainActivity_parsesDeepLinksAfterProcessDeathButNeverHistoryReplays() {
         val source = source(
-            "app/src/main/java/com/picohrt/MainActivity.kt"
+            "app/src/main/java/com/dosecare/app/MainActivity.kt"
         )
         assertTrue(
             "The launch-intent parse must gate on the ViewModel-lifetime marker plus the " +

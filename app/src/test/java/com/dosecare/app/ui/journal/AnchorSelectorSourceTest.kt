@@ -8,7 +8,7 @@ import java.io.File
 class AnchorSelectorSourceTest {
     @Test
     fun anchorSelectorSheet_usesCalibrationStyleHeaderAndPadding() {
-        val source = source("app/src/main/java/com/picohrt/ui/journal/AnchorSelectorList.kt")
+        val source = source("app/src/main/java/com/dosecare/app/ui/journal/AnchorSelectorList.kt")
         val sheet = source.substringAfter("fun AnchorSelectorSheet(")
             .substringBefore("\n// Shared anchor picker content.")
         val content = source.substringAfter("fun AnchorSelectorSheetContent(")
@@ -36,10 +36,10 @@ class AnchorSelectorSourceTest {
     @Test
     fun anchorSelector_reusesMilestoneCardWithoutTimelineRail() {
         val anchorSelectorSource = source(
-            "app/src/main/java/com/picohrt/ui/journal/AnchorSelectorList.kt"
+            "app/src/main/java/com/dosecare/app/ui/journal/AnchorSelectorList.kt"
         )
         val journalComponentsSource = source(
-            "app/src/main/java/com/picohrt/ui/journal/JournalComponents.kt"
+            "app/src/main/java/com/dosecare/app/ui/journal/JournalComponents.kt"
         )
         val anchorSelectorList = anchorSelectorSource.substringAfter("fun AnchorSelectorList(")
         val timelineMilestoneRow = journalComponentsSource.substringAfter("fun TimelineMilestoneRow(")

@@ -8,7 +8,7 @@ import java.io.File
 class HeroBackgroundRenderGuardTest {
     private val source = File(
         projectRoot(),
-        "app/src/main/java/com/picohrt/ui/journal/JournalComponents.kt",
+        "app/src/main/java/com/dosecare/app/ui/journal/JournalComponents.kt",
     ).readText()
 
     @Test

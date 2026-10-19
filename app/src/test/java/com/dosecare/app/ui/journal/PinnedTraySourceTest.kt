@@ -10,7 +10,7 @@ class PinnedTraySourceTest {
     fun pinnedTray_letsReorderableColumnOwnGapsDuringDrag() {
         val source = File(
             projectRoot(),
-            "app/src/main/java/com/picohrt/ui/journal/JournalComponents.kt",
+            "app/src/main/java/com/dosecare/app/ui/journal/JournalComponents.kt",
         ).readText()
         val pinnedTrayRows = source.substringAfter("private fun PinnedTrayRows(")
             .substringBefore("\nprivate fun MutableTransitionState<Boolean>.isPinnedTrayRowPresent")
@@ -51,7 +51,7 @@ class PinnedTraySourceTest {
     fun pinnedTray_hasNoDragHintFloorAndUsesSupportMessageForEmptyState() {
         val source = File(
             projectRoot(),
-            "app/src/main/java/com/picohrt/ui/journal/JournalComponents.kt",
+            "app/src/main/java/com/dosecare/app/ui/journal/JournalComponents.kt",
         ).readText()
 
         assertFalse(
@@ -74,7 +74,7 @@ class PinnedTraySourceTest {
     fun pinnedTray_emptyMorphFadesOnlyInnerContents() {
         val source = File(
             projectRoot(),
-            "app/src/main/java/com/picohrt/ui/journal/JournalComponents.kt",
+            "app/src/main/java/com/dosecare/app/ui/journal/JournalComponents.kt",
         ).readText()
         val pinnedTray = source.substringAfter("fun PinnedTray(")
             .substringBefore("\n@Composable\nprivate fun PinnedTrayRows")
@@ -101,7 +101,7 @@ class PinnedTraySourceTest {
     fun pinnedTray_emptyMorphClipsToRoundedCardShape() {
         val source = File(
             projectRoot(),
-            "app/src/main/java/com/picohrt/ui/journal/JournalComponents.kt",
+            "app/src/main/java/com/dosecare/app/ui/journal/JournalComponents.kt",
         ).readText()
         val pinnedTray = source.substringAfter("fun PinnedTray(")
             .substringBefore("\n@Composable\nprivate fun PinnedTrayRows")

@@ -20,6 +20,7 @@ import com.dosecare.app.model.medication.MedicineStockState
 import com.dosecare.app.model.medication.RunwayProjection
 import com.dosecare.app.model.medication.testMedicationGroupMedication
 import com.dosecare.app.model.medication.testMedicine
+import com.dosecare.app.model.pharmacology.DrugCatalogService
 import com.dosecare.app.model.settings.SettingsState
 import io.mockk.Runs
 import io.mockk.coEvery
@@ -54,6 +55,7 @@ class MedicineDetailViewModelTest {
     private val medicationGroupRepository: MedicationGroupRepository = mockk()
     private val stockRepository: MedicineStockRepository = mockk()
     private val settingsRepository: SettingsRepository = mockk()
+    private val drugCatalog = DrugCatalogService(emptyList())
     private val dispatcher = StandardTestDispatcher()
 
     @Before
@@ -84,6 +86,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -113,6 +116,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -172,6 +176,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -215,6 +220,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -262,6 +268,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -294,6 +301,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -328,6 +336,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -362,6 +371,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -392,6 +402,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -430,6 +441,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -464,6 +476,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -504,6 +517,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -534,6 +548,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -575,6 +590,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -620,6 +636,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -673,6 +690,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -713,6 +731,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -783,6 +802,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -826,6 +846,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -869,6 +890,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -918,6 +940,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -954,6 +977,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -982,6 +1006,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -1052,6 +1077,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = SavedStateHandle(
                 mapOf(MedicineDetailViewModel.MEDICINE_ID_ARG to medicineUuid.toString()),
             ),
@@ -1105,6 +1131,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = savedStateHandle,
         )
         advanceUntilIdle()
@@ -1154,6 +1181,7 @@ class MedicineDetailViewModelTest {
             medicationGroupRepository = medicationGroupRepository,
             stockRepository = stockRepository,
             settingsRepository = settingsRepository,
+            drugCatalog = drugCatalog,
             savedStateHandle = savedStateHandle,
         )
         advanceUntilIdle()

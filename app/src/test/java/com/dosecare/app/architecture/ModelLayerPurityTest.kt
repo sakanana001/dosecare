@@ -16,7 +16,7 @@ import java.io.File
 class ModelLayerPurityTest {
     @Test
     fun model_layer_does_not_import_data_layer() {
-        val modelDir = File("src/main/java/com/picohrt/model")
+        val modelDir = File("src/main/java/com/dosecare/app/model")
         require(modelDir.isDirectory) {
             "Expected model source directory at ${modelDir.absolutePath}; unit tests " +
                     "must run with the app module as the working directory."

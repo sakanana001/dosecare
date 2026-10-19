@@ -17,7 +17,7 @@ class LazySectionJankGuardTest {
 
     @Test
     fun medicinesScreen_usesLazyHrtSection() {
-        val src = source("app/src/main/java/com/picohrt/ui/catalog/MedicinesScreen.kt")
+        val src = source("app/src/main/java/com/dosecare/app/ui/catalog/MedicinesScreen.kt")
         assertTrue("MedicinesScreen should flatten sections via hrtSection.", src.contains("hrtSection("))
         assertFalse(
             "MedicinesScreen should no longer pack a Composable HrtSection into a lazy item.",
@@ -27,7 +27,7 @@ class LazySectionJankGuardTest {
 
     @Test
     fun archivedGroupsScreen_usesLazyHrtSection() {
-        val src = source("app/src/main/java/com/picohrt/ui/plan/ArchivedMedicationGroupsScreen.kt")
+        val src = source("app/src/main/java/com/dosecare/app/ui/plan/ArchivedMedicationGroupsScreen.kt")
         assertTrue("ArchivedMedicationGroupsScreen should flatten via hrtSection.", src.contains("hrtSection("))
         assertFalse(
             "ArchivedMedicationGroupsScreen should no longer use a Composable HrtSection.",
@@ -39,7 +39,7 @@ class LazySectionJankGuardTest {
     fun planBatchAddScreen_groupSectionUsesLazyHrtSection() {
         // Range/preview sub-sections legitimately keep the Composable HrtSection
         // (they use animatedItem), so only assert the group list is flattened.
-        val src = source("app/src/main/java/com/picohrt/ui/plan/PlanBatchAddScreen.kt")
+        val src = source("app/src/main/java/com/dosecare/app/ui/plan/PlanBatchAddScreen.kt")
         assertTrue(
             "PlanBatchAdd group section should flatten via hrtSection.",
             src.contains("hrtSection(\n                    key = \"group-section\""),
@@ -48,7 +48,7 @@ class LazySectionJankGuardTest {
 
     @Test
     fun planScreen_regimenSectionUsesLazyHrtSection() {
-        val src = source("app/src/main/java/com/picohrt/ui/plan/PlanScreen.kt")
+        val src = source("app/src/main/java/com/dosecare/app/ui/plan/PlanScreen.kt")
         val regimenFn = src.substringAfter("fun LazyListScope.regimenSectionItems")
             .substringBefore("\nprivate fun ")
         assertTrue(

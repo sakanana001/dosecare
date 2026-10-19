@@ -9,7 +9,7 @@ class PinFolderOverflowSourceTest {
     fun pinFolderOverflowIsGatedOnShortcutSupport() {
         val source = File(
             projectRoot(),
-            "app/src/main/java/com/picohrt/ui/journal/JournalScreens.kt",
+            "app/src/main/java/com/dosecare/app/ui/journal/JournalScreens.kt",
         ).readText()
 
         // The overflow lives inside the top app bar's actions block. Scope the assertion to it

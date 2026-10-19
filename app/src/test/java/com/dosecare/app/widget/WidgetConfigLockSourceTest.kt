@@ -12,7 +12,7 @@ class WidgetConfigLockSourceTest {
     @Test
     fun widgetConfigActivity_gatesContentBehindAppLock() {
         val source = source(
-            "app/src/main/java/com/picohrt/widget/WidgetConfigActivity.kt"
+            "app/src/main/java/com/dosecare/app/widget/WidgetConfigActivity.kt"
         )
 
         assertTrue(
