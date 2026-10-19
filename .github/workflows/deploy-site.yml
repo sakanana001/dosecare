@@ -1,9 +1,9 @@
 name: Deploy DoseCare site to GitHub Pages
 
 on:
-  # Trigger on push to main, but only when site/** changes.
+  # Trigger on push to master, but only when site/** changes.
   push:
-    branches: [main]
+    branches: [master]
     paths:
       - 'site/**'
       - '.github/workflows/deploy-site.yml'
