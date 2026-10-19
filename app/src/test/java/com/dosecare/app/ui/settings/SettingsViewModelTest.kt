@@ -142,7 +142,7 @@ class SettingsViewModelTest {
         advanceUntilIdle()
 
         viewModel.setPendingPreparedBackupExport(
-            displayName = "picohrt-backup.hrtbackup",
+            displayName = "dosecare-backup.hrtbackup",
             tempFilePath = "C:\\temp\\backup.tmp",
         )
         advanceUntilIdle()
@@ -150,7 +150,7 @@ class SettingsViewModelTest {
         val pendingPreparedBackupExport = viewModel.uiState.value.pendingPreparedBackupExport
         assertNotNull(pendingPreparedBackupExport)
         checkNotNull(pendingPreparedBackupExport)
-        assertEquals("picohrt-backup.hrtbackup", pendingPreparedBackupExport.displayName)
+        assertEquals("dosecare-backup.hrtbackup", pendingPreparedBackupExport.displayName)
         assertEquals("C:\\temp\\backup.tmp", pendingPreparedBackupExport.tempFilePath)
 
         viewModel.clearPendingPreparedBackupExport()

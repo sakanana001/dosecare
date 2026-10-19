@@ -1,6 +1,6 @@
 # Adding a New App Language
 
-This guide documents the current i18n surface in PicoHRT and the steps needed to add another in-app language. It covers resource strings, app language selection, date/time formats, widgets, notifications, and known hard-coded formatting shapes that need review for every locale.
+This guide documents the current i18n surface in DoseCare and the steps needed to add another in-app language. It covers resource strings, app language selection, date/time formats, widgets, notifications, and known hard-coded formatting shapes that need review for every locale.
 
 ## Current State
 
@@ -15,10 +15,21 @@ unqualifiedResLocale = en
 - Traditional Chinese lives in `app/src/main/res/values-b+zh+Hant/strings.xml`.
 - Cantonese (Hong Kong and Macau) lives in
   `app/src/main/res/values-b+yue+Hant+HK/strings.xml`.
+- Japanese lives in `app/src/main/res/values-ja/strings.xml`.
 - `app/build.gradle.kts` enables `androidResources.generateLocaleConfig = true`, so Android's locale config is generated from resource folders.
 - App bundle language splits are disabled with `bundle.language.enableSplit = false`, so packaged resources stay available for in-app switching.
 - The app currently exposes `ENGLISH`, `SIMPLIFIED_CHINESE`,
-  `TRADITIONAL_CHINESE`, and `CANTONESE` in `AppLanguageOption`.
+  `TRADITIONAL_CHINESE`, `CANTONESE`, and `JAPANESE` in
+  `AppLanguageOption` — five languages, with English as the default
+  resource locale.
+- The Japanese translation is still being filled in. `values-ja` today
+  covers the pharmacology, plasma-level, comparison, and chart strings
+  that came in with the DoseCare merge; the base hormone-therapy UI
+  strings are not yet translated and fall back to English at runtime.
+  Untranslated keys are not an error — the resource system falls back to
+  the default `values/` folder — but the Japanese locale is not yet
+  complete, so treat it as a work in progress rather than a finished
+  language.
 - The only default string intentionally missing from `zh-Hans` is `privacy_policy_url`, marked `translatable="false"`.
 
 ## Add the Resource Folder
@@ -45,20 +56,25 @@ Keep these rules:
 
 ## Add the Language Option
 
-Update `app/src/main/java/com/mkx/hrttracker/model/settings/SettingsModels.kt`:
+Update `app/src/main/java/com/dosecare/app/model/settings/SettingsModels.kt`:
 
-This example adds French and shows how to preserve a script-specific Chinese option if that variant is introduced:
+This example shows the enum as it stands today, and shows how a new option
+such as French would slot in:
 
 ```kotlin
 enum class AppLanguageOption(val languageTag: String) {
     ENGLISH(languageTag = "en"),
     SIMPLIFIED_CHINESE(languageTag = "zh-Hans"),
     TRADITIONAL_CHINESE(languageTag = "zh-Hant"),
+    CANTONESE(languageTag = "yue-Hant-HK"),
+    JAPANESE(languageTag = "ja"),
     FRENCH(languageTag = "fr");
 
     companion object {
         fun fromLocale(locale: Locale): AppLanguageOption {
             return when {
+                locale.language == "yue" -> CANTONESE
+                locale.language == "ja" -> JAPANESE
                 locale.language == "zh" && locale.script == "Hant" -> TRADITIONAL_CHINESE
                 locale.language == "zh" -> SIMPLIFIED_CHINESE
                 locale.language == "fr" -> FRENCH
@@ -75,10 +91,17 @@ Cantonese uses the `yue` language code. The `粵語` option uses `yue-Hant-HK`
 and Hong Kong/Macau wording; `fromLocale()` maps explicit `yue` locales to it,
 while `zh-Hant` and scriptless `zh-HK`/`zh-MO` remain Traditional Chinese.
 
-Then update `app/src/main/java/com/mkx/hrttracker/ui/settings/SettingsUiText.kt`:
+Japanese uses the plain `ja` language code, so it needs no script or
+region branch: `locale.language == "ja"` is enough, and it must be
+matched *before* the Chinese branches would matter (it does not collide
+with them, but keeping the order stable makes future additions easier).
+
+Then update `app/src/main/java/com/dosecare/app/ui/settings/SettingsUiText.kt`:
 
 ```kotlin
 AppLanguageOption.TRADITIONAL_CHINESE -> R.string.app_language_traditional_chinese
+AppLanguageOption.CANTONESE -> R.string.app_language_cantonese
+AppLanguageOption.JAPANESE -> R.string.app_language_japanese
 AppLanguageOption.FRENCH -> R.string.app_language_french
 ```
 
@@ -112,9 +135,9 @@ If the new language needs different grammar/order for these shapes, replace the 
 
 ## Date and Time Formatting
 
-Most date/time formatting is centralized in `app/src/main/java/com/mkx/hrttracker/util/AppDateTimeFormatters.kt`.
+Most date/time formatting is centralized in `app/src/main/java/com/dosecare/app/util/AppDateTimeFormatters.kt`.
 
-Review and extend these helpers when adding a language whose date grammar is not covered by the current English/Chinese split:
+Review and extend these helpers when adding a language whose date grammar is not covered by the current Chinese / non-Chinese split (English, Cantonese, and Japanese all take the non-Chinese branches today):
 
 - `localizedShortTimeFormatter(locale, uses24HourFormat)`
   - 24-hour: `HH:mm`.
@@ -182,10 +205,10 @@ If a hard-coded runtime phrase is found while adding a language, move it to `str
 Useful searches:
 
 ```bash
-rg --pcre2 -n 'Text\(\s*"|text\s*=\s*"(?![a-z0-9_-]+")|title\s*=\s*"|contentDescription\s*=\s*"' app/src/main/java/com/mkx/hrttracker -g '*.kt'
+rg --pcre2 -n 'Text\(\s*"|text\s*=\s*"(?![a-z0-9_-]+")|title\s*=\s*"|contentDescription\s*=\s*"' app/src/main/java/com/dosecare/app -g '*.kt'
 rg --pcre2 -n 'android:text="(?!@string)' app/src/main/res -g '*.xml'
-rg -n 'DateTimeFormatter\.ofPattern|DateFormat|getBestDateTimePattern|Locale\.US|Locale\.ROOT|Locale\.getDefault\(\)' app/src/main/java/com/mkx/hrttracker
-rg -n 'LocalTime\.of\(|09:00|21:00|AM|PM' app/src/main/java/com/mkx/hrttracker app/src/main/res
+rg -n 'DateTimeFormatter\.ofPattern|DateFormat|getBestDateTimePattern|Locale\.US|Locale\.ROOT|Locale\.getDefault\(\)' app/src/main/java/com/dosecare/app
+rg -n 'LocalTime\.of\(|09:00|21:00|AM|PM' app/src/main/java/com/dosecare/app app/src/main/res
 ```
 
 ## Validation Checklist
@@ -199,7 +222,7 @@ xmllint --noout app/src/main/res/values/strings.xml
 xmllint --noout app/src/main/res/values-fr/strings.xml
 ```
 
-2. Check for missing string/plural names. The only expected missing key in existing `zh-Hans` is `privacy_policy_url` because it is `translatable="false"`. If a locale intentionally omits a translated value, such as a widget preview time left in English, this command will still flag it; document those exceptions. Locale-specific `translatable="false"` overrides will also surface in this raw name comparison.
+2. Check for missing string/plural names. The only expected missing key in existing `zh-Hans` is `privacy_policy_url` because it is `translatable="false"`. If a locale intentionally omits a translated value, such as a widget preview time left in English, this command will still flag it; document those exceptions. Locale-specific `translatable="false"` overrides will also surface in this raw name comparison. The `values-ja` folder is the deliberate exception: the Japanese translation is still in progress, so most base-UI keys are expected to be missing there and fall back to English.
 
 ```bash
 comm -23 \

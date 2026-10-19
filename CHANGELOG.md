@@ -22,6 +22,62 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Last night's doses stay on the medium home-screen widget through midnight instead of disappearing at the date change.
 - Logging a scheduled dose after its window has closed no longer records a duplicate entry.
 
+## [2.0.0] - 2026-10-19
+
+DoseCare and PicoHRT are now one app. This release merges the pharmacology
+features of DoseCare into the PicoHRT base (HRT tracking, journal, calendar,
+reminders, encrypted backup, home-screen widget, biometric app lock), keeps
+the DoseCare name and package id, and moves the whole project to AGPL-3.0.
+
+### Added
+
+- **202-drug pharmacology catalog** with CYP450 profile, QTc risk, therapeutic
+  window, PK parameters, adverse effects, overdose management and monitoring
+  requirements. Ships as an on-device asset — no network calls, no account.
+- **Drug interaction analysis**: CYP inhibition/induction, QTc prolongation,
+  serotonin syndrome and anticholinergic load, evaluated against the doses and
+  frequencies from *your* regimen, not synthetic values. One-tap import from
+  your medication plan.
+- **Plasma level estimation (TDM)**: one-compartment oral PK model with
+  therapeutic-window comparison, multi-drug overlay on a single chart, and a
+  plain-language explanation of what the estimate does and does not cover.
+- **Two-drug spec comparison** across eight sections (basics, PK, therapeutic
+  window, CYP role, adverse effects, dose adjustment, monitoring, overdose),
+  with a "layman mode" that highlights the differences that actually matter.
+- **Pharmacology dossier binding**: any medication in your plan can be linked
+  to a catalog entry, and the dossier is then shown on the medication detail
+  screen.
+- **Japanese** as a 5th interface language (English, Simplified Chinese,
+  Traditional Chinese, Cantonese, Japanese), selectable in Settings.
+- **A widget for the new screens** and the merged navigation, on the same
+  encrypted local store as everything else.
+
+### Changed
+
+- Package id is now `com.dosecare.app` (was `com.picohrt`); the app name is
+  DoseCare in every language.
+- Database schema is now v11 (`medicines.drugCatalogId` added).
+- The license is now **AGPL-3.0** (was GPL-3.0). AGPL-3.0 is a superset of
+  GPL-3.0, so this is a one-way upgrade; see `LICENSE` for the rationale.
+- The whole UI, including the two merged feature areas, now renders through
+  the shared Haze chrome wrappers, so the app-wide blur switch applies
+  everywhere.
+
+### Fixed
+
+- The TDM medication chip rendered "TDM TDM"; it now renders once.
+- Reboot leftovers: 47 source-inspection tests pointed at the pre-rename
+  `com/picohrt/` source path and failed; the model-layer purity check was
+  matching a package name that no longer existed and never actually fired.
+
+### Upgrade notes
+
+- The app id changed, so this is a **fresh install**; your existing PicoHRT or
+  DoseCare data does not carry over automatically. Export an encrypted backup
+  from the old install and import it in the new one.
+- Backups and diagnostic exports produced by earlier builds keep their old
+  `picohrt-` file name prefix; the format itself is unchanged.
+
 ## [1.3.3] - 2026-06-27
 
 ### Added

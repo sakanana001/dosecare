@@ -18,7 +18,7 @@ const navItems = [
 
 function isCurrent(href: string): boolean {
   if (href === siteUrl('/') || href === siteUrl('')) {
-    return currentPath === siteUrl('/') || currentPath === siteUrl('') || currentPath === '/PicoHRT/' || currentPath === '/PicoHRT';
+    return currentPath === siteUrl('/') || currentPath === siteUrl('') || currentPath === '/DoseCare/' || currentPath === '/DoseCare';
   }
   return currentPath.startsWith(href);
 }
@@ -29,7 +29,7 @@ function isCurrent(href: string): boolean {
     <nav class="site-nav" aria-label="Site">
       <a href={siteUrl('/')} class="site-nav__brand">
         <span class="site-nav__brand-mark">P</span>
-        <span>PicoHRT</span>
+        <span>DoseCare</span>
         <span class="site-nav__current">— {t.site.forkNote}</span>
       </a>
       <ul class="site-nav__links">
@@ -135,7 +135,7 @@ function isCurrent(href: string): boolean {
     themeButtons.forEach(function (b) {
       b.addEventListener('click', function () {
         var opt = b.getAttribute('data-theme-option');
-        try { localStorage.setItem('picohrt-theme', opt); } catch (e) {}
+        try { localStorage.setItem('dosecare-theme', opt); } catch (e) {}
         var theme =
           opt === 'auto'
             ? (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light')

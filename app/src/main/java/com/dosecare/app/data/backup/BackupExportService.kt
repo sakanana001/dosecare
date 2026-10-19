@@ -559,7 +559,7 @@ class BackupExportService @Inject constructor(
             zoneId: ZoneId = ZoneId.systemDefault(),
         ): String {
             val timestamp = backupFileNameTimestampFormatter().format(exportedAt.atZone(zoneId))
-            return "picohrt-backup-$timestamp.hrtbackup"
+            return "dosecare-backup-$timestamp.hrtbackup"
         }
 
         private const val BACKUP_MIME_TYPE = "application/octet-stream"

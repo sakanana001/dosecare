@@ -1,6 +1,6 @@
 # PK differences
 
-PicoHRT's pharmacokinetic math borrows the model shape and many
+DoseCare's pharmacokinetic math borrows the model shape and many
 parameter values from
 [`LaoZhong-Mihari/HRT-Recorder-PKcomponent-Test`](https://github.com/LaoZhong-Mihari/HRT-Recorder-PKcomponent-Test).
 This page lists what's the same, what's different, and why; it does
@@ -14,21 +14,21 @@ catalog (`PKSharedCatalog.json`), and Swift implementations
 (`PKparameter.swift`, `PKcore.swift`, `SimulationEngine`) targeting iOS
 and watchOS. The math, the route catalog, and the population-average
 parameters in
-[`PkCatalog`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L1203)
+[`PkCatalog`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L1203)
 trace back to that reference. Anyone wanting the math itself —
 compartment equations, parameter provenance, literature anchors —
 should read the upstream README and its `pk_research/` workspace.
 
-## What PicoHRT reuses
+## What DoseCare reuses
 
 - **Model shape.** Two parallel depots → esterase hydrolysis →
   clearance for injections; first-order Bateman absorption for oral,
   gel, and fallback patches; constant-rate input for labelled patches;
   dual-pathway (fast mucosal + slow swallowed-oral) for sublingual.
   Implemented in
-  [`ThreeCompartmentModel`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L849)
+  [`ThreeCompartmentModel`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L849)
   and consumed by
-  [`PkSimulationEngine`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L586).
+  [`PkSimulationEngine`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L586).
 - **Route catalog and compound metadata.** `PkRoute`, `PkCompound`,
   and `PkCatalog`'s `compounds` / `twoPartDepot` / `formationFraction`
   / `hydrolysisK2` / `oralKAbs` / `oralBioavailability` mirror the
@@ -43,29 +43,29 @@ should read the upstream README and its `pk_research/` workspace.
   [`Transmtf-HRT-Tracker`](https://github.com/TransmtfTeam/Transmtf-HRT-Tracker)
   (the "im-depot-v1" model) — the LaoZhong upstream has no EU model.
 
-## What PicoHRT changes
+## What DoseCare changes
 
 - **Single-hormone simulation runtime.** Upstream's catalog and
   simulator drive both estradiol and testosterone end-to-end.
-  PicoHRT keeps the testosterone constants in
-  [`PkCatalog`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L1203)
+  DoseCare keeps the testosterone constants in
+  [`PkCatalog`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L1203)
   for parity but wires only the estradiol path through
-  [`toEstradiolPkDoseEvent`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L1069),
+  [`toEstradiolPkDoseEvent`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L1069),
   `buildEstradiolEvents`, and
-  [`simulateMainEstradiolTrend`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L314);
+  [`simulateMainEstradiolTrend`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L314);
   the testosterone surface stays dormant until the planned PK engine
   swap lands.
 - **Planned-dose projection.** Upstream simulates the doses you give
-  it. PicoHRT synthesizes virtual future-dose events for
+  it. DoseCare synthesizes virtual future-dose events for
   unfulfilled scheduled slots via
-  [`buildEstradiolPkSimulationEntries`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkPlannedEntries.kt#L25)
+  [`buildEstradiolPkSimulationEntries`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkPlannedEntries.kt#L25)
   so the home chart can show a "if you take everything on schedule"
   curve to the right of the prediction marker. The `isPlanned` flag
   propagates to dose markers so the UI can distinguish logged from
   projected doses.
 - **Option-aware chart-sample placement.** Upstream's
   `SimulationEngine` is a math reference, not a chart engine, so it
-  samples on a single fixed step. PicoHRT drives a user-selectable
+  samples on a single fixed step. DoseCare drives a user-selectable
   home chart through `HomeE2ChartWindowOption`: `SEVEN_DAYS` renders a
   3-day-past / 4-day-future window on a 0.1 h dense interval, while
   `THIRTY_DAYS` renders a 16-day-past / 14-day-future window on a
@@ -79,9 +79,9 @@ should read the upstream README and its `pk_research/` workspace.
   underplot their local peaks. Both options also pin the prediction
   instant, the previous-day instant, and every logged-event instant.
   The trend
-  ([`mainChartSampleTimeH`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L490))
+  ([`mainChartSampleTimeH`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L490))
   and projection
-  ([`mainProjectionSampleTimeH`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L533))
+  ([`mainProjectionSampleTimeH`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L533))
   paths share the strategy but differ in which "exact" instants they
   pin.
 - **Option-aware chart-window rounding contract.**
@@ -109,18 +109,18 @@ should read the upstream README and its `pk_research/` workspace.
   in
   [`architecture.md#home-snapshot-and-pk-projection-cache`](architecture.md#home-snapshot-and-pk-projection-cache);
   the widget consumes `widgetPkProjection` via
-  [`WidgetSnapshotBuilder`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetSnapshotBuilder.kt)
+  [`WidgetSnapshotBuilder`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetSnapshotBuilder.kt)
   with its own expiry check on the widget render path. Upstream has
   no equivalent because it has no persistent home snapshot.
 - **Active-mg conversion on the data path.** Upstream resolves dose
-  events directly inside its simulator. PicoHRT computes the
+  events directly inside its simulator. DoseCare computes the
   per-event active-mg-as-E2 upstream of the simulator in
-  [`DoseInstructionCalculator`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/medication/DoseInstructionCalculator.kt),
+  [`DoseInstructionCalculator`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/medication/DoseInstructionCalculator.kt),
   which resolves a `Medicine`'s `MedicinePreparation` +
   `DoseInstruction` into mg-as-E2 using the calculator's own
   per-compound molecular-weight constants and persists it on the log
   row as `equivalentE2Mg`. Inside the simulator,
-  [`pkDoseAmounts`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L1106)
+  [`pkDoseAmounts`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L1106)
   prefers the snapshotted value for non-patch routes (falling back to
   `DoseInstructionCalculator.perUnitEquivalentE2Mg` for planned
   entries or legacy rows that have no snapshot) and reads the patch
@@ -133,7 +133,7 @@ should read the upstream README and its `pk_research/` workspace.
 - **Imported injection/gel preparations skip fabricated package
   geometry.** External tracker imports do not know vial concentration,
   vial volume, gel sachet weight, or gel concentration percent. Rather
-  than inventing those fields, PicoHRT stores imported injection
+  than inventing those fields, DoseCare stores imported injection
   and gel support medicines as `MedicinePreparation.ImportedInjection`
   and `MedicinePreparation.ImportedGel`. `DoseInstructionCalculator`
   reads the administered/applied mg directly for whole-unit imported
@@ -146,7 +146,7 @@ should read the upstream README and its `pk_research/` workspace.
 - **Duplicated molecular-weight constants.** Estradiol
   molecular-weight constants live in `PkCatalog.compounds` and again
   in
-  [`DoseInstructionCalculator`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/medication/DoseInstructionCalculator.kt),
+  [`DoseInstructionCalculator`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/medication/DoseInstructionCalculator.kt),
   which log creation uses to snapshot `equivalentE2Mg` and planned PK
   entries use to rederive it when no snapshot exists. Medication UI
   code also uses the calculator for raw dose amount and patch
@@ -160,7 +160,7 @@ should read the upstream README and its `pk_research/` workspace.
   the planned PK engine.
 - **Default gel application area baked in.** `DefaultGelAreaCm2 =
   750.0` is set at the dose-event factory; upstream's catalog exposes
-  area-related parameters per event. PicoHRT doesn't expose this in
+  area-related parameters per event. DoseCare doesn't expose this in
   the UI because the current gel model doesn't read `areaCm2` —
   `PkParameterResolver`'s `GEL` branch uses `core.gelK1` and
   `core.gelFMax` directly. The field is kept so a future skin-depot
@@ -169,24 +169,24 @@ should read the upstream README and its `pk_research/` workspace.
 - **Sublingual θ is fixed, not user-settable.** Upstream lets the user
   configure the sublingual θ — the fraction of a sublingual dose
   absorbed through the buccal mucosa (fast pathway) versus swallowed
-  and absorbed orally (slow pathway). PicoHRT's
-  [`PkDoseEvent`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L73)
+  and absorbed orally (slow pathway). DoseCare's
+  [`PkDoseEvent`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L73)
   carries an optional `sublingualTheta: Double?` field for parity, but
   nothing in the UI ever sets it. The
-  [`PkParameterResolver.SUBLINGUAL`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L820)
+  [`PkParameterResolver.SUBLINGUAL`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L820)
   branch always falls back to the catalog default
-  [`PkCatalog.standardSublingualTheta = 0.11`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/pk/PkSimulation.kt#L1204).
+  [`PkCatalog.standardSublingualTheta = 0.11`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/pk/PkSimulation.kt#L1204).
   Real per-person variation in mucosal-vs-swallowed fraction can be
-  substantial; PicoHRT does not currently expose it for tuning.
+  substantial; DoseCare does not currently expose it for tuning.
 
-## What PicoHRT plans to change
+## What DoseCare plans to change
 
 The PK engine swap gates three deferred refactors, all enumerated in
 [`architecture.md#known-limitations-and-planned-refactors`](architecture.md#known-limitations-and-planned-refactors):
 
 - Consolidate the fragmented PK math (constants, three-compartment
   simulation, dose-equivalence) so `PkCatalog` and
-  [`DoseInstructionCalculator`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/medication/DoseInstructionCalculator.kt)'s
+  [`DoseInstructionCalculator`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/medication/DoseInstructionCalculator.kt)'s
   overlapping molecular-weight constants collapse into one source of
   truth.
 - Untangle the projection cache from `HomeSnapshotRepository` so PK
@@ -199,7 +199,7 @@ The PK engine swap gates three deferred refactors, all enumerated in
 
 ## Cyproterone acetate (CPA)
 
-PicoHRT adds CPA as a third compound in the catalog alongside the estradiol and testosterone esters. CPA differs from the E2 esters in that **it is the active drug itself, not a pro-drug that requires enzymatic hydrolysis**, so it is the first catalog entry that is *not* parameterized through the `formationFraction` / `hydrolysisK2` / two-part-depot path. The oral route is the only one with a meaningful model today; depot, gel, and patch are zero-weighted.
+DoseCare adds CPA as a third compound in the catalog alongside the estradiol and testosterone esters. CPA differs from the E2 esters in that **it is the active drug itself, not a pro-drug that requires enzymatic hydrolysis**, so it is the first catalog entry that is *not* parameterized through the `formationFraction` / `hydrolysisK2` / two-part-depot path. The oral route is the only one with a meaningful model today; depot, gel, and patch are zero-weighted.
 
 ### Calibration anchors
 

@@ -1003,6 +1003,6 @@ class BackupExportServiceTest {
             zoneId = ZoneId.of("Asia/Tokyo"),
         )
 
-        assertEquals("picohrt-backup-2026-04-26_12-04-05.hrtbackup", fileName)
+        assertEquals("dosecare-backup-2026-04-26_12-04-05.hrtbackup", fileName)
     }
 }

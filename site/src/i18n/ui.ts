@@ -18,8 +18,8 @@ export type Dictionary = typeof en;
 
 export function getLocaleFromPath(pathname: string): Locale {
   // Strip the GitHub Pages base prefix before checking the locale segment
-  // so /PicoHRT/zh-Hans/privacy/ reads as zh-Hans.
-  const baseStripped = pathname.replace(/^\/PicoHRT\/?/, '/');
+  // so /DoseCare/zh-Hans/privacy/ reads as zh-Hans.
+  const baseStripped = pathname.replace(/^\/DoseCare\/?/, '/');
   const seg = baseStripped.split('/').filter(Boolean)[0]?.toLowerCase();
   if (seg === 'zh-hans' || seg === 'zh-cn' || seg === 'zh') {
     return 'zh-Hans';
@@ -51,7 +51,7 @@ export function localizedPath(locale: Locale, path: string): string {
 // the URL identical.
 export function stripLocale(pathname: string): string {
   // Drop the base prefix.
-  const baseStripped = pathname.replace(/^\/PicoHRT\/?/, '/');
+  const baseStripped = pathname.replace(/^\/DoseCare\/?/, '/');
   const seg = baseStripped.split('/').filter(Boolean)[0]?.toLowerCase();
   if (seg === 'zh-hans' || seg === 'zh-cn' || seg === 'zh') {
     const rest = baseStripped.split('/').filter(Boolean).slice(1).join('/');

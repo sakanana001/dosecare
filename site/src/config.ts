@@ -1,6 +1,6 @@
 // Site-wide constants. Keep in sync with astro.config.mjs `base`.
 
-export const SITE_BASE = '/PicoHRT/';
+export const SITE_BASE = '/DoseCare/';
 export const SITE_ORIGIN = 'https://sakanana001.github.io';
 
 /** Build an internal URL that respects the GitHub Pages base path. */

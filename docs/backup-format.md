@@ -1,23 +1,23 @@
 # Backup format
 
-How PicoHRT exports user data to a single encrypted file and how
+How DoseCare exports user data to a single encrypted file and how
 that file is read back. The whole subsystem lives in
-[`data/backup/`](https://github.com/sakanana001/PicoHRT/tree/main/app/src/main/java/com/mkx/hrttracker/data/backup).
+[`data/backup/`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/data/backup).
 
 ## Two version numbers
 
 - **Envelope format version** —
-  [`CURRENT_BACKUP_CONTAINER_VERSION = 3`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt).
+  [`CURRENT_BACKUP_CONTAINER_VERSION = 3`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt).
   Describes the on-disk byte layout. Bumps are rare and crypto-
   breaking — they cover changes to the framing or to the
   cryptographic primitives.
 - **Snapshot JSON version** —
-  [`CURRENT_BACKUP_SNAPSHOT_VERSION = 6`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupSnapshot.kt).
+  [`CURRENT_BACKUP_SNAPSHOT_VERSION = 6`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupSnapshot.kt).
   Describes the plaintext payload — the `BackupSnapshot` data-class
   tree serialized as JSON. Bumps are reserved for renames, removals,
   or semantic changes to existing fields. The restore path also
   enforces a floor of
-  [`MIN_SUPPORTED_BACKUP_SNAPSHOT_VERSION = 2`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupRestoreService.kt):
+  [`MIN_SUPPORTED_BACKUP_SNAPSHOT_VERSION = 2`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupRestoreService.kt):
   v1 files are rejected with no migration path, because the medicine-
   identity refactor renamed and removed denormalized fields on group
   items and log entries (see "Cross-version restore matrix" below).
@@ -30,9 +30,9 @@ stored as-is. Writers only emit version `3`.
 
 One contiguous byte sequence: a 65-byte header followed by AES-GCM
 ciphertext with its 16-byte tag appended. Built by
-[`buildArgon2Header`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt)
+[`buildArgon2Header`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt)
 and parsed by
-[`parseContainer`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt):
+[`parseContainer`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt):
 
 ```text
 offset  size  field
@@ -59,18 +59,18 @@ The full 65-byte header is fed to AES-GCM as Additional Authenticated
 Data, so tampering with any declared parameter fails the auth check at
 decrypt time. Salt and nonce lengths are read from the header rather
 than assumed, so differently-sized envelopes still parse.
-[`FIXED_HEADER_LENGTH_V3 = 37`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt)
+[`FIXED_HEADER_LENGTH_V3 = 37`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt)
 gates the minimum-bytes check; the legacy v2 header was 28 bytes.
 
 ## Encryption
 
 ### Key derivation
 
-[`BackupArgon2KeyDeriver`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt)
+[`BackupArgon2KeyDeriver`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt)
 wraps the [argon2kt][argon2kt] library and calls `Argon2Mode.ARGON2_ID`
 with the parameters read from the header and a 16-byte random salt.
 Defaults from
-[`DEFAULT_ARGON2_PARAMETERS`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt):
+[`DEFAULT_ARGON2_PARAMETERS`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt):
 time cost `3` iterations, memory cost `65 536` KiB (64 MiB),
 parallelism `1` lane, hash length `32` bytes (matches AES-256 key
 length), mode Argon2id. Storing parameters in the envelope rather than
@@ -87,7 +87,7 @@ not a defence against an in-process attacker.
 ### Symmetric encryption
 
 `AES/GCM/NoPadding` via platform JCA in
-[`encryptWithAesGcm`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt):
+[`encryptWithAesGcm`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt):
 32-byte key from Argon2; 12-byte nonce fresh per export from
 `SecureRandom`, never reused; 128-bit auth tag appended to the
 ciphertext by JCA. The full 65-byte header is the AAD, so tampering
@@ -99,13 +99,13 @@ distinguished externally.
 The plaintext fed into AES-GCM is `gzip(json)`, not the JSON. The
 header's uncompressed-length field is the pre-gzip JSON byte count;
 gunzip refuses payloads that don't match or that exceed the
-[`MAX_BACKUP_JSON_BYTES = 128 MiB`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt)
+[`MAX_BACKUP_JSON_BYTES = 128 MiB`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt)
 cap (decompression-bomb defence).
 
 ## Snapshot tree
 
 Sixteen `@JsonClass` data classes in
-[`BackupSnapshot.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupSnapshot.kt).
+[`BackupSnapshot.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupSnapshot.kt).
 The tree is the wire-format mirror of the Room schema documented in
 [`data-model.md`](data-model.md#entities); each row maps one
 snapshot class to its entity. Nested-in-line snapshots are children
@@ -122,7 +122,7 @@ flattened into the parent's JSON.
   backgrounds round-trip through backups; it too defaults to `null` so
   older backups restore cleanly.
 - `BackupAppSnapshot` — just `packageName`; exports write the stable
-  backup identity (`com.mkx.hrttracker`), and restore rejects other app
+  backup identity (`com.dosecare.app`), and restore rejects other app
   identities.
 - `BackupSettingsSnapshot` — flat DataStore values (dark mode,
   adaptive color, AMOLED pure-black, `hazeBlurEnabled`,
@@ -256,13 +256,13 @@ flattened into the parent's JSON.
   unique index is reached.
 
 Serialization is by Moshi via
-[`BackupSnapshotJsonCodec`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupSnapshotJsonCodec.kt)
+[`BackupSnapshotJsonCodec`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupSnapshotJsonCodec.kt)
 with `.serializeNulls()` enabled — `null` fields are written
 explicitly and distinguishable from missing-on-read.
 
 ## Export flow
 
-[`BackupExportService.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupExportService.kt)
+[`BackupExportService.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupExportService.kt)
 runs on `Dispatchers.IO`:
 
 1. Read every backed-up table via its repository, including journal
@@ -288,7 +288,7 @@ between them.
 
 ## Restore flow
 
-[`BackupRestoreService.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupRestoreService.kt)
+[`BackupRestoreService.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupRestoreService.kt)
 runs on `Dispatchers.IO`. Validation is layered into four passes so
 incompatible files are rejected at the cheapest detection point.
 
@@ -296,14 +296,14 @@ incompatible files are rejected at the cheapest detection point.
    bytes are read into memory up front; later passes re-read the
    buffer.
 2. **Pass 1 — envelope shape.**
-   [`validateEncryptedBackupContainer`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt)
+   [`validateEncryptedBackupContainer`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt)
    parses magic, version, KDF / cipher / compression identifiers, and
    Argon2 parameters. Failures wrap as
    `IncompatibleBackupFileException` so the UI can distinguish "not a
    backup" from "wrong password". Runs before the password dialog
    opens.
 3. **Pass 2 — decrypt + auth-tag verify.**
-   [`decrypt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt)
+   [`decrypt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt)
    derives the key from the entered password and the envelope's salt,
    runs AES-GCM with the header as AAD.
 4. **Pass 3 — decompress + JSON decode.** Gunzip refuses payloads
@@ -311,7 +311,7 @@ incompatible files are rejected at the cheapest detection point.
    the 128 MiB cap; `BackupSnapshotJsonCodec.decode` throws on
    missing required fields.
 5. **Pass 4 — semantic validation.**
-   [`toValidatedSnapshot`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupRestoreService.kt)
+   [`toValidatedSnapshot`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupRestoreService.kt)
    runs these checks:
    - version + identity: `snapshotVersion` must fall in
      `MIN_SUPPORTED_BACKUP_SNAPSHOT_VERSION..CURRENT_BACKUP_SNAPSHOT_VERSION`
@@ -319,7 +319,7 @@ incompatible files are rejected at the cheapest detection point.
      migration path because the medicine-identity refactor removed
      the denormalized identity fields older payloads relied on.
      `app.packageName` must match the stable backup identity
-     (`com.mkx.hrttracker`), not the installed package name.
+     (`com.dosecare.app`), not the installed package name.
    - parseability: enum-name resolution, UUID parsing, `DayOfWeek`
      and `ZoneId.of` round-trips
    - value sanity: positive-finite doses, including `equivalentE2Mg`
@@ -360,7 +360,7 @@ incompatible files are rejected at the cheapest detection point.
      have `value == canonicalValue`
 
    The settings sub-pass
-   [`toValidatedSettings`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupRestoreService.kt)
+   [`toValidatedSettings`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupRestoreService.kt)
    constructs each unit choice through `AllowedAnalyteUnit.of`, so an
    unsupported unit fails before the database is touched. It also
    parses `homeE2ChartWindow` as a `HomeE2ChartWindowOption`, so an
@@ -450,8 +450,8 @@ worth it.
 
 **Bumping the envelope version (crypto break).** Required when framing
 or primitives change. KDF and cipher are recorded as identifier bytes
-([`KDF_ARGON2_ID = 2`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt),
-[`CIPHER_AES_256_GCM = 1`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/backup/BackupCrypto.kt)),
+([`KDF_ARGON2_ID = 2`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt),
+[`CIPHER_AES_256_GCM = 1`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/backup/BackupCrypto.kt)),
 so additions can extend the readable set without bumping. A bump is
 reserved for changes that break parser invariants — different field
 ordering, a different fixed-header length, a different AAD contract.

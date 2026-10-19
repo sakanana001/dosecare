@@ -1,13 +1,13 @@
 # Home-screen widget
 
-How PicoHRT turns the home-screen cache into two dose app-widget
+How DoseCare turns the home-screen cache into two dose app-widget
 surfaces (`HrtWidgetMedium` and `HrtWidgetLarge`) without re-running
 medication math on the widget thread, and how those surfaces stay
 current across home-data mutations, settings changes, alarms, time/date
 events, and quick-log taps. A third surface, the journal-driven
 `HrtAnchorWidget`, follows a separate pipeline described under
 [Anchor widget](#anchor-widget). The whole subsystem lives in
-[`widget/`](../app/src/main/java/com/mkx/hrttracker/widget)
+[`widget/`](../app/src/main/java/com/dosecare/app/widget)
 (33 files). For where it sits in the layer map, see
 [architecture.md](architecture.md).
 
@@ -44,7 +44,7 @@ seat: see [Update triggers](#update-triggers) below.
 
 ### Build
 
-[`WidgetSnapshotBuilder.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetSnapshotBuilder.kt)
+[`WidgetSnapshotBuilder.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetSnapshotBuilder.kt)
 exposes one internal function, `buildWidgetSnapshotRecord`. It is pure
 in the same sense the reminder planner is: given a `HomeSnapshotRecord`,
 a `SettingsState`, and a `LocalDateTime`, it returns a
@@ -94,7 +94,7 @@ new language.
 
 ### Persist
 
-[`WidgetSnapshotStore.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetSnapshotStore.kt)
+[`WidgetSnapshotStore.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetSnapshotStore.kt)
 persists the snapshot as an encrypted DataStore file
 (`widget_snapshot.pb`). The serializer wraps a custom
 `WidgetSnapshotCrypto` that uses an AES-256-GCM key minted in the
@@ -111,7 +111,7 @@ widget then falls back to its empty-setup composable rather than
 rendering against an obsolete shape.
 
 The store is also the
-[`GlanceStateDefinition`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/HrtWidget.kt#L146)
+[`GlanceStateDefinition`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/HrtWidget.kt#L146)
 for both widgets, so Glance composables read straight from the same
 file via `currentState<WidgetSnapshotState>()`. There is no in-memory
 cache to keep coherent.
@@ -120,7 +120,7 @@ cache to keep coherent.
 
 User theming lives outside the snapshot, in its own Preferences
 DataStore (`widget_appearance`):
-[`WidgetAppearance`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetAppearance.kt)
+[`WidgetAppearance`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetAppearance.kt)
 carries `seedHue` (accent; null = dynamic palette), `saturation`,
 `balance` (light/dark depth), plus `contentScale` / `backgroundAlpha` /
 `darkMode` — all moved out of `SettingsRepository` (a one-time
@@ -129,7 +129,7 @@ legacy keys, then deletes them). The store keeps an
 `appearance_default` entry plus dormant per-`appWidgetId` overrides, so
 a future per-widget editor needs no storage migration; the v1 UI writes
 only the default.
-[`WidgetAppearanceRepository`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetAppearanceRepository.kt)
+[`WidgetAppearanceRepository`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetAppearanceRepository.kt)
 resolves `override ?: default ?: built-in` as a Flow, both render paths
 resolve it per `appWidgetId`, and receiver `onDeleted` drops the
 removed ids' overrides. Values are encoded by the versioned
@@ -139,7 +139,7 @@ only the default entry is backed up
 
 ### Render
 
-[`HrtWidget.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/HrtWidget.kt)
+[`HrtWidget.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/HrtWidget.kt)
 hosts two `GlanceAppWidget` subclasses:
 
 - `HrtWidgetMedium` — `SizeMode.Exact`, targeting a 2×2 launcher cell.
@@ -170,13 +170,13 @@ control pill, and text reproduce the scheme-derived tints exactly (a bit-exact
 anchor enforced by `WidgetThemeDerivationTest`), while the outline and the done
 indicator are tinted and offset from the surface to keep contrast across the range. Shared Glance components
 live in
-[`WidgetRows.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetRows.kt):
+[`WidgetRows.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetRows.kt):
 `WidgetShell`, `ProgressRing`, `ProgressBar`, `DoseRow`,
 `TrailingButton`, and `widgetRowHighlightIntent`.
 
 The `appwidget-provider` XML
-([`hrt_widget_medium_info.xml`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/res/xml/hrt_widget_medium_info.xml),
-[`hrt_widget_large_info.xml`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/res/xml/hrt_widget_large_info.xml))
+([`hrt_widget_medium_info.xml`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/res/xml/hrt_widget_medium_info.xml),
+[`hrt_widget_large_info.xml`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/res/xml/hrt_widget_large_info.xml))
 declares `resizeMode="horizontal|vertical"`. The large provider keeps its
 4×2 placement defaults in `minWidth` / `minHeight` and `targetCellWidth` /
 `targetCellHeight`, while `minResizeWidth` / `minResizeHeight` set the
@@ -256,9 +256,9 @@ On API 31+ each provider adds `android:configure` plus
 `xml-v31/` provider info, so the launcher's long-press menu offers a
 reconfigure affordance (the base `xml/` variant omits this, so older
 launchers have no entry). It launches
-[`WidgetConfigActivity`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetConfigActivity.kt),
+[`WidgetConfigActivity`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetConfigActivity.kt),
 a full-screen activity hosting
-[`WidgetConfigScreen`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetConfigScreen.kt).
+[`WidgetConfigScreen`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetConfigScreen.kt).
 The activity branches on a `WidgetConfigType` (`MEDIUM` / `LARGE` /
 `ANCHOR`); the dose variants show the appearance controls below, while
 the anchor variant swaps in anchor-selection and background-flag
@@ -328,7 +328,7 @@ graph TD
 ```
 
 - **Home-data changes.**
-  [`HomeWidgetManager`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/HomeWidgetManager.kt)
+  [`HomeWidgetManager`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/HomeWidgetManager.kt)
   is a Hilt `@Singleton` started from `HrtTrackerApplication`. It
   subscribes to `homeSnapshotRepository.observeHomeSnapshot()` with
   `filterNotNull()` and calls
@@ -353,7 +353,7 @@ graph TD
   when anything was migrated (the migration write would otherwise be
   the dropped initial emission).
 - **Wall-clock drift.**
-  [`WidgetDailyRefreshWorker`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetDailyRefreshWorker.kt)
+  [`WidgetDailyRefreshWorker`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetDailyRefreshWorker.kt)
   is a periodic `CoroutineWorker` enqueued every 15 minutes (plus one
   one-shot at app start). It reads the persisted snapshot, checks
   whether the snapshot's `anchorDateEpochDay` is before today's date,
@@ -365,14 +365,14 @@ graph TD
   just calls `updateAllHrtWidgets` to re-render against the existing
   snapshot.
 - **Date / time / timezone events.**
-  [`WidgetDateReceiver`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetDateReceiver.kt)
+  [`WidgetDateReceiver`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetDateReceiver.kt)
   is a manifest-declared `BroadcastReceiver` for the widget-owned
   midnight alarm, `BOOT_COMPLETED`, plus best-effort
   `ACTION_DATE_CHANGED`, `ACTION_TIME_CHANGED`, and
   `ACTION_TIMEZONE_CHANGED`. Android 8+ does not exempt
   `ACTION_DATE_CHANGED` manifest receivers from background broadcast
   limits, so `HomeWidgetManager` also arms
-  [`WidgetMidnightRefreshScheduler`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetMidnightRefreshScheduler.kt)
+  [`WidgetMidnightRefreshScheduler`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetMidnightRefreshScheduler.kt)
   for the next local midnight. A reboot clears that exact alarm, so the
   receiver re-arms it on every delivery — including `BOOT_COMPLETED` —
   and uses `goAsync()` to force a home refresh, again leaning on the
@@ -387,7 +387,7 @@ graph TD
   formatter without forcing a home rebuild.
 
 Two render paths exist in
-[`HrtWidget.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/HrtWidget.kt):
+[`HrtWidget.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/HrtWidget.kt):
 
 - **`pushHrtWidgets(context, record)`** — composes a one-shot
   `RemoteViews` per widget via `GlanceRemoteViews().compose(...)` and pushes
@@ -431,7 +431,7 @@ Two render paths exist in
 
 ## Quick-log action
 
-[`QuickLogActionCallback`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/QuickLogActionCallback.kt)
+[`QuickLogActionCallback`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/QuickLogActionCallback.kt)
 is the `ActionCallback` wired to the medium widget's action button and
 the large widget's per-row log buttons. Its parameter contract is five
 keys: `GroupUuidKey`, `ScheduleTimeUuidKey` (nullable), `ScheduledAtKey`
@@ -442,7 +442,7 @@ catalog `Medicine.uuid`), and `ArchivedGroupRowKey` (whether the tapped
 row was rendered as an archived-group row).
 
 The callback resolves the group via the
-[`WidgetEntryPoint`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetEntryPoint.kt)
+[`WidgetEntryPoint`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetEntryPoint.kt)
 Hilt accessor (the standard pattern for getting Hilt-bound singletons
 from non-`@AndroidEntryPoint` receivers and callbacks), narrows the
 medication list when `MedicationUuidKey` is set (matching against
@@ -488,7 +488,7 @@ target the wrong group. Manual records (which carry
 non-nullable key is safe.
 
 `collapseToGroupRow` in
-[`HrtWidget.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/HrtWidget.kt#L120)
+[`HrtWidget.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/HrtWidget.kt#L120)
 is the seat that produces the representative row: it picks the
 strongest status (`DONE` > `OVERDUE` > `DUE_SOON` > `UPCOMING` >
 `LOGGED_OUT_OF_WINDOW`), forwards `groupUuid` / `scheduleTimeUuid`, and
@@ -498,7 +498,7 @@ group.
 ## Highlight deep link
 
 `widgetRowHighlightIntent` in
-[`WidgetRows.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetRows.kt#L365)
+[`WidgetRows.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetRows.kt#L365)
 builds the `MainActivity` intent used when the user taps a widget row
 (as distinct from the log button). It uses a `hrttracker://` data URI
 plus `EXTRA_HIGHLIGHT_*` extras so the home screen can scroll to and
@@ -510,7 +510,7 @@ because Android coalesces `PendingIntent`s with equal `data`.
 ## Background widget surface
 
 `WidgetShell` in
-[`WidgetRows.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/WidgetRows.kt#L63)
+[`WidgetRows.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/WidgetRows.kt#L63)
 applies the user-configurable background alpha and the rounded
 container, and wraps the entire widget in `clickable(actionStartActivity<MainActivity>())`
 so the top-level tap target is the app, with row-level and
@@ -529,26 +529,26 @@ renders the `RemoteViews`.
 ## Anchor widget
 
 `HrtAnchorWidget` in
-[`AnchorWidget.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/AnchorWidget.kt)
+[`AnchorWidget.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/AnchorWidget.kt)
 is a third `GlanceAppWidget`, targeting a 2×1 launcher cell, that shows
 one journal date (an "anchor") and its running day count. Unlike the
 dose widgets it does **not** read the home snapshot: its per-instance
 Glance state is just an `anchorId`
-([`AnchorWidgetState.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/AnchorWidgetState.kt)),
+([`AnchorWidgetState.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/AnchorWidgetState.kt)),
 and the name, date, and day count are read live from the journal at
 compose time; the chrome and content scale (background, opacity, palette,
 dark mode, and scale) come from the shared `WidgetAppearance`.
 
 Because it is journal-driven, the anchor surfaces sit outside the
 six-source `WidgetSnapshotRepository` funnel and have their own manager.
-[`AnchorWidgetManager`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/AnchorWidgetManager.kt)
+[`AnchorWidgetManager`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/AnchorWidgetManager.kt)
 (`@Singleton`, `start()` called once from `HrtTrackerApplication.onCreate()`
 alongside `homeWidgetManager.start()`) observes the journal's anchor ids
 and dates and, on any add / edit / delete, re-renders every anchor
 widget and refreshes the pinned shortcuts. It is deliberately isolated
 from `HomeWidgetManager`.
 
-[`AnchorShortcutManager`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/widget/AnchorShortcutManager.kt)
+[`AnchorShortcutManager`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/widget/AnchorShortcutManager.kt)
 backs the pinned-shortcut surface: a launcher shortcut per anchor,
 keyed `SHORTCUT_ID_PREFIX + anchor.id` (`"anchor:"`), with an
 adaptive icon bitmap baking the day count. Tapping one deep-links into

@@ -1,14 +1,14 @@
 {
   "site": {
-    "title": "PicoHRT",
-    "titleTemplate": "%s — PicoHRT",
-    "description": "PicoHRT is a privacy-first HRT tracker for Android. Log doses, see your routine, keep your records private.",
-    "brandTagline": "PicoHRT",
+    "title": "DoseCare",
+    "titleTemplate": "%s — DoseCare",
+    "description": "DoseCare is a privacy-first HRT tracker for Android. Log doses, see your routine, keep your records private.",
+    "brandTagline": "DoseCare",
     "forkNote": "A fork of Featherline"
   },
   "nav": {
     "home": "Home",
-    "picohrt": "PicoHRT",
+    "dosecare": "DoseCare",
     "download": "Download",
     "privacy": "Privacy",
     "menu": "Menu",
@@ -28,12 +28,12 @@
   "home": {
     "heroTagline": "Log doses, see your routine, keep your records private.",
     "introTitle": "A privacy-first HRT tracker for Android",
-    "introBody1": "PicoHRT is a medication tracker built for people on long-term hormone therapy who want to keep their personal records private. Everything you log — doses, schedules, labs, personal notes — stays in an encrypted database on your device, under your control.",
-    "introBody2": "PicoHRT is a fork of mkx173/Featherline. We carry the original's design and pre-v0.6.0 engineering forward and add a refined 3-compartment PK engine for testosterone undecanoate, a transdermal gel depot, and a per-user override layer for the parameters you can see in your own labs.",
+    "introBody1": "DoseCare is a medication tracker built for people on long-term hormone therapy who want to keep their personal records private. Everything you log — doses, schedules, labs, personal notes — stays in an encrypted database on your device, under your control.",
+    "introBody2": "DoseCare is a fork of mkx173/Featherline. We carry the original's design and pre-v0.6.0 engineering forward and add a refined 3-compartment PK engine for testosterone undecanoate, a transdermal gel depot, and a per-user override layer for the parameters you can see in your own labs.",
     "forkTitle": "Based on Featherline",
-    "forkBody": "PicoHRT is a fork of the Featherline project. The original app, design, and pre-v0.6.0 engineering are the work of Zhaoqian Wang and the Featherline maintainers. PicoHRT continues from v0.6.0 with a rebrand, the refined PK engine, and a per-user override layer. See the upstream project for the canonical history.",
+    "forkBody": "DoseCare is a fork of the Featherline project. The original app, design, and pre-v0.6.0 engineering are the work of Zhaoqian Wang and the Featherline maintainers. DoseCare continues from v0.6.0 with a rebrand, the refined PK engine, and a per-user override layer. See the upstream project for the canonical history.",
     "modesTitle": "Hormone modes (MtF / FtM / Non-binary)",
-    "modesIntro": "PicoHRT supports both ends of the gender-affirming hormone therapy spectrum through a single HrtGoal enum. The selected goal controls three things: the default home chart, the available medications in the catalog, and the safety prompts around doses and labs.",
+    "modesIntro": "DoseCare supports both ends of the gender-affirming hormone therapy spectrum through a single HrtGoal enum. The selected goal controls three things: the default home chart, the available medications in the catalog, and the safety prompts around doses and labs.",
     "modesMtF": "MtF (transfeminine)",
     "modesFtM": "FtM (transmasculine)",
     "modesNB": "Non-binary",
@@ -73,24 +73,24 @@
     "carouselPrev": "Previous screenshot",
     "carouselNext": "Next screenshot",
     "downloadTitle": "Get the app",
-    "downloadCta": "Get PicoHRT",
-    "downloadNote": "PicoHRT is currently distributed as a signed APK on the GitHub Releases page. The app holds no internet permission, so it cannot check for updates — monitor the releases page for new versions.",
-    "disclaimer": "PicoHRT is a personal tracking tool, not a medical device. The visualizations are based on the times and amounts you've logged, calculated using publicly available models. They're meant to help you stay organized and aware of your own routine. For any health decisions or interpretations, always consult your healthcare provider.",
+    "downloadCta": "Get DoseCare",
+    "downloadNote": "DoseCare is currently distributed as a signed APK on the GitHub Releases page. The app holds no internet permission, so it cannot check for updates — monitor the releases page for new versions.",
+    "disclaimer": "DoseCare is a personal tracking tool, not a medical device. The visualizations are based on the times and amounts you've logged, calculated using publicly available models. They're meant to help you stay organized and aware of your own routine. For any health decisions or interpretations, always consult your healthcare provider.",
     "privacyLink": "Read the full privacy policy"
   },
   "download": {
-    "title": "Download PicoHRT",
-    "intro": "PicoHRT is currently distributed as a signed debug APK on the GitHub Releases page. Pick the latest release for your device's architecture.",
+    "title": "Download DoseCare",
+    "intro": "DoseCare is currently distributed as a signed debug APK on the GitHub Releases page. Pick the latest release for your device's architecture.",
     "latestTitle": "Latest release",
     "latestCta": "Open the GitHub releases page",
-    "latestNote": "Releases are tagged with the cumulative commit count. The current pre-release line is `v0.6.0-rebrand` (picohrt-all-abis-1.3.3-<hash>-<n>.apk).",
+    "latestNote": "Releases are tagged with the cumulative commit count. The current pre-release line is `v0.6.0-rebrand` (dosecare-all-abis-1.3.3-<hash>-<n>.apk).",
     "howTitle": "How to sideload",
-    "howIntro": "PicoHRT is a debug-signed APK. Your device will need to allow installation from unknown sources for the browser or file manager you use to open the file. The permission is per-app and can be revoked afterwards.",
+    "howIntro": "DoseCare is a debug-signed APK. Your device will need to allow installation from unknown sources for the browser or file manager you use to open the file. The permission is per-app and can be revoked afterwards.",
     "howSteps": [
-      "Open the GitHub releases page and download the `picohrt-all-abis-1.3.3-<hash>-<n>.apk` asset.",
+      "Open the GitHub releases page and download the `dosecare-all-abis-1.3.3-<hash>-<n>.apk` asset.",
       "When prompted, allow your browser or file manager to install unknown apps (this permission is per-app and can be revoked after install).",
       "Open the downloaded APK. Android will verify the signature, then prompt to install.",
-      "After install, the launcher icon is labelled PicoHRT and the package id is com.picohrt — it installs side-by-side with the upstream Featherline (com.mkx.hrttracker) if you still have it."
+      "After install, the launcher icon is labelled DoseCare and the package id is com.dosecare — it installs side-by-side with the upstream Featherline (com.mkx.hrttracker) if you still have it."
     ],
     "flavorsTitle": "APK flavors",
     "flavorsIntro": "Three debug flavors are produced by the build:",
@@ -107,8 +107,8 @@
   },
   "privacy": {
     "title": "Privacy policy",
-    "leadTitle": "PicoHRT privacy — at a glance",
-    "leadBody": "PicoHRT is a fork of Featherline. Until a hosted PicoHRT privacy policy exists, the upstream Featherline privacy policy at https://asterismlabs.io/featherline/privacy/ is the legal reference and is treated as the controlling document in any conflict. This page documents how those commitments are enforced in code, manifest, and resource files, so an auditor or contributor can verify each claim against source.",
+    "leadTitle": "DoseCare privacy — at a glance",
+    "leadBody": "DoseCare is a fork of Featherline. Until a hosted DoseCare privacy policy exists, the upstream Featherline privacy policy at https://asterismlabs.io/featherline/privacy/ is the legal reference and is treated as the controlling document in any conflict. This page documents how those commitments are enforced in code, manifest, and resource files, so an auditor or contributor can verify each claim against source.",
     "canonical": "Canonical Featherline privacy policy",
     "inRepoTitle": "What's stored on device",
     "inRepoBody": "User data lives in three places under the app sandbox:",
@@ -128,29 +128,29 @@
     ],
     "encryptionConsequence": "Consequence: a copy of `hrt_tracker.db` lifted off the device cannot be decrypted without the Keystore-bound wrapping key, which is bound to that specific device.",
     "networkTitle": "Network and telemetry",
-    "networkBody": "PicoHRT holds no `android.permission.INTERNET` permission. The app cannot make outbound HTTP requests. There is no analytics SDK, no crash reporter, no telemetry endpoint. The only background work is a BootCompleted receiver that re-arms pending medication reminders after a reboot — it does not transmit.",
+    "networkBody": "DoseCare holds no `android.permission.INTERNET` permission. The app cannot make outbound HTTP requests. There is no analytics SDK, no crash reporter, no telemetry endpoint. The only background work is a BootCompleted receiver that re-arms pending medication reminders after a reboot — it does not transmit.",
     "permissionsTitle": "Android permissions used",
-    "permissionsBody": "PicoHRT requests only the permissions it needs for its on-device features:",
+    "permissionsBody": "DoseCare requests only the permissions it needs for its on-device features:",
     "permissionsPoints": [
       "`POST_NOTIFICATIONS` (Android 13+) — required to post medication reminders. Revoking it disables reminders but does not delete any data.",
       "`RECEIVE_BOOT_COMPLETED` — re-arms pending reminders after a reboot. Revoking it means reminders scheduled while the device was off will not fire until the next manual app open.",
       "`SCHEDULE_EXACT_ALARM` (Android 12+) — used by AlarmManager to fire reminders at the exact dose time, not at the next minute. Revoking it downgrades reminders to inexact (typically within a few minutes of the scheduled time)."
     ],
     "backupTitle": "Backup files",
-    "backupBody": "The encrypted, compressed backup format (.hrtbackup) is documented in docs/backup-format.md. Backup files are encrypted with a user-supplied passphrase. The app does not transmit backups; you move them yourself. The default backup filename is `picohrt-backup-<timestamp>.hrtbackup`.",
+    "backupBody": "The encrypted, compressed backup format (.hrtbackup) is documented in docs/backup-format.md. Backup files are encrypted with a user-supplied passphrase. The app does not transmit backups; you move them yourself. The default backup filename is `dosecare-backup-<timestamp>.hrtbackup`.",
     "forkTitle": "Fork-specific changes",
-    "forkBody": "PicoHRT changes the following privacy-relevant defaults from upstream Featherline:",
+    "forkBody": "DoseCare changes the following privacy-relevant defaults from upstream Featherline:",
     "forkPoints": [
-      "Package id: `com.picohrt` (upstream: `com.mkx.hrttracker`). The two apps install side-by-side; their data sandboxes are separate.",
-      "Default backup filename: `picohrt-backup-` (upstream: `featherline-backup-`). No data-format change.",
-      "Diagnostics export filename: `picohrt-diagnostics-` (upstream: `featherline-diagnostics-`). Same content shape.",
-      "The in-app About screen links to the PicoHRT GitHub repository and the upstream Featherline project separately. No external link is opened without explicit user confirmation."
+      "Package id: `com.dosecare` (upstream: `com.mkx.hrttracker`). The two apps install side-by-side; their data sandboxes are separate.",
+      "Default backup filename: `dosecare-backup-` (upstream: `featherline-backup-`). No data-format change.",
+      "Diagnostics export filename: `dosecare-diagnostics-` (upstream: `featherline-diagnostics-`). Same content shape.",
+      "The in-app About screen links to the DoseCare GitHub repository and the upstream Featherline project separately. No external link is opened without explicit user confirmation."
     ],
     "contactTitle": "Contact",
-    "contactBody": "Until a hosted PicoHRT contact is published, the in-app About screen's feedback email goes to the upstream Featherline maintainer. The PicoHRT fork's GitHub Issues page is the primary contact channel for fork-specific issues: https://github.com/sakanana001/PicoHRT/issues"
+    "contactBody": "Until a hosted DoseCare contact is published, the in-app About screen's feedback email goes to the upstream Featherline maintainer. The DoseCare fork's GitHub Issues page is the primary contact channel for fork-specific issues: https://github.com/sakanana001/dosecare/issues"
   },
   "footer": {
-    "copyright": "© 2026 PicoHRT contributors",
+    "copyright": "© 2026 DoseCare contributors",
     "forkOf": "Fork of",
     "forkUpstream": "mkx173/Featherline"
   }

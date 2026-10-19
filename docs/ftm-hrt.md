@@ -2,11 +2,11 @@
 
 > 范围：FtM 化（F-PR1~F-PR5）— HRT goal 枚举、睾酮 4 种剂型、模式开关、安全提示
 > 提交区间：1ac4b78..HEAD（19 commits）
-> 适用版本：PicoHRT v0.6+
+> 适用版本：DoseCare v0.6+
 
 ## 1. 概览
 
-PicoHRT 原本只服务 MtF 端（HRT 减害工具），主屏默认雌激素曲线。FtM 化在 v0.6
+DoseCare 原本只服务 MtF 端（HRT 减害工具），主屏默认雌激素曲线。FtM 化在 v0.6
 引入 **HRT goal** 概念，让用户（MtF / FtM / Non-binary / 未选）切换 app 的行为：
 
 - **MtF** — 默认 E2 曲线，可选 CPA 抗雄
@@ -210,7 +210,7 @@ d27c469  feat(pk): add cyproterone acetate to PkCatalog
 ## 10. 文件影响范围
 
 ```
-app/src/main/java/com/mkx/hrttracker/
+app/src/main/java/com/dosecare/app/
   model/settings/SettingsModels.kt        (F-PR1: HrtGoal enum + SettingsState 字段)
   model/settings/HrtGoalSafety.kt         (F-PR4: 矩阵 helper + 数据类)
   data/repository/SettingsRepository.kt   (F-PR1: DataStore 持久化)
@@ -229,7 +229,7 @@ app/src/main/java/com/mkx/hrttracker/
 
 app/src/main/res/values/strings.xml       (F-PR1 4 + F-PR4 6 字符串)
 
-app/src/test/java/com/mkx/hrttracker/
+app/src/test/java/com/dosecare/app/
   model/settings/HrtGoalTest.kt           (F-PR1: 2 测试)
   model/settings/HrtGoalSafetyTest.kt     (F-PR4: 7 测试)
   ui/main/MainUiModelsChartHormoneTest.kt (F-PR3: 7 测试)

@@ -46,7 +46,7 @@ class AppDiagnosticsExportServiceTest {
         )
 
         val exportedText = output.toString(Charsets.UTF_8.name())
-        assertTrue(exportedText.contains("PicoHRT diagnostic logs"))
+        assertTrue(exportedText.contains("DoseCare diagnostic logs"))
         assertTrue(exportedText.contains("Package: com.dosecare.app"))
         assertTrue(exportedText.contains("Build type: ${BuildConfig.BUILD_TYPE}"))
         assertTrue(exportedText.contains("INFO/App: app-owned log"))
@@ -91,7 +91,7 @@ class AppDiagnosticsExportServiceTest {
         )
 
         assertEquals(
-            "picohrt-diagnostics-2026-05-07_12-04-05.txt",
+            "dosecare-diagnostics-2026-05-07_12-04-05.txt",
             service.buildExportFileName(
                 exportedAt = Instant.parse("2026-05-07T03:04:05Z"),
                 zoneId = ZoneId.of("Asia/Tokyo"),

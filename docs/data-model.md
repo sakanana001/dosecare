@@ -9,20 +9,20 @@ format used for manual backups, see [backup-format.md](backup-format.md).
 
 ## Database setup
 
-- [`HrtTrackerDatabase`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/HrtTrackerDatabase.kt)
-  is the Room database at schema version 9. It declares 12 entities
+- [`HrtTrackerDatabase`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/HrtTrackerDatabase.kt)
+  is the Room database at schema version 11. It declares 12 entities
   and exposes 7 DAOs. `exportSchema` is off — schemas are tracked via
   migration objects in source rather than committed schema JSON.
-- [`DatabaseHolder`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/DatabaseHolder.kt)
+- [`DatabaseHolder`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/DatabaseHolder.kt)
   builds the database via `Room.databaseBuilder`, installs a
   `SupportOpenHelperFactory` from SQLCipher's `net.zetetic` artifact,
   and registers `MIGRATION_1_2`, `MIGRATION_2_3`, `MIGRATION_3_4`,
   `MIGRATION_4_5`, `MIGRATION_5_6`, `MIGRATION_6_7`, `MIGRATION_7_8`,
-  and `MIGRATION_8_9`.
+  `MIGRATION_8_9`, `MIGRATION_9_10`, and `MIGRATION_10_11`.
   No `fallbackToDestructiveMigration`
   is wired — a missing migration crashes loudly in every build, debug
   and release, so silent data loss can't slip through.
-- [`DatabasePassphraseProvider`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/DatabasePassphraseProvider.kt)
+- [`DatabasePassphraseProvider`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/DatabasePassphraseProvider.kt)
   produces the SQLCipher passphrase. A 32-byte random passphrase is
   generated on first launch, AES/GCM-encrypted with a key stored in
   the Android Keystore (`MASTER_KEY_ALIAS = "hrt_tracker_database_master_key"`),
@@ -38,7 +38,7 @@ notable invariant.
 
 ### `MedicineEntity`
 
-Defined in [`MedicineEntities.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/MedicineEntities.kt).
+Defined in [`MedicineEntities.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/MedicineEntities.kt).
 Annotated `@Entity(tableName = "medicines")` — one row per known
 medicine in the catalog (built-in plus user-defined custom) or hidden
 external-import medicine, keyed on a UUID. This is the canonical
@@ -71,6 +71,18 @@ unique on `identityKey`, plus secondary indices on
 the dedup contract: two medicines that hash to the same canonical
 string can't both exist, so editing a custom medicine's preparation
 fields recomputes the key and may collide with an existing row.
+
+The pharmacology link is stored on this row too (added by
+`MIGRATION_10_11`): `drugCatalogId` is the id of an entry in the
+bundled 202-drug pharmacology catalog (`assets/pharmacology/catalog.json`),
+or the empty string when the medicine is not linked to the catalog. It is
+`TEXT NOT NULL DEFAULT ''`, so every row that predates the catalog reads
+back as "not linked" — exactly the state it was in before the catalog
+existed. It is deliberately **not** a foreign key: the catalog ships as a
+static asset, not as a table, so nothing in the database can point at a
+row that Room does not own. The user sets it from the medicine detail
+page's `PharmacologyDossierSection`, and the interaction engine reads it
+to resolve the user's regimen into catalog drugs.
 
 Stock tracking is per-medicine state stored on this same row (added by
 `MIGRATION_2_3`): `trackingEnabled` (opt-in flag, default `0`),
@@ -114,7 +126,7 @@ preparations.
 
 ### `UserProfileEntity`
 
-Defined in [`UserProfileEntity.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/UserProfileEntity.kt).
+Defined in [`UserProfileEntity.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/UserProfileEntity.kt).
 Annotated `@Entity(tableName = "user_profile")` — a singleton row
 keyed on `id = "default"`. Stores
 the body-weight inputs that feed PK simulation
@@ -125,7 +137,7 @@ timestamp via `updatedAtEpochMillis`.
 
 ### `MedicationGroupEntity`
 
-Defined in [`MedicationGroupEntities.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/MedicationGroupEntities.kt).
+Defined in [`MedicationGroupEntities.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/MedicationGroupEntities.kt).
 Annotated `@Entity(tableName = "medication_groups")` — one row per
 medication group, where a group is a set of medications that share
 a reminder schedule. Stores `name`,
@@ -141,7 +153,7 @@ fulfillment links.
 
 ### `MedicationGroupItemEntity`
 
-Defined in [`MedicationGroupEntities.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/MedicationGroupEntities.kt).
+Defined in [`MedicationGroupEntities.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/MedicationGroupEntities.kt).
 Annotated `@Entity(tableName = "medication_group_items")` — one row
 per medication slot in a group. Two foreign keys: to
 `medication_groups.uuid` with `ON DELETE CASCADE` (a deleted group
@@ -168,7 +180,7 @@ backups. All other persisted slots populate it.
 
 ### `MedicationGroupScheduleTimeEntity`
 
-Defined in [`MedicationGroupEntities.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/MedicationGroupEntities.kt).
+Defined in [`MedicationGroupEntities.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/MedicationGroupEntities.kt).
 Annotated `@Entity(tableName = "medication_group_schedule_times")` —
 one row per time-of-day a group's schedule fires (`hourOfDay`,
 `minuteOfHour`). FK to
@@ -178,7 +190,7 @@ apply only to future occurrences without rewriting history.
 
 ### `MedicationGroupWeeklyDayEntity`
 
-Defined in [`MedicationGroupEntities.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/MedicationGroupEntities.kt).
+Defined in [`MedicationGroupEntities.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/MedicationGroupEntities.kt).
 Annotated `@Entity(tableName = "medication_group_weekly_days")` with
 a composite primary key `(groupUuid, dayOfWeek)`; one row per
 (group, weekday) selected when
@@ -189,7 +201,7 @@ concrete occurrences.
 
 ### `MedicationLogEntryEntity`
 
-Defined in [`MedicationLogEntryEntity.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/MedicationLogEntryEntity.kt).
+Defined in [`MedicationLogEntryEntity.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/MedicationLogEntryEntity.kt).
 Annotated `@Entity(tableName = "medication_log_entries")` — one row
 per logged dose. Identity is a nullable `medicineUuid` reference
 (no Room FK constraint on this column: the log is intentionally
@@ -231,7 +243,7 @@ keep both fields null.
 
 ### `BloodTestPanelEntity`
 
-Defined in [`BloodTestEntities.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/BloodTestEntities.kt).
+Defined in [`BloodTestEntities.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/BloodTestEntities.kt).
 Annotated `@Entity(tableName = "blood_test_panels")` — one row per
 blood-test sitting. Stores
 `collectedAtInstantEpochMillis` / `collectedAtTimeZoneId` (when the
@@ -246,7 +258,7 @@ identity.
 
 ### `BloodTestResultEntity`
 
-Defined in [`BloodTestEntities.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/BloodTestEntities.kt).
+Defined in [`BloodTestEntities.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/BloodTestEntities.kt).
 Annotated `@Entity(tableName = "blood_test_results")` — one row per
 analyte result inside a panel. FK to `blood_test_panels.uuid`
 (`ON DELETE CASCADE`) and an
@@ -267,7 +279,7 @@ row moves between imported panels on reimport.
 
 ### `CustomBloodAnalyteEntity`
 
-Defined in [`BloodTestEntities.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/BloodTestEntities.kt).
+Defined in [`BloodTestEntities.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/BloodTestEntities.kt).
 Annotated `@Entity(tableName = "custom_blood_analytes")` — one row
 per user-defined analyte not
 present in the builtin `BloodTestCatalog`. Stores raw `name` /
@@ -280,7 +292,7 @@ row is the raw value (no conversion).
 
 ### `TrackedDateEntity`
 
-Defined in [`JournalEntities.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/JournalEntities.kt).
+Defined in [`JournalEntities.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/JournalEntities.kt).
 Annotated `@Entity(tableName = "tracked_dates")` — one row per journal
 anchor date the user tracks. The primary key is a UUID string. Stores
 `name`, the curated `iconKey`, wall-clock `dateIso` (ISO-8601 local
@@ -295,7 +307,7 @@ set, and on `dateIso`, which backs the date-ordered tracked-date reads.
 
 ### `NoteEntity`
 
-Defined in [`JournalEntities.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/JournalEntities.kt).
+Defined in [`JournalEntities.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/JournalEntities.kt).
 Annotated `@Entity(tableName = "notes")` — one row per daily journal
 note, keyed by UUID. Stores wall-clock `dateIso`, free-form `text`,
 and created/updated epoch millisecond timestamps. The unique index on
@@ -325,7 +337,7 @@ types:
 
 `MedicineEntity` is a flat union of nullable columns, but the
 in-memory model splits cleanly along two axes — defined in
-[`MedicineModels.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/medication/MedicineModels.kt).
+[`MedicineModels.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/medication/MedicineModels.kt).
 
 - **`MedicinePreparation`** (sealed) describes what's in the package:
   `Pill`, `Capsule`, `InjectionSingleUseVial`,
@@ -346,14 +358,14 @@ in-memory model splits cleanly along two axes — defined in
   `TabletFraction(numerator, denominator)`, `WholeUnit`,
   `VolumeMl`, `WeightGrams`, `Noop`. Compatibility against a
   preparation type is encoded in
-  [`MedicinePreparationForm.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/medication/MedicinePreparationForm.kt)
+  [`MedicinePreparationForm.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/medication/MedicinePreparationForm.kt)
   (e.g., `VolumeMl` is only valid with `INJECTION_MULTI_USE_VIAL`,
   `Noop` only with PATCH_OFF). Group slots and log entries persist
   the discriminator + value columns described in their entity
   sections; the model converts both ways.
 
 Find-or-create dedup uses
-[`MedicineIdentityKey`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/medication/MedicineIdentityKey.kt),
+[`MedicineIdentityKey`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/medication/MedicineIdentityKey.kt),
 a canonical-string fingerprint over (selection, preparation type,
 preparation fields). Catalog keys take the form
 `C|<medicationKey>|<prep-type>|field=value...`, custom keys
@@ -370,7 +382,7 @@ have the same display dose.
 
 Mass-equivalent dosing — what gets snapshotted into
 `equivalentE2Mg` on each log row — is computed by
-[`DoseInstructionCalculator`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/model/medication/DoseInstructionCalculator.kt)
+[`DoseInstructionCalculator`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/model/medication/DoseInstructionCalculator.kt)
 from the medicine's preparation plus the dose instruction. It
 replaces the per-entry estradiol math that used to live in
 `EstradiolEquivalentCalculator` (deleted). Patch release-rate doses
@@ -419,7 +431,7 @@ Patterns shared across entities:
 
 Seven DAO interfaces, each backing the entities in its namesake area.
 
-- [`MedicineDao`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/MedicineDao.kt)
+- [`MedicineDao`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/MedicineDao.kt)
   — catalog of `medicines`. Active/archived list observers,
   by-UUID and by-identity-key lookups, targeted updates
   (`updateDisplayName`, `updatePreparationFields`, `archive`,
@@ -439,14 +451,14 @@ Seven DAO interfaces, each backing the entities in its namesake area.
   out `importedFromExternalTracker` rows; `getAll()` still returns
   them for backup, and `getImportedByIdentityKey` is the importer-only
   identity lookup.
-- [`UserProfileDao`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/UserProfileDao.kt)
+- [`UserProfileDao`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/UserProfileDao.kt)
   — singleton-row read / observe / upsert for `user_profile`.
-- [`MedicationGroupDao`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/MedicationGroupDao.kt)
+- [`MedicationGroupDao`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/MedicationGroupDao.kt)
   — group plus items plus schedule times plus weekly days, observed
   via Flow as the combined `MedicationGroupWithItemsEntity` projection.
   The `upsertGroupWithItems` `@Transaction` rewrites every child
   table to match the supplied lists in one atomic step.
-- [`MedicationLogDao`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/MedicationLogDao.kt)
+- [`MedicationLogDao`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/MedicationLogDao.kt)
   — log inserts, batch reads by ID, the
   `getLatestEntryByCategoryOnOrBefore` query, schedule-time renames
   (`updateScheduledForTimeForEntries`), the
@@ -456,14 +468,14 @@ Seven DAO interfaces, each backing the entities in its namesake area.
   reads that index already-logged scheduled doses for the stock
   runway projection. `getImportedEntry(sourceApp, externalId)` is the
   reimport lookup for provenance-owned logs.
-- [`BloodTestDao`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/BloodTestDao.kt)
+- [`BloodTestDao`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/BloodTestDao.kt)
   — panels, results, and custom analytes; the
   `upsertPanelWithResults` `@Transaction`; the
   `getBuiltinTrendPoints` / `getCustomTrendPoints` projections that
   feed the chart. Import helpers read panels/results by provenance,
   enumerate all imported panels for a source, and delete empty
   imported panels left behind after a moved result.
-- [`JournalDao`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/JournalDao.kt)
+- [`JournalDao`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/JournalDao.kt)
   — tracked dates and daily notes. It exposes Flow observers for all
   tracked dates, pinned tracked dates, notes and note counts, plus the
   note for one `LocalDate`; one-shot reads for backup/export and the
@@ -472,7 +484,7 @@ Seven DAO interfaces, each backing the entities in its namesake area.
   `updateHeroBackground` changes for pin/reorder/hero operations; note
   deletes by date, by a set of dates, or by UUID; and restore
   helpers that bulk insert or delete all journal rows.
-- [`HomeDao`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/HomeDao.kt)
+- [`HomeDao`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/HomeDao.kt)
   — the composite queries feeding the home screen:
   `observeActiveGroups`, `observeScheduleEntries`,
   `observeLatestAntiandrogenEntriesOnOrBefore` (one row per
@@ -488,10 +500,11 @@ The medicine-identity refactor reset the schema: v29 → v30 was
 abandoned mid-flight and the database was collapsed to v1, with
 `DatabaseMigrations.kt` deleted entirely. The current chain starts
 fresh at v1 and bumps via `Migration` objects declared inline in
-[`HrtTrackerDatabase.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/local/HrtTrackerDatabase.kt).
+[`HrtTrackerDatabase.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/local/HrtTrackerDatabase.kt).
 The chain today is `MIGRATION_1_2` → `MIGRATION_2_3` → `MIGRATION_3_4`
 → `MIGRATION_4_5` → `MIGRATION_5_6` → `MIGRATION_6_7` →
-`MIGRATION_7_8` → `MIGRATION_8_9`.
+`MIGRATION_7_8` → `MIGRATION_8_9` → `MIGRATION_9_10` →
+`MIGRATION_10_11`.
 `MIGRATION_1_2` adds the `displayDoseUnit` column to `medicines` with a
 `MG` default. `MIGRATION_2_3` adds the stock feature: the six stock
 columns on `medicines` (see [`MedicineEntity`](#medicineentity) above),
@@ -514,7 +527,12 @@ for medication logs, imported panels, and imported results.
 `MIGRATION_7_8` adds the Journal phase-1 tables: `tracked_dates`
 with its `pinnedOrder` and `dateIso` indices, and `notes` with its
 unique `dateIso` index. `MIGRATION_8_9` adds the nullable
-`heroBackgroundKey` column to `tracked_dates`. Both are additive and do
+`heroBackgroundKey` column to `tracked_dates`. `MIGRATION_9_10` adds the
+nullable `note` column to `medication_log_entries` for the per-entry
+free-text annotation. `MIGRATION_10_11` adds `drugCatalogId` to
+`medicines`, linking a medicine to an entry in the bundled pharmacology
+catalog; the column is `TEXT NOT NULL DEFAULT ''` so pre-existing rows
+read back as "not linked". All of these are additive and do
 not rewrite existing tables. The reset
 deliberately did not register a `MIGRATION_29_*` shim, and no
 `fallbackToDestructiveMigration` is wired in any build flavor: a

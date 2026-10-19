@@ -1,4 +1,4 @@
-name: Deploy PicoHRT site to GitHub Pages
+name: Deploy DoseCare site to GitHub Pages
 
 on:
   # Trigger on push to main, but only when site/** changes.

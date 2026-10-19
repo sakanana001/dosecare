@@ -1,12 +1,12 @@
-# PicoHRT docs
+# DoseCare docs
 
 Developer documentation. For the project overview, screenshots, and
 download links, see the [repo README](../README.md).
 
-> PicoHRT is a fork of [mkx173/Featherline](https://github.com/mkx173/Featherline), maintained at [sakanana001/PicoHRT](https://github.com/sakanana001/PicoHRT).
-> See [PROJECT.md](PROJECT.md) for the full fork rationale, the
-> v0.6.0 → current PK engine evolution, and the per-user override
-> layer. Chinese mirror: [PROJECT.zh-Hans.md](PROJECT.zh-Hans.md).
+> DoseCare is maintained at [sakanana001/dosecare](https://github.com/sakanana001/dosecare) and builds on two upstream lines: the [PicoHRT](https://github.com/sakanana001/PicoHRT) fork of [mkx173/Featherline](https://github.com/mkx173/Featherline) and the original DoseCare pharmacology app.
+> See [PROJECT.md](PROJECT.md) for the full lineage, the
+> v0.6.0 → current PK engine evolution, the per-user override
+> layer, and the pharmacology merge. Chinese mirror: [PROJECT.zh-Hans.md](PROJECT.zh-Hans.md).
 
 ## Release notes
 
@@ -22,7 +22,8 @@ download links, see the [repo README](../README.md).
 - [Architecture](architecture.md) — layer map, module boundaries, DI,
   Compose navigation, known limitations.
 - [Data model](data-model.md) — Room entities, schema relationships,
-  encryption, migration policy, per-medicine stock columns.
+  encryption, migration policy, per-medicine stock columns, and the
+  `medicines.drugCatalogId` link into the pharmacology catalog.
 
 ## Domain deep-dives
 
@@ -50,7 +51,7 @@ download links, see the [repo README](../README.md).
 
 - [Privacy](privacy.md) — what is stored, where, what leaves the
   device, permissions used.
-- [Safety](safety.md) — medical disclaimer, PK model limits, when to
-  consult a clinician.
+- [Safety](safety.md) — medical disclaimer, PK model limits, the
+  interaction-rule and plasma-level caveats, when to consult a clinician.
 - [Third-party notices](third-party-notices.md) — dependency, asset, and
-  adapted-code license notices.
+  adapted-code license notices, plus the drug-catalog data sources.

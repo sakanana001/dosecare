@@ -1,10 +1,10 @@
-# Contributing to PicoHRT
+# Contributing to DoseCare
 
 Thanks for considering a contribution. Here's how to get involved.
 
-> PicoHRT is a fork of [mkx173/Featherline](https://github.com/mkx173/Featherline), maintained at [sakanana001/PicoHRT](https://github.com/sakanana001/PicoHRT).
+> DoseCare is maintained at [sakanana001/dosecare](https://github.com/sakanana001/dosecare) and builds on two upstream lines: the [PicoHRT](https://github.com/sakanana001/PicoHRT) fork of [mkx173/Featherline](https://github.com/mkx173/Featherline) (the hormone-therapy tracker base) and the original [DoseCare](https://github.com/sakanana001/dosecare) pharmacology app (the drug catalog, interaction rules, and plasma-level estimation).
 > For changes that affect code, design, or copy that originally came from
-> upstream (anything pre-`v0.6.0`), please also consider opening an issue or
+> upstream (anything pre-`v0.6.0` in the Featherline line), please also consider opening an issue or
 > PR upstream so the broader Featherline community benefits.
 
 ## Before you start
@@ -26,11 +26,11 @@ Open a GitHub issue with:
 - What you expected to happen vs. what actually happened.
 - A screenshot or recording if the bug is visual.
 
-**PicoHRT is not a medical advice tool.** If you have a concern about your own health, that is not a bug report — see [`docs/safety.md`](docs/safety.md) for the framing and consult a clinician.
+**DoseCare is not a medical advice tool.** If you have a concern about your own health, that is not a bug report — see [`docs/safety.md`](docs/safety.md) for the framing and consult a clinician. The same goes for the pharmacology screens: the interaction rules and the plasma-level estimate are reference heuristics, not clinical judgements.
 
 ## Proposing changes
 
-For non-trivial changes (new features, refactors, anything touching the reminder pipeline, PK simulation, or backup format), open an issue first. The issue should say:
+For non-trivial changes (new features, refactors, anything touching the reminder pipeline, PK simulation, the drug catalog, the rule engine, or the backup format), open an issue first. The issue should say:
 
 - What you want to change and why.
 - A rough sketch of the approach.
@@ -42,6 +42,7 @@ Additional expectations for feature work:
 
 - **Test on real hardware.** Features that depend on a physical device or companion service (Wear OS, Health Connect providers, widgets across launchers, cloud accounts) must be verified by you on real hardware before the PR. "Compiles and unit tests pass" is not sufficient, and the maintainer cannot absorb the device-testing burden for contributed features.
 - **One concern per PR, and keep it reviewable.** A PR the maintainer cannot review in one sitting is likely to stall or be closed; split large work into agreed-upon stages in the issue first.
+- **Catalog and rule changes need a source.** Anything added to the 202-drug catalog or to the interaction rules has to carry the published reference it came from, and a clinical reviewer has to sign off before a release that widens distribution beyond personal use.
 
 ## Development setup
 
@@ -76,4 +77,4 @@ New language translations are welcome. The full workflow — picking the resourc
 
 ## License
 
-PicoHRT is released under [GPL-3.0](LICENSE). By opening a pull request, you confirm that you have the right to license your changes under GPL-3.0 and that you intend to do so. No CLA, no copyright assignment.
+DoseCare is released under [AGPL-3.0](LICENSE). By opening a pull request, you confirm that you have the right to license your changes under AGPL-3.0 and that you intend to do so. No CLA, no copyright assignment.

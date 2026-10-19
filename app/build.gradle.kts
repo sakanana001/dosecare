@@ -62,7 +62,11 @@ android {
         minSdk = 26
         targetSdk = 37
         versionCode = gitCommitCount
-        versionName = "1.3.3"
+        // v2.0.0: DoseCare x PicoHRT merge. The pharmacology catalog, the
+        // CYP/QTc rule engine, drug-interaction analysis, TDM plasma-level
+        // estimation, two-drug spec comparison and the 5th language (Japanese)
+        // all land in this release.
+        versionName = "2.0.0"
 
         buildConfigField(
             "String",

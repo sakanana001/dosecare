@@ -43,6 +43,6 @@ class ModelLayerPurityTest {
     }
 
     private companion object {
-        private val FORBIDDEN_IMPORT = Regex("""^\s*import\s+com\.picohrt\.data\.""")
+        private val FORBIDDEN_IMPORT = Regex("""^\s*import\s+com\.dosecare\.app\.data\.""")
     }
 }

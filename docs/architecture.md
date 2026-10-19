@@ -1,6 +1,6 @@
 # Architecture
 
-This page is the structural overview of the PicoHRT codebase: where
+This page is the structural overview of the DoseCare codebase: where
 the layers sit, what each top-level package owns, how dependency
 injection and navigation are wired, and one representative read path
 through every layer. Use it together with [data-model.md](data-model.md)
@@ -37,13 +37,14 @@ The rules:
 
 ## Top-level packages
 
-Everything lives under `com.mkx.hrttracker`. The top-level packages
+Everything lives under `com.dosecare.app`. The top-level packages
 are organized by role:
 
-- [`model`](https://github.com/sakanana001/PicoHRT/tree/main/app/src/main/java/com/mkx/hrttracker/model) — pure-Kotlin domain.
-  Seven sub-packages, including `model/journal` for pure journal date
-  and note logic.
-- [`data`](https://github.com/sakanana001/PicoHRT/tree/main/app/src/main/java/com/mkx/hrttracker/data) — Room, DataStore, backup
+- [`model`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/model) — pure-Kotlin domain.
+  Eight sub-packages, including `model/journal` for pure journal date
+  and note logic, and `model/pharmacology` for the bundled drug
+  catalog and the interaction rule engine.
+- [`data`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/data) — Room, DataStore, backup
   codec, and external-import plumbing. Four sub-packages:
   `backup`, `importer`, `local`, and `repository`. `data/repository`
   holds 10 `*Repository` classes plus `HomeSnapshotStore`, the
@@ -51,28 +52,28 @@ are organized by role:
   `JournalEntityMappers` helpers, plus the stock-projection helpers
   (see below). `JournalRepository` owns the phase-1 journal
   tracked-date and daily-note data surface.
-- [`ui`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui) — Compose UI. Eleven feature
+- [`ui`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui) — Compose UI. Fourteen feature
   sub-packages plus `components`, `navigation`, `theme`.
-- [`di`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/di) — Hilt modules. Two files.
-- [`reminder`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/reminder) — AlarmManager pipeline,
+- [`di`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/di) — Hilt modules. Two files.
+- [`reminder`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/reminder) — AlarmManager pipeline,
   capability reconciliation, notification text and channels. 18 files;
   documented in detail in [reminders.md](reminders.md).
-- [`startup`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/startup) — Hilt-eager startup
+- [`startup`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/startup) — Hilt-eager startup
   preloader and timing instrumentation. Two files.
-- [`util`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/util) — app-wide helpers
+- [`util`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/util) — app-wide helpers
   (formatters, lock manager, time source, diagnostics, toast). Not a
   catch-all "lib"; entries earn their place by being used in two or
   more features.
-- [`widget`](https://github.com/sakanana001/PicoHRT/tree/642ffa739a76211a3e9dd422d66f329296055bf2/app/src/main/java/com/mkx/hrttracker/widget) — the home-screen Glance
+- [`widget`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/widget) — the home-screen Glance
   widget: snapshot builder, encrypted DataStore, three `GlanceAppWidget`
   surfaces (two dose widgets plus the journal-driven anchor widget and
   its pinned-shortcut manager), the periodic refresh worker, and the
   quick-log `ActionCallback`. Documented in detail in [widget.md](widget.md).
 
 Two files sit at the package root, outside any sub-package:
-[`HrtTrackerApplication.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/HrtTrackerApplication.kt)
+[`HrtTrackerApplication.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/HrtTrackerApplication.kt)
 (the Hilt `@HiltAndroidApp` entry point) and
-[`MainActivity.kt`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/MainActivity.kt)
+[`MainActivity.kt`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/MainActivity.kt)
 (the single Activity that hosts `HrtTrackerNavHost`).
 
 ## Catalog, regimen, and history
@@ -125,7 +126,7 @@ code is built around.
 
 ## Within `data/`
 
-[`data/repository`](https://github.com/sakanana001/PicoHRT/tree/main/app/src/main/java/com/mkx/hrttracker/data/repository)
+[`data/repository`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/data/repository)
 holds 10 `*Repository` classes — `BloodTestRepository`, `HomeRepository`,
 `HomeSnapshotRepository` (gates all home-data mutations and currently
 bundles the PK projection — see [Home snapshot and PK projection
@@ -158,35 +159,38 @@ and the `RunwayProjection` result type live in `model/medication`, not
 here. Only repositories are exposed across the layer boundary; DAOs and
 entities stay inside `data/`.
 
-[`data/local`](https://github.com/sakanana001/PicoHRT/tree/main/app/src/main/java/com/mkx/hrttracker/data/local)
+[`data/local`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/data/local)
 holds the Room database, the 12 `@Entity` data classes, the 7 DAOs,
 the migration objects, and the SQLCipher passphrase provider. The
-current schema is version 9 (the medicine-identity refactor reset the
+current schema is version 11 (the medicine-identity refactor reset the
 schema and dropped the legacy v1–v29 migration chain; `MIGRATION_2_3`
 and `MIGRATION_3_4` then added the stock columns on `medicines`,
 `MIGRATION_4_5` added the `doseAmountDelta` column,
 `MIGRATION_5_6` added the medication-log `(category, appliedAtEpochMillis)`
 index, `MIGRATION_6_7` added external-import provenance,
 `MIGRATION_7_8` added the `tracked_dates` and `notes` journal tables,
-and `MIGRATION_8_9` added the `heroBackgroundKey` column to
-`tracked_dates`).
+`MIGRATION_8_9` added the `heroBackgroundKey` column to
+`tracked_dates`, `MIGRATION_9_10` added the free-text `note` column to
+`medication_log_entries`, and `MIGRATION_10_11` added the
+`drugCatalogId` column to `medicines` that links a medicine to an
+entry in the bundled pharmacology catalog).
 See
 [data-model.md](data-model.md) for the per-entity breakdown.
 
-[`data/backup`](https://github.com/sakanana001/PicoHRT/tree/main/app/src/main/java/com/mkx/hrttracker/data/backup)
+[`data/backup`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/data/backup)
 holds `BackupExportService`, `BackupRestoreService`, `BackupCrypto`,
 `BackupSnapshot`, and `BackupSnapshotJsonCodec` — the v3 compressed,
 password-encrypted backup format used for manual user-driven backups.
 Detailed in [backup-format.md](backup-format.md).
 
-[`data/importer`](https://github.com/sakanana001/PicoHRT/tree/main/app/src/main/java/com/mkx/hrttracker/data/importer)
+[`data/importer`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/data/importer)
 holds the external-tracker import parser, import-domain models, and
 service that maps compatible imported histories into the app's local
 medicine, log, and blood-test repositories.
 
 ## Within `model/`
 
-- [`model/medication`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/model/medication) — group, schedule, slot, and log
+- [`model/medication`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/model/medication) — group, schedule, slot, and log
   domain types; the medication catalog; occurrence generation; slot
   fulfillment math; dose formatting; signature/equivalence helpers.
   Also home to the catalog identity types: `Medicine` (consumed by
@@ -206,52 +210,62 @@ medicine, log, and blood-test repositories.
   `MedicineStockState` (HEALTHY / USER_LOW / IMMINENT / OUT / UNTRACKED
   / NO_RUNWAY), and `MedicineStockProjection` (the derived UI payload —
   rate, total units, runway, state) in `MedicineStockModels.kt`.
-- [`model/journal`](https://github.com/sakanana001/PicoHRT/tree/main/app/src/main/java/com/mkx/hrttracker/model/journal) — pure journal domain
+- [`model/journal`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/model/journal) — pure journal domain
   models and functions: `TrackedDate`, `Note`, curated `AnchorIcon`
   storage keys, whole-day counts, next-milestone derivation, and pin
   ordering helpers.
-- [`model/bloodtest`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/model/bloodtest) — analyte catalog
+- [`model/bloodtest`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/model/bloodtest) — analyte catalog
   (`BloodTestCatalog`), unit-conversion factor table, and the
   `AllowedAnalyteUnit` validation pattern. Detailed in
   [blood-tests.md](blood-tests.md).
-- [`model/pk`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/model/pk) — pharmacokinetic constants
+- [`model/pk`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/model/pk) — pharmacokinetic constants
   (`PkCatalog`), the three-compartment simulation, planned-entry
   generation, and the `HomeE2ChartWindowOption` sampling contract for
   the home chart. Detailed in [pk-differences.md](pk-differences.md).
-- [`model/personalization`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/model/personalization) — `UserProfile`, the
+- [`model/personalization`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/model/personalization) — `UserProfile`, the
   user-tunable inputs feeding PK simulation (currently body weight and
   weight-unit preference).
-- [`model/settings`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/model/settings) — settings value types
+- [`model/settings`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/model/settings) — settings value types
   consumed by `SettingsRepository`.
+- [`model/pharmacology`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/model/pharmacology) — the
+  pharmacology domain that arrived with the DoseCare merge. `DrugCatalog`
+  and `DrugCatalogService` hold the in-memory snapshot of the 202-entry
+  catalog loaded from `assets/pharmacology/catalog.json`; `DrugCatalogLoader`
+  parses it; `PkModel` / `PkEngine` hold the one-compartment oral model
+  used by the plasma-level estimator; `RuleEngine` holds the interaction
+  rules; `CypProfile`, `Interactions`, `PharmaLabels`, `PatientProfile`,
+  and `IndicationGroup` hold the supporting domain types. The package is
+  pure Kotlin like the rest of `model/`, so the rules stay unit-testable
+  without Android.
 
 ## Within `ui/`
 
 Feature sub-packages, one screen tree each:
 
-- [`ui/main`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/main) — the home tab:
+- [`ui/main`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/main) — the home tab:
   E2 hero card, 7-day/30-day PK trend chart,
   today/last-night/upcoming sections, antiandrogen status cards, and
   the collapsible low-stock section (`MainLowStockSection`) that lists
   medicines in a warning state.
-- [`ui/plan`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/plan) — the plan tab: medication-group
+- [`ui/plan`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/plan) — the plan tab: medication-group
   list, the group editor, the batch-add flow (with an opt-in
   stock-deduction preview that projects before/after stock per
   medicine), the archived-groups
   screen. Hosts a top-bar icon that opens the catalog manager
   (`ui/catalog`).
-- [`ui/history`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/history) — the log-entries history
+- [`ui/history`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/history) — the log-entries history
   screen.
-- [`ui/journal`](https://github.com/sakanana001/PicoHRT/tree/main/app/src/main/java/com/mkx/hrttracker/ui/journal) — the journal tab: tracked-date
+- [`ui/journal`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/journal) — the journal tab: tracked-date
   timeline, add-date sheet, milestones screen, all-notes list, and
   hero-background picker.
-- [`ui/calibration`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/calibration) — blood-test panel list, panel
+- [`ui/calibration`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/calibration) — blood-test panel list, panel
   editor, per-unit settings.
-- [`ui/settings`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/settings) — the settings tab.
-- [`ui/security`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/security) — the app-lock screen and
+- [`ui/settings`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/settings) — the settings tab.
+- [`ui/security`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/security) — the app-lock screen and
   authentication prompt.
-- [`ui/onboarding`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/onboarding) — the first-run onboarding flow,
+- [`ui/onboarding`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/onboarding) — the first-run onboarding flow,
   including the optional stock-tracking opt-in step.
-- [`ui/catalog`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/catalog) — the medicine manager: list of
+- [`ui/catalog`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/catalog) — the medicine manager: list of
   catalog `Medicine` rows, the create-medicine bottom sheet, the
   medicine detail/edit screen, the two dose sheets that turn a medicine
   into a slot result or a manual log (`CreateMedicineThenDoseSheet` for a
@@ -265,7 +279,7 @@ Feature sub-packages, one screen tree each:
   enable tracking on untracked medicines; `StockNudgeGate` holds the
   enable flag and the dismiss-threshold policy (three explicit
   X-dismissals auto-disable it, unless the user has voluntarily opted in).
-- [`ui/medication`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/medication) — the medication-editor
+- [`ui/medication`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/medication) — the medication-editor
   building blocks shared across the plan and log surfaces: shared field
   primitives (`MedicationEditorFields`), a pure dose-draft reducer
   (`MedicationDoseDraft`) that the slot and log view-models round-trip
@@ -273,15 +287,31 @@ Feature sub-packages, one screen tree each:
   sheet entry points — `MedicationGroupSlotEditorSheet` (edits a regimen
   slot) and `MedicationLogEntryEditorSheet` (edits/displays a history
   entry). Consumes `Medicine` identity from `ui/catalog`; does not own it.
-- [`ui/log`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/log) — the medication-log-entry sheet
+- [`ui/log`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/log) — the medication-log-entry sheet
   (`MedicationLogEntryScreen`): edit an existing entry, or quick-log a
   scheduled dose from a group. Medicine identity is locked and only the
   applied date/time is editable — direct manual logs are created from the
   catalog dose sheets above, not here.
+- [`ui/interaction`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/interaction) — the drug-interaction
+  screen that arrived with the DoseCare merge: `InteractionScreen`,
+  `InteractionViewModel`, the shared `SearchableDrugPicker` (live filter
+  over the 202-entry catalog by Chinese name, English name, brand name,
+  or pinyin initials), and the label helpers for the interaction rows.
+  Reached from Settings → Interactions, not from the bottom navigation.
+- [`ui/tdm`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/tdm) — the plasma-level
+  (TDM) screen: `TdmScreen`, `TdmViewModel`, and
+  `InteractiveConcentrationChart` for the multi-drug concentration
+  overlay. Reached from Settings → Blood level monitoring, not from the
+  bottom navigation.
+- [`ui/compare`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/compare) — the two-drug
+  spec comparison: `CompareScreen`, `CompareViewModel`, and
+  `SpecComparison`, which builds the eight comparison sections and the
+  plain-language layer. Reached from Settings → Two-drug spec
+  comparison, not from the bottom navigation.
 
 Shared sub-packages:
 
-- [`ui/components`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/components) — Compose primitives reused across
+- [`ui/components`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/components) — Compose primitives reused across
   features: buttons, dropdowns, dialogs, segmented list items, the
   medication card (with its embedded `MedicationStockSubcard`), the
   `StockStatusIndicator` state badge, the medical-disclaimer banner,
@@ -291,10 +321,10 @@ Shared sub-packages:
   tab-retap animation, and the `HazeChrome` helpers that draw the
   translucent blur behind app bars, bottom sheets, and dialogs
   (Android 12+, off below that or via the "Background blur" setting).
-- [`ui/navigation`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/navigation) — the `HrtTrackerNavHost`, the
+- [`ui/navigation`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/navigation) — the `HrtTrackerNavHost`, the
   `Screen` sealed class, and the navigation-transition specs. See
   the section below.
-- [`ui/theme`](https://github.com/sakanana001/PicoHRT/tree/8e46ab59d3328a389c20e588bd1e62174dcb8b19/app/src/main/java/com/mkx/hrttracker/ui/theme) — Material 3 color scheme, typography,
+- [`ui/theme`](https://github.com/sakanana001/dosecare/tree/main/app/src/main/java/com/dosecare/app/ui/theme) — Material 3 color scheme, typography,
   shapes. On API 31+ with adaptive color on, the app and widget read the
   system Material You palette directly (`systemColorSchemes`, matching
   AndroidX); otherwise MaterialKolor expands the baked `DefaultSeedColor`.
@@ -303,15 +333,15 @@ Shared sub-packages:
 
 ## Dependency injection
 
-Hilt is the DI framework. The application has two top-level modules,
-both installed in `SingletonComponent`:
+Hilt is the DI framework. The application has three top-level modules,
+all installed in `SingletonComponent`:
 
-- [`AppCoroutineModule`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/di/AppCoroutineModule.kt)
+- [`AppCoroutineModule`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/di/AppCoroutineModule.kt)
   — provides `@DefaultDispatcher CoroutineDispatcher`
   (`Dispatchers.Default`) and `@AppScope CoroutineScope` (a
   `SupervisorJob` on the default dispatcher). The two qualifiers
   (`@DefaultDispatcher`, `@AppScope`) are declared in the same file.
-- [`AppTimeModule`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/di/AppTimeModule.kt)
+- [`AppTimeModule`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/di/AppTimeModule.kt)
   — provides a `java.time.Clock` (system UTC) and an `AppTimeSource`
   that wraps the clock to support tickable test seams and atomic
   `(minute, zone)` observation. `HrtTrackerApplication` refreshes it on
@@ -319,6 +349,11 @@ both installed in `SingletonComponent`:
   synchronously for `TIME_SET` / `TIMEZONE_CHANGED` broadcasts so foreground
   Home UI and timezone notices update without a lifecycle round trip (the
   per-minute ticker is paused while no UI is subscribed).
+- [`PharmacologyModule`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/di/PharmacologyModule.kt)
+  — binds the pharmacology singletons that came in with the DoseCare
+  merge: the `DrugCatalogService` (loaded once from
+  `assets/pharmacology/catalog.json`) and the `RuleEngine` that
+  evaluates a regimen against it.
 
 Consumer pattern: `@AndroidEntryPoint` on `MainActivity` and the
 reminder broadcast receivers; `@HiltViewModel` on ViewModels. The
@@ -332,19 +367,22 @@ stores are `@Singleton` and constructor-injected.
 ## Compose navigation
 
 Navigation is single-Activity, single-NavHost. The entry point is
-[`HrtTrackerNavHost`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/ui/navigation/HrtTrackerNavHost.kt),
+[`HrtTrackerNavHost`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/ui/navigation/HrtTrackerNavHost.kt),
 which routes between Compose destinations declared via a `Screen`
-sealed class. At time of writing the app exposes 15 `Screen`
+sealed class. At time of writing the app exposes 18 `Screen`
 destinations, grouped by feature area: `Main`, `Plan` (plus
 `PlanBatchAdd`, `PlanArchivedGroups`), `Journal` (plus
 `JournalMilestones`, `JournalAllNotes`), `History`, `Settings` (plus
 `SettingsCalibration`, `SettingsCalibrationUnits`,
-`SettingsCalibrationEntry`), `EditMedicationGroup`, and the catalog
+`SettingsCalibrationEntry`), `EditMedicationGroup`, the catalog
 pair `Medicines` and `MedicineDetail` (the medicine manager opens
 its "Create medicine" form as a bottom sheet rather than its own
-destination). The host wraps
+destination), and the three pharmacology destinations `Interactions`,
+`Tdm`, and `Comparison` (the latter three are pushed on top of the
+Settings tab rather than taking a bottom-navigation slot). The host
+wraps
 the `NavHost` in
-[`EdgeToEdgeNavigationSuiteScaffold`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/ui/navigation/EdgeToEdgeNavigationSuiteScaffold.kt),
+[`EdgeToEdgeNavigationSuiteScaffold`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/ui/navigation/EdgeToEdgeNavigationSuiteScaffold.kt),
 a `NavigationSuiteScaffold` variant that adapts its navigation
 component to the current window width class and paints content
 full-height behind the bottom bar; screens pad their scrollable region
@@ -358,14 +396,14 @@ actions and tracked back to their top-level parent via the
 `topLevelParent` nav-argument.
 
 Routed-screen body content is capped at 640dp by
-[`AppContentContainer`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/ui/components/AppContentContainer.kt),
+[`AppContentContainer`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/ui/components/AppContentContainer.kt),
 applied inside each screen's own `Scaffold` body. The top app bar
 stays full-width — only the scrollable content centers within the cap.
 This avoids scroll-elevation color seams at the top-bar edges while
 keeping cards and charts at a comfortable reading width on tablets.
 
 Navigation races are closed by a shared lock rather than per-screen
-fixes. [`NavigationLock`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/ui/components/NavigationLock.kt)
+fixes. [`NavigationLock`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/ui/components/NavigationLock.kt)
 counts reasons the top-level chrome must ignore taps — an open modal
 window or an in-flight mutation — and the NavHost also swallows system
 back while it is held; editor exits fire from retained ViewModel flags
@@ -378,7 +416,7 @@ cleared via `onDismissRequest` (per-route signal provided by the
 NavHost) so it cannot reappear on the next visit.
 
 Transition motion is centralized in
-[`NavigationTransitions`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/ui/navigation/NavigationTransitions.kt).
+[`NavigationTransitions`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/ui/navigation/NavigationTransitions.kt).
 The four `NavHost` transition slots
 (`enterTransition`, `exitTransition`, `popEnterTransition`,
 `popExitTransition`) are wired once at the
@@ -424,6 +462,29 @@ Write paths run inverse: screen action → ViewModel → repository
 mutation gated through `HomeSnapshotRepository.runHomeDataMutation`
 → DAO write → Room Flow re-emits → screen re-composes.
 
+The pharmacology screens have a shorter, fully offline read path, named
+in full for the same reason:
+
+- `HrtTrackerNavHost` routes to `InteractionScreen`, `TdmScreen`, or
+  `CompareScreen` on the `Screen.Interactions`, `Screen.Tdm`, and
+  `Screen.Comparison` destinations, each pushed on top of the Settings
+  tab rather than taking a bottom-navigation slot.
+- `InteractionViewModel`, `TdmViewModel`, and `CompareViewModel` are
+  `@HiltViewModel`s that inject the two pharmacology singletons from
+  `PharmacologyModule`: the `DrugCatalogService` and the `RuleEngine`.
+- `DrugCatalogService` is an in-memory snapshot parsed once at startup
+  from `assets/pharmacology/catalog.json` by `DrugCatalogLoader`. No
+  disk or network read happens on a screen.
+- For the interaction screen, `InteractionAnalysisRepository` reads the
+  user's own regimen from Room and resolves each linked medicine's
+  preparation strength and group schedule into a `UserDrugForRule`, so
+  the engine scales its exposure folds to the doses the user actually
+  takes. `medicines.drugCatalogId` is the link; an empty string means
+  the medicine is not linked to the catalog.
+- `RuleEngine.evaluate` then runs the rules over the resolved drugs and
+  the `PatientProfile`, and returns a list sorted by descending
+  severity.
+
 ## Home snapshot and PK projection cache
 
 This subsection exists because the home-screen read path is the most
@@ -436,7 +497,7 @@ wires together.
 The home screen has two cached layers, both observed by
 `MainViewModel` through `HomeRepository`:
 
-- [`HomeSnapshotRepository`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/repository/HomeSnapshotRepository.kt)
+- [`HomeSnapshotRepository`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/repository/HomeSnapshotRepository.kt)
   owns the plan-and-fulfillment cache for the home screen.
   Every home-related mutation (a dose log, a schedule edit, a profile
   update) routes through `runHomeDataMutation`, which holds a mutex,
@@ -444,7 +505,7 @@ The home screen has two cached layers, both observed by
   runs the mutation, and then asynchronously refreshes the snapshot.
   Journal hero-anchor changes invalidate and refresh the same snapshot
   from `JournalRepository`.
-- [`HomeSnapshotStore`](https://github.com/sakanana001/PicoHRT/blob/main/app/src/main/java/com/mkx/hrttracker/data/repository/HomeSnapshotStore.kt)
+- [`HomeSnapshotStore`](https://github.com/sakanana001/dosecare/blob/main/app/src/main/java/com/dosecare/app/data/repository/HomeSnapshotStore.kt)
   persists the snapshot as an encrypted DataStore file
   (`home_snapshot.pb`) so the home screen paints from cache on cold
   start before live Room observation catches up. The persisted record
