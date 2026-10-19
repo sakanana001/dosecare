@@ -1,6 +1,8 @@
 package com.dosecare.app.ui.interaction
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.dosecare.app.data.repository.InteractionAnalysisRepository
 import com.dosecare.app.model.pharmacology.Drug
 import com.dosecare.app.model.pharmacology.DrugCatalogService
 import com.dosecare.app.model.pharmacology.Interaction
@@ -11,6 +13,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -30,6 +33,7 @@ import javax.inject.Inject
 class InteractionViewModel @Inject constructor(
     private val catalog: DrugCatalogService,
     private val ruleEngine: RuleEngine,
+    private val analysisRepository: InteractionAnalysisRepository,
 ) : ViewModel() {
 
     private val _selectedIds = MutableStateFlow<List<String>>(emptyList())
@@ -72,17 +76,80 @@ class InteractionViewModel @Inject constructor(
         _results.value = emptyList()
     }
 
-    fun evaluate() {
-        // RuleEngine.evaluate() resolves every id via catalog.getById(), which
-        // throws NoSuchElementException on an unknown id. Ids are only ever
-        // populated from the catalog itself, but mapNotNull keeps a stale
-        // selection from turning into a crash.
-        val userDrugs = _selectedIds.value.mapNotNull { id ->
-            val drug = catalog.tryGetById(id) ?: return@mapNotNull null
-            UserDrugForRule(drug.id, defaultDose(drug), 2.0)
+    /**
+     * How many catalog-linked medicines the user's regimen currently holds.
+     *
+     * Drives whether the "use my regimen" shortcut is worth showing: with nothing
+     * linked there is nothing to import, and offering the button would dead-end.
+     */
+    var regimenDrugCount: Int = 0
+        private set
+
+    /**
+     * Replace the selection with everything the user's regimen links to the catalog.
+     *
+     * This is the shortcut that makes the screen worth having: without it the user
+     * re-picks their own medications from a 202-entry catalog on every visit. The
+     * selection stays editable afterwards — adding or removing from the picker still
+     * works, because "what am I evaluating" and "what am I taking" are not the same
+     * question.
+     */
+    fun selectMyRegimen() {
+        viewModelScope.launch {
+            val ids = analysisRepository.currentUserDrugs().map { it.drugCatalogId }
+            _selectedIds.value = ids
+            invalidateResult()
         }
-        _results.value = ruleEngine.evaluate(userDrugs, PatientProfile())
-        _hasEvaluated.value = true
+    }
+
+    init {
+        // Count once so the shortcut can be hidden on an empty regimen. Recomputing on
+        // every composition would hit the database per frame.
+        viewModelScope.launch {
+            regimenDrugCount = analysisRepository.currentUserDrugs().size
+        }
+    }
+
+    /**
+     * Evaluate the current selection.
+     *
+     * Doses and frequencies come from the user's own regimen wherever the app can
+     * supply them — the bridge maps each linked medicine's preparation strength and
+     * its group's schedule into `UserDrugForRule`. That matters because the engine
+     * scales AUC folds by dose and frequency, so a synthetic dose would grade a
+     * real interaction at the wrong severity.
+     *
+     * Ids the user picked by hand that no regimen slot backs fall back to the
+     * catalog's midpoint dose at twice daily, which is what DoseCare did for
+     * every drug. Ids the catalog does not know are dropped rather than thrown on:
+     * `RuleEngine.evaluate` resolves via `getById`, which throws on a miss.
+     */
+    fun evaluate() {
+        val selected = _selectedIds.value
+        if (selected.isEmpty()) {
+            _results.value = emptyList()
+            _hasEvaluated.value = true
+            return
+        }
+        // Reading the regimen hits the database, so the whole evaluation runs on
+        // viewModelScope rather than on the caller.
+        viewModelScope.launch {
+            val fromRegimen = analysisRepository.currentUserDrugs().associateBy { it.drugCatalogId }
+            val userDrugs = selected.mapNotNull { id ->
+                val drug = catalog.tryGetById(id) ?: return@mapNotNull null
+                fromRegimen[id] ?: UserDrugForRule(
+                    drug.id,
+                    defaultDose(drug),
+                    DEFAULT_FREQUENCY_PER_DAY,
+                )
+            }
+            _results.value = ruleEngine.evaluate(userDrugs, PatientProfile())
+            _hasEvaluated.value = true
+        }
+    }
+
+    private companion object {
+        const val DEFAULT_FREQUENCY_PER_DAY = 2.0
     }
 }
 

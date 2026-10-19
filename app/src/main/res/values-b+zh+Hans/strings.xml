@@ -1188,4 +1188,7 @@
 
     <!-- v0.9g merge: 设置页入口标题(静态,不带计数占位符) -->
     <string name="interaction_entry_title">药物相互作用</string>
+    <!-- v0.9g merge: 用药方案快捷导入 -->
+    <string name="interaction_use_my_regimen">用我的用药方案</string>
+    <string name="interaction_use_my_regimen_n">用我的用药方案（%1$d）</string>
 </resources>

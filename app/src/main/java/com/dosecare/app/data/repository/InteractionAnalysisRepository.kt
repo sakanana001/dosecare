@@ -62,11 +62,20 @@ class InteractionAnalysisRepository @Inject constructor(
         }.map { (groups, _) -> groups.orEmpty().toRuleInputs() }
 
     /**
+     * The regimen as the rule engine sees it, read once.
+     *
+     * For callers that only need it at evaluation time (the interaction screen's
+     * button), where subscribing to [observeUserDrugs] would be pointless bookkeeping.
+     */
+    suspend fun currentUserDrugs(): List<UserDrugForRule> =
+        medicationGroupRepository.getGroups().toRuleInputs()
+
+    /**
      * Full evaluation. Returns an empty list when nothing in the regimen is linked to the
      * catalog — an empty result is the correct answer there, not an error.
      */
     suspend fun evaluate(): List<com.dosecare.app.model.pharmacology.Interaction> {
-        val inputs = medicationGroupRepository.getGroups().toRuleInputs()
+        val inputs = currentUserDrugs()
         if (inputs.isEmpty()) return emptyList()
         return ruleEngine.evaluate(inputs, patientProfile())
     }
@@ -75,11 +84,8 @@ class InteractionAnalysisRepository @Inject constructor(
      * Convenience for one-shot callers (widget, notification tap). Same shape as [evaluate],
      * and suspending for the same reason: reading the regimen goes through the database.
      */
-    suspend fun evaluateNow(): List<com.dosecare.app.model.pharmacology.Interaction> {
-        val inputs = medicationGroupRepository.getGroups().toRuleInputs()
-        if (inputs.isEmpty()) return emptyList()
-        return ruleEngine.evaluate(inputs, patientProfile())
-    }
+    suspend fun evaluateNow(): List<com.dosecare.app.model.pharmacology.Interaction> =
+        evaluate()
 
     /**
      * Patient profile for the engine.

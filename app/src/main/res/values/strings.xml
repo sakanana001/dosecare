@@ -1296,4 +1296,7 @@
 
     <!-- v0.9g merge: 设置页入口标题(静态,不带计数占位符) -->
     <string name="interaction_entry_title">Drug interactions</string>
+    <!-- v0.9g merge: 用药方案快捷导入 -->
+    <string name="interaction_use_my_regimen">Use my regimen</string>
+    <string name="interaction_use_my_regimen_n">Use my regimen (%1$d)</string>
 </resources>

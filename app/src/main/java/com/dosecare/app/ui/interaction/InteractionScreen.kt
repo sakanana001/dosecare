@@ -31,6 +31,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.InputChip
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -186,6 +187,26 @@ fun InteractionScreen(
                             }
                         }
                     }
+                }
+            }
+
+            // v0.9g merge: import the user's own regimen in one tap. Without this the
+            // selection starts empty every visit and the user re-picks their own
+            // medications out of a 202-entry catalog by hand. Hidden when nothing in
+            // the regimen is linked to the catalog — it would dead-end.
+            if (viewModel.regimenDrugCount > 0) {
+                OutlinedButton(
+                    onClick = { viewModel.selectMyRegimen() },
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Icon(Icons.Default.CheckCircle, contentDescription = null)
+                    Spacer(Modifier.width(8.dp))
+                    Text(
+                        stringResource(
+                            R.string.interaction_use_my_regimen_n,
+                            viewModel.regimenDrugCount,
+                        )
+                    )
                 }
             }
 
