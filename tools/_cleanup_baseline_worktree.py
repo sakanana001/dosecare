@@ -1,29 +1,28 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-删掉验证用的临时基线副本 baseline-picohrt (剩下的深层 build 缓存)。
+删掉验证用的临时基线副本 (git worktree remove 删不掉的那些)。
 
-难点: 路径太长, shutil.rmtree 直接删会失败 (Filename too long)。
-办法: 先把最深的目录用长路径前缀重命名成短名字, 再从深到浅逐层删。
+用法: python _cleanup_baseline_worktree.py [目录路径]
+默认 C:\\Users\\yuwen\\Desktop\\dosecare-workspace\\baseline-picohrt
 
-只处理这个明确指定的临时目录。
+难点: gradle build 目录里的路径太长, 普通删除会报 "Filename too long";
+另外 gradle daemon 可能还持有 classes.jar 的句柄 (WinError 32), 需要先
+`gradlew --stop`。
+
+只处理明确指定的临时目录, 不碰任何仓库。
 """
 import os
 import shutil
 import sys
 
-TARGET = r"C:\Users\yuwen\Desktop\dosecare-workspace\baseline-picohrt"
 LONG = "\\\\?\\"
-
-
-def long(p):
-    return LONG + os.path.abspath(p)
 
 
 def rm_walk(path):
     """从深到浅删, 每层都走长路径前缀。"""
     deleted = 0
-    for dirpath, dirnames, filenames in os.walk(long(path)):
+    for dirpath, dirnames, filenames in os.walk(LONG + os.path.abspath(path)):
         for fn in filenames:
             fp = os.path.join(dirpath, fn)
             try:
@@ -38,9 +37,8 @@ def rm_walk(path):
                 os.rmdir(dp)
             except Exception:
                 pass
-    # 自己
     try:
-        os.rmdir(long(path))
+        os.rmdir(LONG + os.path.abspath(path))
         deleted += 1
     except Exception:
         pass
@@ -48,26 +46,21 @@ def rm_walk(path):
 
 
 def main():
-    if not os.path.isdir(TARGET):
-        print("目录不存在, 无需清理")
+    target = sys.argv[1] if len(sys.argv) > 1 else \
+        r"C:\Users\yuwen\Desktop\dosecare-workspace\baseline-picohrt"
+    target = os.path.abspath(target)
+    if not os.path.isdir(target):
+        print("目录不存在, 无需清理: %s" % target)
         return 0
-    n = rm_walk(TARGET)
-    left = os.path.isdir(TARGET)
-    if left:
-        # 再试一次普通 rmtree
-        try:
-            shutil.rmtree(TARGET, ignore_errors=True)
-        except Exception:
-            pass
-        left = os.path.isdir(TARGET)
+
+    n = rm_walk(target)
+    if os.path.isdir(target):
+        shutil.rmtree(target, ignore_errors=True)
+    left = os.path.isdir(target)
     print("删除 %d 项; 目录仍存在? %s" % (n, left))
     if left:
-        for dp, dn, fn in os.walk(TARGET):
-            for f in fn[:3]:
-                print("  残留: " + os.path.join(dp, f))
-            break
         return 1
-    print("[OK] 临时基线副本已清理干净")
+    print("[OK] 临时基线副本已清理干净: %s" % target)
     return 0
 
 
