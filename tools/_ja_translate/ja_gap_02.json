@@ -1,0 +1,448 @@
+{
+  "anchor_config_choose": {
+    "en": "Select a date",
+    "placeholders": []
+  },
+  "anchor_config_row_title": {
+    "en": "Date",
+    "placeholders": []
+  },
+  "anchor_pin_folder_icon": {
+    "en": "Create shortcut",
+    "placeholders": []
+  },
+  "anchor_selector_days": {
+    "en": "%1$d days",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "anchor_selector_empty_state": {
+    "en": "No tracked dates yet.",
+    "placeholders": []
+  },
+  "anchor_shortcut_disabled_message": {
+    "en": "This date was removed",
+    "placeholders": []
+  },
+  "anchor_widget_empty": {
+    "en": "Please select a date.",
+    "placeholders": []
+  },
+  "anchor_widget_planned_for": {
+    "en": "Planned for %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "anchor_widget_preview_days": {
+    "en": "67 days",
+    "placeholders": []
+  },
+  "anchor_widget_preview_since": {
+    "en": "Since Jan 1, 2026",
+    "placeholders": []
+  },
+  "field_note_hint": {
+    "en": "Notes for this application (optional)",
+    "placeholders": []
+  },
+  "journal_add_date": {
+    "en": "Add a date",
+    "placeholders": []
+  },
+  "journal_all_notes": {
+    "en": "All notes",
+    "placeholders": []
+  },
+  "journal_anchor_icon_cake": {
+    "en": "Birthday",
+    "placeholders": []
+  },
+  "journal_anchor_icon_event": {
+    "en": "Event",
+    "placeholders": []
+  },
+  "journal_anchor_icon_favorite": {
+    "en": "Personal",
+    "placeholders": []
+  },
+  "journal_anchor_icon_flag": {
+    "en": "Goal",
+    "placeholders": []
+  },
+  "journal_anchor_icon_home_health": {
+    "en": "Hospital",
+    "placeholders": []
+  },
+  "journal_anchor_icon_labs": {
+    "en": "Labs",
+    "placeholders": []
+  },
+  "journal_anchor_icon_medication": {
+    "en": "Medication",
+    "placeholders": []
+  },
+  "journal_anchor_icon_mic": {
+    "en": "Voice",
+    "placeholders": []
+  },
+  "journal_anchor_icon_monitor_weight": {
+    "en": "Weight",
+    "placeholders": []
+  },
+  "journal_anchor_icon_passport": {
+    "en": "Personal ID",
+    "placeholders": []
+  },
+  "journal_anchor_icon_pill": {
+    "en": "Pill",
+    "placeholders": []
+  },
+  "journal_anchor_icon_star": {
+    "en": "Highlight",
+    "placeholders": []
+  },
+  "journal_anchor_icon_stethoscope": {
+    "en": "Appointment",
+    "placeholders": []
+  },
+  "journal_anchor_icon_travel": {
+    "en": "Travel",
+    "placeholders": []
+  },
+  "journal_anchor_icon_vaccines": {
+    "en": "Injection",
+    "placeholders": []
+  },
+  "journal_anchor_icon_water_drops": {
+    "en": "Gel",
+    "placeholders": []
+  },
+  "journal_cancel_selection": {
+    "en": "Cancel selection",
+    "placeholders": []
+  },
+  "journal_clear_month_filter": {
+    "en": "Show all notes",
+    "placeholders": []
+  },
+  "journal_date_date_label": {
+    "en": "Date",
+    "placeholders": []
+  },
+  "journal_date_delete_failed": {
+    "en": "Unable to delete date.",
+    "placeholders": []
+  },
+  "journal_date_icon_section": {
+    "en": "Icon",
+    "placeholders": []
+  },
+  "journal_date_name_label": {
+    "en": "Name",
+    "placeholders": []
+  },
+  "journal_date_palette_none": {
+    "en": "No color",
+    "placeholders": []
+  },
+  "journal_date_palette_section": {
+    "en": "Color",
+    "placeholders": []
+  },
+  "journal_date_save_failed": {
+    "en": "Unable to save changes.",
+    "placeholders": []
+  },
+  "journal_date_sheet_add_title": {
+    "en": "Add a date",
+    "placeholders": []
+  },
+  "journal_date_sheet_edit_title": {
+    "en": "Edit date",
+    "placeholders": []
+  },
+  "journal_delete_date": {
+    "en": "Delete",
+    "placeholders": []
+  },
+  "journal_delete_date_confirmation": {
+    "en": "Delete this date?",
+    "placeholders": []
+  },
+  "journal_delete_date_title": {
+    "en": "Delete date",
+    "placeholders": []
+  },
+  "journal_delete_note": {
+    "en": "Delete note",
+    "placeholders": []
+  },
+  "journal_delete_note_confirmation": {
+    "en": "Delete this note?",
+    "placeholders": []
+  },
+  "journal_delete_note_title": {
+    "en": "Delete note",
+    "placeholders": []
+  },
+  "journal_delete_selected_notes_fab": {
+    "en": "Delete selected notes",
+    "placeholders": []
+  },
+  "journal_delete_selected_notes_title": {
+    "en": "Delete note",
+    "placeholders": []
+  },
+  "journal_done": {
+    "en": "Done",
+    "placeholders": []
+  },
+  "journal_edit": {
+    "en": "Edit",
+    "placeholders": []
+  },
+  "journal_filter_by_month": {
+    "en": "Filter by month",
+    "placeholders": []
+  },
+  "journal_hero_background_action": {
+    "en": "Customize background",
+    "placeholders": []
+  },
+  "journal_hero_background_date_color": {
+    "en": "Date color",
+    "placeholders": []
+  },
+  "journal_hero_background_none": {
+    "en": "None",
+    "placeholders": []
+  },
+  "journal_hero_background_title": {
+    "en": "Background color",
+    "placeholders": []
+  },
+  "journal_hero_badge": {
+    "en": "HERO",
+    "placeholders": []
+  },
+  "journal_hero_edit_summary": {
+    "en": "%1$s · %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "journal_home_slot_empty": {
+    "en": "First pinned date appears on Home.",
+    "placeholders": []
+  },
+  "journal_home_tag": {
+    "en": "Home",
+    "placeholders": []
+  },
+  "journal_in_prefix": {
+    "en": "in",
+    "placeholders": []
+  },
+  "journal_milestone_today": {
+    "en": "%1$s today",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "journal_milestones_section": {
+    "en": "Timeline",
+    "placeholders": []
+  },
+  "journal_move_anchor_down": {
+    "en": "Move down %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "journal_move_anchor_to_top": {
+    "en": "Move %1$s to top",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "journal_move_anchor_up": {
+    "en": "Move up %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "journal_no_dates": {
+    "en": "No tracked dates yet.",
+    "placeholders": []
+  },
+  "journal_no_dates_subtitle": {
+    "en": "Add a date to see how far you\\'ve come.",
+    "placeholders": []
+  },
+  "journal_no_dates_welcome_title": {
+    "en": "Start your timeline",
+    "placeholders": []
+  },
+  "journal_no_earlier_notes": {
+    "en": "No earlier notes.",
+    "placeholders": []
+  },
+  "journal_no_notes": {
+    "en": "No saved notes yet.",
+    "placeholders": []
+  },
+  "journal_note_delete_failed": {
+    "en": "Unable to delete note.",
+    "placeholders": []
+  },
+  "journal_note_save_failed": {
+    "en": "Unable to save note.",
+    "placeholders": []
+  },
+  "journal_note_selected": {
+    "en": "Note selected",
+    "placeholders": []
+  },
+  "journal_notes_section": {
+    "en": "Notes",
+    "placeholders": []
+  },
+  "journal_notes_window_meta": {
+    "en": "Last 30 days",
+    "placeholders": []
+  },
+  "journal_nothing_pinned_subtitle": {
+    "en": "Pinned dates appear here.",
+    "placeholders": []
+  },
+  "journal_nothing_pinned_title": {
+    "en": "No pinned dates yet",
+    "placeholders": []
+  },
+  "journal_open": {
+    "en": "Open",
+    "placeholders": []
+  },
+  "journal_pin_date": {
+    "en": "Pin this date",
+    "placeholders": []
+  },
+  "journal_pin_to_home_content_description": {
+    "en": "Pin to Home",
+    "placeholders": []
+  },
+  "journal_pinned_section": {
+    "en": "Pinned",
+    "placeholders": []
+  },
+  "journal_planned_date": {
+    "en": "Planned for %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "journal_pride_flag_agender": {
+    "en": "Agender",
+    "placeholders": []
+  },
+  "journal_pride_flag_asexual": {
+    "en": "Asexual",
+    "placeholders": []
+  },
+  "journal_pride_flag_bisexual": {
+    "en": "Bisexual",
+    "placeholders": []
+  },
+  "journal_pride_flag_genderfluid": {
+    "en": "Genderfluid",
+    "placeholders": []
+  },
+  "journal_pride_flag_lesbian": {
+    "en": "Lesbian",
+    "placeholders": []
+  },
+  "journal_pride_flag_nonbinary": {
+    "en": "Nonbinary",
+    "placeholders": []
+  },
+  "journal_pride_flag_pansexual": {
+    "en": "Pansexual",
+    "placeholders": []
+  },
+  "journal_pride_flag_rainbow": {
+    "en": "Rainbow",
+    "placeholders": []
+  },
+  "journal_pride_flag_transgender": {
+    "en": "Transgender",
+    "placeholders": []
+  },
+  "journal_reorder_anchor": {
+    "en": "Reorder %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "journal_see_all_notes": {
+    "en": "See all notes",
+    "placeholders": []
+  },
+  "journal_select_all": {
+    "en": "Select all",
+    "placeholders": []
+  },
+  "journal_select_date": {
+    "en": "Select date",
+    "placeholders": []
+  },
+  "journal_select_note": {
+    "en": "Select note",
+    "placeholders": []
+  },
+  "journal_since_date": {
+    "en": "Since %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "journal_since_you_started": {
+    "en": "Timeline",
+    "placeholders": []
+  },
+  "journal_timeline_section": {
+    "en": "All dates",
+    "placeholders": []
+  },
+  "journal_today": {
+    "en": "Today",
+    "placeholders": []
+  },
+  "journal_unpin_anchor": {
+    "en": "Unpin %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "journal_write_about_today": {
+    "en": "Write about this moment...",
+    "placeholders": []
+  },
+  "plan_batch_add_date_range": {
+    "en": "Range",
+    "placeholders": []
+  },
+  "plan_batch_add_date_range_value": {
+    "en": "%1$s–%2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "widget_anchor_description": {
+    "en": "Timeline",
+    "placeholders": []
+  }
+}

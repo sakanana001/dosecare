@@ -1160,7 +1160,7 @@
     <string name="interaction_qtc_format">Estimated QTc %1$.0f ms</string>
     <string name="interaction_reevaluate_n">Re-evaluate all %1$d drug combinations</string>
     <string name="interaction_references">References: %1$s</string>
-    <string name="interaction_search_hint">🔍 Search: flu / fluvoxamine / clozapine / F</string>
+    <string name="interaction_search_hint">🔍 搜尋: 氟 / fluvoxamine / 氯氮平 / F</string>
     <string name="interaction_selected_n">Selected (%1$d):</string>
     <string name="interaction_serotonin_format">%1$d serotonergic drug(s) involved</string>
     <string name="interaction_title">Interactions · %1$d drugs</string>
@@ -1333,4 +1333,27 @@
     <string name="monfreq_before_each_dose">每次食藥之前</string>
     <string name="monfreq_every_6_8_weeks">每 6-8 個星期</string>
     <string name="monfreq_continuous">持續監測</string>
+    <string name="hrt_goal_ftm">FtM（跨男性）</string>
+    <string name="hrt_goal_mtf">MtF（跨女性）</string>
+    <string name="hrt_goal_non_binary">非二元 / 自訂</string>
+    <string name="hrt_goal_unset">仲未設定</string>
+    <string name="main_chart_hormone_cpa">CPA</string>
+    <string name="main_chart_hormone_e2">E2</string>
+    <string name="main_chart_hormone_t">T</string>
+    <string name="main_cpa_chart_subtitle">醋酸環丙孕酮 · 實測趨勢</string>
+    <string name="main_t_chart_3comp_badge">3 室模型</string>
+    <string name="main_t_chart_3comp_badge_cd">三室模型：深部周邊脂肪儲存，90 天終末半衰期</string>
+    <string name="main_t_chart_subtitle">睪酮 · 實測趨勢</string>
+    <string name="medication_name_testosterone_cypionate">睪酮環戊丙酸酯</string>
+    <string name="medication_name_testosterone_enanthate">睪酮庚酸酯</string>
+    <string name="medication_name_testosterone_gel">睪酮凝膠</string>
+    <string name="medication_name_testosterone_undecanoate">睪酮十一酸酯（Nebido）</string>
+    <string name="safety_hrt_goal_mismatch_cpa_ftm_body">醋酸環丙孕酮係用喺跨女性方案，作用係阻斷雄激素嘅影響。如果你行緊 FtM 方案，而且係醫生特登開咗 CPA 俾你，記錄之前請先確認劑量同原因。</string>
+    <string name="safety_hrt_goal_mismatch_cpa_ftm_title">CPA 係跨女性用嘅抗雄激素</string>
+    <string name="safety_hrt_goal_mismatch_e2_ftm_body">雌二醇係跨女性方案嘅主要荷爾蒙。如果你行緊 FtM 方案，而且醫生俾咗低劑量 E2，記錄之前請先確認用藥途徑同劑量。</string>
+    <string name="safety_hrt_goal_mismatch_e2_ftm_title">雌二醇係跨女性用嘅荷爾蒙</string>
+    <string name="safety_hrt_goal_mismatch_t_mtf_body">睪酮係跨男性方案嘅主要荷爾蒙。如果你行緊 MtF 方案，而且醫生俾咗低劑量 T，記錄之前請先確認用藥途徑同劑量。</string>
+    <string name="safety_hrt_goal_mismatch_t_mtf_title">睪酮係跨男性用嘅荷爾蒙</string>
+    <string name="settings_hrt_goal">HRT 目標</string>
+    <string name="settings_hrt_goal_summary">決定主頁圖表預設顯示嘅荷爾蒙，亦會控制臨床安全提示。隨時可以更改。</string>
 </resources>

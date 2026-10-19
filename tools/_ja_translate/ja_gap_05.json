@@ -1,0 +1,920 @@
+{
+  "bottom_sheet_dismiss": {
+    "en": "Dismiss bottom sheet",
+    "placeholders": []
+  },
+  "edit_entry": {
+    "en": "Edit record",
+    "placeholders": []
+  },
+  "edit_medication": {
+    "en": "Edit medication",
+    "placeholders": []
+  },
+  "external_import_confirm": {
+    "en": "Import",
+    "placeholders": []
+  },
+  "external_import_detected_source": {
+    "en": "Source",
+    "placeholders": []
+  },
+  "external_import_failed": {
+    "en": "Unable to import selected file",
+    "placeholders": []
+  },
+  "external_import_lab_label": {
+    "en": "Blood test rows",
+    "placeholders": []
+  },
+  "external_import_review_title": {
+    "en": "Confirm import",
+    "placeholders": []
+  },
+  "external_import_skipped_rows_copied": {
+    "en": "Copied details",
+    "placeholders": []
+  },
+  "external_import_skipped_rows_copy": {
+    "en": "Copy skipped records",
+    "placeholders": []
+  },
+  "external_import_skipped_rows_title": {
+    "en": "Skipped records",
+    "placeholders": []
+  },
+  "external_import_success": {
+    "en": "External data imported",
+    "placeholders": []
+  },
+  "external_import_summary_existing": {
+    "en": "%1$d existing",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "external_import_summary_new": {
+    "en": "%1$d new",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "external_import_summary_updated": {
+    "en": "%1$d updated",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "field_container_weight_grams": {
+    "en": "Total gel amount",
+    "placeholders": []
+  },
+  "field_sachet_weight_grams": {
+    "en": "Amount per sachet",
+    "placeholders": []
+  },
+  "history_current_month": {
+    "en": "Current month",
+    "placeholders": []
+  },
+  "history_next_month": {
+    "en": "Next month",
+    "placeholders": []
+  },
+  "history_select_all": {
+    "en": "Select all",
+    "placeholders": []
+  },
+  "history_select_entry": {
+    "en": "Select record",
+    "placeholders": []
+  },
+  "history_select_month": {
+    "en": "Select month",
+    "placeholders": []
+  },
+  "home_card_hide": {
+    "en": "Hide %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "home_card_layout_menu": {
+    "en": "Customize cards",
+    "placeholders": []
+  },
+  "home_card_layout_title": {
+    "en": "Customize cards",
+    "placeholders": []
+  },
+  "home_card_move_down": {
+    "en": "Move %1$s down",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "home_card_move_to_top": {
+    "en": "Move %1$s to top",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "home_card_move_up": {
+    "en": "Move %1$s up",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "home_card_name_antiandrogen": {
+    "en": "Antiandrogen",
+    "placeholders": []
+  },
+  "home_card_name_e2_chart": {
+    "en": "Estradiol trend",
+    "placeholders": []
+  },
+  "home_card_name_e2_hero": {
+    "en": "Estradiol level",
+    "placeholders": []
+  },
+  "home_card_name_low_stock": {
+    "en": "Low stock",
+    "placeholders": []
+  },
+  "home_card_name_timeline": {
+    "en": "Timeline",
+    "placeholders": []
+  },
+  "home_card_show": {
+    "en": "Show %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "hrt_goal_ftm": {
+    "en": "FtM (transmasculine)",
+    "placeholders": []
+  },
+  "hrt_goal_mtf": {
+    "en": "MtF (transfeminine)",
+    "placeholders": []
+  },
+  "hrt_goal_non_binary": {
+    "en": "Non-binary / custom",
+    "placeholders": []
+  },
+  "hrt_goal_unset": {
+    "en": "Not set yet",
+    "placeholders": []
+  },
+  "main_antiandrogen_next_dose": {
+    "en": "Due %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "main_antiandrogen_no_last_dose": {
+    "en": "No logged dose yet",
+    "placeholders": []
+  },
+  "main_antiandrogen_no_next_dose": {
+    "en": "No upcoming dose",
+    "placeholders": []
+  },
+  "main_antiandrogen_title": {
+    "en": "Antiandrogen",
+    "placeholders": []
+  },
+  "main_chart_hormone_cpa": {
+    "en": "CPA",
+    "placeholders": []
+  },
+  "main_chart_hormone_e2": {
+    "en": "E2",
+    "placeholders": []
+  },
+  "main_chart_hormone_t": {
+    "en": "T",
+    "placeholders": []
+  },
+  "main_coming_up_title": {
+    "en": "Tonight",
+    "placeholders": []
+  },
+  "main_cpa_chart_subtitle": {
+    "en": "Cyproterone · measured trend",
+    "placeholders": []
+  },
+  "main_display_unit": {
+    "en": "Display unit",
+    "placeholders": []
+  },
+  "main_duration_compact_days": {
+    "en": "%1$dd",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "main_duration_compact_hours": {
+    "en": "%1$dh",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "main_duration_compact_minutes": {
+    "en": "%1$dm",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "main_duration_days_hours": {
+    "en": "%1$dd %2$dh",
+    "placeholders": [
+      "%1$d",
+      "%2$d"
+    ]
+  },
+  "main_duration_hours_minutes": {
+    "en": "%1$dh %2$dm",
+    "placeholders": [
+      "%1$d",
+      "%2$d"
+    ]
+  },
+  "main_duration_minutes": {
+    "en": "%1$dm",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "main_e2_change_since_yesterday": {
+    "en": "%1$s from 24h ago",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "main_e2_chart_overview": {
+    "en": "Chart overview",
+    "placeholders": []
+  },
+  "main_e2_chart_reset_view": {
+    "en": "Reset chart view",
+    "placeholders": []
+  },
+  "main_e2_chart_target": {
+    "en": "Target %1$s–%2$s %3$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s",
+      "%3$s"
+    ]
+  },
+  "main_e2_chart_title_seven_days": {
+    "en": "7-day trend",
+    "placeholders": []
+  },
+  "main_e2_chart_title_thirty_days": {
+    "en": "30-day trend",
+    "placeholders": []
+  },
+  "main_e2_chart_window_toggle_cd": {
+    "en": "Switch chart window",
+    "placeholders": []
+  },
+  "main_e2_estimate_info": {
+    "en": "Show estradiol estimate information",
+    "placeholders": []
+  },
+  "main_e2_no_change_since_yesterday": {
+    "en": "No change from 24h ago",
+    "placeholders": []
+  },
+  "main_e2_no_last_dose": {
+    "en": "No logged dose yet",
+    "placeholders": []
+  },
+  "main_e2_title": {
+    "en": "Estradiol · estimated",
+    "placeholders": []
+  },
+  "main_last_night_title": {
+    "en": "Last night",
+    "placeholders": []
+  },
+  "main_more_options": {
+    "en": "More options",
+    "placeholders": []
+  },
+  "main_relative_tomorrow": {
+    "en": "tomorrow",
+    "placeholders": []
+  },
+  "main_t_chart_3comp_badge": {
+    "en": "3-comp",
+    "placeholders": []
+  },
+  "main_t_chart_3comp_badge_cd": {
+    "en": "3-compartment model: deep peripheral fat reservoir, 90-day terminal half-life",
+    "placeholders": []
+  },
+  "main_t_chart_subtitle": {
+    "en": "Testosterone · measured trend",
+    "placeholders": []
+  },
+  "main_today_empty_state": {
+    "en": "Nothing scheduled today.",
+    "placeholders": []
+  },
+  "main_today_quick_log": {
+    "en": "Quick log",
+    "placeholders": []
+  },
+  "main_today_range_afternoon": {
+    "en": "Afternoon",
+    "placeholders": []
+  },
+  "main_today_range_evening": {
+    "en": "Evening",
+    "placeholders": []
+  },
+  "main_today_range_morning": {
+    "en": "Morning",
+    "placeholders": []
+  },
+  "main_today_range_night": {
+    "en": "Night",
+    "placeholders": []
+  },
+  "main_today_summary_done_label": {
+    "en": "DONE",
+    "placeholders": []
+  },
+  "main_today_summary_manual_label": {
+    "en": "MANUAL",
+    "placeholders": []
+  },
+  "main_today_title": {
+    "en": "Today",
+    "placeholders": []
+  },
+  "main_tomorrow_title": {
+    "en": "Tomorrow",
+    "placeholders": []
+  },
+  "main_upcoming_empty_state": {
+    "en": "Nothing scheduled in the next 90 days.",
+    "placeholders": []
+  },
+  "main_upcoming_title": {
+    "en": "Upcoming",
+    "placeholders": []
+  },
+  "medical_disclaimer_home_estimates_and_ranges": {
+    "en": "Estimated concentrations and WPATH SOC-8 target ranges are references, not measured values or medical advice; your targets may differ.",
+    "placeholders": []
+  },
+  "medical_disclaimer_preset_doses": {
+    "en": "Preset doses are reference values, not medical advice. Safe dosing depends on lab results, other medications, medical history, and clinician supervision.",
+    "placeholders": []
+  },
+  "onboarding_start_cta": {
+    "en": "Get started",
+    "placeholders": []
+  },
+  "onboarding_start_tagline": {
+    "en": "Log HRT doses, view plasma levels, and stay on top of your routine.",
+    "placeholders": []
+  },
+  "onboarding_useful_weight_desc": {
+    "en": "Set your weight to improve plasma concentration estimates.",
+    "placeholders": []
+  },
+  "onboarding_useful_weight_title": {
+    "en": "Enter your weight",
+    "placeholders": []
+  },
+  "personalization_weight_dialog_clear": {
+    "en": "Clear",
+    "placeholders": []
+  },
+  "personalization_weight_dialog_description": {
+    "en": "Used to improve plasma concentration estimates.",
+    "placeholders": []
+  },
+  "personalization_weight_dialog_save": {
+    "en": "Save",
+    "placeholders": []
+  },
+  "personalization_weight_dialog_title": {
+    "en": "Body weight",
+    "placeholders": []
+  },
+  "personalization_weight_dialog_value_label": {
+    "en": "Weight",
+    "placeholders": []
+  },
+  "personalization_weight_display": {
+    "en": "%1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "personalization_weight_not_set": {
+    "en": "Not set",
+    "placeholders": []
+  },
+  "personalization_weight_update_failed": {
+    "en": "Unable to update body weight.",
+    "placeholders": []
+  },
+  "personalization_weight_validation_invalid": {
+    "en": "Enter a valid weight.",
+    "placeholders": []
+  },
+  "safety_hrt_goal_mismatch_cpa_ftm_body": {
+    "en": "Cyproterone acetate is prescribed for transfeminine regimens to block androgen effects. If you are on FtM and your clinician specifically prescribed CPA, confirm the dose and reason before logging it here.",
+    "placeholders": []
+  },
+  "safety_hrt_goal_mismatch_cpa_ftm_title": {
+    "en": "CPA is an MtF antiandrogen",
+    "placeholders": []
+  },
+  "safety_hrt_goal_mismatch_e2_ftm_body": {
+    "en": "Estradiol is the primary hormone for transfeminine regimens. If you are on FtM and your clinician prescribed a low-dose E2, confirm the route and dose before logging it here.",
+    "placeholders": []
+  },
+  "safety_hrt_goal_mismatch_e2_ftm_title": {
+    "en": "Estradiol is the MtF hormone",
+    "placeholders": []
+  },
+  "safety_hrt_goal_mismatch_t_mtf_body": {
+    "en": "Testosterone is the primary hormone for transmasculine regimens. If you are on MtF and your clinician prescribed low-dose T, confirm the route and dose before logging it here.",
+    "placeholders": []
+  },
+  "safety_hrt_goal_mismatch_t_mtf_title": {
+    "en": "Testosterone is the FtM hormone",
+    "placeholders": []
+  },
+  "select_date": {
+    "en": "Select date",
+    "placeholders": []
+  },
+  "select_time": {
+    "en": "Select time",
+    "placeholders": []
+  },
+  "validation_container_weight_required": {
+    "en": "Enter a valid total gel amount.",
+    "placeholders": []
+  },
+  "validation_count_required": {
+    "en": "Enter a valid count.",
+    "placeholders": []
+  },
+  "validation_sachet_weight_required": {
+    "en": "Enter a valid amount per sachet.",
+    "placeholders": []
+  },
+  "widget_all_done": {
+    "en": "All done",
+    "placeholders": []
+  },
+  "widget_all_logged": {
+    "en": "All logged",
+    "placeholders": []
+  },
+  "widget_config_balance": {
+    "en": "Light balance",
+    "placeholders": []
+  },
+  "widget_config_bg_gradient": {
+    "en": "Gradient",
+    "placeholders": []
+  },
+  "widget_config_preview_toggle": {
+    "en": "Toggle preview between light and dark",
+    "placeholders": []
+  },
+  "widget_config_saturation": {
+    "en": "Saturation",
+    "placeholders": []
+  },
+  "widget_config_title": {
+    "en": "Widget settings",
+    "placeholders": []
+  },
+  "widget_large_description": {
+    "en": "Dose list",
+    "placeholders": []
+  },
+  "widget_last_night": {
+    "en": "Last night",
+    "placeholders": []
+  },
+  "widget_manual_record": {
+    "en": "Manual record",
+    "placeholders": []
+  },
+  "widget_medium_description": {
+    "en": "Dose summary",
+    "placeholders": []
+  },
+  "widget_no_doses_today": {
+    "en": "Nothing scheduled today",
+    "placeholders": []
+  },
+  "widget_no_medications": {
+    "en": "No regimen set up",
+    "placeholders": []
+  },
+  "widget_nothing_more_today": {
+    "en": "Nothing more today",
+    "placeholders": []
+  },
+  "widget_preview_done_count_label": {
+    "en": "/3 DONE",
+    "placeholders": []
+  },
+  "widget_preview_e2_label": {
+    "en": "E2 ~120 pg/mL",
+    "placeholders": []
+  },
+  "widget_preview_large_header": {
+    "en": "Today · 1/3 done",
+    "placeholders": []
+  },
+  "widget_quick_log_failed": {
+    "en": "Unable to quick-log dose.",
+    "placeholders": []
+  },
+  "widget_today": {
+    "en": "Today",
+    "placeholders": []
+  },
+  "widget_tonight": {
+    "en": "Tonight",
+    "placeholders": []
+  },
+  "widget_upcoming": {
+    "en": "Upcoming",
+    "placeholders": []
+  },
+  "add_entry": {
+    "en": "Add record",
+    "placeholders": []
+  },
+  "cancel": {
+    "en": "Cancel",
+    "placeholders": []
+  },
+  "confirm": {
+    "en": "OK",
+    "placeholders": []
+  },
+  "cross_timezone_saved_toast": {
+    "en": "Saved in %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "delete_entries_confirm": {
+    "en": "Delete",
+    "placeholders": []
+  },
+  "delete_entries_fab": {
+    "en": "Delete selected records",
+    "placeholders": []
+  },
+  "fab_add_entry": {
+    "en": "Add medication log record",
+    "placeholders": []
+  },
+  "history_cancel_selection": {
+    "en": "Cancel selection",
+    "placeholders": []
+  },
+  "history_delete_all_entries": {
+    "en": "Delete all records",
+    "placeholders": []
+  },
+  "history_delete_all_entries_failure": {
+    "en": "Unable to delete records.",
+    "placeholders": []
+  },
+  "history_delete_all_entries_success": {
+    "en": "Deleted all records.",
+    "placeholders": []
+  },
+  "history_delete_all_entries_title": {
+    "en": "Delete all records",
+    "placeholders": []
+  },
+  "history_delete_selected_entries_failure": {
+    "en": "Unable to delete selected records.",
+    "placeholders": []
+  },
+  "history_empty_state": {
+    "en": "No records yet.",
+    "placeholders": []
+  },
+  "history_month_empty_state": {
+    "en": "No records for this month.",
+    "placeholders": []
+  },
+  "history_selected_day_empty_state": {
+    "en": "No records for this day.",
+    "placeholders": []
+  },
+  "medicines_empty_state": {
+    "en": "No medicines yet.",
+    "placeholders": []
+  },
+  "more_options": {
+    "en": "More options",
+    "placeholders": []
+  },
+  "navigate_back": {
+    "en": "Navigate back",
+    "placeholders": []
+  },
+  "remove": {
+    "en": "Remove",
+    "placeholders": []
+  },
+  "remove_time": {
+    "en": "Remove",
+    "placeholders": []
+  },
+  "save": {
+    "en": "Save",
+    "placeholders": []
+  },
+  "add": {
+    "en": "Add",
+    "placeholders": []
+  },
+  "external_tracker_record_indicator": {
+    "en": "Imported external record",
+    "placeholders": []
+  },
+  "field_concentration_mg_per_ml": {
+    "en": "Concentration",
+    "placeholders": []
+  },
+  "field_count": {
+    "en": "Count",
+    "placeholders": []
+  },
+  "field_date_of_application": {
+    "en": "Date of application",
+    "placeholders": []
+  },
+  "field_medication": {
+    "en": "Medication",
+    "placeholders": []
+  },
+  "field_note": {
+    "en": "Note",
+    "placeholders": []
+  },
+  "field_time_of_application": {
+    "en": "Time of application",
+    "placeholders": []
+  },
+  "history_clear_selection": {
+    "en": "Clear selection",
+    "placeholders": []
+  },
+  "history_legend_unplanned": {
+    "en": "Off plan",
+    "placeholders": []
+  },
+  "history_month_entries_title": {
+    "en": "%1$s records",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "history_month_picker_month": {
+    "en": "Month",
+    "placeholders": []
+  },
+  "history_month_picker_title": {
+    "en": "Jump to month",
+    "placeholders": []
+  },
+  "history_month_picker_year": {
+    "en": "Year",
+    "placeholders": []
+  },
+  "history_previous_month": {
+    "en": "Previous month",
+    "placeholders": []
+  },
+  "history_reverse_selection": {
+    "en": "Reverse",
+    "placeholders": []
+  },
+  "history_selected_day_records_title": {
+    "en": "Records on %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "history_summary_missed": {
+    "en": "Missed",
+    "placeholders": []
+  },
+  "history_summary_on_track": {
+    "en": "On track",
+    "placeholders": []
+  },
+  "history_summary_partial": {
+    "en": "Partial",
+    "placeholders": []
+  },
+  "manual_record_label": {
+    "en": "Manual record",
+    "placeholders": []
+  },
+  "medical_disclaimer_plasma_concentration_estimates": {
+    "en": "Plasma concentration values are model estimates based on your dosing schedule, not measured values.",
+    "placeholders": []
+  },
+  "medical_disclaimer_reference_ranges": {
+    "en": "Target ranges are general guidelines, not medical advice—your target ranges may differ based on your treatment plan.",
+    "placeholders": []
+  },
+  "medical_disclaimer_wpath_reference_ranges": {
+    "en": "Target ranges are based on WPATH Standards of Care 8. They are general guidelines, not medical advice—your target ranges may differ based on your treatment plan.",
+    "placeholders": []
+  },
+  "medicines_title": {
+    "en": "Medicines",
+    "placeholders": []
+  },
+  "month_picker_month": {
+    "en": "Month",
+    "placeholders": []
+  },
+  "month_picker_year": {
+    "en": "Year",
+    "placeholders": []
+  },
+  "onboarding_continue": {
+    "en": "Continue",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_acknowledge_read": {
+    "en": "I have read and agree",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_advice_body": {
+    "en": "Information shown by this app is educational and is not medical advice. It is not a medical device, and it cannot diagnose, treat, cure, or prevent any condition. Always consult a qualified clinician before changing your regimen.",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_advice_heading": {
+    "en": "Not medical advice",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_data_body": {
+    "en": "All medication, dose, and lab data is stored in an encrypted local database on your device. The app uses no analytics or third-party tracking services. By default, your data does not leave your device — you can export an encrypted backup at any time.",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_data_heading": {
+    "en": "Data &amp; privacy",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_estimates_body": {
+    "en": "Plasma concentration estimates are calculated using approximate pharmacokinetic models based on published data and route-specific assumptions. Individual response can vary significantly. Treat estimates as rough trend indicators only.",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_estimates_heading": {
+    "en": "Estimates &amp; modeling",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_reminders_body": {
+    "en": "Dose reminders depend on your device\\'s notification and alarm permissions. Battery optimizations or system limits may delay or skip reminders.",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_reminders_heading": {
+    "en": "Reminders",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_subtitle": {
+    "en": "DoseCare is a logging tool and does not provide medical advice. Plasma concentration values are model estimates calculated from your dosing schedule, not measured values, and should not replace lab tests or guidance from your clinician.",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_title": {
+    "en": "Important information",
+    "placeholders": []
+  },
+  "onboarding_disclaimer_view_full_policy": {
+    "en": "View full privacy policy",
+    "placeholders": []
+  },
+  "onboarding_notifications_alarm_desc": {
+    "en": "Deliver reminders closer to their scheduled times.",
+    "placeholders": []
+  },
+  "onboarding_notifications_alarm_title": {
+    "en": "Exact alarms",
+    "placeholders": []
+  },
+  "onboarding_notifications_app_desc": {
+    "en": "Send reminders at your scheduled dose times.",
+    "placeholders": []
+  },
+  "onboarding_notifications_app_title": {
+    "en": "App notifications",
+    "placeholders": []
+  },
+  "onboarding_notifications_master_alarm_subtitle": {
+    "en": "DoseCare can send reminders at your scheduled dose times. You can also allow exact alarms for more precise notification timing.",
+    "placeholders": []
+  },
+  "onboarding_notifications_master_subtitle": {
+    "en": "DoseCare can send reminders at your scheduled dose times. You can turn it off at any time in settings.",
+    "placeholders": []
+  },
+  "onboarding_notifications_optional": {
+    "en": "Optional",
+    "placeholders": []
+  },
+  "onboarding_notifications_permission_subtitle": {
+    "en": "To send reminders at your scheduled dose times, DoseCare needs the following permission. You can revoke it at any time in your system settings.",
+    "placeholders": []
+  },
+  "onboarding_notifications_subtitle": {
+    "en": "To send reminders at your scheduled dose times, DoseCare needs the following two permissions. You can revoke them at any time in your system settings.",
+    "placeholders": []
+  },
+  "onboarding_notifications_title": {
+    "en": "Enable dose reminders",
+    "placeholders": []
+  },
+  "onboarding_open_app": {
+    "en": "Open DoseCare",
+    "placeholders": []
+  },
+  "onboarding_skip_notifications": {
+    "en": "Skip",
+    "placeholders": []
+  },
+  "onboarding_update_failed": {
+    "en": "Unable to update onboarding.",
+    "placeholders": []
+  },
+  "onboarding_useful_subtitle": {
+    "en": "These steps are optional, but can help DoseCare provide more complete tracking, reminders, and estimates.",
+    "placeholders": []
+  },
+  "onboarding_useful_title": {
+    "en": "Recommended setup",
+    "placeholders": []
+  },
+  "personalization_weight": {
+    "en": "Body weight",
+    "placeholders": []
+  },
+  "tab_history": {
+    "en": "History",
+    "placeholders": []
+  },
+  "tab_journal": {
+    "en": "Journal",
+    "placeholders": []
+  },
+  "tab_main": {
+    "en": "Home",
+    "placeholders": []
+  },
+  "tab_plan": {
+    "en": "Plan",
+    "placeholders": []
+  },
+  "tab_settings": {
+    "en": "Settings",
+    "placeholders": []
+  },
+  "timezone_change_notice": {
+    "en": "Time zone changed from %1$s to %2$s. Plan times follow your local time.",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "timezone_change_notice_dismiss": {
+    "en": "Dismiss timezone change notice",
+    "placeholders": []
+  },
+  "validation_concentration_required": {
+    "en": "Enter a valid concentration.",
+    "placeholders": []
+  },
+  "validation_name_required": {
+    "en": "Enter a medication name.",
+    "placeholders": []
+  }
+}

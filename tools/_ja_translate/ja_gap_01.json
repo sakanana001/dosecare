@@ -1,0 +1,790 @@
+{
+  "app_lock_body": {
+    "en": "Unlock the app to access your medication history.",
+    "placeholders": []
+  },
+  "app_lock_grace_period_15_minutes": {
+    "en": "15 minutes",
+    "placeholders": []
+  },
+  "app_lock_grace_period_15_seconds": {
+    "en": "15 seconds",
+    "placeholders": []
+  },
+  "app_lock_grace_period_1_minute": {
+    "en": "1 minute",
+    "placeholders": []
+  },
+  "app_lock_grace_period_2_minutes": {
+    "en": "2 minutes",
+    "placeholders": []
+  },
+  "app_lock_grace_period_30_minutes": {
+    "en": "30 minutes",
+    "placeholders": []
+  },
+  "app_lock_grace_period_30_seconds": {
+    "en": "30 seconds",
+    "placeholders": []
+  },
+  "app_lock_grace_period_5_minutes": {
+    "en": "5 minutes",
+    "placeholders": []
+  },
+  "app_lock_grace_period_immediately": {
+    "en": "Immediately",
+    "placeholders": []
+  },
+  "app_lock_title": {
+    "en": "App locked",
+    "placeholders": []
+  },
+  "app_lock_unlock": {
+    "en": "Unlock",
+    "placeholders": []
+  },
+  "dark_mode_always_off": {
+    "en": "Always off",
+    "placeholders": []
+  },
+  "dark_mode_always_on": {
+    "en": "Always on",
+    "placeholders": []
+  },
+  "dark_mode_follow_system": {
+    "en": "Follow system",
+    "placeholders": []
+  },
+  "disable_screen_lock_prompt_subtitle": {
+    "en": "Verify your identity to disable app lock.",
+    "placeholders": []
+  },
+  "disable_screen_lock_prompt_title": {
+    "en": "Disable app lock",
+    "placeholders": []
+  },
+  "enable_screen_lock_prompt_subtitle": {
+    "en": "Verify your identity to enable app lock.",
+    "placeholders": []
+  },
+  "enable_screen_lock_prompt_title": {
+    "en": "Enable app lock",
+    "placeholders": []
+  },
+  "first_day_of_week_follow_system": {
+    "en": "Default",
+    "placeholders": []
+  },
+  "first_day_of_week_monday": {
+    "en": "Monday",
+    "placeholders": []
+  },
+  "first_day_of_week_saturday": {
+    "en": "Saturday",
+    "placeholders": []
+  },
+  "first_day_of_week_sunday": {
+    "en": "Sunday",
+    "placeholders": []
+  },
+  "personalization_weight_unit_kg_short": {
+    "en": "kg",
+    "placeholders": []
+  },
+  "personalization_weight_unit_lb_short": {
+    "en": "lb",
+    "placeholders": []
+  },
+  "reminder_notification_action_log_all": {
+    "en": "Log all",
+    "placeholders": []
+  },
+  "reminder_notification_action_log_now": {
+    "en": "Log now",
+    "placeholders": []
+  },
+  "reminder_notification_action_remind_later": {
+    "en": "Remind later",
+    "placeholders": []
+  },
+  "reminder_notification_channel_description": {
+    "en": "Notifications for scheduled doses.",
+    "placeholders": []
+  },
+  "reminder_notification_channel_name": {
+    "en": "Dose reminders",
+    "placeholders": []
+  },
+  "reminder_notification_merged_title": {
+    "en": "Time for your doses",
+    "placeholders": []
+  },
+  "reminder_notification_nothing_to_add": {
+    "en": "Already logged.",
+    "placeholders": []
+  },
+  "reminder_notification_single_title": {
+    "en": "Time for your dose",
+    "placeholders": []
+  },
+  "reminder_notification_snoozed": {
+    "en": "We\\'ll remind you in %1$d minutes.",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "reminder_notification_two_groups": {
+    "en": "%1$s and %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "screen_lock_auth_failed": {
+    "en": "Authentication failed.",
+    "placeholders": []
+  },
+  "screen_lock_auth_locked_out": {
+    "en": "Too many failed attempts. Try again later.",
+    "placeholders": []
+  },
+  "screen_lock_auth_unavailable_generic": {
+    "en": "Secure authentication is not available on this device.",
+    "placeholders": []
+  },
+  "screen_lock_auth_unavailable_hw": {
+    "en": "Secure authentication is temporarily unavailable.",
+    "placeholders": []
+  },
+  "screen_lock_auth_unavailable_no_hardware": {
+    "en": "This device does not support secure biometric or screen lock authentication.",
+    "placeholders": []
+  },
+  "screen_lock_auth_unavailable_none_enrolled": {
+    "en": "Set up biometrics or a screen lock in system settings first.",
+    "placeholders": []
+  },
+  "screen_lock_auth_unavailable_security_update": {
+    "en": "A security update is required before secure authentication can be used.",
+    "placeholders": []
+  },
+  "settings_about": {
+    "en": "About",
+    "placeholders": []
+  },
+  "settings_about_app_info_copied": {
+    "en": "Copied.",
+    "placeholders": []
+  },
+  "settings_about_app_info_copy_text": {
+    "en": "%1$s (%2$s)",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "settings_about_app_info_easter_egg": {
+    "en": "Ciallo～(∠・ω&lt; )⌒☆",
+    "placeholders": []
+  },
+  "settings_about_app_info_version": {
+    "en": "%1$s (%2$s)",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "settings_about_model": {
+    "en": "About the model",
+    "placeholders": []
+  },
+  "settings_about_open_link_confirm": {
+    "en": "Open",
+    "placeholders": []
+  },
+  "settings_about_open_link_message": {
+    "en": "This link will open outside the app. Continue?",
+    "placeholders": []
+  },
+  "settings_about_open_link_title": {
+    "en": "Open external link",
+    "placeholders": []
+  },
+  "settings_about_open_source_licenses": {
+    "en": "Open source licenses",
+    "placeholders": []
+  },
+  "settings_about_privacy_policy": {
+    "en": "Privacy policy",
+    "placeholders": []
+  },
+  "settings_about_upstream_project": {
+    "en": "Upstream project (Featherline)",
+    "placeholders": []
+  },
+  "settings_about_upstream_project_summary": {
+    "en": "Based on the original Featherline by Zhaoqian Wang",
+    "placeholders": []
+  },
+  "settings_adaptive_color": {
+    "en": "Adaptive color",
+    "placeholders": []
+  },
+  "settings_amoled_black": {
+    "en": "Pure black dark theme",
+    "placeholders": []
+  },
+  "settings_app_language": {
+    "en": "App language",
+    "placeholders": []
+  },
+  "settings_app_lock_grace_period": {
+    "en": "Stay unlocked after leaving",
+    "placeholders": []
+  },
+  "settings_appearance": {
+    "en": "Appearance",
+    "placeholders": []
+  },
+  "settings_backup_confirm_password_label": {
+    "en": "Confirm password",
+    "placeholders": []
+  },
+  "settings_backup_export_failed": {
+    "en": "Unable to save backup",
+    "placeholders": []
+  },
+  "settings_backup_export_success": {
+    "en": "Backup saved as %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "settings_backup_password_confirm": {
+    "en": "Continue",
+    "placeholders": []
+  },
+  "settings_backup_password_label": {
+    "en": "Password",
+    "placeholders": []
+  },
+  "settings_backup_password_message": {
+    "en": "Enter a password for this backup. Use at least 6 characters.",
+    "placeholders": []
+  },
+  "settings_backup_password_min_length": {
+    "en": "Use at least %1$d characters",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "settings_backup_password_mismatch": {
+    "en": "Passwords must match",
+    "placeholders": []
+  },
+  "settings_backup_password_required": {
+    "en": "Enter a password",
+    "placeholders": []
+  },
+  "settings_backup_password_title": {
+    "en": "Encrypt backup",
+    "placeholders": []
+  },
+  "settings_backup_password_warning": {
+    "en": "If you forget this password, the backup cannot be recovered.",
+    "placeholders": []
+  },
+  "settings_backup_restore": {
+    "en": "Backup &amp; restore",
+    "placeholders": []
+  },
+  "settings_backup_restore_confirm": {
+    "en": "Restore",
+    "placeholders": []
+  },
+  "settings_backup_restore_confirm_title": {
+    "en": "Restore backup?",
+    "placeholders": []
+  },
+  "settings_backup_restore_failed": {
+    "en": "Wrong password or corrupted backup file",
+    "placeholders": []
+  },
+  "settings_backup_restore_incompatible_file": {
+    "en": "Selected file is not a compatible backup",
+    "placeholders": []
+  },
+  "settings_backup_restore_password_message": {
+    "en": "This will replace current local data with the selected backup. Enter the backup password to continue.",
+    "placeholders": []
+  },
+  "settings_backup_restore_password_message_with_name": {
+    "en": "This will replace current local data with %1$s. Enter the backup password to continue.",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "settings_backup_restore_success": {
+    "en": "Backup restored",
+    "placeholders": []
+  },
+  "settings_backup_to_file": {
+    "en": "Backup to file",
+    "placeholders": []
+  },
+  "settings_calibration_add_analyte": {
+    "en": "Add result",
+    "placeholders": []
+  },
+  "settings_calibration_add_result": {
+    "en": "Add test result",
+    "placeholders": []
+  },
+  "settings_calibration_analyte_fsh": {
+    "en": "Follicle-stimulating hormone",
+    "placeholders": []
+  },
+  "settings_calibration_analyte_hb": {
+    "en": "Hemoglobin",
+    "placeholders": []
+  },
+  "settings_calibration_analyte_lh": {
+    "en": "Luteinizing hormone",
+    "placeholders": []
+  },
+  "settings_calibration_analyte_prl": {
+    "en": "Prolactin",
+    "placeholders": []
+  },
+  "settings_calibration_analyte_prog": {
+    "en": "Progesterone",
+    "placeholders": []
+  },
+  "settings_calibration_builtin_analytes": {
+    "en": "Built-in analytes",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_abbreviation_label": {
+    "en": "Abbreviation",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_add_title": {
+    "en": "Add custom analyte",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_archive_message": {
+    "en": "Archive %1$s? Existing test results will be kept.",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "settings_calibration_custom_analyte_archive_success": {
+    "en": "Archived custom analyte.",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_archive_title": {
+    "en": "Archive custom analyte",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_edit_title": {
+    "en": "Edit custom analyte",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_error_archive": {
+    "en": "Unable to archive this custom analyte.",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_error_duplicate": {
+    "en": "That name and unit already exist.",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_error_required_abbreviation": {
+    "en": "Enter an abbreviation.",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_error_required_name": {
+    "en": "Enter a name.",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_error_required_unit": {
+    "en": "Enter a unit.",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_error_save": {
+    "en": "Unable to save this custom analyte.",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_name_label": {
+    "en": "Name",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analyte_unit_locked_toast": {
+    "en": "Unit can\\'t be changed once test results have been recorded for this analyte.",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analytes": {
+    "en": "Custom analytes",
+    "placeholders": []
+  },
+  "settings_calibration_custom_analytes_empty": {
+    "en": "No custom analytes yet.",
+    "placeholders": []
+  },
+  "settings_calibration_date_label": {
+    "en": "Date",
+    "placeholders": []
+  },
+  "settings_calibration_delete_all_entries": {
+    "en": "Delete all calibration records",
+    "placeholders": []
+  },
+  "settings_calibration_delete_all_entries_failure": {
+    "en": "Unable to delete calibration records.",
+    "placeholders": []
+  },
+  "settings_calibration_delete_all_entries_success": {
+    "en": "Deleted all calibration records.",
+    "placeholders": []
+  },
+  "settings_calibration_delete_all_entries_title": {
+    "en": "Delete all calibration records",
+    "placeholders": []
+  },
+  "settings_calibration_delete_entry_failure": {
+    "en": "Unable to delete calibration record.",
+    "placeholders": []
+  },
+  "settings_calibration_edit_result": {
+    "en": "Edit test result",
+    "placeholders": []
+  },
+  "settings_calibration_empty_state": {
+    "en": "No test results yet.",
+    "placeholders": []
+  },
+  "settings_calibration_error_invalid_number": {
+    "en": "Enter a valid value.",
+    "placeholders": []
+  },
+  "settings_calibration_last_e2_elapsed": {
+    "en": "%1$s after last E2 dose",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "settings_calibration_notes_label": {
+    "en": "Notes",
+    "placeholders": []
+  },
+  "settings_calibration_range_status_above": {
+    "en": "Above",
+    "placeholders": []
+  },
+  "settings_calibration_range_status_below": {
+    "en": "Below",
+    "placeholders": []
+  },
+  "settings_calibration_range_status_in_range": {
+    "en": "In range",
+    "placeholders": []
+  },
+  "settings_calibration_remaining_analytes": {
+    "en": "%1$d available",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "settings_calibration_results": {
+    "en": "Test results",
+    "placeholders": []
+  },
+  "settings_calibration_save_entry_failure": {
+    "en": "Unable to save calibration record.",
+    "placeholders": []
+  },
+  "settings_calibration_settings": {
+    "en": "Calibration settings",
+    "placeholders": []
+  },
+  "settings_calibration_target_range": {
+    "en": "Target %1$s–%2$s %3$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s",
+      "%3$s"
+    ]
+  },
+  "settings_calibration_target_range_line": {
+    "en": "%1$s: %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "settings_calibration_target_range_value": {
+    "en": "%1$s–%2$s %3$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s",
+      "%3$s"
+    ]
+  },
+  "settings_calibration_target_ranges_title": {
+    "en": "WPATH SOC-8 target range",
+    "placeholders": []
+  },
+  "settings_calibration_target_upper": {
+    "en": "Target &lt;%1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "settings_calibration_target_upper_value": {
+    "en": "&lt;%1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "settings_calibration_time_label": {
+    "en": "Time",
+    "placeholders": []
+  },
+  "settings_calibration_under_development_message": {
+    "en": "Calibration is under development. You can still log blood test results.",
+    "placeholders": []
+  },
+  "settings_calibration_unit_label": {
+    "en": "Unit",
+    "placeholders": []
+  },
+  "settings_calibration_value_label": {
+    "en": "Value",
+    "placeholders": []
+  },
+  "settings_cjk_text_offset": {
+    "en": "Adjust Chinese text display",
+    "placeholders": []
+  },
+  "settings_cjk_text_offset_summary": {
+    "en": "Try this if Chinese text alignment looks off.",
+    "placeholders": []
+  },
+  "settings_dark_mode": {
+    "en": "Dark mode",
+    "placeholders": []
+  },
+  "settings_diagnostics": {
+    "en": "Diagnostics",
+    "placeholders": []
+  },
+  "settings_diagnostics_export_failed": {
+    "en": "Unable to export diagnostic logs",
+    "placeholders": []
+  },
+  "settings_diagnostics_export_logs": {
+    "en": "Export diagnostic logs",
+    "placeholders": []
+  },
+  "settings_diagnostics_export_success": {
+    "en": "Diagnostic logs exported",
+    "placeholders": []
+  },
+  "settings_display": {
+    "en": "Display",
+    "placeholders": []
+  },
+  "settings_first_day_of_week": {
+    "en": "First day of week",
+    "placeholders": []
+  },
+  "settings_github_repo": {
+    "en": "DoseCare on GitHub",
+    "placeholders": []
+  },
+  "settings_haze_blur": {
+    "en": "Background blur effect",
+    "placeholders": []
+  },
+  "settings_hide_archived_group_records": {
+    "en": "Hide archived group records",
+    "placeholders": []
+  },
+  "settings_hide_medication_details": {
+    "en": "Hide medication details",
+    "placeholders": []
+  },
+  "settings_hide_medication_details_summary": {
+    "en": "Hides medication name and dose in notifications and widgets.",
+    "placeholders": []
+  },
+  "settings_hide_reference_ranges": {
+    "en": "Hide reference ranges",
+    "placeholders": []
+  },
+  "settings_hide_screen_content": {
+    "en": "Hide screen content",
+    "placeholders": []
+  },
+  "settings_hide_screen_content_summary": {
+    "en": "Hide app content in recents and screenshots.",
+    "placeholders": []
+  },
+  "settings_hrt_goal": {
+    "en": "HRT goal",
+    "placeholders": []
+  },
+  "settings_hrt_goal_summary": {
+    "en": "Powers the home chart\\'s default hormone and gates clinical safety prompts. You can change this later.",
+    "placeholders": []
+  },
+  "settings_import_external_tracker_json": {
+    "en": "Import external data",
+    "placeholders": []
+  },
+  "settings_notifications": {
+    "en": "Notifications",
+    "placeholders": []
+  },
+  "settings_personalization": {
+    "en": "Personalization",
+    "placeholders": []
+  },
+  "settings_personalization_calibration": {
+    "en": "Calibration",
+    "placeholders": []
+  },
+  "settings_reminders": {
+    "en": "Dose reminders",
+    "placeholders": []
+  },
+  "settings_reminders_notifications_unavailable": {
+    "en": "Enable app notifications in system settings.",
+    "placeholders": []
+  },
+  "settings_reminders_permission_off_summary": {
+    "en": "Notifications are off for this app.",
+    "placeholders": []
+  },
+  "settings_reminders_summary": {
+    "en": "Controls all reminders.",
+    "placeholders": []
+  },
+  "settings_restore_from_file": {
+    "en": "Restore from backup",
+    "placeholders": []
+  },
+  "settings_screen_lock_protection": {
+    "en": "App lock",
+    "placeholders": []
+  },
+  "settings_screen_lock_protection_summary": {
+    "en": "Require device authentication to open the app.",
+    "placeholders": []
+  },
+  "settings_security": {
+    "en": "Security",
+    "placeholders": []
+  },
+  "settings_update_failed": {
+    "en": "Unable to update setting.",
+    "placeholders": []
+  },
+  "settings_widget_appearance": {
+    "en": "Widgets",
+    "placeholders": []
+  },
+  "settings_widget_background_opacity": {
+    "en": "Background opacity",
+    "placeholders": []
+  },
+  "settings_widget_content_scale": {
+    "en": "Content scale",
+    "placeholders": []
+  },
+  "settings_widget_dark_mode": {
+    "en": "Dark mode",
+    "placeholders": []
+  },
+  "stock_unit_capsules": {
+    "en": "capsules",
+    "placeholders": []
+  },
+  "stock_unit_containers": {
+    "en": "containers",
+    "placeholders": []
+  },
+  "stock_unit_g": {
+    "en": "g",
+    "placeholders": []
+  },
+  "stock_unit_injections": {
+    "en": "injections",
+    "placeholders": []
+  },
+  "stock_unit_ml": {
+    "en": "mL",
+    "placeholders": []
+  },
+  "stock_unit_patches": {
+    "en": "patches",
+    "placeholders": []
+  },
+  "stock_unit_sachets": {
+    "en": "sachets",
+    "placeholders": []
+  },
+  "stock_unit_tablets": {
+    "en": "tablets",
+    "placeholders": []
+  },
+  "stock_unit_vials": {
+    "en": "vials",
+    "placeholders": []
+  },
+  "unit_grams": {
+    "en": "g",
+    "placeholders": []
+  },
+  "unit_mcg": {
+    "en": "μg",
+    "placeholders": []
+  },
+  "unit_mcg_day": {
+    "en": "μg/day",
+    "placeholders": []
+  },
+  "unit_mg": {
+    "en": "mg",
+    "placeholders": []
+  },
+  "unit_mg_per_ml": {
+    "en": "mg/mL",
+    "placeholders": []
+  },
+  "unit_ml": {
+    "en": "mL",
+    "placeholders": []
+  },
+  "unit_percent": {
+    "en": "%",
+    "placeholders": []
+  },
+  "unlock_app_prompt_subtitle": {
+    "en": "Verify your identity to open the app.",
+    "placeholders": []
+  },
+  "unlock_app_prompt_title": {
+    "en": "Unlock the app",
+    "placeholders": []
+  },
+  "widget_config_seed_dynamic": {
+    "en": "Dynamic",
+    "placeholders": []
+  },
+  "widget_config_seed_hue": {
+    "en": "Accent color",
+    "placeholders": []
+  }
+}

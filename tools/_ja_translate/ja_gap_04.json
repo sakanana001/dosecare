@@ -1,0 +1,540 @@
+{
+  "stock_subcard_cd_stock_pool": {
+    "en": "Stock pool",
+    "placeholders": []
+  },
+  "stock_subcard_chip_almost_out": {
+    "en": "Almost out",
+    "placeholders": []
+  },
+  "stock_subcard_chip_in_stock": {
+    "en": "In stock",
+    "placeholders": []
+  },
+  "stock_subcard_chip_low": {
+    "en": "Low",
+    "placeholders": []
+  },
+  "stock_subcard_chip_out": {
+    "en": "Out",
+    "placeholders": []
+  },
+  "stock_subcard_runway_more_than_one_year": {
+    "en": ">1 year",
+    "placeholders": []
+  },
+  "stock_toast_imminent_single": {
+    "en": "Almost out: %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "stock_toast_out_single": {
+    "en": "Out of stock: %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "stock_toast_user_low_single": {
+    "en": "Low stock: %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "stock_warnat_row_title": {
+    "en": "Low stock reminders",
+    "placeholders": []
+  },
+  "stock_warnat_value_days": {
+    "en": "%1$d days",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "stock_warnat_value_off": {
+    "en": "Off",
+    "placeholders": []
+  },
+  "validation_capsule_strength_required": {
+    "en": "Enter a valid capsule strength.",
+    "placeholders": []
+  },
+  "validation_depot_strength_required": {
+    "en": "Enter a valid strength per injection.",
+    "placeholders": []
+  },
+  "validation_dose_tablet_fraction_required": {
+    "en": "Enter a valid tablet amount.",
+    "placeholders": []
+  },
+  "validation_dose_volume_required": {
+    "en": "Enter a valid volume.",
+    "placeholders": []
+  },
+  "validation_dose_weight_required": {
+    "en": "Enter a valid weight.",
+    "placeholders": []
+  },
+  "validation_gel_concentration_required": {
+    "en": "Enter a valid gel concentration.",
+    "placeholders": []
+  },
+  "validation_medication_selection_required": {
+    "en": "Select a medication.",
+    "placeholders": []
+  },
+  "validation_patch_release_rate_required": {
+    "en": "Enter a valid release rate.",
+    "placeholders": []
+  },
+  "validation_patch_total_required": {
+    "en": "Enter a valid total patch amount.",
+    "placeholders": []
+  },
+  "validation_pill_strength_required": {
+    "en": "Enter a valid tablet strength.",
+    "placeholders": []
+  },
+  "validation_preparation_type_required": {
+    "en": "Select a preparation type.",
+    "placeholders": []
+  },
+  "validation_vial_strength_required": {
+    "en": "Enter a valid vial strength.",
+    "placeholders": []
+  },
+  "validation_vial_volume_required": {
+    "en": "Enter a valid vial volume.",
+    "placeholders": []
+  },
+  "widget_preview_dose_supporting": {
+    "en": "Oral · 2 mg",
+    "placeholders": []
+  },
+  "widget_preview_dose_supporting_cpa": {
+    "en": "Oral · 1/4 tablet · 12.5 mg",
+    "placeholders": []
+  },
+  "widget_preview_dose_supporting_progesterone": {
+    "en": "Oral · 200 mg",
+    "placeholders": []
+  },
+  "widget_preview_dose_text_cpa": {
+    "en": "1/4 tablet · 12.5 mg",
+    "placeholders": []
+  },
+  "widget_preview_dose_time": {
+    "en": "9:00 AM",
+    "placeholders": []
+  },
+  "widget_preview_dose_time_evening": {
+    "en": "9:00 PM",
+    "placeholders": []
+  },
+  "archive": {
+    "en": "Archive",
+    "placeholders": []
+  },
+  "archive_create_active_copy": {
+    "en": "Create copy after archive",
+    "placeholders": []
+  },
+  "archived_group_record_indicator": {
+    "en": "From archived group",
+    "placeholders": []
+  },
+  "cross_timezone_entry_indicator": {
+    "en": "Recorded in a different timezone",
+    "placeholders": []
+  },
+  "decrease_schedule_interval": {
+    "en": "Decrease schedule interval",
+    "placeholders": []
+  },
+  "default_group_name_format": {
+    "en": "Group %1$d",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "delete_editing_entry_confirmation": {
+    "en": "Delete this record?",
+    "placeholders": []
+  },
+  "delete_entry_failure": {
+    "en": "Unable to delete record.",
+    "placeholders": []
+  },
+  "delete_entry_title": {
+    "en": "Delete record",
+    "placeholders": []
+  },
+  "delete_group_also_related_records": {
+    "en": "Also delete related records",
+    "placeholders": []
+  },
+  "delete_group_related_records": {
+    "en": "Delete records",
+    "placeholders": []
+  },
+  "delete_group_related_records_disabled": {
+    "en": "No related records yet.",
+    "placeholders": []
+  },
+  "delete_group_related_records_failure": {
+    "en": "Unable to delete related records.",
+    "placeholders": []
+  },
+  "delete_group_related_records_success": {
+    "en": "Deleted related records.",
+    "placeholders": []
+  },
+  "delete_group_related_records_title": {
+    "en": "Delete related records",
+    "placeholders": []
+  },
+  "group_color_picker_action": {
+    "en": "Change group color",
+    "placeholders": []
+  },
+  "group_color_picker_swatch_content_description": {
+    "en": "Color %1$d",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "group_color_picker_swatch_selected_content_description": {
+    "en": "Color %1$d, selected",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "group_color_picker_title": {
+    "en": "Pick a color",
+    "placeholders": []
+  },
+  "group_danger_zone_title": {
+    "en": "Danger zone",
+    "placeholders": []
+  },
+  "group_locked_banner": {
+    "en": "This group already has related records, so some settings can’t be changed. To make adjustments, archive the current group and create a new one.",
+    "placeholders": []
+  },
+  "group_locked_time_note": {
+    "en": "Changing the scheduled time also updates the scheduled time shown on past records.",
+    "placeholders": []
+  },
+  "group_medications_empty": {
+    "en": "No medications in this group yet.",
+    "placeholders": []
+  },
+  "group_medications_title": {
+    "en": "Medications",
+    "placeholders": []
+  },
+  "group_notifications_archived_disabled": {
+    "en": "Archived groups do not send reminders.",
+    "placeholders": []
+  },
+  "group_notifications_exact_alarm_message": {
+    "en": "Without exact alarms, reminders may be delayed. You can continue or open settings.",
+    "placeholders": []
+  },
+  "group_notifications_exact_alarm_settings": {
+    "en": "Open settings",
+    "placeholders": []
+  },
+  "group_notifications_exact_alarm_skip": {
+    "en": "Skip",
+    "placeholders": []
+  },
+  "group_notifications_exact_alarm_title": {
+    "en": "Allow exact alarms?",
+    "placeholders": []
+  },
+  "group_notifications_inexact_warning": {
+    "en": "Reminders may be delayed.",
+    "placeholders": []
+  },
+  "group_notifications_master_disabled": {
+    "en": "Reminders are off in Settings.",
+    "placeholders": []
+  },
+  "group_notifications_reenable_confirm": {
+    "en": "Turn on",
+    "placeholders": []
+  },
+  "group_notifications_reenable_message": {
+    "en": "Reminders are turned off in Settings. Once turned on, reminders for this group will also be enabled.",
+    "placeholders": []
+  },
+  "group_notifications_reenable_title": {
+    "en": "Turn on reminders?",
+    "placeholders": []
+  },
+  "group_notifications_reminder": {
+    "en": "Remind me",
+    "placeholders": []
+  },
+  "group_notifications_summary": {
+    "en": "Remind me for this group.",
+    "placeholders": []
+  },
+  "group_notifications_title": {
+    "en": "Notifications",
+    "placeholders": []
+  },
+  "group_past_plans_title": {
+    "en": "Past schedule",
+    "placeholders": []
+  },
+  "group_past_schedule_do_not_show": {
+    "en": "Do not show",
+    "placeholders": []
+  },
+  "group_past_schedule_recreated_locked_note": {
+    "en": "Recreated groups won’t show past schedule.",
+    "placeholders": []
+  },
+  "group_past_schedule_show": {
+    "en": "Show",
+    "placeholders": []
+  },
+  "group_past_schedule_show_and_generate_records": {
+    "en": "Also generate past records as planned",
+    "placeholders": []
+  },
+  "group_schedule_backfill_records_empty": {
+    "en": "No records added.",
+    "placeholders": []
+  },
+  "group_schedule_backfill_records_failure": {
+    "en": "Group saved, but unable to add records.",
+    "placeholders": []
+  },
+  "group_schedule_daily": {
+    "en": "Daily",
+    "placeholders": []
+  },
+  "group_schedule_daily_single_interval_summary": {
+    "en": "Every day",
+    "placeholders": []
+  },
+  "group_schedule_days_of_week": {
+    "en": "Days of week",
+    "placeholders": []
+  },
+  "group_schedule_duplicate_time": {
+    "en": "That time is already in the schedule.",
+    "placeholders": []
+  },
+  "group_schedule_preview": {
+    "en": "Preview",
+    "placeholders": []
+  },
+  "group_schedule_recreated_start_date_past_note": {
+    "en": "Recreated groups can’t set a start date in the past.",
+    "placeholders": []
+  },
+  "group_schedule_repeat_every": {
+    "en": "Repeat every",
+    "placeholders": []
+  },
+  "group_schedule_reset_days_to_start": {
+    "en": "Reset",
+    "placeholders": []
+  },
+  "group_schedule_since": {
+    "en": "Start date",
+    "placeholders": []
+  },
+  "group_schedule_since_summary": {
+    "en": "Since %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "group_schedule_time": {
+    "en": "Time",
+    "placeholders": []
+  },
+  "group_schedule_times_with_count": {
+    "en": "Times of day · %d",
+    "placeholders": []
+  },
+  "group_schedule_title": {
+    "en": "Schedule",
+    "placeholders": []
+  },
+  "group_schedule_weekly": {
+    "en": "Weekly",
+    "placeholders": []
+  },
+  "group_schedule_weekly_single_interval_summary": {
+    "en": "Every week",
+    "placeholders": []
+  },
+  "history_entry_selected": {
+    "en": "Record selected",
+    "placeholders": []
+  },
+  "history_summary_logged_strip": {
+    "en": "%1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "increase_schedule_interval": {
+    "en": "Increase schedule interval",
+    "placeholders": []
+  },
+  "onboarding_useful_plan_added": {
+    "en": "Group added",
+    "placeholders": []
+  },
+  "onboarding_useful_plan_desc": {
+    "en": "Add a medication group to enable predictions and reminders.",
+    "placeholders": []
+  },
+  "onboarding_useful_plan_title": {
+    "en": "Create your first plan",
+    "placeholders": []
+  },
+  "plan_archived_groups": {
+    "en": "Archived groups",
+    "placeholders": []
+  },
+  "plan_archived_groups_archived_at": {
+    "en": "Archived at %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "plan_archived_groups_created_at": {
+    "en": "Created at %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "plan_archived_groups_empty": {
+    "en": "No archived groups yet.",
+    "placeholders": []
+  },
+  "plan_empty_state": {
+    "en": "No medication groups yet.",
+    "placeholders": []
+  },
+  "plan_entry_label_manual": {
+    "en": "Manual",
+    "placeholders": []
+  },
+  "plan_group_notifications_disabled": {
+    "en": "Reminders off",
+    "placeholders": []
+  },
+  "plan_group_notifications_enabled": {
+    "en": "Reminders on",
+    "placeholders": []
+  },
+  "plan_group_upcoming_format": {
+    "en": "%1$s · %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "plan_group_upcoming_title": {
+    "en": "Upcoming",
+    "placeholders": []
+  },
+  "plan_group_upcoming_today": {
+    "en": "Today",
+    "placeholders": []
+  },
+  "plan_group_upcoming_tomorrow": {
+    "en": "Tomorrow",
+    "placeholders": []
+  },
+  "plan_more_options": {
+    "en": "More options",
+    "placeholders": []
+  },
+  "plan_next_week": {
+    "en": "Next week",
+    "placeholders": []
+  },
+  "plan_open_history": {
+    "en": "Open history",
+    "placeholders": []
+  },
+  "plan_previous_week": {
+    "en": "Previous week",
+    "placeholders": []
+  },
+  "plan_regimen_title": {
+    "en": "Regimen",
+    "placeholders": []
+  },
+  "plan_schedule_entry_due_soon": {
+    "en": "Due soon",
+    "placeholders": []
+  },
+  "plan_schedule_entry_logged": {
+    "en": "Logged",
+    "placeholders": []
+  },
+  "plan_schedule_entry_logged_day_offset_earlier": {
+    "en": "-%1$d",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "plan_schedule_entry_logged_day_offset_later": {
+    "en": "+%1$d",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "plan_schedule_entry_missed": {
+    "en": "Missed",
+    "placeholders": []
+  },
+  "plan_schedule_entry_past_due": {
+    "en": "Past due",
+    "placeholders": []
+  },
+  "plan_schedule_entry_planned": {
+    "en": "Planned",
+    "placeholders": []
+  },
+  "plan_selected_day_records_empty": {
+    "en": "No records for this day.",
+    "placeholders": []
+  },
+  "plan_week_current": {
+    "en": "This week",
+    "placeholders": []
+  },
+  "plan_week_next": {
+    "en": "Next week",
+    "placeholders": []
+  },
+  "plan_week_previous": {
+    "en": "Last week",
+    "placeholders": []
+  },
+  "save_entry_failure": {
+    "en": "Unable to save record.",
+    "placeholders": []
+  },
+  "schedule_fulfillment_warning_message": {
+    "en": "The time you entered is far from the original scheduled time, so this record won’t count as completing this schedule.",
+    "placeholders": []
+  },
+  "schedule_fulfillment_warning_title": {
+    "en": "Won’t count as completed",
+    "placeholders": []
+  }
+}

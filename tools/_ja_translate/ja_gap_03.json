@@ -1,0 +1,1077 @@
+{
+  "add_medication_group": {
+    "en": "Add group",
+    "placeholders": []
+  },
+  "add_medication_to_group": {
+    "en": "Add medication",
+    "placeholders": []
+  },
+  "archive_and_recreate_medication_group_failure": {
+    "en": "Unable to archive and recreate group.",
+    "placeholders": []
+  },
+  "archive_and_recreate_medication_group_success": {
+    "en": "Archived.",
+    "placeholders": []
+  },
+  "archive_medication_group": {
+    "en": "Archive group",
+    "placeholders": []
+  },
+  "archive_medication_group_blocked_by_planned_slots": {
+    "en": "Resolve current or upcoming planned slots that already have records before archiving.",
+    "placeholders": []
+  },
+  "archive_medication_group_confirmation": {
+    "en": "Archive this medication group? It will be removed from your current plan and reminders will stop. Existing records won’t be deleted.",
+    "placeholders": []
+  },
+  "archive_medication_group_end_date": {
+    "en": "Plan ended on",
+    "placeholders": []
+  },
+  "archive_medication_group_end_date_now": {
+    "en": "Now",
+    "placeholders": []
+  },
+  "archive_medication_group_failure": {
+    "en": "Unable to archive group.",
+    "placeholders": []
+  },
+  "archive_medication_group_irreversible_acknowledgement": {
+    "en": "I understand that archived groups can’t be restored.",
+    "placeholders": []
+  },
+  "archive_medication_group_reset_to_now": {
+    "en": "Reset",
+    "placeholders": []
+  },
+  "archive_medication_group_title": {
+    "en": "Archive group",
+    "placeholders": []
+  },
+  "archived_medication_group": {
+    "en": "Archived group",
+    "placeholders": []
+  },
+  "create_medicine_action": {
+    "en": "Save",
+    "placeholders": []
+  },
+  "create_medicine_title": {
+    "en": "Add medicine",
+    "placeholders": []
+  },
+  "decrease_medication_count": {
+    "en": "Decrease medication count",
+    "placeholders": []
+  },
+  "delete_group_medication_confirmation": {
+    "en": "Remove %1$s from this group?",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "delete_group_medication_title": {
+    "en": "Remove medication",
+    "placeholders": []
+  },
+  "delete_medication_group": {
+    "en": "Delete group",
+    "placeholders": []
+  },
+  "delete_medication_group_confirmation": {
+    "en": "Delete this medication group? It has no related history records.",
+    "placeholders": []
+  },
+  "delete_medication_group_failure": {
+    "en": "Unable to delete group.",
+    "placeholders": []
+  },
+  "delete_medication_group_title": {
+    "en": "Delete group",
+    "placeholders": []
+  },
+  "dose_instruction_summary_active_amount": {
+    "en": "%1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "dose_instruction_summary_concentration_mg_per_ml": {
+    "en": "%1$s mg/mL",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "dose_instruction_summary_concentration_percent": {
+    "en": "%1$s%%",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "dose_instruction_summary_patch_release_rate": {
+    "en": "%1$s μg/day",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "dose_instruction_summary_tablet_fraction": {
+    "en": "%1$s tablets",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "dose_instruction_summary_volume_ml": {
+    "en": "%1$s mL",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "dose_instruction_summary_weight_grams": {
+    "en": "%1$s g",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "duplicate_medication_group": {
+    "en": "Duplicate as new group",
+    "placeholders": []
+  },
+  "edit_medication_group": {
+    "en": "Edit group",
+    "placeholders": []
+  },
+  "external_import_medication_label": {
+    "en": "Medication rows",
+    "placeholders": []
+  },
+  "field_capsule_strength_mg": {
+    "en": "Capsule strength",
+    "placeholders": []
+  },
+  "field_depot_strength_mg": {
+    "en": "Strength per injection",
+    "placeholders": []
+  },
+  "field_dose_tablet_fraction": {
+    "en": "Tablets per dose",
+    "placeholders": []
+  },
+  "field_dose_volume_ml": {
+    "en": "Volume per dose",
+    "placeholders": []
+  },
+  "field_dose_weight_grams": {
+    "en": "Weight per dose",
+    "placeholders": []
+  },
+  "field_gel_concentration_percent": {
+    "en": "Gel concentration",
+    "placeholders": []
+  },
+  "field_medication_application": {
+    "en": "Application",
+    "placeholders": []
+  },
+  "field_medication_category": {
+    "en": "Category",
+    "placeholders": []
+  },
+  "field_medication_group_name": {
+    "en": "Group name",
+    "placeholders": []
+  },
+  "field_medication_name": {
+    "en": "Medication name",
+    "placeholders": []
+  },
+  "field_patch_release_rate": {
+    "en": "Patch release rate",
+    "placeholders": []
+  },
+  "field_patch_spec_kind": {
+    "en": "Patch specification",
+    "placeholders": []
+  },
+  "field_patch_spec_release_rate": {
+    "en": "Release rate",
+    "placeholders": []
+  },
+  "field_patch_spec_total_mg": {
+    "en": "Total dose",
+    "placeholders": []
+  },
+  "field_patch_total_dosage_mg": {
+    "en": "Total amount in patch",
+    "placeholders": []
+  },
+  "field_pill_strength_mg": {
+    "en": "Tablet strength",
+    "placeholders": []
+  },
+  "field_preparation_form": {
+    "en": "Preparation form",
+    "placeholders": []
+  },
+  "field_preparation_type": {
+    "en": "Preparation type",
+    "placeholders": []
+  },
+  "field_single_use_vial_strength_mg": {
+    "en": "Vial strength",
+    "placeholders": []
+  },
+  "field_vial_volume_ml": {
+    "en": "Vial volume",
+    "placeholders": []
+  },
+  "group_medication_duplicate_exists": {
+    "en": "This medication is already in the group.",
+    "placeholders": []
+  },
+  "home_low_stock_collapsed_state": {
+    "en": "Collapsed",
+    "placeholders": []
+  },
+  "home_low_stock_expanded_state": {
+    "en": "Expanded",
+    "placeholders": []
+  },
+  "home_low_stock_title_with_count": {
+    "en": "Low stock · %1$d",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "increase_medication_count": {
+    "en": "Increase medication count",
+    "placeholders": []
+  },
+  "main_antiandrogen_last_dose_elapsed": {
+    "en": "Last dose %1$s ago",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "main_antiandrogen_next_dose_past_due": {
+    "en": "Due %1$s ago",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "main_e2_last_dose_with_time": {
+    "en": "Last dose %1$s ago",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_application_gel": {
+    "en": "Gel",
+    "placeholders": []
+  },
+  "medication_application_injection": {
+    "en": "Injection",
+    "placeholders": []
+  },
+  "medication_application_oral": {
+    "en": "Oral",
+    "placeholders": []
+  },
+  "medication_application_patch_off": {
+    "en": "Patch",
+    "placeholders": []
+  },
+  "medication_application_patch_on": {
+    "en": "Patch",
+    "placeholders": []
+  },
+  "medication_application_sublingual": {
+    "en": "Sublingual",
+    "placeholders": []
+  },
+  "medication_archived_indicator_cd": {
+    "en": "Archived medicine",
+    "placeholders": []
+  },
+  "medication_category_antiandrogen": {
+    "en": "Antiandrogen",
+    "placeholders": []
+  },
+  "medication_category_custom": {
+    "en": "Custom",
+    "placeholders": []
+  },
+  "medication_category_estradiol": {
+    "en": "Estradiol",
+    "placeholders": []
+  },
+  "medication_category_gnrh_agonist": {
+    "en": "GnRHa",
+    "placeholders": []
+  },
+  "medication_category_serm": {
+    "en": "SERM",
+    "placeholders": []
+  },
+  "medication_category_testosterone": {
+    "en": "Testosterone",
+    "placeholders": []
+  },
+  "medication_editor_dose_assist_grams": {
+    "en": "%1$sg",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_editor_dose_assist_mcg_day": {
+    "en": "%1$s μg/day",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_editor_dose_assist_mg": {
+    "en": "%1$s mg",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_editor_dose_assist_mg_per_ml": {
+    "en": "%1$s mg/mL",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_editor_dose_assist_ml": {
+    "en": "%1$s mL",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_editor_dose_assist_percent": {
+    "en": "%1$s%%",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_editor_dose_warning": {
+    "en": "Dose above warning threshold",
+    "placeholders": []
+  },
+  "medication_editor_original_schedule": {
+    "en": "Scheduled for %1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_editor_patch_off_hint": {
+    "en": "Not required for patch removal",
+    "placeholders": []
+  },
+  "medication_editor_schedule_offset_days_earlier": {
+    "en": "-%1$dd",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "medication_editor_schedule_offset_days_later": {
+    "en": "+%1$dd",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "medication_editor_schedule_offset_hours_earlier": {
+    "en": "-%1$dh",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "medication_editor_schedule_offset_hours_later": {
+    "en": "+%1$dh",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "medication_editor_schedule_offset_minutes_earlier": {
+    "en": "-%1$dm",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "medication_editor_schedule_offset_minutes_later": {
+    "en": "+%1$dm",
+    "placeholders": [
+      "%1$d"
+    ]
+  },
+  "medication_editor_schedule_offset_warning": {
+    "en": "Outside fulfillment window",
+    "placeholders": []
+  },
+  "medication_gel_application_area_default": {
+    "en": "Default",
+    "placeholders": []
+  },
+  "medication_log_actual_amount": {
+    "en": "Actual amount",
+    "placeholders": []
+  },
+  "medication_log_actual_amount_decrease": {
+    "en": "Decrease actual amount",
+    "placeholders": []
+  },
+  "medication_log_actual_amount_increase": {
+    "en": "Increase actual amount",
+    "placeholders": []
+  },
+  "medication_log_actual_amount_reset": {
+    "en": "Reset actual amount",
+    "placeholders": []
+  },
+  "medication_name_bicalutamide": {
+    "en": "比卡鲁胺",
+    "placeholders": []
+  },
+  "medication_name_cyproterone_acetate": {
+    "en": "醋酸环丙孕酮",
+    "placeholders": []
+  },
+  "medication_name_dutasteride": {
+    "en": "度他雄胺",
+    "placeholders": []
+  },
+  "medication_name_estradiol": {
+    "en": "雌二醇",
+    "placeholders": []
+  },
+  "medication_name_estradiol_benzoate": {
+    "en": "苯甲酸雌二醇",
+    "placeholders": []
+  },
+  "medication_name_estradiol_cypionate": {
+    "en": "环戊丙酸雌二醇",
+    "placeholders": []
+  },
+  "medication_name_estradiol_enanthate": {
+    "en": "庚酸雌二醇",
+    "placeholders": []
+  },
+  "medication_name_estradiol_gel": {
+    "en": "雌二醇",
+    "placeholders": []
+  },
+  "medication_name_estradiol_patch": {
+    "en": "雌二醇",
+    "placeholders": []
+  },
+  "medication_name_estradiol_undecylate": {
+    "en": "十一酸雌二醇",
+    "placeholders": []
+  },
+  "medication_name_estradiol_valerate": {
+    "en": "戊酸雌二醇",
+    "placeholders": []
+  },
+  "medication_name_finasteride": {
+    "en": "非那雄胺",
+    "placeholders": []
+  },
+  "medication_name_goserelin": {
+    "en": "戈舍瑞林",
+    "placeholders": []
+  },
+  "medication_name_leuprorelin": {
+    "en": "亮丙瑞林",
+    "placeholders": []
+  },
+  "medication_name_raloxifene": {
+    "en": "雷洛昔芬",
+    "placeholders": []
+  },
+  "medication_name_spironolactone": {
+    "en": "螺内酯",
+    "placeholders": []
+  },
+  "medication_name_tamoxifen": {
+    "en": "他莫昔芬",
+    "placeholders": []
+  },
+  "medication_name_testosterone_cypionate": {
+    "en": "睾酮环戊丙酸酯",
+    "placeholders": []
+  },
+  "medication_name_testosterone_enanthate": {
+    "en": "睾酮庚酸酯",
+    "placeholders": []
+  },
+  "medication_name_testosterone_gel": {
+    "en": "睾酮凝胶",
+    "placeholders": []
+  },
+  "medication_name_testosterone_undecanoate": {
+    "en": "睾酮十一酸酯（Nebido）",
+    "placeholders": []
+  },
+  "medication_name_triptorelin": {
+    "en": "曲普瑞林",
+    "placeholders": []
+  },
+  "medication_preparation_summary_capsule": {
+    "en": "Capsule · %1$s mg",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_preparation_summary_capsule_with_unit": {
+    "en": "Capsule · %1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "medication_preparation_summary_depot_injection": {
+    "en": "Injection · %1$s mg",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_preparation_summary_depot_injection_with_unit": {
+    "en": "Injection · %1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "medication_preparation_summary_gel_container": {
+    "en": "Gel · Container · %1$s%% · %2$s g",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "medication_preparation_summary_gel_sachet": {
+    "en": "Gel · Sachet · %1$s%% · %2$s g",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "medication_preparation_summary_imported_gel": {
+    "en": "Gel · %1$s mg",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_preparation_summary_imported_injection": {
+    "en": "Injection · %1$s mg",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_preparation_summary_multi_use_vial": {
+    "en": "Injection · Vial · %1$s mg/mL · %2$s mL",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "medication_preparation_summary_patch_release_rate": {
+    "en": "Patch · %1$s μg/day",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_preparation_summary_patch_total": {
+    "en": "Patch · %1$s mg",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_preparation_summary_patch_total_with_unit": {
+    "en": "Patch · %1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "medication_preparation_summary_pill": {
+    "en": "Tablet · %1$s mg",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_preparation_summary_pill_with_unit": {
+    "en": "Tablet · %1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "medication_preparation_summary_single_use_vial": {
+    "en": "Injection · Ampule · %1$s mg",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "medication_preparation_summary_single_use_vial_with_unit": {
+    "en": "Injection · Ampule · %1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "medicine_already_exists": {
+    "en": "Medicine already exists.",
+    "placeholders": []
+  },
+  "medicine_archive_action": {
+    "en": "Archive",
+    "placeholders": []
+  },
+  "medicine_archive_blocked_by_groups": {
+    "en": "Remove this medicine from active groups before archiving.",
+    "placeholders": []
+  },
+  "medicine_archive_confirm_message": {
+    "en": "Archive this medicine? Logged history will be kept.",
+    "placeholders": []
+  },
+  "medicine_archive_confirm_title": {
+    "en": "Archive medicine",
+    "placeholders": []
+  },
+  "medicine_archive_failure": {
+    "en": "Unable to archive this medicine.",
+    "placeholders": []
+  },
+  "medicine_detail_title": {
+    "en": "Medicine details",
+    "placeholders": []
+  },
+  "medicine_display_name": {
+    "en": "Display name",
+    "placeholders": []
+  },
+  "medicine_edit_action": {
+    "en": "Edit medicine",
+    "placeholders": []
+  },
+  "medicine_edit_title": {
+    "en": "Edit medicine",
+    "placeholders": []
+  },
+  "medicine_linked_groups": {
+    "en": "Active groups",
+    "placeholders": []
+  },
+  "medicine_linked_groups_empty": {
+    "en": "No active groups use this medicine.",
+    "placeholders": []
+  },
+  "medicine_locked_by_logs": {
+    "en": "This medicine already has related records, so some fields can’t be changed.",
+    "placeholders": []
+  },
+  "medicine_manager_manual_log_title": {
+    "en": "Add manual record",
+    "placeholders": []
+  },
+  "medicine_patch_off_detail_summary": {
+    "en": "Logging this entry removes any currently applied estradiol patch.",
+    "placeholders": []
+  },
+  "medicine_patch_off_name": {
+    "en": "Remove patch",
+    "placeholders": []
+  },
+  "medicine_picker_add_new_medicine": {
+    "en": "Add medicine",
+    "placeholders": []
+  },
+  "medicine_picker_select_medicine": {
+    "en": "Select medicine",
+    "placeholders": []
+  },
+  "medicine_preparation": {
+    "en": "Preparation",
+    "placeholders": []
+  },
+  "medicine_preparation_form_capsule": {
+    "en": "Capsule",
+    "placeholders": []
+  },
+  "medicine_preparation_form_gel": {
+    "en": "Gel",
+    "placeholders": []
+  },
+  "medicine_preparation_form_injection": {
+    "en": "Injection",
+    "placeholders": []
+  },
+  "medicine_preparation_form_patch": {
+    "en": "Patch",
+    "placeholders": []
+  },
+  "medicine_preparation_form_tablet": {
+    "en": "Tablet",
+    "placeholders": []
+  },
+  "medicine_save_failure": {
+    "en": "Unable to save this medicine.",
+    "placeholders": []
+  },
+  "medicine_stock_update_failure": {
+    "en": "Unable to update stock.",
+    "placeholders": []
+  },
+  "onboarding_stock_optin_banner": {
+    "en": "Tap a medicine to add stock. You can also enable stock tracking anytime from Plan → Medicine.",
+    "placeholders": []
+  },
+  "onboarding_useful_stock_added": {
+    "en": "Stock tracking enabled",
+    "placeholders": []
+  },
+  "onboarding_useful_stock_desc": {
+    "en": "Record your remaining stock to enable runway estimates.",
+    "placeholders": []
+  },
+  "onboarding_useful_stock_title": {
+    "en": "Track stock",
+    "placeholders": []
+  },
+  "plan_batch_add_confirm_button": {
+    "en": "Add records",
+    "placeholders": []
+  },
+  "plan_batch_add_confirm_title": {
+    "en": "Add records?",
+    "placeholders": []
+  },
+  "plan_batch_add_deduct_stock": {
+    "en": "Update stock counts",
+    "placeholders": []
+  },
+  "plan_batch_add_deduct_stock_none_tracked": {
+    "en": "This group has no tracked medicines.",
+    "placeholders": []
+  },
+  "plan_batch_add_entries_to_add_with_skipped": {
+    "en": "%1$s · %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "plan_batch_add_failure": {
+    "en": "Unable to add records.",
+    "placeholders": []
+  },
+  "plan_batch_add_from_plan": {
+    "en": "Batch add from plan",
+    "placeholders": []
+  },
+  "plan_batch_add_group_not_started": {
+    "en": "Please select a group with a start date in the past.",
+    "placeholders": []
+  },
+  "plan_batch_add_group_selected": {
+    "en": "Selected",
+    "placeholders": []
+  },
+  "plan_batch_add_manual_before_start_note": {
+    "en": "Records before the plan start date will be saved as manual records.",
+    "placeholders": []
+  },
+  "plan_batch_add_no_entries": {
+    "en": "No records can be added in this range.",
+    "placeholders": []
+  },
+  "plan_batch_add_no_new_entries": {
+    "en": "No new records to add",
+    "placeholders": []
+  },
+  "plan_batch_add_range_title": {
+    "en": "Date range",
+    "placeholders": []
+  },
+  "plan_batch_add_select_group": {
+    "en": "Select group",
+    "placeholders": []
+  },
+  "plan_batch_add_select_group_no_available_medicines": {
+    "en": "No stock changes in this range.",
+    "placeholders": []
+  },
+  "plan_batch_add_select_group_prompt": {
+    "en": "Please select a group first.",
+    "placeholders": []
+  },
+  "plan_batch_add_stock_title": {
+    "en": "Stock",
+    "placeholders": []
+  },
+  "plan_batch_add_title": {
+    "en": "Batch add from plan",
+    "placeholders": []
+  },
+  "preparation_type_capsule": {
+    "en": "Capsule",
+    "placeholders": []
+  },
+  "preparation_type_gel_container": {
+    "en": "Container",
+    "placeholders": []
+  },
+  "preparation_type_gel_sachet": {
+    "en": "Sachet",
+    "placeholders": []
+  },
+  "preparation_type_injection_multi_use_vial": {
+    "en": "Vial",
+    "placeholders": []
+  },
+  "preparation_type_injection_single_use_vial": {
+    "en": "Ampule",
+    "placeholders": []
+  },
+  "preparation_type_patch": {
+    "en": "Patch",
+    "placeholders": []
+  },
+  "preparation_type_pill": {
+    "en": "Tablet",
+    "placeholders": []
+  },
+  "quick_add_group_planned_slot_today": {
+    "en": "Today",
+    "placeholders": []
+  },
+  "remove_medication_from_group": {
+    "en": "Remove medication",
+    "placeholders": []
+  },
+  "save_medication_group_failure": {
+    "en": "Unable to save group.",
+    "placeholders": []
+  },
+  "stock_adjust_add": {
+    "en": "Add",
+    "placeholders": []
+  },
+  "stock_adjust_after": {
+    "en": "After: %1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "stock_adjust_confirm": {
+    "en": "Confirm",
+    "placeholders": []
+  },
+  "stock_adjust_decrease_count": {
+    "en": "Decrease count",
+    "placeholders": []
+  },
+  "stock_adjust_field_add_to_stock": {
+    "en": "Add to stock",
+    "placeholders": []
+  },
+  "stock_adjust_field_current_stock": {
+    "en": "Current stock",
+    "placeholders": []
+  },
+  "stock_adjust_increase_count": {
+    "en": "Increase count",
+    "placeholders": []
+  },
+  "stock_adjust_row_label": {
+    "en": "Adjust stock",
+    "placeholders": []
+  },
+  "stock_adjust_save": {
+    "en": "Save",
+    "placeholders": []
+  },
+  "stock_adjust_tab_received": {
+    "en": "Add stock",
+    "placeholders": []
+  },
+  "stock_adjust_tab_recount": {
+    "en": "Edit stock",
+    "placeholders": []
+  },
+  "stock_adjust_title": {
+    "en": "Adjust stock",
+    "placeholders": []
+  },
+  "stock_cancel": {
+    "en": "Cancel",
+    "placeholders": []
+  },
+  "stock_chip_imminent": {
+    "en": "Almost out",
+    "placeholders": []
+  },
+  "stock_chip_low": {
+    "en": "Low",
+    "placeholders": []
+  },
+  "stock_chip_out": {
+    "en": "Out",
+    "placeholders": []
+  },
+  "stock_current_edit_action_container": {
+    "en": "Edit current container",
+    "placeholders": []
+  },
+  "stock_current_edit_action_vial": {
+    "en": "Edit current vial",
+    "placeholders": []
+  },
+  "stock_current_edit_dialog_field": {
+    "en": "Remaining",
+    "placeholders": []
+  },
+  "stock_current_edit_dialog_invalid": {
+    "en": "Enter a valid number.",
+    "placeholders": []
+  },
+  "stock_current_edit_dialog_title_container": {
+    "en": "Set current container",
+    "placeholders": []
+  },
+  "stock_current_edit_dialog_title_vial": {
+    "en": "Set current vial",
+    "placeholders": []
+  },
+  "stock_disable_body": {
+    "en": "This will clear the current stock info.",
+    "placeholders": []
+  },
+  "stock_disable_confirm": {
+    "en": "Turn off",
+    "placeholders": []
+  },
+  "stock_disable_menu_action": {
+    "en": "Turn off stock tracking",
+    "placeholders": []
+  },
+  "stock_disable_title": {
+    "en": "Turn off stock tracking?",
+    "placeholders": []
+  },
+  "stock_nudge_action_enable": {
+    "en": "Enable",
+    "placeholders": []
+  },
+  "stock_nudge_added_toast": {
+    "en": "Added %1$s to stock",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "stock_nudge_disabled_toast": {
+    "en": "Tips disabled. Turn them back on from the medicine menu.",
+    "placeholders": []
+  },
+  "stock_nudge_menu_label": {
+    "en": "Stock tracking tips",
+    "placeholders": []
+  },
+  "stock_nudge_message": {
+    "en": "Enable stock tracking for %1$s?",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "stock_optin_title": {
+    "en": "Enable stock tracking",
+    "placeholders": []
+  },
+  "stock_rate_per_day": {
+    "en": "%1$s %2$s / day",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "stock_rate_per_week": {
+    "en": "%1$s %2$s / week",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "stock_row_count_only": {
+    "en": "%1$s",
+    "placeholders": [
+      "%1$s"
+    ]
+  },
+  "stock_row_count_over_total": {
+    "en": "%1$s / %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "stock_row_count_with_unit": {
+    "en": "%1$s %2$s",
+    "placeholders": [
+      "%1$s",
+      "%2$s"
+    ]
+  },
+  "stock_row_label_current_container": {
+    "en": "Current container",
+    "placeholders": []
+  },
+  "stock_row_label_current_vial": {
+    "en": "Current vial",
+    "placeholders": []
+  },
+  "stock_row_label_stock": {
+    "en": "Stock",
+    "placeholders": []
+  },
+  "stock_runway_more_than_one_year": {
+    "en": ">1 year remaining",
+    "placeholders": []
+  },
+  "stock_runway_unknown_body": {
+    "en": "Add this medicine to a group to forecast.",
+    "placeholders": []
+  },
+  "stock_runway_unknown_title": {
+    "en": "Runway unknown",
+    "placeholders": []
+  },
+  "stock_section_more_options": {
+    "en": "More options",
+    "placeholders": []
+  },
+  "stock_section_title": {
+    "en": "Stock tracking",
+    "placeholders": []
+  },
+  "stock_snackbar_action_dismiss": {
+    "en": "Dismiss",
+    "placeholders": []
+  },
+  "stock_snackbar_action_view": {
+    "en": "View",
+    "placeholders": []
+  },
+  "stock_subcard_cd_open_container": {
+    "en": "Open container",
+    "placeholders": []
+  },
+  "stock_subcard_cd_open_vial": {
+    "en": "Open vial",
+    "placeholders": []
+  }
+}

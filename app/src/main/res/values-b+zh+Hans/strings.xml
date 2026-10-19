@@ -1332,4 +1332,25 @@
     <string name="monfreq_before_each_dose">每次给药前</string>
     <string name="monfreq_every_6_8_weeks">每 6-8 周</string>
     <string name="monfreq_continuous">持续监测</string>
+    <string name="hrt_goal_ftm">FtM（跨男性）</string>
+    <string name="hrt_goal_mtf">MtF（跨女性）</string>
+    <string name="hrt_goal_non_binary">非二元 / 自定义</string>
+    <string name="hrt_goal_unset">尚未设置</string>
+    <string name="main_chart_hormone_cpa">CPA</string>
+    <string name="main_chart_hormone_e2">E2</string>
+    <string name="main_chart_hormone_t">T</string>
+    <string name="main_cpa_chart_subtitle">醋酸环丙孕酮 · 实测趋势</string>
+    <string name="main_t_chart_subtitle">睾酮 · 实测趋势</string>
+    <string name="medication_name_testosterone_cypionate">睾酮环戊丙酸酯</string>
+    <string name="medication_name_testosterone_enanthate">睾酮庚酸酯</string>
+    <string name="medication_name_testosterone_gel">睾酮凝胶</string>
+    <string name="medication_name_testosterone_undecanoate">睾酮十一酸酯（Nebido）</string>
+    <string name="safety_hrt_goal_mismatch_cpa_ftm_body">醋酸环丙孕酮用于跨女性方案中，用来阻断雄激素的作用。如果你使用 FtM 方案，而医生明确为你开了 CPA，请先确认剂量和原因再记录。</string>
+    <string name="safety_hrt_goal_mismatch_cpa_ftm_title">CPA 是跨女性使用的抗雄激素</string>
+    <string name="safety_hrt_goal_mismatch_e2_ftm_body">雌二醇是跨女性方案的主要激素。如果你使用 FtM 方案，而医生为你开了低剂量 E2，请先确认给药途径和剂量再记录。</string>
+    <string name="safety_hrt_goal_mismatch_e2_ftm_title">雌二醇是跨女性使用的激素</string>
+    <string name="safety_hrt_goal_mismatch_t_mtf_body">睾酮是跨男性方案的主要激素。如果你使用 MtF 方案，而医生为你开了低剂量 T，请先确认给药途径和剂量再记录。</string>
+    <string name="safety_hrt_goal_mismatch_t_mtf_title">睾酮是跨男性使用的激素</string>
+    <string name="settings_hrt_goal">HRT 目标</string>
+    <string name="settings_hrt_goal_summary">决定首页图表默认显示的激素，并控制临床安全提示。随时可以更改。</string>
 </resources>
