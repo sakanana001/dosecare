@@ -59,7 +59,7 @@ class InteractionAnalysisRepository @Inject constructor(
             userProfileRepository.observeProfile(),
         ) { groups, profile ->
             groups to profile
-        }.map { (groups, _) -> groups.toRuleInputs() }
+        }.map { (groups, _) -> groups.orEmpty().toRuleInputs() }
 
     /**
      * Full evaluation. Returns an empty list when nothing in the regimen is linked to the
@@ -72,9 +72,10 @@ class InteractionAnalysisRepository @Inject constructor(
     }
 
     /**
-     * Convenience for one-shot callers (widget, notification tap). Same shape as [evaluate].
+     * Convenience for one-shot callers (widget, notification tap). Same shape as [evaluate],
+     * and suspending for the same reason: reading the regimen goes through the database.
      */
-    fun evaluateNow(): List<com.dosecare.app.model.pharmacology.Interaction> {
+    suspend fun evaluateNow(): List<com.dosecare.app.model.pharmacology.Interaction> {
         val inputs = medicationGroupRepository.getGroups().toRuleInputs()
         if (inputs.isEmpty()) return emptyList()
         return ruleEngine.evaluate(inputs, patientProfile())

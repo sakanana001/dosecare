@@ -141,6 +141,8 @@ fun SettingsScreen(
     modifier: Modifier = Modifier,
     scrollToTopSignal: Int = 0,
     onCalibrationClick: () -> Unit = {},
+    // v0.9g merge: entry point to the drug-interaction screen (Screen.Interactions).
+    onInteractionsClick: () -> Unit = {},
     viewModel: SettingsViewModel = hiltViewModel(),
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
@@ -593,6 +595,7 @@ fun SettingsScreen(
             }
         },
         onCalibrationClick = onCalibrationClick,
+        onInteractionsClick = onInteractionsClick,
         scrollToTopSignal = scrollToTopSignal,
         modifier = modifier
     )
@@ -987,6 +990,7 @@ internal fun SettingsScreenContent(
     showDiagnosticsExport: Boolean,
     onExportDiagnosticLogsClick: () -> Unit,
     onCalibrationClick: () -> Unit,
+    onInteractionsClick: () -> Unit = {},
     scrollToTopSignal: Int = 0,
 ) {
     val settingsState = uiState.settingsState
@@ -1114,6 +1118,25 @@ internal fun SettingsScreenContent(
                             leadingContent = {
                                 SettingsLeadingIconSlot(
                                     painter = painterResource(R.drawable.ic_experiment)
+                                )
+                            },
+                            trailingContent = {
+                                SettingsChevronTrailingIcon()
+                            }
+                        )
+                    }
+
+                    // v0.9g merge: drug-interaction screening. Sits next to
+                    // Calibration because both are clinical review surfaces fed by
+                    // the same regimen; from there the user can pick which drugs
+                    // to evaluate against the 202-drug pharmacology catalog.
+                    item {
+                        SettingsSegmentedListItem(
+                            title = stringResource(R.string.interaction_entry_title),
+                            onClick = onInteractionsClick,
+                            leadingContent = {
+                                SettingsLeadingIconSlot(
+                                    painter = painterResource(R.drawable.ic_data_info_alert)
                                 )
                             },
                             trailingContent = {

@@ -1252,4 +1252,48 @@
     <string name="sevrule_medium">Medium Alert</string>
     <string name="sevrule_low">Low Notice</string>
     <string name="sevrule_info">Info</string>
+
+<!-- ==== merge phase 2: drug interaction UI (from DoseCare A, A/values-en) ==== -->
+    <string name="interaction_acb_format">ACB score %1$d</string>
+    <string name="interaction_add_drug_n">Add drug · search (%1$d available)</string>
+    <string name="interaction_advice">Suggestion: %1$s</string>
+    <string name="interaction_alerts_count">RuleEngine found %1$d alerts</string>
+    <string name="interaction_card_title">Multi-drug interactions</string>
+    <string name="interaction_evaluate_n">Evaluate all %1$d drug combinations</string>
+    <string name="interaction_high_overdose_n">⚠️ %1$d drugs with high overdose risk (severe / life-threatening)</string>
+    <string name="interaction_info">Evaluation info</string>
+    <string name="interaction_info_lines">• Add 2+ drugs, RuleEngine runs all combinations (N×(N-1)/2 pairs)\n• 6 rule categories: CYP inhibition/induction, QTc accumulation, anticholinergic, 5-HT syndrome, therapeutic window deviation, renal/hepatic dose adjustment\n• Severity: LOW / MEDIUM / HIGH / CONTRAINDICATED\n• Individual variation is significant; consult your physician or clinical pharmacist</string>
+    <string name="interaction_info_title">ℹ️ Multi-drug Interaction Info</string>
+    <string name="interaction_more_drugs">…and %1$d more drugs (search added in v0.4)</string>
+    <string name="interaction_n_drugs_available">%1$d drugs available</string>
+    <string name="interaction_no_alerts_desc">But this does not mean safe — this evaluation only covers: CYP inhibition/induction, QTc accumulation, anticholinergic load, 5-HT syndrome, therapeutic window deviation, renal/hepatic dose adjustment. Actual clinical practice also considers: age, liver/kidney, genotype (CYP2D6/2C19 poor metabolizers), protein binding displacement, enterohepatic circulation, food/herbal supplements. Individual variation is significant; still consult your physician.</string>
+    <string name="interaction_no_alerts_title">✓ RuleEngine found none of the 6 known alert categories.</string>
+    <string name="interaction_overdose_help">Overdose treatment requires multi-drug coordination (activated charcoal / hemodialysis / antidote, etc.). Call 120 or local poison control immediately.</string>
+    <string name="interaction_qtc_format">Estimated QTc %1$.0f ms</string>
+    <string name="interaction_reevaluate_n">Re-evaluate all %1$d drug combinations</string>
+    <string name="interaction_references">References: %1$s</string>
+    <string name="interaction_search_hint">🔍 Search: flu / fluvoxamine / clozapine / F</string>
+    <string name="interaction_selected_n">Selected (%1$d):</string>
+    <string name="interaction_serotonin_format">%1$d serotonergic drug(s) involved</string>
+    <string name="interaction_title">Interactions · %1$d drugs</string>
+    <string name="compare_mechanism_auc">%1$s · AUC change %2$s - %3$s ×</string>
+    <string name="common_known">Got it</string>
+    <string name="common_remove">Remove</string>
+    <string name="common_search">Search</string>
+    <string name="common_settings">Settings</string>
+    <string name="drug_name_with_zh_subtitle">%1$s · %2$s</string>
+    <string name="search_placeholder">Tap to search a drug…</string>
+    <string name="search_drug_count">%1$d drugs</string>
+    <string name="drug_name_with_en_subtitle">%1$s (%2$s)</string>
+    <string name="common_close">Close</string>
+    <string name="common_clear">Clear</string>
+    <string name="search_select_title">Select drug · %1$s</string>
+    <string name="search_hint">Chinese / English / Brand / Pinyin initial</string>
+    <string name="search_filtered">%1$d / %2$d drugs</string>
+    <string name="search_count_with_query"> · search:&quot;%1$s&quot;</string>
+    <string name="search_no_match">No matching drugs</string>
+    <string name="search_brand_prefix"> · brand: %1$s</string>
+
+    <!-- v0.9g merge: 设置页入口标题(静态,不带计数占位符) -->
+    <string name="interaction_entry_title">Drug interactions</string>
 </resources>

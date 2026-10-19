@@ -86,6 +86,7 @@ import com.dosecare.app.ui.components.cjkTextOffset
 import com.dosecare.app.ui.components.rememberChromeHazeState
 import com.dosecare.app.ui.components.stockInventoryCountText
 import com.dosecare.app.ui.history.HistoryScreen
+import com.dosecare.app.ui.interaction.InteractionScreen
 import com.dosecare.app.ui.journal.AllNotesScreen
 import com.dosecare.app.ui.journal.JournalScreen
 import com.dosecare.app.ui.journal.MilestonesScreen
@@ -171,6 +172,16 @@ sealed class Screen(val route: String, @get:StringRes val label: Int) {
     }
 
     data object Settings : Screen("settings", R.string.tab_settings)
+
+    // Merge phase 2: drug interaction checker, ported from DoseCare's
+    // InteractionsTab. Deliberately NOT in topLevelNavigationItems — like
+    // Screen.Medicines it is pushed on top of a top-level tab.
+    //
+    // v0.9g merge: reachable from Settings → Interactions.
+    data object Interactions : Screen("interactions", R.string.interaction_title) {
+        const val baseRoute = "interactions"
+    }
+
     data object SettingsCalibration : Screen(
         "settings_calibration?$TOP_LEVEL_PARENT_ARG={$TOP_LEVEL_PARENT_ARG}",
         R.string.settings_personalization_calibration
@@ -1069,6 +1080,25 @@ fun HrtTrackerNavHost(
                                 navController.navigate(
                                     Screen.SettingsCalibration.createRoute(Screen.Settings.route)
                                 )
+                            },
+                            onInteractionsClick = {
+                                navController.navigate(Screen.Interactions.route) {
+                                    launchSingleTop = true
+                                }
+                            }
+                        )
+                    }
+                }
+                // Merge phase 2: drug interaction checker. Reached from Settings ->
+                // Interactions; not in the bottom navigation.
+                composable(Screen.Interactions.route) { backStackEntry ->
+                    RoutedTopChromeHazeProvider(navController, backStackEntry) {
+                        InteractionScreen(
+                            modifier = modifier,
+                            onSettingsClick = {
+                                navController.navigate(Screen.Settings.route) {
+                                    launchSingleTop = true
+                                }
                             }
                         )
                     }
