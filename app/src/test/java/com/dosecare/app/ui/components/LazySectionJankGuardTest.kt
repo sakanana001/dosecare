@@ -13,7 +13,7 @@ import java.io.File
 class LazySectionJankGuardTest {
 
     private fun source(relPath: String): String =
-        File(projectRoot(), relPath).readText()
+        File(projectRoot(), relPath).readText().replace("\r\n", "\n")
 
     @Test
     fun medicinesScreen_usesLazyHrtSection() {

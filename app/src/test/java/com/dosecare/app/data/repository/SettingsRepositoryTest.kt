@@ -2,8 +2,8 @@ package com.dosecare.app.data.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.core.stringSetPreferencesKey
@@ -18,6 +18,7 @@ import com.dosecare.app.model.settings.AppLanguageOption
 import com.dosecare.app.model.settings.AppLockGracePeriodOption
 import com.dosecare.app.model.settings.DarkModeOption
 import com.dosecare.app.model.settings.FirstDayOfWeekOption
+import com.dosecare.app.testing.InMemoryPreferencesDataStore
 import com.dosecare.app.util.appLanguageLocale
 import io.mockk.every
 import io.mockk.mockk
@@ -31,23 +32,18 @@ import kotlinx.coroutines.flow.take
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.test.TestScope
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TemporaryFolder
-import java.io.File
 import java.util.Locale
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class SettingsRepositoryTest {
-    @get:Rule
-    val tmpFolder: TemporaryFolder = TemporaryFolder()
-
     private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
 
@@ -60,10 +56,7 @@ class SettingsRepositoryTest {
         val context: Context = mockk()
         every { appLanguageLocale() } returns Locale.ENGLISH
 
-        dataStore = PreferenceDataStoreFactory.create(
-            scope = testScope,
-            produceFile = { File(tmpFolder.root, "settings_test.preferences_pb") },
-        )
+        dataStore = InMemoryPreferencesDataStore()
 
         settingsRepository = SettingsRepository(context, dataStore)
     }
@@ -394,47 +387,50 @@ class SettingsRepositoryTest {
     fun `home low stock fold state updates expanded and acknowledged states atomically`() =
         runTest(testDispatcher) {
             val uuid = "11111111-1111-1111-1111-111111111111"
-            val foldStateFlow: Flow<Pair<Boolean, Map<String, MedicineStockState>>> = combine(
-                settingsRepository.homeLowStockSectionExpandedFlow,
-                settingsRepository.homeLowStockAcknowledgedWarningStatesFlow,
-            ) { expanded: Boolean, states: Map<String, MedicineStockState> -> expanded to states }
+            val expected = mapOf(uuid to MedicineStockState.IMMINENT)
 
-            val collapseObserved = mutableListOf<Pair<Boolean, Map<String, MedicineStockState>>>()
-            val collapseJob = launch {
-                foldStateFlow
-                    .drop(1)
-                    .take(1)
-                    .toList(collapseObserved)
-            }
+            // 原子性 = 两个键在**同一次 DataStore 发射**里一起变。
+            // 仓库对外暴露的是两个各自独立收集的流, 把它们 combine 出来的中间态
+            // 先后取决于调度顺序, 不能拿它当原子性判据 —— 这里直接看 DataStore
+            // 的发射序列。
+            val expandedKey = booleanPreferencesKey("home_low_stock_section_expanded")
+            val statesKey = stringSetPreferencesKey("home_low_stock_acknowledged_warning_states")
+
+            val collapseEmissions = mutableListOf<Preferences>()
+            val collapseWatcher = launch { dataStore.data.collect { collapseEmissions += it } }
+            advanceUntilIdle()
+
             settingsRepository.setHomeLowStockSectionFoldState(
                 expanded = false,
-                acknowledgedWarningStates = mapOf(uuid to MedicineStockState.IMMINENT),
+                acknowledgedWarningStates = expected,
             )
-            collapseJob.join()
+            advanceUntilIdle()
+            collapseWatcher.cancel()
 
+            // 折叠改成 false 的那次发射里, 已确认告警必须已经是新的 —— 不能还是旧的。
+            val collapseEmission = collapseEmissions.last { it[expandedKey] == false }
             assertEquals(
-                listOf(false to mapOf(uuid to MedicineStockState.IMMINENT)),
-                collapseObserved,
+                setOf("$uuid|IMMINENT"),
+                collapseEmission[statesKey],
             )
             assertEquals(false, settingsRepository.homeLowStockSectionExpandedFlow.first())
             assertEquals(
-                mapOf(uuid to MedicineStockState.IMMINENT),
+                expected,
                 settingsRepository.homeLowStockAcknowledgedWarningStatesFlow.first(),
             )
 
-            val expandObserved = mutableListOf<Pair<Boolean, Map<String, MedicineStockState>>>()
-            val expandJob = launch {
-                foldStateFlow
-                    .drop(1)
-                    .take(1)
-                    .toList(expandObserved)
-            }
+            val expandEmissions = mutableListOf<Preferences>()
+            val expandWatcher = launch { dataStore.data.collect { expandEmissions += it } }
+            advanceUntilIdle()
             settingsRepository.setHomeLowStockSectionFoldState(expanded = true)
-            expandJob.join()
+            advanceUntilIdle()
+            expandWatcher.cancel()
 
-            assertEquals(
-                listOf(true to emptyMap<String, MedicineStockState>()),
-                expandObserved,
+            // 再展开: 折叠变 true 的那次发射里, 已确认告警必须同时被清掉。
+            val expandEmission = expandEmissions.last { it[expandedKey] == true }
+            assertNull(
+                "展开时应同时清掉已确认告警, 实际发射: $expandEmissions",
+                expandEmission[statesKey],
             )
             assertEquals(true, settingsRepository.homeLowStockSectionExpandedFlow.first())
             assertEquals(

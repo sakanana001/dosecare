@@ -1,6 +1,7 @@
 package com.dosecare.app.widget
 
 import android.content.Context
+import androidx.datastore.core.DataStore
 import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
@@ -40,12 +41,27 @@ private fun overrideKey(appWidgetId: Int) = stringPreferencesKey("appearance_$ap
 class WidgetAppearanceStore @Inject constructor(
     @param:ApplicationContext private val context: Context,
 ) {
+    // 存储后端。生产用 context 的进程级单例文件存储; 单元测试可注入内存实现 ——
+    // Windows 上 DataStore 只要还有活跃订阅者就会一直占着偏好文件, 它自己的原子
+    // 改名会失败 (详见 InMemoryPreferencesDataStore 的注释)。
+    private var injectedStorage: DataStore<Preferences>? = null
+
+    internal constructor(
+        context: Context,
+        storage: DataStore<Preferences>,
+    ) : this(context) {
+        injectedStorage = storage
+    }
+
+    private val storage: DataStore<Preferences>
+        get() = injectedStorage ?: context.widgetAppearanceDataStore
+
     // Bounded reader for one-shot reads (readEntry → currentEffective): retry transient
     // IOExceptions (low memory, EBUSY during fsync) briefly, then fall back to empty
     // (→ Default) so a read never hangs under persistent I/O failure, then complete.
     // Completing is fine for `.first()`, but NOT for the live observers below.
     private fun boundedData(): Flow<Preferences> =
-        context.widgetAppearanceDataStore.data
+        storage.data
             .retryWhen { cause, attempt ->
                 val retry = cause is IOException && attempt < IO_RETRY_ATTEMPTS
                 if (retry) delay(IO_RETRY_DELAY_MS)
@@ -62,7 +78,7 @@ class WidgetAppearanceStore @Inject constructor(
     // appearance-driven updates — both the in-app StateFlow and the widget composition
     // collect this. Non-IO failures still propagate, matching boundedData.
     private fun liveData(): Flow<Preferences> =
-        context.widgetAppearanceDataStore.data
+        storage.data
             .retryWhen { cause, _ ->
                 if (cause !is IOException) return@retryWhen false
                 delay(IO_RETRY_DELAY_MS)
@@ -85,13 +101,13 @@ class WidgetAppearanceStore @Inject constructor(
     internal fun observeChanges(): Flow<Preferences> = liveData()
 
     internal suspend fun setEntry(appWidgetId: Int?, appearance: WidgetAppearance) {
-        context.widgetAppearanceDataStore.edit { prefs ->
+        storage.edit { prefs ->
             prefs[keyFor(appWidgetId)] = WidgetAppearanceCodec.encode(appearance.sanitized())
         }
     }
 
     internal suspend fun updateDefault(transform: (WidgetAppearance) -> WidgetAppearance) {
-        context.widgetAppearanceDataStore.edit { prefs ->
+        storage.edit { prefs ->
             val current = prefs[DEFAULT_KEY]?.let(WidgetAppearanceCodec::decode)
                 ?: WidgetAppearance.Default
             prefs[DEFAULT_KEY] = WidgetAppearanceCodec.encode(transform(current).sanitized())
@@ -99,14 +115,14 @@ class WidgetAppearanceStore @Inject constructor(
     }
 
     internal suspend fun deleteOverrides(appWidgetIds: IntArray) {
-        context.widgetAppearanceDataStore.edit { prefs ->
+        storage.edit { prefs ->
             appWidgetIds.forEach { prefs.remove(overrideKey(it)) }
         }
     }
 
     internal suspend fun seedDefaultIfAbsent(appearance: WidgetAppearance): Boolean {
         var seeded = false
-        context.widgetAppearanceDataStore.edit { prefs ->
+        storage.edit { prefs ->
             if (prefs[DEFAULT_KEY] == null) {
                 prefs[DEFAULT_KEY] = WidgetAppearanceCodec.encode(appearance.sanitized())
                 seeded = true

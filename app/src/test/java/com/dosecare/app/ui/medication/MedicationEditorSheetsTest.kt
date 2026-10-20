@@ -134,6 +134,7 @@ class MedicationEditorSheetsTest {
     @Test
     fun medicationEditorContentAndSummaryRequireResolvedMedicine() {
         val source = Files.readString(medicationDoseEditorContentSourcePath())
+            .replace("\r\n", "\n")
 
         assertTrue(
             source.contains(

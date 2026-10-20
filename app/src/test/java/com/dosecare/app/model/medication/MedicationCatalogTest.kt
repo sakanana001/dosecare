@@ -221,6 +221,17 @@ class MedicationCatalogTest {
         )
         assertEquals(
             listOf(
+                MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("25", productLabel = "Climara 25", wearDays = 7),
+                MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("50", productLabel = "Climara 50", wearDays = 7),
+                MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("75", productLabel = "Climara 75", wearDays = 7),
+                MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("100", productLabel = "Climara 100", wearDays = 7),
+                MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("25", productLabel = "Estraderm MX 25", wearDays = 4),
+                MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("50", productLabel = "Estraderm MX 50", wearDays = 4),
+                MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("100", productLabel = "Estraderm MX 100", wearDays = 4),
+                MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("25", productLabel = "Vivelle-Dot 25", wearDays = 4),
+                MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("50", productLabel = "Vivelle-Dot 50", wearDays = 4),
+                MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("100", productLabel = "Vivelle-Dot 100", wearDays = 4),
+                MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("50", productLabel = "Estrana Tape 50", wearDays = 7),
                 MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("50"),
                 MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("75"),
                 MedicationDoseAssistPreset.PatchReleaseRateMcgPerDay("100"),

@@ -11,7 +11,7 @@ class PinnedTraySourceTest {
         val source = File(
             projectRoot(),
             "app/src/main/java/com/dosecare/app/ui/journal/JournalComponents.kt",
-        ).readText()
+        ).readText().replace("\r\n", "\n")
         val pinnedTrayRows = source.substringAfter("private fun PinnedTrayRows(")
             .substringBefore("\nprivate fun MutableTransitionState<Boolean>.isPinnedTrayRowPresent")
 
@@ -52,7 +52,7 @@ class PinnedTraySourceTest {
         val source = File(
             projectRoot(),
             "app/src/main/java/com/dosecare/app/ui/journal/JournalComponents.kt",
-        ).readText()
+        ).readText().replace("\r\n", "\n")
 
         assertFalse(
             "Dragging a pinned row should not reveal a Home-slot hint floor behind it.",
@@ -75,7 +75,7 @@ class PinnedTraySourceTest {
         val source = File(
             projectRoot(),
             "app/src/main/java/com/dosecare/app/ui/journal/JournalComponents.kt",
-        ).readText()
+        ).readText().replace("\r\n", "\n")
         val pinnedTray = source.substringAfter("fun PinnedTray(")
             .substringBefore("\n@Composable\nprivate fun PinnedTrayRows")
 
@@ -102,7 +102,7 @@ class PinnedTraySourceTest {
         val source = File(
             projectRoot(),
             "app/src/main/java/com/dosecare/app/ui/journal/JournalComponents.kt",
-        ).readText()
+        ).readText().replace("\r\n", "\n")
         val pinnedTray = source.substringAfter("fun PinnedTray(")
             .substringBefore("\n@Composable\nprivate fun PinnedTrayRows")
 

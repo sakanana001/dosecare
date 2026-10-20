@@ -2,9 +2,9 @@ package com.dosecare.app.ui.catalog.nudge
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import com.dosecare.app.data.repository.SettingsRepository
+import com.dosecare.app.testing.InMemoryPreferencesDataStore
 import com.dosecare.app.util.appLanguageLocale
 import io.mockk.every
 import io.mockk.mockk
@@ -16,17 +16,11 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TemporaryFolder
-import java.io.File
 import java.util.Locale
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class StockNudgeGateTest {
-    @get:Rule
-    val tmpFolder: TemporaryFolder = TemporaryFolder()
-
     private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
 
@@ -39,10 +33,7 @@ class StockNudgeGateTest {
         every { appLanguageLocale() } returns Locale.ENGLISH
 
         val context: Context = mockk()
-        val dataStore: DataStore<Preferences> = PreferenceDataStoreFactory.create(
-            scope = testScope,
-            produceFile = { File(tmpFolder.root, "settings_test.preferences_pb") },
-        )
+        val dataStore: DataStore<Preferences>  = InMemoryPreferencesDataStore()
 
         settings = SettingsRepository(context, dataStore)
         gate = StockNudgeGate(settings)

@@ -2,12 +2,12 @@ package com.dosecare.app.data.repository
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.dosecare.app.model.settings.DarkModeOption
+import com.dosecare.app.testing.InMemoryPreferencesDataStore
 import com.dosecare.app.util.appLanguageLocale
 import io.mockk.every
 import io.mockk.mockk
@@ -21,17 +21,11 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TemporaryFolder
-import java.io.File
 import java.util.Locale
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class SettingsRepositoryLegacyWidgetAppearanceTest {
-    @get:Rule
-    val tmpFolder: TemporaryFolder = TemporaryFolder()
-
     private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
 
@@ -48,10 +42,7 @@ class SettingsRepositoryLegacyWidgetAppearanceTest {
         val context: Context = mockk()
         every { appLanguageLocale() } returns Locale.ENGLISH
 
-        dataStore = PreferenceDataStoreFactory.create(
-            scope = testScope,
-            produceFile = { File(tmpFolder.root, "legacy_widget_test.preferences_pb") },
-        )
+        dataStore = InMemoryPreferencesDataStore()
 
         settingsRepository = SettingsRepository(context, dataStore)
     }

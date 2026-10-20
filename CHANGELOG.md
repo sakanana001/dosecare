@@ -22,6 +22,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Last night's doses stay on the medium home-screen widget through midnight instead of disappearing at the date change.
 - Logging a scheduled dose after its window has closed no longer records a duplicate entry.
 
+### Pharmacology catalog / Japanese localisation
+
+#### Added
+
+- The 202-drug pharmacology catalog now carries a Japanese generic name for every medication, so the Japanese UI shows and searches drugs by their Japanese INN (クロザパン, レボチロキシン, ワルファリン, ...) instead of the Chinese name. The names come from the Japanese INN list and were cross-checked against KEGG MEDICUS.
+- Drug names now follow the UI language everywhere they appear: the drug picker, the interaction checker, the plasma-level (TDM) screen, the two-drug comparison and the pharmacology dossier. The picker also sorts by the name of the current UI language.
+
+#### Fixed
+
+- The Traditional Chinese and Hong Kong Cantonese UIs no longer fall back to English for drug categories, interaction results, metabolic pathways, dose-assist chips and severity labels - 91 strings that were still English while the Simplified Chinese UI had them translated.
+
 ## [2.0.0] - 2026-10-19
 
 DoseCare and PicoHRT are now one app. This release merges the pharmacology

@@ -32,6 +32,7 @@ import com.dosecare.app.model.medication.MedicationGroupColorKey
 import com.dosecare.app.ui.theme.HrtTrackerTheme
 import com.dosecare.app.util.dateLabelFormatter
 import com.dosecare.app.util.medicationGroupScheduleDateFormatter
+import java.util.Locale
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
@@ -225,7 +226,9 @@ class JournalScreenTest {
             scrollToTopSignal++
         }
 
+        // 区块标题由 HrtSectionHeader 渲染, 会统一转成大写
         val milestonesHeader = context.getString(R.string.journal_milestones_section)
+            .uppercase(Locale.ROOT)
         composeRule.waitUntil(timeoutMillis = 5_000) {
             composeRule.onAllNodesWithText(milestonesHeader)
                 .fetchSemanticsNodes()

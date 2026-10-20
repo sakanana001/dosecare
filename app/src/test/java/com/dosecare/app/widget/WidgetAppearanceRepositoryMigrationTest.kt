@@ -2,7 +2,6 @@ package com.dosecare.app.widget
 
 import android.content.Context
 import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.PreferenceDataStoreFactory
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.floatPreferencesKey
@@ -10,6 +9,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.dosecare.app.data.repository.LegacyWidgetAppearance
 import com.dosecare.app.data.repository.SettingsRepository
 import com.dosecare.app.model.settings.DarkModeOption
+import com.dosecare.app.testing.InMemoryPreferencesDataStore
 import com.dosecare.app.util.appLanguageLocale
 import io.mockk.coEvery
 import io.mockk.every
@@ -19,7 +19,6 @@ import io.mockk.spyk
 import io.mockk.unmockkStatic
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestScope
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.runTest
@@ -29,12 +28,8 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TemporaryFolder
-import java.io.File
 import java.io.IOException
-import java.nio.file.Files
 import java.util.Locale
 
 // Behavioral coverage of WidgetAppearanceRepository.migrateFromLegacySettingsIfNeeded
@@ -43,9 +38,6 @@ import java.util.Locale
 // true when the clear fails so the caller repaints and the next start retries.
 @OptIn(ExperimentalCoroutinesApi::class)
 class WidgetAppearanceRepositoryMigrationTest {
-    @get:Rule
-    val tmpFolder: TemporaryFolder = TemporaryFolder()
-
     private val testDispatcher = UnconfinedTestDispatcher()
     private val testScope = TestScope(testDispatcher)
 
@@ -64,17 +56,13 @@ class WidgetAppearanceRepositoryMigrationTest {
         every { appLanguageLocale() } returns Locale.ENGLISH
         val context: Context = mockk()
 
-        settingsDataStore = PreferenceDataStoreFactory.create(
-            scope = testScope,
-            produceFile = { File(tmpFolder.root, "migration_settings_test.preferences_pb") },
-        )
+        settingsDataStore = InMemoryPreferencesDataStore()
         settingsRepository = SettingsRepository(context, settingsDataStore)
 
-        store = WidgetAppearanceStore(widgetContext)
+        // 内存版存储: Windows 上文件版 DataStore 会被常驻读句柄锁住, 写不进去。
+        val widgetStorage = InMemoryPreferencesDataStore()
+        store = WidgetAppearanceStore(widgetContext, widgetStorage)
         repository = WidgetAppearanceRepository(store, settingsRepository, mockk(relaxed = true))
-
-        // The widget DataStore singleton survives across tests; start each empty.
-        runBlocking { widgetDataStore().edit { it.clear() } }
     }
 
     @After
@@ -150,23 +138,9 @@ class WidgetAppearanceRepositoryMigrationTest {
             assertFalse(repository.migrateFromLegacySettingsIfNeeded())
         }
 
-    // The store's DataStore is created by a process-wide singleton delegate keyed to
-    // the first Context's filesDir, so every test must share one stable directory
-    // (a per-test TemporaryFolder would leave the cached singleton pointing at a
-    // deleted path) and reset contents in setUp instead.
-    private fun widgetDataStore(): DataStore<Preferences> {
-        val getter = Class.forName("com.dosecare.app.widget.WidgetAppearanceStoreKt")
-            .getDeclaredMethod("getWidgetAppearanceDataStore", Context::class.java)
-            .apply { isAccessible = true }
-        @Suppress("UNCHECKED_CAST")
-        return getter.invoke(null, widgetContext) as DataStore<Preferences>
-    }
-
     private companion object {
-        val widgetFilesDir = Files.createTempDirectory("widget_appearance_test").toFile()
         val widgetContext: Context = mockk<Context>().also {
             every { it.applicationContext } returns it
-            every { it.filesDir } returns widgetFilesDir
         }
     }
 }
