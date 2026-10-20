@@ -32,6 +32,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
+import java.io.File
 import java.io.IOException
 import java.nio.file.Files
 import java.util.Locale
@@ -65,7 +66,7 @@ class WidgetAppearanceRepositoryMigrationTest {
 
         settingsDataStore = PreferenceDataStoreFactory.create(
             scope = testScope,
-            produceFile = { tmpFolder.newFile("migration_settings_test.preferences_pb") },
+            produceFile = { File(tmpFolder.root, "migration_settings_test.preferences_pb") },
         )
         settingsRepository = SettingsRepository(context, settingsDataStore)
 

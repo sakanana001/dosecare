@@ -1,0 +1,1267 @@
+[
+  {
+    "id": "clozapine",
+    "en": "Clozapine",
+    "zh": "氯氮平",
+    "ja": "クロザピン"
+  },
+  {
+    "id": "olanzapine",
+    "en": "Olanzapine",
+    "zh": "奥氮平",
+    "ja": "オランザピン"
+  },
+  {
+    "id": "risperidone",
+    "en": "Risperidone",
+    "zh": "利培酮",
+    "ja": "リスペリドン"
+  },
+  {
+    "id": "quetiapine",
+    "en": "Quetiapine",
+    "zh": "喹硫平",
+    "ja": "クエチアピン"
+  },
+  {
+    "id": "aripiprazole",
+    "en": "Aripiprazole",
+    "zh": "阿立哌唑",
+    "ja": "アリピプラゾール"
+  },
+  {
+    "id": "ziprasidone",
+    "en": "Ziprasidone",
+    "zh": "齐拉西酮",
+    "ja": "ジプラシドン",
+    "ja_source": "manual",
+    "ja_prev": "エヴァンゲロス・カツイオウリス"
+  },
+  {
+    "id": "amisulpride",
+    "en": "Amisulpride",
+    "zh": "氨磺必利",
+    "ja": "アミスルプリド"
+  },
+  {
+    "id": "valproic_acid",
+    "en": "Valproic acid",
+    "zh": "丙戊酸钠",
+    "ja": "バルプロ酸ナトリウム"
+  },
+  {
+    "id": "lithium",
+    "en": "Lithium carbonate",
+    "zh": "碳酸锂",
+    "ja": "炭酸リチウム"
+  },
+  {
+    "id": "lamotrigine",
+    "en": "Lamotrigine",
+    "zh": "拉莫三嗪",
+    "ja": "ラモトリギン"
+  },
+  {
+    "id": "fluoxetine",
+    "en": "Fluoxetine",
+    "zh": "氟西汀",
+    "ja": "フルオキセチン"
+  },
+  {
+    "id": "sertraline",
+    "en": "Sertraline",
+    "zh": "舍曲林",
+    "ja": "セルトラリン"
+  },
+  {
+    "id": "paroxetine",
+    "en": "Paroxetine",
+    "zh": "帕罗西汀",
+    "ja": "パロキセチン"
+  },
+  {
+    "id": "escitalopram",
+    "en": "Escitalopram",
+    "zh": "艾司西酞普兰",
+    "ja": "エスシタロプラム"
+  },
+  {
+    "id": "fluvoxamine",
+    "en": "Fluvoxamine",
+    "zh": "氟伏沙明",
+    "ja": "フルボキサミン"
+  },
+  {
+    "id": "citalopram",
+    "en": "Citalopram",
+    "zh": "西酞普兰",
+    "ja": "シタロプラム"
+  },
+  {
+    "id": "venlafaxine",
+    "en": "Venlafaxine",
+    "zh": "文拉法辛",
+    "ja": "ベンラファキシン"
+  },
+  {
+    "id": "duloxetine",
+    "en": "Duloxetine",
+    "zh": "度洛西汀",
+    "ja": "デュロキセチン"
+  },
+  {
+    "id": "diazepam",
+    "en": "Diazepam",
+    "zh": "地西泮",
+    "ja": "ジアゼパム"
+  },
+  {
+    "id": "lorazepam",
+    "en": "Lorazepam",
+    "zh": "劳拉西泮",
+    "ja": "ロラゼパム"
+  },
+  {
+    "id": "carbamazepine",
+    "en": "Carbamazepine",
+    "zh": "卡马西平",
+    "ja": "カルバマゼピン"
+  },
+  {
+    "id": "oxcarbazepine",
+    "en": "Oxcarbazepine",
+    "zh": "奥卡西平",
+    "ja": "オクスカルバゼピン"
+  },
+  {
+    "id": "topiramate",
+    "en": "Topiramate",
+    "zh": "托吡酯",
+    "ja": "トピラマート"
+  },
+  {
+    "id": "gabapentin",
+    "en": "Gabapentin",
+    "zh": "加巴喷丁",
+    "ja": "ガバペンチン"
+  },
+  {
+    "id": "pregabalin",
+    "en": "Pregabalin",
+    "zh": "普瑞巴林",
+    "ja": "プレガバリン"
+  },
+  {
+    "id": "benztropine",
+    "en": "Benztropine",
+    "zh": "苯扎托品",
+    "ja": "ベンズトロピン"
+  },
+  {
+    "id": "trihexyphenidyl",
+    "en": "Trihexyphenidyl",
+    "zh": "苯海索",
+    "ja": "トリヘキシフェニジル"
+  },
+  {
+    "id": "levodopa_carbidopa",
+    "en": "Levodopa/Carbidopa",
+    "zh": "左旋多巴/卡比多巴",
+    "ja": "レボドパ／カルビドパ",
+    "ja_source": "manual+kegg",
+    "ja_prev": "レボドパ"
+  },
+  {
+    "id": "pramipexole",
+    "en": "Pramipexole",
+    "zh": "普拉克索",
+    "ja": "プラミペキソール"
+  },
+  {
+    "id": "metformin",
+    "en": "Metformin",
+    "zh": "二甲双胍",
+    "ja": "メトホルミン"
+  },
+  {
+    "id": "empagliflozin",
+    "en": "Empagliflozin",
+    "zh": "恩格列净",
+    "ja": "エンパグリフロジン"
+  },
+  {
+    "id": "atorvastatin",
+    "en": "Atorvastatin",
+    "zh": "阿托伐他汀",
+    "ja": "アトルバスタチン"
+  },
+  {
+    "id": "amlodipine",
+    "en": "Amlodipine",
+    "zh": "氨氯地平",
+    "ja": "アムロジピン"
+  },
+  {
+    "id": "lisinopril",
+    "en": "Lisinopril",
+    "zh": "赖诺普利",
+    "ja": "リシノプリル"
+  },
+  {
+    "id": "losartan",
+    "en": "Losartan",
+    "zh": "氯沙坦",
+    "ja": "ロサルタン"
+  },
+  {
+    "id": "metoprolol",
+    "en": "Metoprolol",
+    "zh": "美托洛尔",
+    "ja": "メトプロロール"
+  },
+  {
+    "id": "warfarin",
+    "en": "Warfarin",
+    "zh": "华法林",
+    "ja": "ワルファリン"
+  },
+  {
+    "id": "rivaroxaban",
+    "en": "Rivaroxaban",
+    "zh": "利伐沙班",
+    "ja": "リバーロキサバン"
+  },
+  {
+    "id": "aspirin",
+    "en": "Aspirin",
+    "zh": "阿司匹林",
+    "ja": "アセチルサリチル酸"
+  },
+  {
+    "id": "clopidogrel",
+    "en": "Clopidogrel",
+    "zh": "氯吡格雷",
+    "ja": "クロピドグレル"
+  },
+  {
+    "id": "omeprazole",
+    "en": "Omeprazole",
+    "zh": "奥美拉唑",
+    "ja": "オメプラゾール"
+  },
+  {
+    "id": "levothyroxine",
+    "en": "Levothyroxine",
+    "zh": "左甲状腺素",
+    "ja": "レボチロキシン"
+  },
+  {
+    "id": "diphenhydramine",
+    "en": "Diphenhydramine",
+    "zh": "苯海拉明",
+    "ja": "ジフェンヒドラミン"
+  },
+  {
+    "id": "hydroxyzine",
+    "en": "Hydroxyzine",
+    "zh": "羟嗪",
+    "ja": "ヒドロキシジン"
+  },
+  {
+    "id": "zolpidem",
+    "en": "Zolpidem",
+    "zh": "唑吡坦",
+    "ja": "ゾルピデム"
+  },
+  {
+    "id": "tramadol",
+    "en": "Tramadol",
+    "zh": "曲马多",
+    "ja": "トラマドール"
+  },
+  {
+    "id": "amiodarone",
+    "en": "Amiodarone",
+    "zh": "胺碘酮",
+    "ja": "アミオダロン"
+  },
+  {
+    "id": "sotalol",
+    "en": "Sotalol",
+    "zh": "索他洛尔",
+    "ja": "ソタロール"
+  },
+  {
+    "id": "phenytoin",
+    "en": "Phenytoin",
+    "zh": "苯妥英",
+    "ja": "フェニトイン"
+  },
+  {
+    "id": "levetiracetam",
+    "en": "Levetiracetam",
+    "zh": "左乙拉西坦",
+    "ja": "レベチラセタム"
+  },
+  {
+    "id": "paliperidone",
+    "en": "Paliperidone",
+    "zh": "帕利哌酮",
+    "ja": "パリペリドン"
+  },
+  {
+    "id": "asenapine",
+    "en": "Asenapine",
+    "zh": "阿塞那平",
+    "ja": "アセナピン",
+    "ja_source": "manual",
+    "ja_prev": "移動水素化"
+  },
+  {
+    "id": "lurasidone",
+    "en": "Lurasidone",
+    "zh": "鲁拉西酮",
+    "ja": "ルラシドン"
+  },
+  {
+    "id": "brexpiprazole",
+    "en": "Brexpiprazole",
+    "zh": "依匹哌唑",
+    "ja": "ブレクスピプラゾール"
+  },
+  {
+    "id": "cariprazine",
+    "en": "Cariprazine",
+    "zh": "卡利拉嗪",
+    "ja": "カリプラジン"
+  },
+  {
+    "id": "iloperidone",
+    "en": "Iloperidone",
+    "zh": "伊潘立酮",
+    "ja": "イロペリドン",
+    "ja_source": "manual",
+    "ja_prev": "ニューレグリン3"
+  },
+  {
+    "id": "mirtazapine",
+    "en": "Mirtazapine",
+    "zh": "米氮平",
+    "ja": "ミルタザピン"
+  },
+  {
+    "id": "bupropion",
+    "en": "Bupropion",
+    "zh": "安非他酮",
+    "ja": "ブプロピオン"
+  },
+  {
+    "id": "vortioxetine",
+    "en": "Vortioxetine",
+    "zh": "伏硫西汀",
+    "ja": "ボルチオキセチン"
+  },
+  {
+    "id": "agomelatine",
+    "en": "Agomelatine",
+    "zh": "阿戈美拉汀",
+    "ja": "アゴメラチン"
+  },
+  {
+    "id": "trazodone",
+    "en": "Trazodone",
+    "zh": "曲唑酮",
+    "ja": "トラゾドン"
+  },
+  {
+    "id": "phenelzine",
+    "en": "Phenelzine",
+    "zh": "苯乙肼",
+    "ja": "フェネルジン",
+    "ja_source": "manual",
+    "ja_prev": "IARC発がん性リスク一覧"
+  },
+  {
+    "id": "selegiline",
+    "en": "Selegiline",
+    "zh": "司来吉兰",
+    "ja": "セレギリン"
+  },
+  {
+    "id": "amitriptyline",
+    "en": "Amitriptyline",
+    "zh": "阿米替林",
+    "ja": "アミトリプチリン"
+  },
+  {
+    "id": "nortriptyline",
+    "en": "Nortriptyline",
+    "zh": "去甲替林",
+    "ja": "ノルトリプチリン"
+  },
+  {
+    "id": "clomipramine",
+    "en": "Clomipramine",
+    "zh": "氯米帕明",
+    "ja": "クロミプラミン"
+  },
+  {
+    "id": "imipramine",
+    "en": "Imipramine",
+    "zh": "丙咪嗪",
+    "ja": "イミプラミン"
+  },
+  {
+    "id": "buspirone",
+    "en": "Buspirone",
+    "zh": "丁螺环酮",
+    "ja": "ブスピロン"
+  },
+  {
+    "id": "methylphenidate",
+    "en": "Methylphenidate",
+    "zh": "哌甲酯",
+    "ja": "メチルフェニデート"
+  },
+  {
+    "id": "atomoxetine",
+    "en": "Atomoxetine",
+    "zh": "托莫西汀",
+    "ja": "アトモキセチン"
+  },
+  {
+    "id": "ropinirole",
+    "en": "Ropinirole",
+    "zh": "罗匹尼罗",
+    "ja": "ロピニロール"
+  },
+  {
+    "id": "rasagiline",
+    "en": "Rasagiline",
+    "zh": "雷沙吉兰",
+    "ja": "ラサギリン"
+  },
+  {
+    "id": "entacapone",
+    "en": "Entacapone",
+    "zh": "恩他卡朋",
+    "ja": "エンタカポン"
+  },
+  {
+    "id": "amantadine",
+    "en": "Amantadine",
+    "zh": "金刚烷胺",
+    "ja": "アマンタジン"
+  },
+  {
+    "id": "tolcapone",
+    "en": "Tolcapone",
+    "zh": "托卡朋",
+    "ja": "トルカポン",
+    "ja_source": "manual",
+    "ja_prev": "スマートドラッグ"
+  },
+  {
+    "id": "donepezil",
+    "en": "Donepezil",
+    "zh": "多奈哌齐",
+    "ja": "ドネペジル"
+  },
+  {
+    "id": "rivastigmine",
+    "en": "Rivastigmine",
+    "zh": "卡巴拉汀",
+    "ja": "リバスチグミン"
+  },
+  {
+    "id": "galantamine",
+    "en": "Galantamine",
+    "zh": "加兰他敏",
+    "ja": "ガランタミン"
+  },
+  {
+    "id": "memantine",
+    "en": "Memantine",
+    "zh": "美金刚",
+    "ja": "メマンチン"
+  },
+  {
+    "id": "eslicarbazepine",
+    "en": "Eslicarbazepine",
+    "zh": "醋酸艾司利卡西平",
+    "ja": "エスリカルバゼピン",
+    "ja_source": "manual+kegg",
+    "ja_prev": "エスシリカルバゼピン酢酸塩"
+  },
+  {
+    "id": "perampanel",
+    "en": "Perampanel",
+    "zh": "吡仑帕奈",
+    "ja": "ペランパネル"
+  },
+  {
+    "id": "lacosamide",
+    "en": "Lacosamide",
+    "zh": "拉科酰胺",
+    "ja": "ラコサミド",
+    "ja_source": "manual",
+    "ja_prev": "CRMPファミリー"
+  },
+  {
+    "id": "sumatriptan",
+    "en": "Sumatriptan",
+    "zh": "舒马普坦",
+    "ja": "スマトリプタン"
+  },
+  {
+    "id": "flunarizine",
+    "en": "Flunarizine",
+    "zh": "氟桂利嗪",
+    "ja": "フルナリジン",
+    "ja_source": "manual",
+    "ja_prev": null
+  },
+  {
+    "id": "baclofen",
+    "en": "Baclofen",
+    "zh": "巴氯芬",
+    "ja": "バクロフェン"
+  },
+  {
+    "id": "tizanidine",
+    "en": "Tizanidine",
+    "zh": "替扎尼定",
+    "ja": "チザニジン"
+  },
+  {
+    "id": "betahistine",
+    "en": "Betahistine",
+    "zh": "倍他司汀",
+    "ja": "ベタヒスチン",
+    "ja_source": "manual",
+    "ja_prev": "耳鳴り"
+  },
+  {
+    "id": "meclizine",
+    "en": "Meclizine",
+    "zh": "美克洛嗪",
+    "ja": "メクリジン"
+  },
+  {
+    "id": "glipizide",
+    "en": "Glipizide",
+    "zh": "格列吡嗪",
+    "ja": "グリピジド"
+  },
+  {
+    "id": "sitagliptin",
+    "en": "Sitagliptin",
+    "zh": "西格列汀",
+    "ja": "シタグリプチン"
+  },
+  {
+    "id": "liraglutide",
+    "en": "Liraglutide",
+    "zh": "利拉鲁肽",
+    "ja": "リラグルチド"
+  },
+  {
+    "id": "pioglitazone",
+    "en": "Pioglitazone",
+    "zh": "吡格列酮",
+    "ja": "ピオグリタゾン"
+  },
+  {
+    "id": "methimazole",
+    "en": "Methimazole",
+    "zh": "甲巯咪唑",
+    "ja": "チアマゾール"
+  },
+  {
+    "id": "propylthiouracil",
+    "en": "Propylthiouracil",
+    "zh": "丙硫氧嘧啶",
+    "ja": "プロピルチオウラシル"
+  },
+  {
+    "id": "prednisone",
+    "en": "Prednisone",
+    "zh": "泼尼松",
+    "ja": "プレドニゾン"
+  },
+  {
+    "id": "prednisolone",
+    "en": "Prednisolone",
+    "zh": "泼尼松龙",
+    "ja": "プレドニゾロン"
+  },
+  {
+    "id": "hydrocortisone",
+    "en": "Hydrocortisone",
+    "zh": "氢化可的松",
+    "ja": "ヒドロコルチゾン"
+  },
+  {
+    "id": "dexamethasone",
+    "en": "Dexamethasone",
+    "zh": "地塞米松",
+    "ja": "デキサメタゾン"
+  },
+  {
+    "id": "methylprednisolone",
+    "en": "Methylprednisolone",
+    "zh": "甲泼尼龙",
+    "ja": "メチルプレドニゾロン"
+  },
+  {
+    "id": "alendronate",
+    "en": "Alendronate",
+    "zh": "阿仑膦酸钠",
+    "ja": "アレンドロン酸"
+  },
+  {
+    "id": "risedronate",
+    "en": "Risedronate",
+    "zh": "利塞膦酸钠",
+    "ja": "リセドロン酸ナトリウム",
+    "ja_source": "manual",
+    "ja_prev": "アレンドロン酸 ナトリウム"
+  },
+  {
+    "id": "finasteride",
+    "en": "Finasteride",
+    "zh": "非那雄胺",
+    "ja": "フィナステリド"
+  },
+  {
+    "id": "dutasteride",
+    "en": "Dutasteride",
+    "zh": "度他雄胺",
+    "ja": "デュタステリド"
+  },
+  {
+    "id": "estradiol",
+    "en": "Estradiol",
+    "zh": "雌二醇",
+    "ja": "エストラジオール"
+  },
+  {
+    "id": "progesterone",
+    "en": "Progesterone",
+    "zh": "孕酮",
+    "ja": "プロゲステロン"
+  },
+  {
+    "id": "desmopressin",
+    "en": "Desmopressin",
+    "zh": "去氨加压素",
+    "ja": "デスモプレシン"
+  },
+  {
+    "id": "naltrexone",
+    "en": "Naltrexone",
+    "zh": "纳曲酮",
+    "ja": "ナルトレキソン"
+  },
+  {
+    "id": "buprenorphine",
+    "en": "Buprenorphine",
+    "zh": "丁丙诺啡",
+    "ja": "ブプレノルフィン"
+  },
+  {
+    "id": "methadone",
+    "en": "Methadone",
+    "zh": "美沙酮",
+    "ja": "メサドン"
+  },
+  {
+    "id": "fluconazole",
+    "en": "Fluconazole",
+    "zh": "氟康唑",
+    "ja": "フルコナゾール"
+  },
+  {
+    "id": "rifampin",
+    "en": "Rifampin",
+    "zh": "利福平",
+    "ja": "リファンピシン"
+  },
+  {
+    "id": "dolutegravir",
+    "en": "Dolutegravir",
+    "zh": "多替拉韦",
+    "ja": "ドルテグラビル"
+  },
+  {
+    "id": "zaleplon",
+    "en": "Zaleplon",
+    "zh": "扎来普隆",
+    "ja": "ザレプロン",
+    "ja_source": "manual",
+    "ja_prev": "非ベンゾジアゼピン系"
+  },
+  {
+    "id": "eszopiclone",
+    "en": "Eszopiclone",
+    "zh": "右佐匹克隆",
+    "ja": "エスゾピクロン"
+  },
+  {
+    "id": "acamprosate",
+    "en": "Acamprosate",
+    "zh": "阿坎酸",
+    "ja": "アカンプロサート"
+  },
+  {
+    "id": "disulfiram",
+    "en": "Disulfiram",
+    "zh": "双硫仑",
+    "ja": "ジスルフィラム"
+  },
+  {
+    "id": "modafinil",
+    "en": "Modafinil",
+    "zh": "莫达非尼",
+    "ja": "モダフィニル"
+  },
+  {
+    "id": "calcium_carbonate",
+    "en": "Calcium Carbonate",
+    "zh": "碳酸钙",
+    "ja": "炭酸カルシウム"
+  },
+  {
+    "id": "ferrous_sulfate",
+    "en": "Ferrous Sulfate",
+    "zh": "硫酸亚铁",
+    "ja": "硫酸鉄(II)"
+  },
+  {
+    "id": "folic_acid",
+    "en": "Folic Acid",
+    "zh": "叶酸",
+    "ja": "葉酸"
+  },
+  {
+    "id": "tianeptine",
+    "en": "Tianeptine",
+    "zh": "噻奈普汀",
+    "ja": "チアネプチン",
+    "ja_source": "manual",
+    "ja_prev": null
+  },
+  {
+    "id": "allopurinol",
+    "en": "Allopurinol",
+    "zh": "别嘌醇",
+    "ja": "アロプリノール"
+  },
+  {
+    "id": "colchicine",
+    "en": "Colchicine",
+    "zh": "秋水仙碱",
+    "ja": "コルヒチン"
+  },
+  {
+    "id": "tamsulosin",
+    "en": "Tamsulosin",
+    "zh": "坦索罗辛",
+    "ja": "タムスロシン"
+  },
+  {
+    "id": "morphine",
+    "en": "Morphine",
+    "zh": "吗啡",
+    "ja": "モルヒネ"
+  },
+  {
+    "id": "fentanyl",
+    "en": "Fentanyl",
+    "zh": "芬太尼",
+    "ja": "フェンタニル"
+  },
+  {
+    "id": "sufentanil",
+    "en": "Sufentanil",
+    "zh": "舒芬太尼",
+    "ja": "スフェンタニル"
+  },
+  {
+    "id": "remifentanil",
+    "en": "Remifentanil",
+    "zh": "瑞芬太尼",
+    "ja": "レミフェンタニル"
+  },
+  {
+    "id": "oxycodone",
+    "en": "Oxycodone",
+    "zh": "羟考酮",
+    "ja": "オキシコドン"
+  },
+  {
+    "id": "hydromorphone",
+    "en": "Hydromorphone",
+    "zh": "氢吗啡酮",
+    "ja": "ヒドロモルフォン"
+  },
+  {
+    "id": "pethidine",
+    "en": "Pethidine",
+    "zh": "哌替啶",
+    "ja": "ペチジン"
+  },
+  {
+    "id": "codeine",
+    "en": "Codeine",
+    "zh": "可待因",
+    "ja": "コデイン"
+  },
+  {
+    "id": "cocaine",
+    "en": "Cocaine",
+    "zh": "可卡因",
+    "ja": "コカイン"
+  },
+  {
+    "id": "dihydroetorphine",
+    "en": "Dihydroetorphine",
+    "zh": "二氢埃托啡",
+    "ja": "ジヒドロエトルフィン",
+    "ja_source": "manual",
+    "ja_prev": "ブプレノルフィン ジヒドロエトルフィン"
+  },
+  {
+    "id": "ketamine",
+    "en": "Ketamine",
+    "zh": "氯胺酮",
+    "ja": "ケタミン"
+  },
+  {
+    "id": "mdma",
+    "en": "MDMA",
+    "zh": "二甲基色胺",
+    "ja": "メチレンジオキシメタンフェタミン"
+  },
+  {
+    "id": "triazolam",
+    "en": "Triazolam",
+    "zh": "三唑仑",
+    "ja": "トリアゾラム"
+  },
+  {
+    "id": "ghb",
+    "en": "GHB",
+    "zh": "γ-羟丁酸",
+    "ja": "Γ-ヒドロキシ酪酸"
+  },
+  {
+    "id": "amphetamine",
+    "en": "Amphetamine",
+    "zh": "苯丙胺",
+    "ja": "アンフェタミン"
+  },
+  {
+    "id": "alprazolam",
+    "en": "Alprazolam",
+    "zh": "阿普唑仑",
+    "ja": "アルプラゾラム"
+  },
+  {
+    "id": "estazolam",
+    "en": "Estazolam",
+    "zh": "艾司唑仑",
+    "ja": "エスタゾラム"
+  },
+  {
+    "id": "nitrazepam",
+    "en": "Nitrazepam",
+    "zh": "硝西泮",
+    "ja": "ニトラゼパム"
+  },
+  {
+    "id": "midazolam",
+    "en": "Midazolam",
+    "zh": "咪达唑仑",
+    "ja": "ミダゾラム"
+  },
+  {
+    "id": "zopiclone",
+    "en": "Zopiclone",
+    "zh": "佐匹克隆",
+    "ja": "ゾピクロン"
+  },
+  {
+    "id": "phenobarbital",
+    "en": "Phenobarbital",
+    "zh": "苯巴比妥",
+    "ja": "フェノバルビタール"
+  },
+  {
+    "id": "amobarbital",
+    "en": "Amobarbital",
+    "zh": "异戊巴比妥",
+    "ja": "アモバルビタール"
+  },
+  {
+    "id": "secobarbital",
+    "en": "Secobarbital",
+    "zh": "司可巴比妥",
+    "ja": "セコバルビタール"
+  },
+  {
+    "id": "chloral_hydrate",
+    "en": "Chloral Hydrate",
+    "zh": "水合氯醛",
+    "ja": "抱水クロラール"
+  },
+  {
+    "id": "bupropion_xl",
+    "en": "Bupropion XL",
+    "zh": "安非他酮缓释片",
+    "ja": "ブプロピオン徐放錠",
+    "ja_source": "manual",
+    "ja_prev": "ブプロピオン 徐放錠"
+  },
+  {
+    "id": "venlafaxine_xr",
+    "en": "Venlafaxine XR",
+    "zh": "文拉法辛缓释胶囊",
+    "ja": "ベンラファキシン持続性カプセル",
+    "ja_source": "manual",
+    "ja_prev": "ベンラファキシン 持続性カプセル"
+  },
+  {
+    "id": "paroxetine_cr",
+    "en": "Paroxetine CR",
+    "zh": "帕罗西汀控释片",
+    "ja": "パロキセチン持続性錠",
+    "ja_source": "manual",
+    "ja_prev": "パロキセチン 持続性錠"
+  },
+  {
+    "id": "fluoxetine_weekly",
+    "en": "Fluoxetine Weekly",
+    "zh": "氟西汀每周一次",
+    "ja": "フルオキセチン週1回錠",
+    "ja_source": "manual",
+    "ja_prev": "フルオキセチン 週1回錠"
+  },
+  {
+    "id": "arformoterol",
+    "en": "Arformoterol",
+    "zh": "阿福特罗 (R-福莫特罗)",
+    "ja": "アルホルモテロール"
+  },
+  {
+    "id": "levalbuterol",
+    "en": "Levalbuterol",
+    "zh": "左沙丁胺醇 (R-沙丁胺醇)",
+    "ja": "レバルブテロール",
+    "ja_source": "manual+kegg",
+    "ja_prev": "レボアルブテロール"
+  },
+  {
+    "id": "dextroamphetamine",
+    "en": "Dextroamphetamine",
+    "zh": "右旋安非他命",
+    "ja": "デキストロアンフェタミン"
+  },
+  {
+    "id": "desvenlafaxine",
+    "en": "Desvenlafaxine",
+    "zh": "去甲文拉法辛",
+    "ja": "デスベンラファキシン"
+  },
+  {
+    "id": "norfluoxetine",
+    "en": "Norfluoxetine",
+    "zh": "去甲氟西汀",
+    "ja": "セプロキセチン"
+  },
+  {
+    "id": "norketamine",
+    "en": "Norketamine",
+    "zh": "去甲氯胺酮",
+    "ja": "ノルケタミン",
+    "ja_source": "manual",
+    "ja_prev": "ケタミン（ノルケタミン）"
+  },
+  {
+    "id": "morphine_6_glucuronide",
+    "en": "Morphine-6-Glucuronide",
+    "zh": "吗啡-6-葡萄糖醛酸苷",
+    "ja": "モルヒネ-6-グルクロン酸",
+    "ja_source": "manual",
+    "ja_prev": "モルヒネ-6-グルクロン酸"
+  },
+  {
+    "id": "rosuvastatin",
+    "en": "Rosuvastatin",
+    "zh": "瑞舒伐他汀",
+    "ja": "ロスバスタチン"
+  },
+  {
+    "id": "simvastatin",
+    "en": "Simvastatin",
+    "zh": "辛伐他汀",
+    "ja": "シンバスタチン"
+  },
+  {
+    "id": "pravastatin",
+    "en": "Pravastatin",
+    "zh": "普伐他汀",
+    "ja": "プラバスタチン",
+    "ja_source": "manual",
+    "ja_prev": "アトルバスタチン"
+  },
+  {
+    "id": "lansoprazole",
+    "en": "Lansoprazole",
+    "zh": "兰索拉唑",
+    "ja": "ランソプラゾール"
+  },
+  {
+    "id": "rabeprazole",
+    "en": "Rabeprazole",
+    "zh": "雷贝拉唑",
+    "ja": "ラベプラゾール"
+  },
+  {
+    "id": "pantoprazole",
+    "en": "Pantoprazole",
+    "zh": "泮托拉唑",
+    "ja": "パントプラゾール"
+  },
+  {
+    "id": "dimenhydrinate",
+    "en": "Dimenhydrinate",
+    "zh": "茶苯海明",
+    "ja": "ジメンヒドリナート"
+  },
+  {
+    "id": "dabigatran",
+    "en": "Dabigatran",
+    "zh": "达比加群",
+    "ja": "ダビガトラン"
+  },
+  {
+    "id": "apixaban",
+    "en": "Apixaban",
+    "zh": "阿哌沙班",
+    "ja": "アピキサバン"
+  },
+  {
+    "id": "loratadine",
+    "en": "Loratadine",
+    "zh": "氯雷他定",
+    "ja": "ロラタジン"
+  },
+  {
+    "id": "cetirizine",
+    "en": "Cetirizine",
+    "zh": "西替利嗪",
+    "ja": "セチリジン"
+  },
+  {
+    "id": "lidocaine",
+    "en": "Lidocaine",
+    "zh": "利多卡因",
+    "ja": "リドカイン"
+  },
+  {
+    "id": "flecainide",
+    "en": "Flecainide",
+    "zh": "氟卡尼",
+    "ja": "フレカイニド"
+  },
+  {
+    "id": "rizatriptan",
+    "en": "Rizatriptan",
+    "zh": "利扎曲普坦",
+    "ja": "リザトリプタン"
+  },
+  {
+    "id": "cyclobenzaprine",
+    "en": "Cyclobenzaprine",
+    "zh": "环苯扎林",
+    "ja": "シクロベンザプリン"
+  },
+  {
+    "id": "zoledronic_acid",
+    "en": "Zoledronic acid",
+    "zh": "唑来膦酸",
+    "ja": "ゾレドロン酸"
+  },
+  {
+    "id": "salmeterol",
+    "en": "Salmeterol",
+    "zh": "沙美特罗",
+    "ja": "サルメテロール"
+  },
+  {
+    "id": "ibuprofen",
+    "en": "Ibuprofen",
+    "zh": "布洛芬",
+    "ja": "イブプロフェン"
+  },
+  {
+    "id": "naproxen",
+    "en": "Naproxen",
+    "zh": "萘普生",
+    "ja": "ナプロキセン"
+  },
+  {
+    "id": "fluvastatin",
+    "en": "Fluvastatin",
+    "zh": "氟伐他汀",
+    "ja": "フルバスタチン",
+    "ja_source": "manual",
+    "ja_prev": "アトルバスタチン"
+  },
+  {
+    "id": "amoxicillin",
+    "en": "Amoxicillin",
+    "zh": "阿莫西林",
+    "ja": "アモキシシリン"
+  },
+  {
+    "id": "doxycycline",
+    "en": "Doxycycline",
+    "zh": "多西环素",
+    "ja": "ドキシサイクリン"
+  },
+  {
+    "id": "propafenone",
+    "en": "Propafenone",
+    "zh": "普罗帕酮",
+    "ja": "プロパフェノン"
+  },
+  {
+    "id": "cyanocobalamin",
+    "en": "Cyanocobalamin",
+    "zh": "维生素 B12",
+    "ja": "シアノコバラミン"
+  },
+  {
+    "id": "promethazine",
+    "en": "Promethazine",
+    "zh": "异丙嗪",
+    "ja": "プロメタジン"
+  },
+  {
+    "id": "conjugated_estrogens",
+    "en": "Conjugated estrogens",
+    "zh": "结合雌激素",
+    "ja": "結合型女性ホルモン",
+    "ja_source": "manual",
+    "ja_prev": "エストラジオール 結合"
+  },
+  {
+    "id": "linezolid",
+    "en": "Linezolid",
+    "zh": "利奈唑胺",
+    "ja": "リネゾリド"
+  },
+  {
+    "id": "denosumab",
+    "en": "Denosumab",
+    "zh": "地舒单抗",
+    "ja": "デノスマブ"
+  },
+  {
+    "id": "glycopyrrolate",
+    "en": "Glycopyrrolate",
+    "zh": "格隆溴铵",
+    "ja": "グリコピロニウム"
+  },
+  {
+    "id": "probenecid",
+    "en": "Probenecid",
+    "zh": "丙磺舒",
+    "ja": "プロベネシド"
+  },
+  {
+    "id": "ciprofloxacin",
+    "en": "Ciprofloxacin",
+    "zh": "环丙沙星",
+    "ja": "シプロフロキサシン"
+  },
+  {
+    "id": "esomeprazole",
+    "en": "Esomeprazole",
+    "zh": "艾司奥美拉唑",
+    "ja": "エソメプラゾール"
+  },
+  {
+    "id": "triamcinolone",
+    "en": "Triamcinolone",
+    "zh": "曲安奈德",
+    "ja": "トリアムシノロン"
+  },
+  {
+    "id": "memantine_donepezil",
+    "en": "Memantine + Donepezil",
+    "zh": "美金刚+多奈哌齐 (复方)",
+    "ja": "メマンチン・ドネペジル配合剤",
+    "ja_source": "manual",
+    "ja_prev": "メマンチン＋ドネペジル 複方"
+  },
+  {
+    "id": "thyroid_armour",
+    "en": "Thyroid (desiccated)",
+    "zh": "甲状腺片 (干甲状腺)",
+    "ja": "乾燥甲状腺",
+    "ja_source": "manual",
+    "ja_prev": "レボチロキシン 甲状腺"
+  },
+  {
+    "id": "pitavastatin",
+    "en": "Pitavastatin",
+    "zh": "匹伐他汀",
+    "ja": "ピタバスタチン"
+  },
+  {
+    "id": "sevoflurane",
+    "en": "Sevoflurane",
+    "zh": "七氟烷",
+    "ja": "セボフルラン"
+  },
+  {
+    "id": "meloxicam",
+    "en": "Meloxicam",
+    "zh": "美洛昔康",
+    "ja": "メロキシカム"
+  },
+  {
+    "id": "lovastatin",
+    "en": "Lovastatin",
+    "zh": "洛伐他汀",
+    "ja": "ロバスタチン"
+  },
+  {
+    "id": "levofloxacin",
+    "en": "Levofloxacin",
+    "zh": "左氧氟沙星",
+    "ja": "レボフロキサシン"
+  },
+  {
+    "id": "ondansetron",
+    "en": "Ondansetron",
+    "zh": "昂丹司琼",
+    "ja": "オンダンセトロン"
+  },
+  {
+    "id": "lumateperone",
+    "en": "Lumateperone",
+    "zh": "鲁玛替培酮",
+    "ja": "ルマテペロン"
+  },
+  {
+    "id": "xanomeline",
+    "en": "Xanomeline + Trospium",
+    "zh": "沙诺美林+曲司氯铵",
+    "ja": "キサノメリン・トロスピウム",
+    "ja_source": "ja-search"
+  }
+]

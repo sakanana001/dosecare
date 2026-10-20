@@ -19,6 +19,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
+import java.io.File
 import java.util.Locale
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -40,7 +41,7 @@ class StockNudgeGateTest {
         val context: Context = mockk()
         val dataStore: DataStore<Preferences> = PreferenceDataStoreFactory.create(
             scope = testScope,
-            produceFile = { tmpFolder.newFile("settings_test.preferences_pb") },
+            produceFile = { File(tmpFolder.root, "settings_test.preferences_pb") },
         )
 
         settings = SettingsRepository(context, dataStore)

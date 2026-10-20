@@ -76,6 +76,7 @@ data class Drug(
     val id: String,                       // 英文小写下划线
     val genericName: String,              // INN 英文
     val genericNameZh: String,            // 中文通用名
+    val genericNameJa: String? = null,    // 日文通用名 (INN 日本語); 缺失时回落英文 INN
     val brandNames: List<String> = emptyList(),
     val category: DrugCategory,
     val subcategory: String? = null,      // "ATYPICAL", "SSRI", "TCA" ...

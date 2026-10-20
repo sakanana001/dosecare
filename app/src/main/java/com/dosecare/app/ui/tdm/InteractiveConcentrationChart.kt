@@ -41,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import com.dosecare.app.R
 import com.dosecare.app.model.pharmacology.Drug
 import com.dosecare.app.model.pharmacology.PkCurve
+import com.dosecare.app.ui.pharmacology.displayName
 import kotlin.math.abs
 import kotlin.math.ceil
 
@@ -111,6 +112,13 @@ fun InteractiveConcentrationChart(
         maxOf(cmaxD * 1.6, winHigh * 1.15, cminD * 2.0, 1.0)
     }
 
+    // 药名短名: 必须在 Composable 作用域预先算好
+    // (Canvas 的 draw lambda / drawIntoCanvas 不是 Composable 上下文, 里面不能调 displayName())
+    val seriesShortNames = series.map { s ->
+        val n = s.drug.displayName()
+        if (n.length > 4) n.substring(0, 4) + "…" else n
+    }
+
     Column(modifier = modifier) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
@@ -133,7 +141,7 @@ fun InteractiveConcentrationChart(
                 Box(modifier = Modifier.size(8.dp).background(s.color, CircleShape))
                 Spacer(Modifier.width(4.dp))
                 Text(
-                    "${s.drug.genericNameZh} Cmax ${"%.1f".format(cmaxD)} ${s.drug.therapeuticWindow?.unit?.let { if (s.drug.skipTherapeuticWindowBand) it else it.substringBefore(" ") }}",
+                    "${s.drug.displayName()} Cmax ${"%.1f".format(cmaxD)} ${s.drug.therapeuticWindow?.unit?.let { if (s.drug.skipTherapeuticWindowBand) it else it.substringBefore(" ") }}",
                     style = MaterialTheme.typography.labelSmall
                 )
                 s.drug.therapeuticWindow?.let { win ->
@@ -437,8 +445,7 @@ fun InteractiveConcentrationChart(
                                     )
                                     textSize = 22f; isAntiAlias = true; isFakeBoldText = true
                                 }
-                                val name = s.drug.genericNameZh
-                                val shortName = if (name.length > 4) name.substring(0, 4) + "…" else name
+                                val shortName = seriesShortNames[idx]
                                 canvas.nativeCanvas.drawText(
                                     "$shortName c=${"%.1f".format(c)}",
                                     boxX + 8f, boxY + 24f + 20f * (idx + 1), tpDrug

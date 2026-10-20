@@ -24,6 +24,7 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TemporaryFolder
+import java.io.File
 import java.util.Locale
 
 @OptIn(ExperimentalCoroutinesApi::class)
@@ -49,7 +50,7 @@ class SettingsRepositoryLegacyWidgetAppearanceTest {
 
         dataStore = PreferenceDataStoreFactory.create(
             scope = testScope,
-            produceFile = { tmpFolder.newFile("legacy_widget_test.preferences_pb") },
+            produceFile = { File(tmpFolder.root, "legacy_widget_test.preferences_pb") },
         )
 
         settingsRepository = SettingsRepository(context, dataStore)

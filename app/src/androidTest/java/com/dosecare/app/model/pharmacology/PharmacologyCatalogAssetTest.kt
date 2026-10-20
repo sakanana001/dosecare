@@ -53,7 +53,49 @@ class PharmacologyCatalogAssetTest {
             assertTrue("${drug.id} has a blank id", drug.id.isNotBlank())
             assertTrue("${drug.id} missing genericName", drug.genericName.isNotBlank())
             assertTrue("${drug.id} missing genericNameZh", drug.genericNameZh.isNotBlank())
+            assertTrue("${drug.id} missing genericNameJa", !drug.genericNameJa.isNullOrBlank())
         }
+    }
+
+    /**
+     * 日文通用名必须**已经被本地化**—— 之前目录里没有这个字段时, 日语界面的药名
+     * 列表显示的是中文名, 搜索也搜不到日文名。
+     *
+     * 判定标准: 日文名既不能是英文 INN 的复制, 也不能是中文通用名的复制。
+     * (不能简单要求"必须含假名": 叶酸 / 硫酸鉄(II) / 乾燥甲状腺 这类日本医药品
+     * 一般名本来就是纯汉字写法。)
+     */
+    @Test
+    fun everyJapaneseNameIsLocalizedRatherThanCopied() {
+        loadCatalog().all().forEach { drug ->
+            val ja = drug.genericNameJa
+            assertTrue("${drug.id} missing genericNameJa", !ja.isNullOrBlank())
+            assertTrue(
+                "${drug.id} Japanese name '$ja' is just the English INN",
+                !ja!!.equals(drug.genericName, ignoreCase = true),
+            )
+            assertTrue(
+                "${drug.id} Japanese name '$ja' is just the Chinese generic name",
+                ja != drug.genericNameZh,
+            )
+        }
+    }
+
+    /**
+     * 反向防线: 如果以后有人把日文名批量填成中文名 (靠上一条只能拦下"完全相同",
+     * 拦不住"换成简体字形"), 那 202 个名字里绝大多数会不含假名。
+     * 纯汉字的合法日文名目前只有 3 个, 所以留 5% 余量。
+     */
+    @Test
+    fun mostJapaneseNamesContainKana() {
+        val kana = Regex("[\\u3040-\\u309F\\u30A0-\\u30FF]")
+        val all = loadCatalog().all()
+        val withKana = all.count { kana.containsMatchIn(it.genericNameJa.orEmpty()) }
+        val threshold = (all.size * 0.95).toInt()
+        assertTrue(
+            "only $withKana/${all.size} Japanese names contain kana (expected >= $threshold)",
+            withKana >= threshold,
+        )
     }
 
     /**

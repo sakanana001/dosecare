@@ -22,6 +22,7 @@
       "id": "clozapine",
       "genericName": "Clozapine",
       "genericNameZh": "氯氮平",
+      "genericNameJa": "クロザピン",
       "brandNames": [
         "Clozaril",
         "Leponex",
@@ -168,6 +169,7 @@
       "id": "olanzapine",
       "genericName": "Olanzapine",
       "genericNameZh": "奥氮平",
+      "genericNameJa": "オランザピン",
       "brandNames": [
         "Zyprexa",
         "Zypadhera",
@@ -314,6 +316,7 @@
       "id": "risperidone",
       "genericName": "Risperidone",
       "genericNameZh": "利培酮",
+      "genericNameJa": "リスペリドン",
       "brandNames": [
         "Risperdal",
         "维思通",
@@ -462,6 +465,7 @@
       "id": "quetiapine",
       "genericName": "Quetiapine",
       "genericNameZh": "喹硫平",
+      "genericNameJa": "クエチアピン",
       "brandNames": [
         "Seroquel",
         "思瑞康",
@@ -599,6 +603,7 @@
       "id": "aripiprazole",
       "genericName": "Aripiprazole",
       "genericNameZh": "阿立哌唑",
+      "genericNameJa": "アリピプラゾール",
       "brandNames": [
         "Abilify",
         "安律凡",
@@ -747,6 +752,7 @@
       "id": "ziprasidone",
       "genericName": "Ziprasidone",
       "genericNameZh": "齐拉西酮",
+      "genericNameJa": "ジプラシドン",
       "brandNames": [
         "Geodon",
         "Zeldox"
@@ -881,6 +887,7 @@
       "id": "amisulpride",
       "genericName": "Amisulpride",
       "genericNameZh": "氨磺必利",
+      "genericNameJa": "アミスルプリド",
       "brandNames": [
         "Solian",
         "索里昂"
@@ -984,6 +991,7 @@
       "id": "valproic_acid",
       "genericName": "Valproic acid",
       "genericNameZh": "丙戊酸钠",
+      "genericNameJa": "バルプロ酸ナトリウム",
       "brandNames": [
         "Depakote",
         "Depakene",
@@ -1120,6 +1128,7 @@
       "id": "lithium",
       "genericName": "Lithium carbonate",
       "genericNameZh": "碳酸锂",
+      "genericNameJa": "炭酸リチウム",
       "brandNames": [
         "Lithobid",
         "Eskalith",
@@ -1269,6 +1278,7 @@
       "id": "lamotrigine",
       "genericName": "Lamotrigine",
       "genericNameZh": "拉莫三嗪",
+      "genericNameJa": "ラモトリギン",
       "brandNames": [
         "Lamictal",
         "利必通"
@@ -1406,6 +1416,7 @@
       "id": "fluoxetine",
       "genericName": "Fluoxetine",
       "genericNameZh": "氟西汀",
+      "genericNameJa": "フルオキセチン",
       "brandNames": [
         "Prozac",
         "百忧解"
@@ -1556,6 +1567,7 @@
       "id": "sertraline",
       "genericName": "Sertraline",
       "genericNameZh": "舍曲林",
+      "genericNameJa": "セルトラリン",
       "brandNames": [
         "Zoloft",
         "左洛复"
@@ -1705,6 +1717,7 @@
       "id": "paroxetine",
       "genericName": "Paroxetine",
       "genericNameZh": "帕罗西汀",
+      "genericNameJa": "パロキセチン",
       "brandNames": [
         "Paxil",
         "Seroxat",
@@ -1858,6 +1871,7 @@
       "id": "escitalopram",
       "genericName": "Escitalopram",
       "genericNameZh": "艾司西酞普兰",
+      "genericNameJa": "エスシタロプラム",
       "brandNames": [
         "Lexapro",
         "来士普"
@@ -2001,6 +2015,7 @@
       "id": "fluvoxamine",
       "genericName": "Fluvoxamine",
       "genericNameZh": "氟伏沙明",
+      "genericNameJa": "フルボキサミン",
       "brandNames": [
         "Luvox",
         "兰释"
@@ -2170,6 +2185,7 @@
       "id": "citalopram",
       "genericName": "Citalopram",
       "genericNameZh": "西酞普兰",
+      "genericNameJa": "シタロプラム",
       "brandNames": [
         "Celexa",
         "Cipramil",
@@ -2313,6 +2329,7 @@
       "id": "venlafaxine",
       "genericName": "Venlafaxine",
       "genericNameZh": "文拉法辛",
+      "genericNameJa": "ベンラファキシン",
       "brandNames": [
         "Effexor",
         "怡诺思",
@@ -2469,6 +2486,7 @@
       "id": "duloxetine",
       "genericName": "Duloxetine",
       "genericNameZh": "度洛西汀",
+      "genericNameJa": "デュロキセチン",
       "brandNames": [
         "Cymbalta",
         "欣百达",
@@ -2628,6 +2646,7 @@
       "id": "diazepam",
       "genericName": "Diazepam",
       "genericNameZh": "地西泮",
+      "genericNameJa": "ジアゼパム",
       "brandNames": [
         "Valium",
         "安定"
@@ -2786,6 +2805,7 @@
       "id": "lorazepam",
       "genericName": "Lorazepam",
       "genericNameZh": "劳拉西泮",
+      "genericNameJa": "ロラゼパム",
       "brandNames": [
         "Ativan",
         "罗拉"
@@ -2913,6 +2933,7 @@
       "id": "carbamazepine",
       "genericName": "Carbamazepine",
       "genericNameZh": "卡马西平",
+      "genericNameJa": "カルバマゼピン",
       "brandNames": [
         "Tegretol",
         "得理多",
@@ -3114,6 +3135,7 @@
       "id": "oxcarbazepine",
       "genericName": "Oxcarbazepine",
       "genericNameZh": "奥卡西平",
+      "genericNameJa": "オクスカルバゼピン",
       "brandNames": [
         "Trileptal",
         "曲莱"
@@ -3238,6 +3260,7 @@
       "id": "topiramate",
       "genericName": "Topiramate",
       "genericNameZh": "托吡酯",
+      "genericNameJa": "トピラマート",
       "brandNames": [
         "Topamax",
         "妥泰"
@@ -3374,6 +3397,7 @@
       "id": "gabapentin",
       "genericName": "Gabapentin",
       "genericNameZh": "加巴喷丁",
+      "genericNameJa": "ガバペンチン",
       "brandNames": [
         "Neurontin",
         "派汀"
@@ -3478,6 +3502,7 @@
       "id": "pregabalin",
       "genericName": "Pregabalin",
       "genericNameZh": "普瑞巴林",
+      "genericNameJa": "プレガバリン",
       "brandNames": [
         "Lyrica",
         "乐瑞卡"
@@ -3583,6 +3608,7 @@
       "id": "benztropine",
       "genericName": "Benztropine",
       "genericNameZh": "苯扎托品",
+      "genericNameJa": "ベンズトロピン",
       "brandNames": [
         "Cogentin"
       ],
@@ -3698,6 +3724,7 @@
       "id": "trihexyphenidyl",
       "genericName": "Trihexyphenidyl",
       "genericNameZh": "苯海索",
+      "genericNameJa": "トリヘキシフェニジル",
       "brandNames": [
         "Artane",
         "安坦"
@@ -3813,6 +3840,7 @@
       "id": "levodopa_carbidopa",
       "genericName": "Levodopa/Carbidopa",
       "genericNameZh": "左旋多巴/卡比多巴",
+      "genericNameJa": "レボドパ／カルビドパ",
       "brandNames": [
         "Sinemet",
         "美多芭",
@@ -3939,6 +3967,7 @@
       "id": "pramipexole",
       "genericName": "Pramipexole",
       "genericNameZh": "普拉克索",
+      "genericNameJa": "プラミペキソール",
       "brandNames": [
         "Mirapex",
         "森福罗"
@@ -4054,6 +4083,7 @@
       "id": "metformin",
       "genericName": "Metformin",
       "genericNameZh": "二甲双胍",
+      "genericNameJa": "メトホルミン",
       "brandNames": [
         "Glucophage",
         "格华止"
@@ -4169,6 +4199,7 @@
       "id": "empagliflozin",
       "genericName": "Empagliflozin",
       "genericNameZh": "恩格列净",
+      "genericNameJa": "エンパグリフロジン",
       "brandNames": [
         "Jardiance",
         "欧唐静"
@@ -4276,6 +4307,7 @@
       "id": "atorvastatin",
       "genericName": "Atorvastatin",
       "genericNameZh": "阿托伐他汀",
+      "genericNameJa": "アトルバスタチン",
       "brandNames": [
         "Lipitor",
         "立普妥"
@@ -4412,6 +4444,7 @@
       "id": "amlodipine",
       "genericName": "Amlodipine",
       "genericNameZh": "氨氯地平",
+      "genericNameJa": "アムロジピン",
       "brandNames": [
         "Norvasc",
         "络活喜"
@@ -4541,6 +4574,7 @@
       "id": "lisinopril",
       "genericName": "Lisinopril",
       "genericNameZh": "赖诺普利",
+      "genericNameJa": "リシノプリル",
       "brandNames": [
         "Zestril",
         "Prinivil"
@@ -4668,6 +4702,7 @@
       "id": "losartan",
       "genericName": "Losartan",
       "genericNameZh": "氯沙坦",
+      "genericNameJa": "ロサルタン",
       "brandNames": [
         "Cozaar",
         "科素亚"
@@ -4802,6 +4837,7 @@
       "id": "metoprolol",
       "genericName": "Metoprolol",
       "genericNameZh": "美托洛尔",
+      "genericNameJa": "メトプロロール",
       "brandNames": [
         "Lopressor",
         "Toprol-XL",
@@ -4934,6 +4970,7 @@
       "id": "warfarin",
       "genericName": "Warfarin",
       "genericNameZh": "华法林",
+      "genericNameJa": "ワルファリン",
       "brandNames": [
         "Coumadin",
         "Marevan",
@@ -5111,6 +5148,7 @@
       "id": "rivaroxaban",
       "genericName": "Rivaroxaban",
       "genericNameZh": "利伐沙班",
+      "genericNameJa": "リバーロキサバン",
       "brandNames": [
         "Xarelto",
         "拜瑞妥"
@@ -5251,6 +5289,7 @@
       "id": "aspirin",
       "genericName": "Aspirin",
       "genericNameZh": "阿司匹林",
+      "genericNameJa": "アセチルサリチル酸",
       "brandNames": [
         "Bayer",
         "拜阿"
@@ -5378,6 +5417,7 @@
       "id": "clopidogrel",
       "genericName": "Clopidogrel",
       "genericNameZh": "氯吡格雷",
+      "genericNameJa": "クロピドグレル",
       "brandNames": [
         "Plavix",
         "波立维"
@@ -5506,6 +5546,7 @@
       "id": "omeprazole",
       "genericName": "Omeprazole",
       "genericNameZh": "奥美拉唑",
+      "genericNameJa": "オメプラゾール",
       "brandNames": [
         "Prilosec",
         "洛赛克"
@@ -5650,6 +5691,7 @@
       "id": "levothyroxine",
       "genericName": "Levothyroxine",
       "genericNameZh": "左甲状腺素",
+      "genericNameJa": "レボチロキシン",
       "brandNames": [
         "Synthroid",
         "优甲乐",
@@ -5796,6 +5838,7 @@
       "id": "diphenhydramine",
       "genericName": "Diphenhydramine",
       "genericNameZh": "苯海拉明",
+      "genericNameJa": "ジフェンヒドラミン",
       "brandNames": [
         "Benadryl",
         "苯那君"
@@ -5927,6 +5970,7 @@
       "id": "hydroxyzine",
       "genericName": "Hydroxyzine",
       "genericNameZh": "羟嗪",
+      "genericNameJa": "ヒドロキシジン",
       "brandNames": [
         "Atarax",
         "Vistaril"
@@ -6065,6 +6109,7 @@
       "id": "zolpidem",
       "genericName": "Zolpidem",
       "genericNameZh": "唑吡坦",
+      "genericNameJa": "ゾルピデム",
       "brandNames": [
         "Ambien",
         "思诺思"
@@ -6197,6 +6242,7 @@
       "id": "tramadol",
       "genericName": "Tramadol",
       "genericNameZh": "曲马多",
+      "genericNameJa": "トラマドール",
       "brandNames": [
         "Ultram",
         "舒敏"
@@ -6361,6 +6407,7 @@
       "id": "amiodarone",
       "genericName": "Amiodarone",
       "genericNameZh": "胺碘酮",
+      "genericNameJa": "アミオダロン",
       "brandNames": [
         "Cordarone",
         "可达龙"
@@ -6541,6 +6588,7 @@
       "id": "sotalol",
       "genericName": "Sotalol",
       "genericNameZh": "索他洛尔",
+      "genericNameJa": "ソタロール",
       "brandNames": [
         "Betapace",
         "索他洛尔"
@@ -6677,6 +6725,7 @@
       "id": "phenytoin",
       "genericName": "Phenytoin",
       "genericNameZh": "苯妥英",
+      "genericNameJa": "フェニトイン",
       "brandNames": [
         "Dilantin",
         "大仑丁"
@@ -6864,6 +6913,7 @@
       "id": "levetiracetam",
       "genericName": "Levetiracetam",
       "genericNameZh": "左乙拉西坦",
+      "genericNameJa": "レベチラセタム",
       "brandNames": [
         "Keppra",
         "开浦兰"
@@ -6968,6 +7018,7 @@
       "id": "paliperidone",
       "genericName": "Paliperidone",
       "genericNameZh": "帕利哌酮",
+      "genericNameJa": "パリペリドン",
       "brandNames": [
         "Invega",
         "善妥达",
@@ -7105,6 +7156,7 @@
       "id": "asenapine",
       "genericName": "Asenapine",
       "genericNameZh": "阿塞那平",
+      "genericNameJa": "アセナピン",
       "brandNames": [
         "Saphris",
         "Sycrest",
@@ -7254,6 +7306,7 @@
       "id": "lurasidone",
       "genericName": "Lurasidone",
       "genericNameZh": "鲁拉西酮",
+      "genericNameJa": "ルラシドン",
       "brandNames": [
         "Latuda",
         "罗舒达"
@@ -7400,6 +7453,7 @@
       "id": "brexpiprazole",
       "genericName": "Brexpiprazole",
       "genericNameZh": "依匹哌唑",
+      "genericNameJa": "ブレクスピプラゾール",
       "brandNames": [
         "Rexulti",
         "Rxulti"
@@ -7549,6 +7603,7 @@
       "id": "cariprazine",
       "genericName": "Cariprazine",
       "genericNameZh": "卡利拉嗪",
+      "genericNameJa": "カリプラジン",
       "brandNames": [
         "Vraylar",
         "瑞欣妥"
@@ -7684,6 +7739,7 @@
       "id": "iloperidone",
       "genericName": "Iloperidone",
       "genericNameZh": "伊潘立酮",
+      "genericNameJa": "イロペリドン",
       "brandNames": [
         "Fanapt",
         "泰妥生"
@@ -7843,6 +7899,7 @@
       "id": "mirtazapine",
       "genericName": "Mirtazapine",
       "genericNameZh": "米氮平",
+      "genericNameJa": "ミルタザピン",
       "brandNames": [
         "Remeron",
         "瑞美隆"
@@ -8004,6 +8061,7 @@
       "id": "bupropion",
       "genericName": "Bupropion",
       "genericNameZh": "安非他酮",
+      "genericNameJa": "ブプロピオン",
       "brandNames": [
         "Wellbutrin",
         "Elontril",
@@ -8178,6 +8236,7 @@
       "id": "vortioxetine",
       "genericName": "Vortioxetine",
       "genericNameZh": "伏硫西汀",
+      "genericNameJa": "ボルチオキセチン",
       "brandNames": [
         "Trintellix",
         "心达悦"
@@ -8354,6 +8413,7 @@
       "id": "agomelatine",
       "genericName": "Agomelatine",
       "genericNameZh": "阿戈美拉汀",
+      "genericNameJa": "アゴメラチン",
       "brandNames": [
         "Valdoxan",
         "维度新"
@@ -8506,6 +8566,7 @@
       "id": "trazodone",
       "genericName": "Trazodone",
       "genericNameZh": "曲唑酮",
+      "genericNameJa": "トラゾドン",
       "brandNames": [
         "Desyrel",
         "Trittico",
@@ -8672,6 +8733,7 @@
       "id": "phenelzine",
       "genericName": "Phenelzine",
       "genericNameZh": "苯乙肼",
+      "genericNameJa": "フェネルジン",
       "brandNames": [
         "Nardil"
       ],
@@ -8845,6 +8907,7 @@
       "id": "selegiline",
       "genericName": "Selegiline",
       "genericNameZh": "司来吉兰",
+      "genericNameJa": "セレギリン",
       "brandNames": [
         "Eldepryl",
         "Zelapar"
@@ -9012,6 +9075,7 @@
       "id": "amitriptyline",
       "genericName": "Amitriptyline",
       "genericNameZh": "阿米替林",
+      "genericNameJa": "アミトリプチリン",
       "brandNames": [
         "Elavil",
         "Endep",
@@ -9195,6 +9259,7 @@
       "id": "nortriptyline",
       "genericName": "Nortriptyline",
       "genericNameZh": "去甲替林",
+      "genericNameJa": "ノルトリプチリン",
       "brandNames": [
         "Pamelor",
         "Aventyl",
@@ -9348,6 +9413,7 @@
       "id": "clomipramine",
       "genericName": "Clomipramine",
       "genericNameZh": "氯米帕明",
+      "genericNameJa": "クロミプラミン",
       "brandNames": [
         "Anafranil",
         "安拿芬尼"
@@ -9518,6 +9584,7 @@
       "id": "imipramine",
       "genericName": "Imipramine",
       "genericNameZh": "丙咪嗪",
+      "genericNameJa": "イミプラミン",
       "brandNames": [
         "Tofranil",
         "依咪帕明"
@@ -9678,6 +9745,7 @@
       "id": "buspirone",
       "genericName": "Buspirone",
       "genericNameZh": "丁螺环酮",
+      "genericNameJa": "ブスピロン",
       "brandNames": [
         "BuSpar",
         "布斯帕"
@@ -9821,6 +9889,7 @@
       "id": "methylphenidate",
       "genericName": "Methylphenidate",
       "genericNameZh": "哌甲酯",
+      "genericNameJa": "メチルフェニデート",
       "brandNames": [
         "Ritalin",
         "Concerta",
@@ -9967,6 +10036,7 @@
       "id": "atomoxetine",
       "genericName": "Atomoxetine",
       "genericNameZh": "托莫西汀",
+      "genericNameJa": "アトモキセチン",
       "brandNames": [
         "Strattera",
         "择思达"
@@ -10121,6 +10191,7 @@
       "id": "ropinirole",
       "genericName": "Ropinirole",
       "genericNameZh": "罗匹尼罗",
+      "genericNameJa": "ロピニロール",
       "brandNames": [
         "Requip",
         "力必平"
@@ -10268,6 +10339,7 @@
       "id": "rasagiline",
       "genericName": "Rasagiline",
       "genericNameZh": "雷沙吉兰",
+      "genericNameJa": "ラサギリン",
       "brandNames": [
         "Azilect",
         "安齐来"
@@ -10439,6 +10511,7 @@
       "id": "entacapone",
       "genericName": "Entacapone",
       "genericNameZh": "恩他卡朋",
+      "genericNameJa": "エンタカポン",
       "brandNames": [
         "Comtan",
         "珂丹"
@@ -10567,6 +10640,7 @@
       "id": "amantadine",
       "genericName": "Amantadine",
       "genericNameZh": "金刚烷胺",
+      "genericNameJa": "アマンタジン",
       "brandNames": [
         "Symmetrel",
         "Gocovri"
@@ -10705,6 +10779,7 @@
       "id": "tolcapone",
       "genericName": "Tolcapone",
       "genericNameZh": "托卡朋",
+      "genericNameJa": "トルカポン",
       "brandNames": [
         "Tasmar"
       ],
@@ -10831,6 +10906,7 @@
       "id": "donepezil",
       "genericName": "Donepezil",
       "genericNameZh": "多奈哌齐",
+      "genericNameJa": "ドネペジル",
       "brandNames": [
         "Aricept",
         "安理申"
@@ -10988,6 +11064,7 @@
       "id": "rivastigmine",
       "genericName": "Rivastigmine",
       "genericNameZh": "卡巴拉汀",
+      "genericNameJa": "リバスチグミン",
       "brandNames": [
         "Exelon",
         "艾斯能"
@@ -11105,6 +11182,7 @@
       "id": "galantamine",
       "genericName": "Galantamine",
       "genericNameZh": "加兰他敏",
+      "genericNameJa": "ガランタミン",
       "brandNames": [
         "Razadyne",
         "Reminyl",
@@ -11262,6 +11340,7 @@
       "id": "memantine",
       "genericName": "Memantine",
       "genericNameZh": "美金刚",
+      "genericNameJa": "メマンチン",
       "brandNames": [
         "Namenda",
         "Namenda XR",
@@ -11405,6 +11484,7 @@
       "id": "eslicarbazepine",
       "genericName": "Eslicarbazepine",
       "genericNameZh": "醋酸艾司利卡西平",
+      "genericNameJa": "エスリカルバゼピン",
       "brandNames": [
         "Aptiom",
         "Zebinix",
@@ -11554,6 +11634,7 @@
       "id": "perampanel",
       "genericName": "Perampanel",
       "genericNameZh": "吡仑帕奈",
+      "genericNameJa": "ペランパネル",
       "brandNames": [
         "Fycompa",
         "卫克启"
@@ -11697,6 +11778,7 @@
       "id": "lacosamide",
       "genericName": "Lacosamide",
       "genericNameZh": "拉科酰胺",
+      "genericNameJa": "ラコサミド",
       "brandNames": [
         "Vimpat",
         "维派特"
@@ -11825,6 +11907,7 @@
       "id": "sumatriptan",
       "genericName": "Sumatriptan",
       "genericNameZh": "舒马普坦",
+      "genericNameJa": "スマトリプタン",
       "brandNames": [
         "Imitrex",
         "Imigran",
@@ -11973,6 +12056,7 @@
       "id": "flunarizine",
       "genericName": "Flunarizine",
       "genericNameZh": "氟桂利嗪",
+      "genericNameJa": "フルナリジン",
       "brandNames": [
         "Sibelium",
         "西比灵"
@@ -12116,6 +12200,7 @@
       "id": "baclofen",
       "genericName": "Baclofen",
       "genericNameZh": "巴氯芬",
+      "genericNameJa": "バクロフェン",
       "brandNames": [
         "Lioresal",
         "力奥来素"
@@ -12264,6 +12349,7 @@
       "id": "tizanidine",
       "genericName": "Tizanidine",
       "genericNameZh": "替扎尼定",
+      "genericNameJa": "チザニジン",
       "brandNames": [
         "Zanaflex",
         "Sirdalud",
@@ -12432,6 +12518,7 @@
       "id": "betahistine",
       "genericName": "Betahistine",
       "genericNameZh": "倍他司汀",
+      "genericNameJa": "ベタヒスチン",
       "brandNames": [
         "Serc",
         "敏使朗"
@@ -12548,6 +12635,7 @@
       "id": "meclizine",
       "genericName": "Meclizine",
       "genericNameZh": "美克洛嗪",
+      "genericNameJa": "メクリジン",
       "brandNames": [
         "Antivert",
         "Bonine",
@@ -12677,6 +12765,7 @@
       "id": "glipizide",
       "genericName": "Glipizide",
       "genericNameZh": "格列吡嗪",
+      "genericNameJa": "グリピジド",
       "brandNames": [
         "Glucotrol",
         "瑞易宁"
@@ -12821,6 +12910,7 @@
       "id": "sitagliptin",
       "genericName": "Sitagliptin",
       "genericNameZh": "西格列汀",
+      "genericNameJa": "シタグリプチン",
       "brandNames": [
         "Januvia",
         "捷诺维"
@@ -12958,6 +13048,7 @@
       "id": "liraglutide",
       "genericName": "Liraglutide",
       "genericNameZh": "利拉鲁肽",
+      "genericNameJa": "リラグルチド",
       "brandNames": [
         "Victoza",
         "诺和力",
@@ -13098,6 +13189,7 @@
       "id": "pioglitazone",
       "genericName": "Pioglitazone",
       "genericNameZh": "吡格列酮",
+      "genericNameJa": "ピオグリタゾン",
       "brandNames": [
         "Actos",
         "艾可拓"
@@ -13261,6 +13353,7 @@
       "id": "methimazole",
       "genericName": "Methimazole",
       "genericNameZh": "甲巯咪唑",
+      "genericNameJa": "チアマゾール",
       "brandNames": [
         "Tapazole",
         "赛治"
@@ -13400,6 +13493,7 @@
       "id": "propylthiouracil",
       "genericName": "Propylthiouracil",
       "genericNameZh": "丙硫氧嘧啶",
+      "genericNameJa": "プロピルチオウラシル",
       "brandNames": [
         "PTU"
       ],
@@ -13527,6 +13621,7 @@
       "id": "prednisone",
       "genericName": "Prednisone",
       "genericNameZh": "泼尼松",
+      "genericNameJa": "プレドニゾン",
       "brandNames": [
         "Deltasone",
         "Rayos",
@@ -13695,6 +13790,7 @@
       "id": "prednisolone",
       "genericName": "Prednisolone",
       "genericNameZh": "泼尼松龙",
+      "genericNameJa": "プレドニゾロン",
       "brandNames": [
         "Orapred",
         "Pediapred",
@@ -13852,6 +13948,7 @@
       "id": "hydrocortisone",
       "genericName": "Hydrocortisone",
       "genericNameZh": "氢化可的松",
+      "genericNameJa": "ヒドロコルチゾン",
       "brandNames": [
         "Cortef",
         "Solu-Cortef",
@@ -13999,6 +14096,7 @@
       "id": "dexamethasone",
       "genericName": "Dexamethasone",
       "genericNameZh": "地塞米松",
+      "genericNameJa": "デキサメタゾン",
       "brandNames": [
         "Decadron",
         "Dexamethasone Intensol",
@@ -14167,6 +14265,7 @@
       "id": "methylprednisolone",
       "genericName": "Methylprednisolone",
       "genericNameZh": "甲泼尼龙",
+      "genericNameJa": "メチルプレドニゾロン",
       "brandNames": [
         "Medrol",
         "Solu-Medrol",
@@ -14325,6 +14424,7 @@
       "id": "alendronate",
       "genericName": "Alendronate",
       "genericNameZh": "阿仑膦酸钠",
+      "genericNameJa": "アレンドロン酸",
       "brandNames": [
         "Fosamax",
         "福善美"
@@ -14473,6 +14573,7 @@
       "id": "risedronate",
       "genericName": "Risedronate",
       "genericNameZh": "利塞膦酸钠",
+      "genericNameJa": "リセドロン酸ナトリウム",
       "brandNames": [
         "Actonel",
         "Atelvia",
@@ -14611,6 +14712,7 @@
       "id": "finasteride",
       "genericName": "Finasteride",
       "genericNameZh": "非那雄胺",
+      "genericNameJa": "フィナステリド",
       "brandNames": [
         "Proscar",
         "Propecia",
@@ -14747,6 +14849,7 @@
       "id": "dutasteride",
       "genericName": "Dutasteride",
       "genericNameZh": "度他雄胺",
+      "genericNameJa": "デュタステリド",
       "brandNames": [
         "Avodart",
         "适必达"
@@ -14880,6 +14983,7 @@
       "id": "estradiol",
       "genericName": "Estradiol",
       "genericNameZh": "雌二醇",
+      "genericNameJa": "エストラジオール",
       "brandNames": [
         "Estrace",
         "Climara",
@@ -15047,6 +15151,7 @@
       "id": "progesterone",
       "genericName": "Progesterone",
       "genericNameZh": "孕酮",
+      "genericNameJa": "プロゲステロン",
       "brandNames": [
         "Prometrium",
         "Crinone",
@@ -15207,6 +15312,7 @@
       "id": "desmopressin",
       "genericName": "Desmopressin",
       "genericNameZh": "去氨加压素",
+      "genericNameJa": "デスモプレシン",
       "brandNames": [
         "DDAVP",
         "Minirin",
@@ -15355,6 +15461,7 @@
       "id": "naltrexone",
       "genericName": "Naltrexone",
       "genericNameZh": "纳曲酮",
+      "genericNameJa": "ナルトレキソン",
       "brandNames": [
         "ReVia",
         "Vivitrol"
@@ -15482,6 +15589,7 @@
       "id": "buprenorphine",
       "genericName": "Buprenorphine",
       "genericNameZh": "丁丙诺啡",
+      "genericNameJa": "ブプレノルフィン",
       "brandNames": [
         "Subutex",
         "Suboxone",
@@ -15656,6 +15764,7 @@
       "id": "methadone",
       "genericName": "Methadone",
       "genericNameZh": "美沙酮",
+      "genericNameJa": "メサドン",
       "brandNames": [
         "Methadone",
         "Dolophine",
@@ -15857,6 +15966,7 @@
       "id": "fluconazole",
       "genericName": "Fluconazole",
       "genericNameZh": "氟康唑",
+      "genericNameJa": "フルコナゾール",
       "brandNames": [
         "Diflucan",
         "三维康"
@@ -16059,6 +16169,7 @@
       "id": "rifampin",
       "genericName": "Rifampin",
       "genericNameZh": "利福平",
+      "genericNameJa": "リファンピシン",
       "brandNames": [
         "Rifadin",
         "Rimactane",
@@ -16285,6 +16396,7 @@
       "id": "dolutegravir",
       "genericName": "Dolutegravir",
       "genericNameZh": "多替拉韦",
+      "genericNameJa": "ドルテグラビル",
       "brandNames": [
         "Tivicay",
         "Triumeq(复方)",
@@ -16465,6 +16577,7 @@
       "id": "zaleplon",
       "genericName": "Zaleplon",
       "genericNameZh": "扎来普隆",
+      "genericNameJa": "ザレプロン",
       "brandNames": [
         "Sonata",
         "柠眠"
@@ -16608,6 +16721,7 @@
       "id": "eszopiclone",
       "genericName": "Eszopiclone",
       "genericNameZh": "右佐匹克隆",
+      "genericNameJa": "エスゾピクロン",
       "brandNames": [
         "Lunesta",
         "依曲诺"
@@ -16754,6 +16868,7 @@
       "id": "acamprosate",
       "genericName": "Acamprosate",
       "genericNameZh": "阿坎酸",
+      "genericNameJa": "アカンプロサート",
       "brandNames": [
         "Campral",
         "坎普拉尔"
@@ -16861,6 +16976,7 @@
       "id": "disulfiram",
       "genericName": "Disulfiram",
       "genericNameZh": "双硫仑",
+      "genericNameJa": "ジスルフィラム",
       "brandNames": [
         "Antabuse",
         "戒酒硫"
@@ -17024,6 +17140,7 @@
       "id": "modafinil",
       "genericName": "Modafinil",
       "genericNameZh": "莫达非尼",
+      "genericNameJa": "モダフィニル",
       "brandNames": [
         "Provigil",
         "Nuvigil",
@@ -17199,6 +17316,7 @@
       "id": "calcium_carbonate",
       "genericName": "Calcium Carbonate",
       "genericNameZh": "碳酸钙",
+      "genericNameJa": "炭酸カルシウム",
       "brandNames": [
         "Tums",
         "Caltrate",
@@ -17348,6 +17466,7 @@
       "id": "ferrous_sulfate",
       "genericName": "Ferrous Sulfate",
       "genericNameZh": "硫酸亚铁",
+      "genericNameJa": "硫酸鉄(II)",
       "brandNames": [
         "Feosol",
         "Slow Fe",
@@ -17506,6 +17625,7 @@
       "id": "folic_acid",
       "genericName": "Folic Acid",
       "genericNameZh": "叶酸",
+      "genericNameJa": "葉酸",
       "brandNames": [
         "Folvite",
         "叶酸片"
@@ -17642,6 +17762,7 @@
       "id": "tianeptine",
       "genericName": "Tianeptine",
       "genericNameZh": "噻奈普汀",
+      "genericNameJa": "チアネプチン",
       "brandNames": [
         "Stablon",
         "Tianeptine",
@@ -17788,6 +17909,7 @@
       "id": "allopurinol",
       "genericName": "Allopurinol",
       "genericNameZh": "别嘌醇",
+      "genericNameJa": "アロプリノール",
       "brandNames": [
         "Zyloprim",
         "Lopurin",
@@ -17958,6 +18080,7 @@
       "id": "colchicine",
       "genericName": "Colchicine",
       "genericNameZh": "秋水仙碱",
+      "genericNameJa": "コルヒチン",
       "brandNames": [
         "Colcrys",
         "Mitigare",
@@ -18160,6 +18283,7 @@
       "id": "tamsulosin",
       "genericName": "Tamsulosin",
       "genericNameZh": "坦索罗辛",
+      "genericNameJa": "タムスロシン",
       "brandNames": [
         "Flomax",
         "Harnal",
@@ -18329,6 +18453,7 @@
       "id": "morphine",
       "genericName": "Morphine",
       "genericNameZh": "吗啡",
+      "genericNameJa": "モルヒネ",
       "brandNames": [
         "MS Contin",
         "美施康定"
@@ -18500,6 +18625,7 @@
       "id": "fentanyl",
       "genericName": "Fentanyl",
       "genericNameZh": "芬太尼",
+      "genericNameJa": "フェンタニル",
       "brandNames": [
         "Duragesic",
         "多瑞吉",
@@ -18657,6 +18783,7 @@
       "id": "sufentanil",
       "genericName": "Sufentanil",
       "genericNameZh": "舒芬太尼",
+      "genericNameJa": "スフェンタニル",
       "brandNames": [
         "Sufenta",
         "舒芬太尼注射液"
@@ -18778,6 +18905,7 @@
       "id": "remifentanil",
       "genericName": "Remifentanil",
       "genericNameZh": "瑞芬太尼",
+      "genericNameJa": "レミフェンタニル",
       "brandNames": [
         "Ultiva",
         "瑞捷"
@@ -18883,6 +19011,7 @@
       "id": "oxycodone",
       "genericName": "Oxycodone",
       "genericNameZh": "羟考酮",
+      "genericNameJa": "オキシコドン",
       "brandNames": [
         "OxyContin",
         "奥施康定",
@@ -19043,6 +19172,7 @@
       "id": "hydromorphone",
       "genericName": "Hydromorphone",
       "genericNameZh": "氢吗啡酮",
+      "genericNameJa": "ヒドロモルフォン",
       "brandNames": [
         "Dilaudid",
         "多菲诺"
@@ -19167,6 +19297,7 @@
       "id": "pethidine",
       "genericName": "Pethidine",
       "genericNameZh": "哌替啶",
+      "genericNameJa": "ペチジン",
       "brandNames": [
         "Demerol",
         "度冷丁",
@@ -19323,6 +19454,7 @@
       "id": "codeine",
       "genericName": "Codeine",
       "genericNameZh": "可待因",
+      "genericNameJa": "コデイン",
       "brandNames": [
         "可待因片"
       ],
@@ -19469,6 +19601,7 @@
       "id": "cocaine",
       "genericName": "Cocaine",
       "genericNameZh": "可卡因",
+      "genericNameJa": "コカイン",
       "brandNames": [
         "古柯碱"
       ],
@@ -19602,6 +19735,7 @@
       "id": "dihydroetorphine",
       "genericName": "Dihydroetorphine",
       "genericNameZh": "二氢埃托啡",
+      "genericNameJa": "ジヒドロエトルフィン",
       "brandNames": [
         "二氢埃托啡舌下片"
       ],
@@ -19734,6 +19868,7 @@
       "id": "ketamine",
       "genericName": "Ketamine",
       "genericNameZh": "氯胺酮",
+      "genericNameJa": "ケタミン",
       "brandNames": [
         "K粉",
         "Ketalar"
@@ -19904,6 +20039,7 @@
       "id": "mdma",
       "genericName": "MDMA",
       "genericNameZh": "二甲基色胺",
+      "genericNameJa": "メチレンジオキシメタンフェタミン",
       "brandNames": [
         "摇头丸",
         "Ecstasy"
@@ -20048,6 +20184,7 @@
       "id": "triazolam",
       "genericName": "Triazolam",
       "genericNameZh": "三唑仑",
+      "genericNameJa": "トリアゾラム",
       "brandNames": [
         "Halcion",
         "海乐神"
@@ -20192,6 +20329,7 @@
       "id": "ghb",
       "genericName": "GHB",
       "genericNameZh": "γ-羟丁酸",
+      "genericNameJa": "Γ-ヒドロキシ酪酸",
       "brandNames": [
         "Xyrem",
         "Sodium Oxybate"
@@ -20320,6 +20458,7 @@
       "id": "amphetamine",
       "genericName": "Amphetamine",
       "genericNameZh": "苯丙胺",
+      "genericNameJa": "アンフェタミン",
       "brandNames": [
         "Adderall",
         "苯丙胺"
@@ -20474,6 +20613,7 @@
       "id": "alprazolam",
       "genericName": "Alprazolam",
       "genericNameZh": "阿普唑仑",
+      "genericNameJa": "アルプラゾラム",
       "brandNames": [
         "Xanax",
         "佳静安定"
@@ -20629,6 +20769,7 @@
       "id": "estazolam",
       "genericName": "Estazolam",
       "genericNameZh": "艾司唑仑",
+      "genericNameJa": "エスタゾラム",
       "brandNames": [
         "ProSom",
         "舒乐安定"
@@ -20762,6 +20903,7 @@
       "id": "nitrazepam",
       "genericName": "Nitrazepam",
       "genericNameZh": "硝西泮",
+      "genericNameJa": "ニトラゼパム",
       "brandNames": [
         "Mogadon",
         "硝基安定"
@@ -20886,6 +21028,7 @@
       "id": "midazolam",
       "genericName": "Midazolam",
       "genericNameZh": "咪达唑仑",
+      "genericNameJa": "ミダゾラム",
       "brandNames": [
         "Versed",
         "力月西"
@@ -21030,6 +21173,7 @@
       "id": "zopiclone",
       "genericName": "Zopiclone",
       "genericNameZh": "佐匹克隆",
+      "genericNameJa": "ゾピクロン",
       "brandNames": [
         "Imovane",
         "忆梦返"
@@ -21167,6 +21311,7 @@
       "id": "phenobarbital",
       "genericName": "Phenobarbital",
       "genericNameZh": "苯巴比妥",
+      "genericNameJa": "フェノバルビタール",
       "brandNames": [
         "Luminal",
         "鲁米那"
@@ -21364,6 +21509,7 @@
       "id": "amobarbital",
       "genericName": "Amobarbital",
       "genericNameZh": "异戊巴比妥",
+      "genericNameJa": "アモバルビタール",
       "brandNames": [
         "Amytal",
         "异戊巴比妥钠"
@@ -21502,6 +21648,7 @@
       "id": "secobarbital",
       "genericName": "Secobarbital",
       "genericNameZh": "司可巴比妥",
+      "genericNameJa": "セコバルビタール",
       "brandNames": [
         "Seconal",
         "速可眠"
@@ -21640,6 +21787,7 @@
       "id": "chloral_hydrate",
       "genericName": "Chloral Hydrate",
       "genericNameZh": "水合氯醛",
+      "genericNameJa": "抱水クロラール",
       "brandNames": [
         "水合氯醛溶液",
         "Chloral Hydrate"
@@ -21784,6 +21932,7 @@
       "id": "bupropion_xl",
       "genericName": "Bupropion XL",
       "genericNameZh": "安非他酮缓释片",
+      "genericNameJa": "ブプロピオン徐放錠",
       "brandNames": [
         "Wellbutrin XL",
         "悦婷"
@@ -21938,6 +22087,7 @@
       "id": "venlafaxine_xr",
       "genericName": "Venlafaxine XR",
       "genericNameZh": "文拉法辛缓释胶囊",
+      "genericNameJa": "ベンラファキシン持続性カプセル",
       "brandNames": [
         "Effexor XR",
         "怡诺思"
@@ -22093,6 +22243,7 @@
       "id": "paroxetine_cr",
       "genericName": "Paroxetine CR",
       "genericNameZh": "帕罗西汀控释片",
+      "genericNameJa": "パロキセチン持続性錠",
       "brandNames": [
         "Paxil CR",
         "赛乐特"
@@ -22259,6 +22410,7 @@
       "id": "fluoxetine_weekly",
       "genericName": "Fluoxetine Weekly",
       "genericNameZh": "氟西汀每周一次",
+      "genericNameJa": "フルオキセチン週1回錠",
       "brandNames": [
         "Prozac Weekly",
         "百忧解周制剂"
@@ -22414,6 +22566,7 @@
       "id": "arformoterol",
       "genericName": "Arformoterol",
       "genericNameZh": "阿福特罗 (R-福莫特罗)",
+      "genericNameJa": "アルホルモテロール",
       "brandNames": [
         "Brovana",
         "阿福特罗吸入液"
@@ -22567,6 +22720,7 @@
       "id": "levalbuterol",
       "genericName": "Levalbuterol",
       "genericNameZh": "左沙丁胺醇 (R-沙丁胺醇)",
+      "genericNameJa": "レバルブテロール",
       "brandNames": [
         "Xopenex",
         "左旋沙丁胺醇"
@@ -22704,6 +22858,7 @@
       "id": "dextroamphetamine",
       "genericName": "Dextroamphetamine",
       "genericNameZh": "右旋安非他命",
+      "genericNameJa": "デキストロアンフェタミン",
       "brandNames": [
         "Dexedrine",
         "右旋苯丙胺"
@@ -22852,6 +23007,7 @@
       "id": "desvenlafaxine",
       "genericName": "Desvenlafaxine",
       "genericNameZh": "去甲文拉法辛",
+      "genericNameJa": "デスベンラファキシン",
       "brandNames": [
         "Pristiq",
         "去甲文拉法辛缓释"
@@ -23004,6 +23160,7 @@
       "id": "norfluoxetine",
       "genericName": "Norfluoxetine",
       "genericNameZh": "去甲氟西汀",
+      "genericNameJa": "セプロキセチン",
       "brandNames": [
         "活性代谢物 (无单独制剂)"
       ],
@@ -23148,6 +23305,7 @@
       "id": "norketamine",
       "genericName": "Norketamine",
       "genericNameZh": "去甲氯胺酮",
+      "genericNameJa": "ノルケタミン",
       "brandNames": [
         "活性代谢物 (无单独制剂, 抗抑郁研究中)"
       ],
@@ -23298,6 +23456,7 @@
       "id": "morphine_6_glucuronide",
       "genericName": "Morphine-6-Glucuronide",
       "genericNameZh": "吗啡-6-葡萄糖醛酸苷",
+      "genericNameJa": "モルヒネ-6-グルクロン酸",
       "brandNames": [
         "活性代谢物 (无单独制剂, 肾衰蓄积)"
       ],
@@ -23441,6 +23600,7 @@
       "id": "rosuvastatin",
       "genericName": "Rosuvastatin",
       "genericNameZh": "瑞舒伐他汀",
+      "genericNameJa": "ロスバスタチン",
       "brandNames": [
         "Crestor",
         "可定"
@@ -23552,6 +23712,7 @@
       "id": "simvastatin",
       "genericName": "Simvastatin",
       "genericNameZh": "辛伐他汀",
+      "genericNameJa": "シンバスタチン",
       "brandNames": [
         "Zocor",
         "舒降之"
@@ -23677,6 +23838,7 @@
       "id": "pravastatin",
       "genericName": "Pravastatin",
       "genericNameZh": "普伐他汀",
+      "genericNameJa": "プラバスタチン",
       "brandNames": [
         "Pravachol",
         "美百乐镇"
@@ -23773,6 +23935,7 @@
       "id": "lansoprazole",
       "genericName": "Lansoprazole",
       "genericNameZh": "兰索拉唑",
+      "genericNameJa": "ランソプラゾール",
       "brandNames": [
         "Prevacid",
         "达克普隆"
@@ -23896,6 +24059,7 @@
       "id": "rabeprazole",
       "genericName": "Rabeprazole",
       "genericNameZh": "雷贝拉唑",
+      "genericNameJa": "ラベプラゾール",
       "brandNames": [
         "AcipHex",
         "波利特"
@@ -24002,6 +24166,7 @@
       "id": "pantoprazole",
       "genericName": "Pantoprazole",
       "genericNameZh": "泮托拉唑",
+      "genericNameJa": "パントプラゾール",
       "brandNames": [
         "Protonix",
         "潘妥洛克"
@@ -24105,6 +24270,7 @@
       "id": "dimenhydrinate",
       "genericName": "Dimenhydrinate",
       "genericNameZh": "茶苯海明",
+      "genericNameJa": "ジメンヒドリナート",
       "brandNames": [
         "Dramamine",
         "晕海宁"
@@ -24214,6 +24380,7 @@
       "id": "dabigatran",
       "genericName": "Dabigatran",
       "genericNameZh": "达比加群",
+      "genericNameJa": "ダビガトラン",
       "brandNames": [
         "Pradaxa",
         "泰毕全"
@@ -24334,6 +24501,7 @@
       "id": "apixaban",
       "genericName": "Apixaban",
       "genericNameZh": "阿哌沙班",
+      "genericNameJa": "アピキサバン",
       "brandNames": [
         "Eliquis",
         "艾乐妥"
@@ -24448,6 +24616,7 @@
       "id": "loratadine",
       "genericName": "Loratadine",
       "genericNameZh": "氯雷他定",
+      "genericNameJa": "ロラタジン",
       "brandNames": [
         "Claritin",
         "开瑞坦"
@@ -24550,6 +24719,7 @@
       "id": "cetirizine",
       "genericName": "Cetirizine",
       "genericNameZh": "西替利嗪",
+      "genericNameJa": "セチリジン",
       "brandNames": [
         "Zyrtec",
         "仙特明"
@@ -24643,6 +24813,7 @@
       "id": "lidocaine",
       "genericName": "Lidocaine",
       "genericNameZh": "利多卡因",
+      "genericNameJa": "リドカイン",
       "brandNames": [
         "Xylocaine",
         "赛罗卡因"
@@ -24770,6 +24941,7 @@
       "id": "flecainide",
       "genericName": "Flecainide",
       "genericNameZh": "氟卡尼",
+      "genericNameJa": "フレカイニド",
       "brandNames": [
         "Tambocor"
       ],
@@ -24893,6 +25065,7 @@
       "id": "rizatriptan",
       "genericName": "Rizatriptan",
       "genericNameZh": "利扎曲普坦",
+      "genericNameJa": "リザトリプタン",
       "brandNames": [
         "Maxalt",
         "欧立停"
@@ -25004,6 +25177,7 @@
       "id": "cyclobenzaprine",
       "genericName": "Cyclobenzaprine",
       "genericNameZh": "环苯扎林",
+      "genericNameJa": "シクロベンザプリン",
       "brandNames": [
         "Flexeril",
         "Amrix"
@@ -25128,6 +25302,7 @@
       "id": "zoledronic_acid",
       "genericName": "Zoledronic acid",
       "genericNameZh": "唑来膦酸",
+      "genericNameJa": "ゾレドロン酸",
       "brandNames": [
         "Reclast",
         "Aclasta",
@@ -25240,6 +25415,7 @@
       "id": "salmeterol",
       "genericName": "Salmeterol",
       "genericNameZh": "沙美特罗",
+      "genericNameJa": "サルメテロール",
       "brandNames": [
         "Serevent"
       ],
@@ -25354,6 +25530,7 @@
       "id": "ibuprofen",
       "genericName": "Ibuprofen",
       "genericNameZh": "布洛芬",
+      "genericNameJa": "イブプロフェン",
       "brandNames": [
         "Advil",
         "Motrin",
@@ -25471,6 +25648,7 @@
       "id": "naproxen",
       "genericName": "Naproxen",
       "genericNameZh": "萘普生",
+      "genericNameJa": "ナプロキセン",
       "brandNames": [
         "Aleve",
         "Naprosyn"
@@ -25591,6 +25769,7 @@
       "id": "fluvastatin",
       "genericName": "Fluvastatin",
       "genericNameZh": "氟伐他汀",
+      "genericNameJa": "フルバスタチン",
       "brandNames": [
         "Lescol",
         "来适可"
@@ -25696,6 +25875,7 @@
       "id": "amoxicillin",
       "genericName": "Amoxicillin",
       "genericNameZh": "阿莫西林",
+      "genericNameJa": "アモキシシリン",
       "brandNames": [
         "Amoxil",
         "阿莫仙"
@@ -25807,6 +25987,7 @@
       "id": "doxycycline",
       "genericName": "Doxycycline",
       "genericNameZh": "多西环素",
+      "genericNameJa": "ドキシサイクリン",
       "brandNames": [
         "Vibramycin",
         "Doryx",
@@ -25929,6 +26110,7 @@
       "id": "propafenone",
       "genericName": "Propafenone",
       "genericNameZh": "普罗帕酮",
+      "genericNameJa": "プロパフェノン",
       "brandNames": [
         "Rythmol",
         "心律平"
@@ -26053,6 +26235,7 @@
       "id": "cyanocobalamin",
       "genericName": "Cyanocobalamin",
       "genericNameZh": "维生素 B12",
+      "genericNameJa": "シアノコバラミン",
       "brandNames": [
         "B12",
         "钴胺素"
@@ -26151,6 +26334,7 @@
       "id": "promethazine",
       "genericName": "Promethazine",
       "genericNameZh": "异丙嗪",
+      "genericNameJa": "プロメタジン",
       "brandNames": [
         "Phenergan",
         "非那根"
@@ -26281,6 +26465,7 @@
       "id": "conjugated_estrogens",
       "genericName": "Conjugated estrogens",
       "genericNameZh": "结合雌激素",
+      "genericNameJa": "結合型女性ホルモン",
       "brandNames": [
         "Premarin",
         "倍美力"
@@ -26412,6 +26597,7 @@
       "id": "linezolid",
       "genericName": "Linezolid",
       "genericNameZh": "利奈唑胺",
+      "genericNameJa": "リネゾリド",
       "brandNames": [
         "Zyvox",
         "斯沃"
@@ -26537,6 +26723,7 @@
       "id": "denosumab",
       "genericName": "Denosumab",
       "genericNameZh": "地舒单抗",
+      "genericNameJa": "デノスマブ",
       "brandNames": [
         "Prolia",
         "Xgeva",
@@ -26649,6 +26836,7 @@
       "id": "glycopyrrolate",
       "genericName": "Glycopyrrolate",
       "genericNameZh": "格隆溴铵",
+      "genericNameJa": "グリコピロニウム",
       "brandNames": [
         "Robinul",
         "胃长宁"
@@ -26754,6 +26942,7 @@
       "id": "probenecid",
       "genericName": "Probenecid",
       "genericNameZh": "丙磺舒",
+      "genericNameJa": "プロベネシド",
       "brandNames": [
         "Benemid"
       ],
@@ -26882,6 +27071,7 @@
       "id": "ciprofloxacin",
       "genericName": "Ciprofloxacin",
       "genericNameZh": "环丙沙星",
+      "genericNameJa": "シプロフロキサシン",
       "brandNames": [
         "Cipro",
         "悉复欢"
@@ -27023,6 +27213,7 @@
       "id": "esomeprazole",
       "genericName": "Esomeprazole",
       "genericNameZh": "艾司奥美拉唑",
+      "genericNameJa": "エソメプラゾール",
       "brandNames": [
         "Nexium",
         "耐信"
@@ -27146,6 +27337,7 @@
       "id": "triamcinolone",
       "genericName": "Triamcinolone",
       "genericNameZh": "曲安奈德",
+      "genericNameJa": "トリアムシノロン",
       "brandNames": [
         "Azmacort",
         "Aristospan",
@@ -27261,6 +27453,7 @@
       "id": "memantine_donepezil",
       "genericName": "Memantine + Donepezil",
       "genericNameZh": "美金刚+多奈哌齐 (复方)",
+      "genericNameJa": "メマンチン・ドネペジル配合剤",
       "brandNames": [
         "Namzaric"
       ],
@@ -27372,6 +27565,7 @@
       "id": "thyroid_armour",
       "genericName": "Thyroid (desiccated)",
       "genericNameZh": "甲状腺片 (干甲状腺)",
+      "genericNameJa": "乾燥甲状腺",
       "brandNames": [
         "Armour Thyroid",
         "Nature-Throid"
@@ -27480,6 +27674,7 @@
       "id": "pitavastatin",
       "genericName": "Pitavastatin",
       "genericNameZh": "匹伐他汀",
+      "genericNameJa": "ピタバスタチン",
       "brandNames": [
         "Livalo",
         "Zypitamag"
@@ -27586,6 +27781,7 @@
       "id": "sevoflurane",
       "genericName": "Sevoflurane",
       "genericNameZh": "七氟烷",
+      "genericNameJa": "セボフルラン",
       "brandNames": [
         "Ultane",
         "Sevofrane"
@@ -27710,6 +27906,7 @@
       "id": "meloxicam",
       "genericName": "Meloxicam",
       "genericNameZh": "美洛昔康",
+      "genericNameJa": "メロキシカム",
       "brandNames": [
         "Mobic",
         "莫比可"
@@ -27838,6 +28035,7 @@
       "id": "lovastatin",
       "genericName": "Lovastatin",
       "genericNameZh": "洛伐他汀",
+      "genericNameJa": "ロバスタチン",
       "brandNames": [
         "Mevacor",
         "Altoprev"
@@ -27950,6 +28148,7 @@
       "id": "levofloxacin",
       "genericName": "Levofloxacin",
       "genericNameZh": "左氧氟沙星",
+      "genericNameJa": "レボフロキサシン",
       "brandNames": [
         "Levaquin",
         "可乐必妥"
@@ -28072,6 +28271,7 @@
       "id": "ondansetron",
       "genericName": "Ondansetron",
       "genericNameZh": "昂丹司琼",
+      "genericNameJa": "オンダンセトロン",
       "brandNames": [
         "Zofran",
         "枢复宁"
@@ -28198,6 +28398,7 @@
       "id": "lumateperone",
       "genericName": "Lumateperone",
       "genericNameZh": "鲁玛替培酮",
+      "genericNameJa": "ルマテペロン",
       "brandNames": [
         "Caplyta",
         "卡普利他"
@@ -28322,6 +28523,7 @@
       "id": "xanomeline",
       "genericName": "Xanomeline + Trospium",
       "genericNameZh": "沙诺美林+曲司氯铵",
+      "genericNameJa": "キサノメリン・トロスピウム",
       "brandNames": [
         "Cobenfy",
         "科本飞"

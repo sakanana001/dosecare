@@ -60,6 +60,7 @@ import com.dosecare.app.model.pharmacology.DoseEvent
 import com.dosecare.app.model.pharmacology.PkCurve
 import com.dosecare.app.model.pharmacology.PkEngine
 import com.dosecare.app.model.pharmacology.PkModel
+import com.dosecare.app.ui.pharmacology.displayName
 import com.dosecare.app.ui.components.HazeAlertDialog
 import com.dosecare.app.ui.components.HazeTopAppBar
 import com.dosecare.app.ui.components.pinnedTopAppBarScrollBehavior
@@ -397,9 +398,7 @@ private fun TdmSelectionCard(
                         .background(selection.color, CircleShape)
                 )
                 Spacer(Modifier.width(8.dp))
-                val locale = androidx.compose.ui.platform.LocalConfiguration.current.locales[0]
-                val isChinesePrimary = locale.language == "zh"
-                val drugNamePrimary = if (isChinesePrimary) selection.drug.genericNameZh else selection.drug.genericName
+                val drugNamePrimary = selection.drug.displayName()
                 Text(
                     drugNamePrimary,
                     style = MaterialTheme.typography.titleSmall,

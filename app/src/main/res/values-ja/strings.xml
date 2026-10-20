@@ -51,6 +51,7 @@
     <string name="drug_cat_supplement">栄養補助食品</string>
     <string name="drug_cat_thyroid">甲状腺</string>
     <string name="drug_name_with_en_subtitle">%1$s (%2$s)</string>
+    <string name="drug_name_with_ja_subtitle">%1$s (%2$s)</string>
     <string name="drug_name_with_zh_subtitle">%1$s · %2$s</string>
     <string name="ind_adhd">注意欠陥多動性障害</string>
     <string name="ind_adrenal">副腎皮質</string>
@@ -113,7 +114,7 @@
     <string name="interaction_qtc_format">推定 QTc %1$.0f ms</string>
     <string name="interaction_reevaluate_n">%1$d 剤の全組み合わせを再評価</string>
     <string name="interaction_references">参照:%1$s</string>
-    <string name="interaction_search_hint">🔍 検索: 氯氮平 / clozapine / Clozaril / F</string>
+    <string name="interaction_search_hint">🔍 検索: クロザピン / clozapine / Clozaril / F</string>
     <string name="interaction_selected_n">選択中 (%1$d):</string>
     <string name="interaction_serotonin_format">%1$d 個のセロトニン作動薬が関与</string>
     <string name="interaction_title">相互作用 · %1$d 剤</string>
@@ -132,7 +133,7 @@
     <string name="search_count_with_query"> · 検索:&quot;%1$s&quot;</string>
     <string name="search_drug_count">%1$d 剤</string>
     <string name="search_filtered">%1$d / %2$d 剤</string>
-    <string name="search_hint">中国語 / 英語 / ブランド / 拼音頭文字</string>
+    <string name="search_hint">日本語名 / 英文名 / 中国語名 / ブランド名</string>
     <string name="search_no_match">一致する薬がありません</string>
     <string name="search_placeholder">タップして薬品を検索…</string>
     <string name="search_select_title">薬を選択 · %1$s</string>

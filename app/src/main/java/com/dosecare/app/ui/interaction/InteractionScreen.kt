@@ -51,6 +51,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.dosecare.app.R
 import com.dosecare.app.model.pharmacology.AnticholinergicLoadInteraction
+import com.dosecare.app.ui.pharmacology.displayName
 import com.dosecare.app.model.pharmacology.CypInteraction
 import com.dosecare.app.model.pharmacology.Interaction
 import com.dosecare.app.model.pharmacology.OverdoseSeverity
@@ -194,7 +195,7 @@ fun InteractionScreen(
                                     InputChip(
                                         selected = false,
                                         onClick = { viewModel.removeDrug(id) },
-                                        label = { Text(drug.genericNameZh) },
+                                        label = { Text(drug.displayName()) },
                                         trailingIcon = {
                                             Icon(
                                                 Icons.Default.Close,
@@ -316,7 +317,7 @@ fun InteractionScreen(
                             Spacer(Modifier.height(6.dp))
                             highOverdose.forEach { o ->
                                 val drugName = selectedIds.firstNotNullOfOrNull { id ->
-                                    viewModel.tryGetDrug(id)?.takeIf { it.overdose === o }?.genericNameZh
+                                    viewModel.tryGetDrug(id)?.takeIf { it.overdose === o }?.displayName()
                                 } ?: "?"
                                 Row(verticalAlignment = Alignment.Top, modifier = Modifier.padding(vertical = 2.dp)) {
                                     Text(

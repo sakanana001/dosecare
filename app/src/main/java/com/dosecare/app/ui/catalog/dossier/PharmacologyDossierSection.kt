@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import com.dosecare.app.R
 import com.dosecare.app.model.pharmacology.Drug
 import com.dosecare.app.model.pharmacology.labelRes
+import com.dosecare.app.ui.pharmacology.displayName
 import com.dosecare.app.ui.components.HrtSection
 import com.dosecare.app.ui.components.HrtSectionHeader
 import com.dosecare.app.ui.components.PreferenceSegmentedListItem
@@ -83,7 +84,7 @@ private fun DossierSummaryRow(drug: Drug) {
     }
     val categoryText = stringResource(drug.category.labelRes())
     PreferenceSegmentedListItem(
-        title = drug.genericNameZh,
+        title = drug.displayName(),
         supportingText = stringResource(
             R.string.dossier_summary_format,
             categoryText,

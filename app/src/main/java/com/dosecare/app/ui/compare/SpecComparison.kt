@@ -39,6 +39,8 @@ import com.dosecare.app.model.pharmacology.EffectStrength
 import com.dosecare.app.model.pharmacology.PkModel
 import com.dosecare.app.model.pharmacology.RiskLevel
 import com.dosecare.app.model.pharmacology.labelRes
+import com.dosecare.app.ui.pharmacology.displayName
+import com.dosecare.app.ui.pharmacology.secondaryDisplayName
 import com.dosecare.app.model.pharmacology.monitoringFrequencyRes
 import kotlin.math.abs
 
@@ -152,12 +154,12 @@ private fun PlainKeyDiffCard(drugA: Drug, drugB: Drug) {
         val aLowHigh = "${drugA.therapeuticWindow!!.low.toInt()}-${drugA.therapeuticWindow!!.high.toInt()}"
         val bLowHigh = "${drugB.therapeuticWindow!!.low.toInt()}-${drugB.therapeuticWindow!!.high.toInt()}"
         if (aLowHigh != bLowHigh) {
-            diffs += stringResource(R.string.cmp_diff_window_format, drugA.genericNameZh, aLowHigh, drugB.genericNameZh, bLowHigh)
+            diffs += stringResource(R.string.cmp_diff_window_format, drugA.displayName(), aLowHigh, drugB.displayName(), bLowHigh)
         }
     } else if (drugA.therapeuticWindow == null && drugB.therapeuticWindow != null) {
-        diffs += stringResource(R.string.cmp_diff_window_no_a, drugA.genericNameZh, drugB.genericNameZh)
+        diffs += stringResource(R.string.cmp_diff_window_no_a, drugA.displayName(), drugB.displayName())
     } else if (drugB.therapeuticWindow == null && drugA.therapeuticWindow != null) {
-        diffs += stringResource(R.string.cmp_diff_window_no_b, drugB.genericNameZh, drugA.genericNameZh)
+        diffs += stringResource(R.string.cmp_diff_window_no_b, drugB.displayName(), drugA.displayName())
     }
     // 半衰期
     if (drugA.pkModel is PkModel.OneCompartmentWithAbsorption && drugB.pkModel is PkModel.OneCompartmentWithAbsorption) {
@@ -170,7 +172,7 @@ private fun PlainKeyDiffCard(drugA: Drug, drugB: Drug) {
             val bDesc = if (bT12 < 24) stringResource(R.string.cmp_diff_half_life_short)
                         else if (bT12 < 72) stringResource(R.string.cmp_diff_half_life_medium)
                         else stringResource(R.string.cmp_diff_half_life_xlong)
-            diffs += stringResource(R.string.cmp_diff_half_life_format, drugA.genericNameZh, aT12.toInt(), aDesc, drugB.genericNameZh, bT12.toInt(), bDesc)
+            diffs += stringResource(R.string.cmp_diff_half_life_format, drugA.displayName(), aT12.toInt(), aDesc, drugB.displayName(), bT12.toInt(), bDesc)
         }
     }
     // 风险
@@ -188,17 +190,17 @@ private fun PlainKeyDiffCard(drugA: Drug, drugB: Drug) {
     }
     val onlyA = aHigh - bHigh.toSet()
     val onlyB = bHigh - aHigh.toSet()
-    if (onlyA.isNotEmpty()) diffs += stringResource(R.string.cmp_diff_only_a_format, drugA.genericNameZh, onlyA.joinToString("、"))
-    if (onlyB.isNotEmpty()) diffs += stringResource(R.string.cmp_diff_only_b_format, drugB.genericNameZh, onlyB.joinToString("、"))
+    if (onlyA.isNotEmpty()) diffs += stringResource(R.string.cmp_diff_only_a_format, drugA.displayName(), onlyA.joinToString("、"))
+    if (onlyB.isNotEmpty()) diffs += stringResource(R.string.cmp_diff_only_b_format, drugB.displayName(), onlyB.joinToString("、"))
     // CYP 差异
     if (drugA.cypProfile.inhibitors.isNotEmpty() && drugB.cypProfile.inhibitors.isEmpty()) {
-        diffs += stringResource(R.string.cmp_diff_cyp_inh_a, drugA.genericNameZh, drugB.genericNameZh, drugA.genericNameZh, drugB.genericNameZh)
+        diffs += stringResource(R.string.cmp_diff_cyp_inh_a, drugA.displayName(), drugB.displayName(), drugA.displayName(), drugB.displayName())
     } else if (drugB.cypProfile.inhibitors.isNotEmpty() && drugA.cypProfile.inhibitors.isEmpty()) {
-        diffs += stringResource(R.string.cmp_diff_cyp_inh_b, drugB.genericNameZh, drugA.genericNameZh, drugB.genericNameZh, drugA.genericNameZh)
+        diffs += stringResource(R.string.cmp_diff_cyp_inh_b, drugB.displayName(), drugA.displayName(), drugB.displayName(), drugA.displayName())
     } else if (drugA.cypProfile.inducers.isNotEmpty() && drugB.cypProfile.inducers.isEmpty()) {
-        diffs += stringResource(R.string.cmp_diff_cyp_ind_a, drugA.genericNameZh, drugB.genericNameZh)
+        diffs += stringResource(R.string.cmp_diff_cyp_ind_a, drugA.displayName(), drugB.displayName())
     } else if (drugB.cypProfile.inducers.isNotEmpty() && drugA.cypProfile.inducers.isEmpty()) {
-        diffs += stringResource(R.string.cmp_diff_cyp_ind_b, drugB.genericNameZh, drugA.genericNameZh)
+        diffs += stringResource(R.string.cmp_diff_cyp_ind_b, drugB.displayName(), drugA.displayName())
     }
     // 老年/肾/肝
     if (drugA.adjustments.elderly != drugB.adjustments.elderly && (drugA.adjustments.elderly != null || drugB.adjustments.elderly != null)) {
@@ -257,13 +259,13 @@ private fun DrugHeaderCard(drug: Drug, modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                drug.genericNameZh,
+                drug.displayName(),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.SemiBold,
                 textAlign = TextAlign.Center
             )
             Text(
-                drug.genericName,
+                drug.secondaryDisplayName(),
                 style = MaterialTheme.typography.bodySmall,
                 color = MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.7f),
                 textAlign = TextAlign.Center
@@ -424,7 +426,7 @@ private fun CriticalInteractionsSection(drugA: Drug, drugB: Drug, plain: Boolean
         // drugA → drugB (drugA 写「我会影响 drugB」)
         intersectA.forEach { hint ->
             InteractionCard(
-                title = "${drugA.genericNameZh} → ${drugB.genericNameZh}",
+                title = "${drugA.displayName()} → ${drugB.displayName()}",
                 mechanism = hint.mechanism.name.replace("_", " "),
                 severity = hint.severity,
                 note = hint.clinicalNote,
@@ -434,7 +436,7 @@ private fun CriticalInteractionsSection(drugA: Drug, drugB: Drug, plain: Boolean
         // drugB → drugA
         intersectB.forEach { hint ->
             InteractionCard(
-                title = "${drugB.genericNameZh} → ${drugA.genericNameZh}",
+                title = "${drugB.displayName()} → ${drugA.displayName()}",
                 mechanism = hint.mechanism.name.replace("_", " "),
                 severity = hint.severity,
                 note = hint.clinicalNote,
@@ -528,8 +530,8 @@ private fun buildComparisonSections(
 
     return listOf(
         R.string.cmp_section_basic to listOf(
-            drugA.genericNameZh to drugB.genericNameZh,
-            drugA.genericName to drugB.genericName,
+            drugA.displayName() to drugB.displayName(),
+            drugA.secondaryDisplayName() to drugB.secondaryDisplayName(),
             (drugA.atc ?: "—") to (drugB.atc ?: "—"),
             stringResource(drugA.category.labelRes()) to stringResource(drugB.category.labelRes()),
             (drugA.subcategory ?: "—") to (drugB.subcategory ?: "—"),

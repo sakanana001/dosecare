@@ -1177,6 +1177,7 @@
     <string name="search_placeholder">点击搜索选药…</string>
     <string name="search_drug_count">%1$d 个药</string>
     <string name="drug_name_with_en_subtitle">%1$s · %2$s</string>
+    <string name="drug_name_with_ja_subtitle">%1$s (%2$s)</string>
     <string name="common_close">关闭</string>
     <string name="common_clear">清空</string>
     <string name="search_select_title">选药 · %1$s</string>
